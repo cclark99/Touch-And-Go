@@ -3,6 +3,8 @@
 
 ##for lcd support
 import sys
+##for mysql support
+import mysqlkey
 
 sys.path.append('lcdlib')
 
@@ -152,6 +154,8 @@ def enroll_finger(location):
             return False
 
         if fingerimg == 1:
+            lcd.clear()
+            lcd.putstr("Remove finger")
             print("Remove finger")
             time.sleep(1)
             while i != adafruit_fingerprint.NOFINGER:
@@ -174,6 +178,11 @@ def enroll_finger(location):
         lcd.clear()
         lcd.putstr("Stored successfully")
         print("Stored")
+        time.sleep(2)
+        lcd.clear()
+        lcd.putstr("Enter your name")
+        name = input("Enter your name: ")
+        mysqlkey.query(name)
         time.sleep(2)
         lcd.clear()
     else:
@@ -226,8 +235,7 @@ def save_fingerprint_image(filename):
 
 
 ##################################################
-
-
+   
 def get_num(max_number):
     """Use input() to get a valid number from 0 to the maximum size
     of the library. Retry till success!"""
