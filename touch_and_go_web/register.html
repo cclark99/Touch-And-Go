@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html lang="en"> <!-- start of html tag -->
+   <head> <!-- start of head tag -->
+     <!-- set charset -->
+     <meta charset="utf-8">
+     <!-- set title -->
+     <title>Login</title>
+     <!-- link external styles.css sheet -->
+     <link rel = "stylesheet" type = "text/css" href = "styles.css">
+   </head> <!-- end of head tag -->
+
+   <body> <!-- start of body tag -->
+      <!-- display logo -->
+      <img src="../Touch__Go_Logo.jpg" alt="Touch and Go Logo" class="center">
+
+      <!-- Sign In heading -->
+      <h1>Register</h1>
+
+      <!-- start of sign in forms -->
+      <form method="post" action="register.php">
+
+         <!-- id number form with with placeholder -->
+         <input name="id" type="number" placeholder="ID Number" class="center" required>
+
+         <!-- firstName form with with placeholder -->
+         <input name="firstName" type="text" placeholder="First Name" class="center" required>
+
+         <!-- firstName form with with placeholder -->
+         <input name="lastName" type="text" placeholder="Last Name" class="center" required>
+	 
+         <!-- email form with with placeholder -->
+         <input name="email" type="text" placeholder="Email Address" class="center" required>
+
+         <!-- password form with placeholder -->
+         <input name="password" type="password" placeholder="Password" class="center" required>
+
+         <!-- password re-enter form with placeholder -->
+	 <!-- <input name="passwordVerify" type="password" placeholder="Re-enter Password" class="center" required> -->
+	 
+         <!-- submit button -->
+         <input class="button" type="submit" value="Register">
+
+         <!-- clear button -->
+         <input class="button" type="reset" value="Clear">
+
+      </form> <!-- end of sign in forms -->
+      
+      <h3 style="text-align: center;">Already a member? <a href="index.html">Login Here</a></h2>
+   
+   </body> <!-- end of body tag -->
+</html> <!-- end of html tag -->
