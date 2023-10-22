@@ -46,15 +46,15 @@ if (!isset($_SESSION['loggedin'])) {
         <tr> <!-- start of row -->
             
           <th> <!-- start of Home cell -->
-            <h2><a class='link' href = "home.html">Home</h2>
+            <h2><a class='link' href = "home.php">Home</h2>
           </th> <!-- end of Home cell -->
             
           <th> <!-- start of Schedule cell -->
-            <h2><a class='link' href = "schedule.html">Schedule</h2>
+            <h2><a class='link' href = "schedule.php">Schedule</h2>
           </th> <!-- end of Schedule cell -->
             
           <th> <!-- start of Analytics cell -->
-            <h2><a class='link' href = "analytics.html">Analytics</h2>
+            <h2><a class='link' href = "analytics.php">Analytics</h2>
           </th> <!-- end of Analytics cell -->
             
           <th> <!-- start of Logo cell -->
@@ -62,15 +62,15 @@ if (!isset($_SESSION['loggedin'])) {
           </th><!-- end of Logo cell -->
             
           <th> <!-- start of Contact cell -->
-            <h2><a class='link' href = "contact.html">Contact</h2>
+            <h2><a class='link' href = "contact.php">Contact</h2>
           </th> <!-- end of Contact cell -->
             
           <th> <!-- start of Help cell -->
-            <h2><a class='link' href = "help.html">Help</h2>
+            <h2><a class='link' href = "help.php">Help</h2>
           </th> <!-- end of Help cell -->
             
           <th> <!-- start of Logout cell -->
-            <h2><a class='link' href = "logout.html">Logout</h2>
+            <h2><a class='link' href = "logout.php">Logout</h2>
           </th> <!-- end of Logout cell -->
          
         </tr> <!-- end of row -->
@@ -95,7 +95,7 @@ if (!isset($_SESSION['loggedin'])) {
     <script>
       // set variables
       var d = new Date();
-      var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "Sepetember", "October", "November", "December"];
+      var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
       var dayOfWeek = d.getDay();
       var month = d.getMonth();
       var day = d.getDate();
