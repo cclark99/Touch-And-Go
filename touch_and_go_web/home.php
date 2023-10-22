@@ -83,7 +83,7 @@ if (!isset($_SESSION['loggedin'])) {
     <!-- home header -->
     <h1>Home</h1>
     <!-- display hello message with student's name -->
-    <h3>Hello <?php $_SESSION['email'] ?> !</h3>
+    <h3>Hello <?php echo $_SESSION['email'] ?> !</h3>
     
     <!-- display today is (day of the week, month, day, and year)-->
       <div id="output"></div>
