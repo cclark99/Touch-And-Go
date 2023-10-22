@@ -10,6 +10,17 @@
   <!-- link external style.css sheet -->
   <link rel="stylesheet" type="text/css" href="../styles.css">
 
+  <!-- start of style tag -->
+  <style>
+      /* start of style rules for h3 tag */
+      h3 {
+        color: #10222E; /* make color blue */
+        font-size: 24pt; /* make font size 24 pt */
+        text-align: center; /* center align text */
+        margin-top: 5%; /* make margin-top 5% */
+       } /* end of style rules for h3 tag */
+    </style> <!-- end of style tag -->
+
   <table> <!-- start of table tag -->
     <thead> <!-- start of thead tag -->
       <tr> <!-- start of row -->
