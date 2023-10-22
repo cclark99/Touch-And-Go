@@ -84,15 +84,6 @@ hr {
     color: #62B6F3; /* blue font color while hovering */
   } /* end of class style for link:hover */
 
-.contactLink {
-    color: #000000; /* yellow font color */
-} /* end of class style for links */                                         
-                                                                       
-/* start of class style for link:hover */
-.contactLink:hover{
-    color: #62B6F3; /* blue font color while hovering */
-} /* end of class style for link:hover */
-
 /* The following code was created on October 16, 2023, using 
    information from the following link:
    https://www.youtube.com/watch?v=bwe-PsEoot4 */

@@ -75,7 +75,7 @@
 
     <section class="dropdown-section"> <!-- start of section tag with dropdown-section class -->
 
-      <ul class="dropdown"> <!-- start of ul tag with dropdown class -->
+      <ul class="dropdown"> <!-- start of ul tag with dropwdown class -->
         <li> <!-- start of li (first question) -->
           <div class="question"> <!-- start of div tag with question class -->
             <!-- create arrow -->
@@ -85,7 +85,7 @@
           </div> <!-- end of div tag -->
           <div class="answer"> <!-- start of div tag with answer class -->
             <!-- display professor information -->
-            <p>Email: <a class="contactLink" href="mailto:professorname@live.kutztown.edu">professorname@live.kutztown.edu</a><br>
+            <p>Email: <a class="link" href="mailto:professorname@live.kutztown.edu">professorname@live.kutztown.edu</a><br>
               Phone: 610-111-1111<br>
               Office Hours:<br>
               - M/W: 4:30 - 5:00 PM<br>
@@ -103,7 +103,7 @@
           </div> <!-- end of div tag -->
           <div class="answer"> <!-- start of div tag with answer class -->
             <!-- display professor information -->
-            <p>Email: <a class="contactLink" href="mailto:professorname@live.kutztown.edu">professorname@live.kutztown.edu</a><br>
+            <p>Email: <a class="link" href="mailto:professorname@live.kutztown.edu">professorname@live.kutztown.edu</a><br>
               Phone: 610-111-1111<br>
               Office Hours:<br>
               - M/W: 4:30 - 5:00 PM<br>
@@ -121,7 +121,7 @@
           </div> <!-- end of div tag -->
           <div class="answer"> <!-- start of div tag with answer class -->
             <!-- display professor information -->
-            <p>Email: <a class="contactLink" href="mailto:professorname@live.kutztown.edu">professorname@live.kutztown.edu</a><br>
+            <p>Email: <a class="link" href="mailto:professorname@live.kutztown.edu">professorname@live.kutztown.edu</a><br>
               Phone: 610-111-1111<br>
               Office Hours:<br>
               - M/W: 4:30 - 5:00 PM<br>
@@ -139,7 +139,7 @@
           </div> <!-- end of div tag -->
           <div class="answer"> <!-- start of div tag with answer class -->
             <!-- display professor information -->
-            <p>Email: <a class="contactLink" href="mailto:professorname@live.kutztown.edu">professorname@live.kutztown.edu</a><br>
+            <p>Email: <a class="link" href="mailto:professorname@live.kutztown.edu">professorname@live.kutztown.edu</a><br>
               Phone: 610-111-1111<br>
               Office Hours:<br>
               - M/W: 4:30 - 5:00 PM<br>
@@ -157,7 +157,7 @@
           </div> <!-- end of div tag -->
           <div class="answer"> <!-- start of div tag with answer class -->
             <!-- display professor information -->
-            <p>Email: <a class="contactLink" href="mailto:professorname@live.kutztown.edu">professorname@live.kutztown.edu</a><br>
+            <p>Email: <a class="link" href="mailto:professorname@live.kutztown.edu">professorname@live.kutztown.edu</a><br>
               Phone: 610-111-1111<br>
               Office Hours:<br>
               - M/W: 4:30 - 5:00 PM<br>
