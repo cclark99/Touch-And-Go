@@ -75,7 +75,7 @@
 
     <section class="dropdown-section"> <!-- start of section tag with dropdown-section class -->
 
-      <ul class="dropdown"> <!-- start of ul tag with dropwdown class -->
+      <ul class="dropdown"> <!-- start of ul tag with dropdown class -->
         <li> <!-- start of li (first question) -->
           <div class="question"> <!-- start of div tag with question class -->
             <!-- create arrow -->
