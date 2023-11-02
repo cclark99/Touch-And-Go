@@ -7,6 +7,17 @@ if (!isset($_SESSION['loggedin'])) {
   exit();
 }
 
+$DATABASE_HOST = 'localhost';
+$DATABASE_USER = 'test';
+$DATABASE_PASS = 'test123';
+$DATABASE_NAME = 'touch_and_go_test';
+
+$con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+if (mysqli_connect_errno()) {
+  // If there is an error with the connection, stop the script and display the error.
+  exit('Failed to connect to MySQL: ' . mysqli_connect_error());
+}
+
 ?>
 <!DOCTYPE html>
 
@@ -61,10 +72,28 @@ if (!isset($_SESSION['loggedin'])) {
 
 <body> <!-- start of body tag -->
 
-  <form action="search.php" method="GET">
-    <input id="search" name="search" type="text" placeholder="Search for users here">
-    <input id="submit" type="submit" value="Search">
+  <!-- SEARCH FORM -->
+  <form method="post" action="2-form.php">
+    <input type="text" name="search" placeholder="Search..." required>
+    <input type="submit" value="Search">
   </form>
+
+  <?php
+  // (PROCESS SEARCH WHEN FORM SUBMITTED
+  if (isset($_POST["search"])) {
+    // SEARCH FOR USERS
+    require "3-search.php";
+
+    // (B2) DISPLAY RESULTS
+    if (count($results) > 0) {
+      foreach ($results as $r) {
+        printf("<div>%s - %s</div>", $r["name"], $r["email"]);
+      }
+    } else {
+      echo "No results found";
+    }
+  }
+  ?>
 
 </body> <!-- end of body tag -->
 

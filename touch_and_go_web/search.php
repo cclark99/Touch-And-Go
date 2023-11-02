@@ -1,15 +1,28 @@
 <?php
+// DATABASE CONFIG
+define("DB_HOST", "localhost");
+define("DB_NAME", "touch_and_go_test");
+define("DB_CHARSET", "utf8mb4");
+define("DB_USER", "test");
+define("DB_PASSWORD", "test123");
 
-$connection = new mysqli('localhost', 'test', 'test123', 'touch_and_go_test');
+// CONNECT TO DATABASE
+$pdo = new PDO(
+    "mysql:host=" . DB_HOST . ";charset=" . DB_CHARSET . ";dbname=" . DB_NAME,
+    DB_USER,
+    DB_PASSWORD,
+    [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+    ]
+);
 
-$search = $_GET['search'];
-$search = $mysqli -> real_escape_string($search);
-
-$query = "SELECT * FROM student WHERE studentFirstName LIKE '%".$search."%'";
-$result= $mysqli -> query($query);
-
-while($row = $result -> fetch_object()){
-    echo "<div id='link' onClick='addText(\"".$row -> studentFirstName."\");'>" . $row -> studentFirstName . "</div>";  
+// SEARCH
+$stmt = $pdo->prepare("SELECT * FROM `users` WHERE `name` LIKE ? OR `email` LIKE ?");
+$stmt->execute(["%" . $_POST["search"] . "%", "%" . $_POST["search"] . "%"]);
+$results = $stmt->fetchAll();
+if (isset($_POST["ajax"])) {
+    echo json_encode($results);
 }
 
 ?>
