@@ -54,6 +54,44 @@ if (mysqli_connect_errno()) {
       return false;
     }
   </script>
+  <style>
+    form {
+      padding: 20px;
+      margin-bottom: 20px;
+      border: 1px solid #eee;
+      background: #f7f7f7;
+    }
+
+    input {
+      display: block;
+      width: 100%;
+      padding: 10px;
+    }
+
+    input[type=text] {
+      border: 1px solid #ddd;
+    }
+
+    input[type=submit] {
+      margin-top: 20px;
+      border: 0;
+      color: #fff;
+      background: #2f3ac1;
+      cursor: pointer;
+    }
+
+    #results div {
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #eee;
+      background: #f7f7f7;
+    }
+
+    #results div:nth-child(even) {
+      background: #fff;
+    }
+  </style>
+
 </head> <!-- end of head tag -->
 <table> <!-- start of table tag -->
   <thead> <!-- start of thead tag -->
