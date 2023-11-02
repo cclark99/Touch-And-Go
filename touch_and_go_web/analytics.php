@@ -56,6 +56,8 @@ if (mysqli_connect_errno()) {
   </script>
   <style>
     form {
+      width: 50%;
+      margin: auto;
       padding: 20px;
       margin-bottom: 20px;
       border: 1px solid #eee;
@@ -64,7 +66,8 @@ if (mysqli_connect_errno()) {
 
     input {
       display: block;
-      width: 100%;
+      width: 50%;
+      margin: auto;
       padding: 10px;
     }
 
