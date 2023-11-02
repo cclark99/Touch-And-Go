@@ -90,7 +90,7 @@ if (mysqli_connect_errno()) {
         printf("<div>%s - %s</div>", $r["name"], $r["email"]);
       }
     } else {
-      echo "No results found";
+      echo "<div>No results found</div>";
     }
   }
   ?>
