@@ -46,7 +46,7 @@ if (mysqli_connect_errno()) {
             wrapper.innerHTML = "";
             for (let r of res) {
               let line = document.createElement("div");
-              line.innerHTML = `${r["name"]} - ${r["email"]}`;
+              line.innerHTML = `${r["studentFirstName"]} - ${r["studentEmail"]}`;
               wrapper.appendChild(line);
             }
           } else { wrapper.innerHTML = "No results found"; }
