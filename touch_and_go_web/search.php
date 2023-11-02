@@ -1,12 +1,12 @@
 <?php
-// DATABASE CONFIG
+// (A) DATABASE CONFIG - CHANGE TO YOUR OWN!
 define("DB_HOST", "localhost");
 define("DB_NAME", "touch_and_go_test");
 define("DB_CHARSET", "utf8mb4");
 define("DB_USER", "test");
 define("DB_PASSWORD", "test123");
 
-// CONNECT TO DATABASE
+// (B) CONNECT TO DATABASE
 $pdo = new PDO(
     "mysql:host=" . DB_HOST . ";charset=" . DB_CHARSET . ";dbname=" . DB_NAME,
     DB_USER,
@@ -17,9 +17,12 @@ $pdo = new PDO(
     ]
 );
 
-// SEARCH
+// (C) SEARCH
 $stmt = $pdo->prepare("SELECT * FROM `student` WHERE `studentFirstName` LIKE ? OR `studentEmail` LIKE ?");
 $stmt->execute(["%" . $_POST["search"] . "%", "%" . $_POST["search"] . "%"]);
 $results = $stmt->fetchAll();
+if (isset($_POST["ajax"])) {
+    echo json_encode($results);
+}
 
 ?>

@@ -30,6 +30,30 @@ if (mysqli_connect_errno()) {
   <title>Analytics</title>
   <!-- link external style.css sheet -->
   <link rel="stylesheet" type="text/css" href="../styles.css">
+
+  <script>
+    function asearch() {
+      // (A) GET SEARCH TERM
+      var data = new FormData(document.getElementById("form"));
+      data.append("ajax", 1);
+
+      // (B) AJAX SEARCH REQUEST
+      fetch("search.php", { method: "POST", body: data })
+        .then(res => res.json())
+        .then(res => {
+          var wrapper = document.getElementById("results");
+          if (res.length > 0) {
+            wrapper.innerHTML = "";
+            for (let r of res) {
+              let line = document.createElement("div");
+              line.innerHTML = `${r["name"]} - ${r["email"]}`;
+              wrapper.appendChild(line);
+            }
+          } else { wrapper.innerHTML = "No results found"; }
+        });
+      return false;
+    }
+  </script>
 </head> <!-- end of head tag -->
 <table> <!-- start of table tag -->
   <thead> <!-- start of thead tag -->
@@ -72,28 +96,13 @@ if (mysqli_connect_errno()) {
 
 <body> <!-- start of body tag -->
 
-  <!-- SEARCH FORM -->
-  <form method="post">
+  <form id="form" onsubmit="return asearch();">
     <input type="text" name="search" placeholder="Search..." required>
     <input type="submit" value="Search">
   </form>
 
-  <?php
-  // (PROCESS SEARCH WHEN FORM SUBMITTED
-  if (isset($_POST["search"])) {
-    // SEARCH FOR USERS
-    require "search.php";
-
-    // (B2) DISPLAY RESULTS
-    if (count($results) > 0) {
-      foreach ($results as $r) {
-        printf("<div>%s - %s</div>", $r["name"], $r["email"]);
-      }
-    } else {
-      echo "<div>No results found</div>";
-    }
-  }
-  ?>
+  <!-- (B) SEARCH RESULTS -->
+  <div id="results"></div>
 
 </body> <!-- end of body tag -->
 
