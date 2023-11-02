@@ -82,7 +82,7 @@ if (mysqli_connect_errno()) {
   // (PROCESS SEARCH WHEN FORM SUBMITTED
   if (isset($_POST["search"])) {
     // SEARCH FOR USERS
-    require "3-search.php";
+    require "search.php";
 
     // (B2) DISPLAY RESULTS
     if (count($results) > 0) {
