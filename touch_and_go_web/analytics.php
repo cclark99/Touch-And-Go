@@ -73,7 +73,7 @@ if (mysqli_connect_errno()) {
 <body> <!-- start of body tag -->
 
   <!-- SEARCH FORM -->
-  <form method="post" action="2-form.php">
+  <form method="post">
     <input type="text" name="search" placeholder="Search..." required>
     <input type="submit" value="Search">
   </form>
