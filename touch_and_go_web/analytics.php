@@ -56,7 +56,7 @@ if (mysqli_connect_errno()) {
       return false;
     }
   </script>
-  <style>
+  <!-- <style>
     form {
       padding: 20px;
       margin-bottom: 20px;
@@ -93,7 +93,7 @@ if (mysqli_connect_errno()) {
     }
     .searchBox {
       width: 50%;
-      margin: auto;
+      margin: auto; -->
     }
   </style>
 
