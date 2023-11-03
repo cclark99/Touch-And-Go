@@ -56,8 +56,6 @@ if (mysqli_connect_errno()) {
   </script>
   <style>
     form {
-      width: 50%;
-      margin: auto;
       padding: 20px;
       margin-bottom: 20px;
       border: 1px solid #eee;
@@ -66,8 +64,6 @@ if (mysqli_connect_errno()) {
 
     input {
       display: block;
-      width: 50%;
-      margin: auto;
       padding: 10px;
     }
 
@@ -92,6 +88,10 @@ if (mysqli_connect_errno()) {
 
     #results div:nth-child(even) {
       background: #fff;
+    }
+    .searchBox {
+      width: 50%;
+      margin: auto;
     }
   </style>
 
@@ -136,15 +136,15 @@ if (mysqli_connect_errno()) {
 
 
 <body> <!-- start of body tag -->
+  <div class="searchBox">
+    <form id="form" onsubmit="return asearch();">
+      <input type="text" name="search" placeholder="Search..." required>
+      <input type="submit" value="Search">
+    </form>
 
-  <form id="form" onsubmit="return asearch();">
-    <input type="text" name="search" placeholder="Search..." required>
-    <input type="submit" value="Search">
-  </form>
-
-  <!-- (B) SEARCH RESULTS -->
-  <div id="results"></div>
-
+    <!-- (B) SEARCH RESULTS -->
+    <div id="results"></div>
+  </div>
 </body> <!-- end of body tag -->
 
 </html> <!-- end of html tag -->
