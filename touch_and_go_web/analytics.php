@@ -87,6 +87,7 @@ if (mysqli_connect_errno()) {
   </style>
 
 </head> <!-- end of head tag -->
+<body> <!-- start of body tag -->
  <!-- The following code was created on October 30, 2023, using 
     information from the following link:
     https://www.w3schools.com/css/css_navbar_horizontal.asp -->
@@ -117,7 +118,6 @@ if (mysqli_connect_errno()) {
 <h1>Analytics</h1>
 
 
-<body> <!-- start of body tag -->
   <div class="searchBox">
     <form id="form" onsubmit="return asearch();">
       <input type="text" name="search" placeholder="Search..." required>
