@@ -5,18 +5,25 @@ body {
     background-color: #FAF8D6; /* yellow background color */
 } /* end of body tag style rules */
 
+/* start of style rules for p tag */ 
+p {
+    font-size: 12pt; /* make font size 12 pt */
+    color: #FAF8D6; /* make font color yellow */
+} /* end of style rules for p tag */
+
 /* start of style rules for h1 tag */
 h1 {
     font-family: sans-serif, arial, copperplate; /* font style */
     color: #10222E; /* blue font color */
     text-align: center; /* center h1 text */
-    font-size: 40pt;
+    font-size: 40pt; /* make font size 40 pt */
     margin: 2%;
+    padding: 0%;
 } /* end of h1 tag style rules */
 
 /* start of style rules for h2 tag */
 h2 {
-    width: 35%;
+    width: 35%; /* make width 35% */
     margin: 0 auto; /* make margin 0% auto */
     text-align: center; /* center h2 text */
     background-color: #10222E; /* blue background color */
@@ -30,22 +37,22 @@ ul{
 } /* end of style rules for ul tag */
 
 /* start of style rules for table tag */
-table{
+/*table{
     width: 100%; /* table width 100% */
-    background-color: #10222E; /* blue background color of table */
-} /* end of table tag style rules */
+/*    background-color: #10222E; /* blue background color of table */
+/*} /* end of table tag style rules */
 
 /* start of style rules for tr tag */
-tr {
+/*tr {
     background-color: #10222E; /* blue background color for tr */
-} /* end of tr tag style rules */
+/*} /* end of tr tag style rules */
 
 /* start of style rules for th */
-th, td {
+/*th, td {
     border-color: #10222E; /* blue border color */
-    width: 14.2857%; /* width of each th */
-    color: #FAF8D6; /* yellow font color */
-} /* end of th style rules */
+/*    width: 14.2857%; /* width of each th */
+/*    color: #FAF8D6; /* yellow font color */
+/*} /* end of th style rules */
 
 /* start of form style rules */
 form {
@@ -55,9 +62,10 @@ form {
 /* start of hr style rules */
 hr {
     color:  #10222E; /* blue line color */
-    height: 3px;
-    background-color:#10222E;
-    margin-bottom: 2%;
+    height: 3px; /* make height 3 px */
+    background-color:#10222E; /* make background color blue */
+    margin-top: 2%; /* make bottom margin 2 % */
+    width: 100%;
 } /* end of hr style rules */
 
 /* start of class style for center */
@@ -81,16 +89,17 @@ hr {
                                                                        
 /* start of class style for link:hover */
 .link:hover{
-    color: #62B6F3; /* blue font color while hovering */
+    color: #10222E; /* blue font color while hovering */
+    background-color: #FAF8D6;
   } /* end of class style for link:hover */
 
 /* The following code was created on October 16, 2023, using 
    information from the following link:
    https://www.youtube.com/watch?v=bwe-PsEoot4 */
 /* start of class style for dropdown-section */
-.dropdown-section {
-    padding: 1%; /* make padding 1% */
-} /* end of style for dropdown-section */
+/*.dropdown-section {
+    /*padding: 1%; /* make padding 1% */
+/*} /* end of style for dropdown-section */
 
 /* start of class style rules for dropdown */
 .dropdown{
@@ -100,9 +109,9 @@ hr {
 } /* end of class style rules for dropdown */
 
 /* start of class style rules for dropdown li */
-.dropdown li{
+.dropdown{
     background-color: #10222E; /* make background-color blue */
-    border-bottom: 5px #FAF8D6 solid; /* make border-bottom 5px, yellow, and solid */
+    border: 3px #10222E solid; /* make border-bottom 5px, yellow, and solid */
 } /* end of class style rules for dropdown li */
 
 /* start of class style rules for dropdown li:first-child */
@@ -112,7 +121,7 @@ hr {
 
 /* start of class style rules for question */
 .question{
-    padding: 3% 0; /* make padding 3% on top and bottom and 0 left and right */
+    padding: 2% 0; /* make padding 3% on top and bottom and 0 left and right */
     border-left: 10px #10222E solid; /* make border-left 10 px, blue, and solid */
     cursor: pointer; /* make cursor pointer */
 } /* end of class style rules for question */
@@ -166,3 +175,43 @@ span {
 /* this ends the code that was created using information from the 
    following link:
    https://www.youtube.com/watch?v=bwe-PsEoot4 */
+
+
+/* The following code was created on October 30, 2023, using 
+   information from the following link:
+   https://www.w3schools.com/css/css_navbar_horizontal.asp */
+
+/* start of style rules for ul tag */
+ul {
+    list-style-type: none; /* get rid of bullet points */
+    border: solid; /* make a solid border */
+    border-color: #10222E; /* make border color blue */
+    background-color: #10222E; /* make background color blue */
+    font-family: serif, sans-serif, arial; /* make font serif */
+    overflow: hidden; /* hide overflow */
+    padding: 0; /* make padding 0 */
+   } /* end of style rules for ul tag */
+
+/* start of style rules for li tag */
+li {
+    width: 14.2857%; /* make width 14.2857% */
+    font-size: 20pt; /* make font size 20pt */
+    font-family: serif, sans-serif, arial; /* make font serif */
+    float: left; /* float text left */
+    text-align: center; /* center align text */
+   } /* end of style rules for li tag */
+
+   /* start of style rules for a tags inside of li tags */
+li a {
+    display: block; /* make display block */
+    padding: 20px; /* make padding 20px */
+    text-decoration: none; /* get rid of underline */
+   } /* end of style rules for a tags inside of li tags */
+
+li a:hover {
+    background-color: #FAF8D6; /* make background color yellow */
+ } /* end of style rules for a tags inside of li tags while hovering */
+
+ /* this ends the code that was created using information from the 
+    following link:
+    https://www.w3schools.com/css/css_navbar_horizontal.asp */
