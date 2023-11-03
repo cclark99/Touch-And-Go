@@ -31,31 +31,6 @@ if (mysqli_connect_errno()) {
   <!-- link external style.css sheet -->
   <link rel="stylesheet" type="text/css" href="../styles.css">
 
-  <script>
-    function asearch() {
-      // (A) GET SEARCH TERM
-      var data = new FormData(document.getElementById("form"));
-      data.append("ajax", 1);
-
-      // (B) AJAX SEARCH REQUEST
-      fetch("search.php", { method: "POST", body: data })
-        .then(res => res.json())
-        .then(res => {
-          var wrapper = document.getElementById("results");
-          if (res.length > 0) {
-            wrapper.innerHTML = "<table><tr><th>First Name</th><th>Email</th></tr>";
-            for (let r of res) {
-              let line = document.createElement("tr");
-              line.innerHTML = `<tr><td>${r["studentFirstName"]}</td><td>${r["studentEmail"]}</td></tr>`;
-              wrapper.appendChild(line);
-            }
-            line.innerHTML = "</table>";
-            wrapper.appendChild(line);
-          } else { wrapper.innerHTML = "No results found"; }
-        });
-      return false;
-    }
-  </script>
   <style>
     form {
       padding: 20px;
@@ -98,44 +73,46 @@ if (mysqli_connect_errno()) {
       width: 50%;
       margin: auto;
     }
+
+     /* start of style rules for h3 tag */
+     h3 {
+        color: #10222E; /* make color blue */
+        font-size: 24pt; /* make font size 24 pt */
+        text-align: center; /* center align text */
+        /*margin-top: 2%; /* make margin-top 2% */
+       } /* end of style rules for h3 tag */
+       .dropdown {
+           width: 30%; /* make width 25% */
+        } /* end of class style rules for dropdown */
   </style>
 
 </head> <!-- end of head tag -->
-<table> <!-- start of table tag -->
-  <thead> <!-- start of thead tag -->
-    <tr> <!-- start of row -->
+ <!-- The following code was created on October 30, 2023, using 
+    information from the following link:
+    https://www.w3schools.com/css/css_navbar_horizontal.asp -->
 
-      <th> <!-- start of Home cell -->
-        <h2><a class='link' href="home.php">Home</h2>
-      </th> <!-- end of Home cell -->
+    <ul> <!-- start of ul for menu bar -->
+      <!-- list home.php link -->
+      <li><a class="link" href="home.php">Home</a></li>
+      <!-- list schedule.php link -->
+      <li><a class="link" href="schedule.php">Schedule</a></li>
+      <!-- list analytics.php link -->
+      <li><a class="link" href="analytics.php">Analytics</a></li>
+      <!-- list Touch & Go logo -->
+      <li><img src="../newLogo.png" alt="Touch and Go Logo" height="60"></li>
+      <!-- list contact.php link -->
+      <li><a class='link' href="contact.php">Contact</a></li>
+      <!-- list help.php link -->
+      <li><a class='link' href="help.php">Help</a></li>
+      <!-- list logout.php link -->
+      <li><a class='link' href="logout.php">Logout</a></li>
+    </ul> <!-- end of ul for menu bar -->
+   
+    <!-- this ends the code that was created using information from the 
+    following link:
+    https://www.w3schools.com/css/css_navbar_horizontal.asp -->
 
-      <th> <!-- start of Schedule cell -->
-        <h2><a class='link' href="schedule.php">Schedule</h2>
-      </th> <!-- end of Schedule cell -->
 
-      <th> <!-- start of Analytics cell -->
-        <h2><a class='link' href="analytics.php">Analytics</h2>
-      </th> <!-- end of Analytics cell -->
-
-      <th> <!-- start of Logo cell -->
-        <img src="../Touch__Go_Logo.jpg" alt="Touch and Go Logo" class="center" height="90">
-      </th><!-- end of Logo cell -->
-
-      <th> <!-- start of Contact cell -->
-        <h2><a class='link' href="contact.php">Contact</h2>
-      </th> <!-- end of Contact cell -->
-
-      <th> <!-- start of Help cell -->
-        <h2><a class='link' href="help.php">Help</h2>
-      </th> <!-- end of Help cell -->
-
-      <th> <!-- start of Logout cell -->
-        <h2><a class='link' href="logout.php">Logout</h2>
-      </th> <!-- end of Logout cell -->
-
-    </tr> <!-- end of row -->
-  </thead> <!-- end of thead tag -->
-</table> <!-- end of table tag -->
 <!-- analytics header -->
 <h1>Analytics</h1>
 
@@ -150,6 +127,163 @@ if (mysqli_connect_errno()) {
     <!-- (B) SEARCH RESULTS -->
     <div id="results"></div>
   </div>
+
+    <section class="dropdown-section"> <!-- start of section tag with dropdown-section class -->
+      <!-- display Today's Attendance -->
+      <h3>Today's Attendance</h3>
+
+      <div class="dropdown"> <!-- start of ul tag with dropdown class -->
+       
+          <div class="question"> <!-- start of div tag with question class -->
+            <!-- create arrow -->
+            <span class="arrow"></span>
+            <!-- display first question -->
+            <span>CSC 341 Introduction to Information Security</span>
+          </div> <!-- end of div tag -->
+          <div class="answer"> <!-- start of div tag with answer class -->
+            <!-- display answer to first question -->
+            <p>Status: Present</p>
+          </div> <!-- end of div tag -->
+        
+          <div class="question"> <!-- start of div tag with question class -->
+            <!-- create arrow -->
+            <span class="arrow"></span>
+            <!-- display second question -->
+            <span>CSC 256 SQL Programming</span>
+          </div> <!-- end of div tag -->
+          <div class="answer"> <!-- start of div tag with answer class -->
+            <!-- display answer to second question -->
+            <p>Status: Late</p>
+          </div> <!-- end of div tag -->
+
+          <div class="question"> <!-- start of div tag with question class -->
+            <!-- create arrow -->
+            <span class="arrow"></span>
+            <!-- display third question -->
+            <span>CSC 355 Software Engineering II</span>
+          </div> <!-- end of div tag -->
+          <div class="answer"> <!-- start of div tag with answer class -->
+            <!-- display answer to third question -->
+            <p>Status: Awaiting Attendance</p>
+          </div> <!-- end of div tag -->
+
+          <div class="question"> <!-- start of div tag with question class -->
+            <!-- create arrow -->
+            <span class="arrow"></span>
+            <!-- display third question -->
+            <span>CSC 242 Server-Side Web Development</span>
+          </div> <!-- end of div tag -->
+          <div class="answer"> <!-- start of div tag with answer class -->
+            <!-- display answer to third question -->
+            <p>Status: Awaiting Attendance</p>
+          </div> <!-- end of div tag -->
+        </div> <!-- end of ul tag -->
+    </section> <!-- end of section tag -->
+
+    <hr>
+
+    <section class="dropdown-section"> <!-- start of section tag with dropdown-section class -->
+      <!-- display Total Semester Attendance -->
+      <h3>Total Semester Attendance</h3>
+
+      <div class="dropdown"> <!-- start of ul tag with dropdown class -->
+       
+          <div class="question"> <!-- start of div tag with question class -->
+            <!-- create arrow -->
+            <span class="arrow"></span>
+            <!-- display first question -->
+            <span>CSC 341 Introduction to Information Security</span>
+          </div> <!-- end of div tag -->
+          <div class="answer"> <!-- start of div tag with answer class -->
+            <!-- display answer to first question -->
+            <p>Present: 33/37 <br>
+               Late: 1/37 <br>
+               You have attended 92% of classes this semester.
+            </p>
+          </div> <!-- end of div tag -->
+        
+          <div class="question"> <!-- start of div tag with question class -->
+            <!-- create arrow -->
+            <span class="arrow"></span>
+            <!-- display second question -->
+            <span>CSC 256 SQL Programming</span>
+          </div> <!-- end of div tag -->
+          <div class="answer"> <!-- start of div tag with answer class -->
+            <!-- display answer to second question -->
+            <p>Present: 33/37 <br>
+              Late: 1/37 <br>
+              You have attended 92% of classes this semester.
+           </p>
+          </div> <!-- end of div tag -->
+
+          <div class="question"> <!-- start of div tag with question class -->
+            <!-- create arrow -->
+            <span class="arrow"></span>
+            <!-- display third question -->
+            <span>CSC 355 Software Engineering II</span>
+          </div> <!-- end of div tag -->
+          <div class="answer"> <!-- start of div tag with answer class -->
+            <!-- display answer to third question -->
+            <p>Present: 33/37 <br>
+              Late: 1/37 <br>
+              You have attended 92% of classes this semester.
+           </p>
+          </div> <!-- end of div tag -->
+
+          <div class="question"> <!-- start of div tag with question class -->
+            <!-- create arrow -->
+            <span class="arrow"></span>
+            <!-- display third question -->
+            <span>CSC 242 Server-Side Web Development</span>
+          </div> <!-- end of div tag -->
+          <div class="answer"> <!-- start of div tag with answer class -->
+            <!-- display answer to third question -->
+            <p>Present: 33/37 <br>
+              Late: 1/37 <br>
+              You have attended 92% of classes this semester.
+           </p>
+          </div> <!-- end of div tag -->
+        </div> <!-- end of ul tag -->
+    </section> <!-- end of section tag -->
+
+  <script>
+    function asearch() {
+      // (A) GET SEARCH TERM
+      var data = new FormData(document.getElementById("form"));
+      data.append("ajax", 1);
+
+      // (B) AJAX SEARCH REQUEST
+      fetch("search.php", { method: "POST", body: data })
+        .then(res => res.json())
+        .then(res => {
+          var wrapper = document.getElementById("results");
+          if (res.length > 0) {
+            wrapper.innerHTML = "<table><tr><th>First Name</th><th>Email</th></tr>";
+            for (let r of res) {
+              let line = document.createElement("tr");
+              line.innerHTML = `<tr><td>${r["studentFirstName"]}</td><td>${r["studentEmail"]}</td></tr>`;
+              wrapper.appendChild(line);
+            }
+            line.innerHTML = "</table>";
+            wrapper.appendChild(line);
+          } else { wrapper.innerHTML = "No results found"; }
+        });
+      return false;
+    }
+
+    // set variables
+    const question = document.querySelectorAll('.question');
+      const answer = document.querySelectorAll('.answer');
+      const arrow = document.querySelectorAll('.arrow');
+  
+      // for loop to open the answer to the question
+      for(let i = 0; i < question.length; i++){
+        question[i].addEventListener('click', () => {
+          answer[i].classList.toggle('answer-opened');
+          arrow[i].classList.toggle('arrow-rotated');
+        });
+      } // end of for loop
+  </script>
 </body> <!-- end of body tag -->
 
 </html> <!-- end of html tag -->
