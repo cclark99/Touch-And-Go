@@ -59,10 +59,11 @@ if (mysqli_connect_errno()) {
   <style>
     form {
       padding: 20px;
-      width: 50%;
       margin: auto;
       border: 1px solid #eee;
       background: #f7f7f7;
+      display: grid;
+      align-content: center;
     }
 
     input {
@@ -78,7 +79,7 @@ if (mysqli_connect_errno()) {
       margin-top: 20px;
       border: 0;
       color: #fff;
-      background: #2f3ac1;
+      background: #10222e;
       cursor: pointer;
     }
 
