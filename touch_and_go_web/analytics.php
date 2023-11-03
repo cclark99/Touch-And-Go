@@ -45,7 +45,7 @@ if (mysqli_connect_errno()) {
           if (res.length > 0) {
             wrapper.innerHTML = "<table><tr><th>First Name</th><th>Email</th></tr>";
             for (let r of res) {
-              let line = document.createElement("div");
+              let line = document.createElement();
               line.innerHTML = `<tr><td>${r["studentFirstName"]}</td><td>${r["studentEmail"]}</td></tr>`;
               wrapper.appendChild(line);
             }
