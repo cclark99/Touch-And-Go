@@ -226,7 +226,7 @@ if (mysqli_connect_errno()) {
             <!-- display answer to third question -->
             <p>Present: 33/37 <br>
               Late: 1/37 <br>
-              You have attended 92% of classes this semester.
+              You have attended 92% of classes this semester. 
            </p>
           </div> <!-- end of div tag -->
 

@@ -1,5 +1,5 @@
 <?php
-// (A) DATABASE CONFIG - CHANGE TO YOUR OWN!
+// (A) DATABASE CONFIG 
 define("DB_HOST", "localhost");
 define("DB_NAME", "touch_and_go_test");
 define("DB_CHARSET", "utf8mb4");
