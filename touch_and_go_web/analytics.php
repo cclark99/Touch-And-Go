@@ -56,10 +56,11 @@ if (mysqli_connect_errno()) {
       return false;
     }
   </script>
-  <!-- <style>
+  <style>
     form {
       padding: 20px;
-      margin-bottom: 20px;
+      width: 50%;
+      margin: auto;
       border: 1px solid #eee;
       background: #f7f7f7;
     }
@@ -83,9 +84,10 @@ if (mysqli_connect_errno()) {
 
     #results div {
       padding: 10px;
-      margin-bottom: 10px;
       border: 1px solid #eee;
       background: #f7f7f7;
+      width: 60%;
+      margin: auto;
     }
 
     #results div:nth-child(even) {
@@ -93,7 +95,7 @@ if (mysqli_connect_errno()) {
     }
     .searchBox {
       width: 50%;
-      margin: auto; -->
+      margin: auto;
     }
   </style>
 
