@@ -43,12 +43,14 @@ if (mysqli_connect_errno()) {
         .then(res => {
           var wrapper = document.getElementById("results");
           if (res.length > 0) {
-            wrapper.innerHTML = "";
+            wrapper.innerHTML = "<table><tr><th>First Name</th><th>Email</th></tr>";
             for (let r of res) {
               let line = document.createElement("div");
-              line.innerHTML = `${r["studentFirstName"]} - ${r["studentEmail"]}`;
+              line.innerHTML = `<tr><td>${r["studentFirstName"]}</td><td>${r["studentEmail"]}</td></tr>`;
               wrapper.appendChild(line);
             }
+            line.innerHTML = "</table>";
+            wrapper.appendChild(line);
           } else { wrapper.innerHTML = "No results found"; }
         });
       return false;
