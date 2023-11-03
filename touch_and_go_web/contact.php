@@ -1,5 +1,7 @@
 
 
+
+
 <!DOCTYPE html>
 
 <html lang="en"> <!-- start of html tag -->
@@ -18,65 +20,55 @@
         color: #10222E; /* make color blue */
         font-size: 24pt; /* make font size 24 pt */
         text-align: center; /* center align text */
-        margin-top: 5%; /* make margin-top 5% */
+        /*margin-top: 5%; /* make margin-top 5% */
        } /* end of style rules for h3 tag */
        
        /* start of class style rules for dropdown */
        .dropdown {
            width: 25%; /* make width 25% */
-      } /* end of class style rules for dropdown */
+        } /* end of class style rules for dropdown */
     </style> <!-- end of style tag -->
+  </head> <!-- end of head tag -->
 
-    <table> <!-- start of table tag -->
-      <thead> <!-- start of thead tag -->
-        <tr> <!-- start of row -->
-            
-          <th> <!-- start of Home cell -->
-            <h2><a class='link' href = "home.php">Home</h2>
-          </th> <!-- end of Home cell -->
-            
-          <th> <!-- start of Schedule cell -->
-            <h2><a class='link' href = "schedule.php">Schedule</h2>
-          </th> <!-- end of Schedule cell -->
-            
-          <th> <!-- start of Analytics cell -->
-            <h2><a class='link' href = "analytics.php">Analytics</h2>
-          </th> <!-- end of Analytics cell -->
-            
-          <th> <!-- start of Logo cell -->
-            <img src="../Touch__Go_Logo.jpg" alt="Touch and Go Logo" class="center" height="90">
-          </th><!-- end of Logo cell -->
-            
-          <th> <!-- start of Contact cell -->
-            <h2><a class='link' href = "contact.php">Contact</h2>
-          </th> <!-- end of Contact cell -->
-            
-          <th> <!-- start of Help cell -->
-            <h2><a class='link' href = "help.php">Help</h2>
-          </th> <!-- end of Help cell -->
-            
-          <th> <!-- start of Logout cell -->
-            <h2><a class='link' href = "logout.php">Logout</h2>
-          </th> <!-- end of Logout cell -->
-         
-        </tr> <!-- end of row -->
-      </thead> <!-- end of thead tag -->
-    </table> <!-- end of table tag -->
+  <body> <!-- start of body tag -->
+
+    <!-- The following code was created on October 30, 2023, using 
+    information from the following link:
+    https://www.w3schools.com/css/css_navbar_horizontal.asp -->
+
+    <ul> <!-- start of ul for menu bar -->
+      <!-- list home.php link -->
+      <li><a class="link" href="home.php">Home</a></li>
+      <!-- list schedule.php link -->
+      <li><a class="link" href="schedule.php">Schedule</a></li>
+      <!-- list analytics.php link -->
+      <li><a class="link" href="analytics.php">Analytics</a></li>
+      <!-- list Touch & Go logo -->
+      <li><img src="../newLogo.png" alt="Touch and Go Logo" height="60"></li>
+      <!-- list contact.php link -->
+      <li><a class='link' href="contact.php">Contact</a></li>
+      <!-- list help.php link -->
+      <li><a class='link' href="help.php">Help</a></li>
+      <!-- list logout.php link -->
+      <li><a class='link' href="logout.php">Logout</a></li>
+    </ul> <!-- end of ul for menu bar -->
+   
+    <!-- this ends the code that was created using information from the 
+    following link:
+    https://www.w3schools.com/css/css_navbar_horizontal.asp -->
+  
     <!-- contact header -->
     <h1>Contact</h1>
     <!-- display Professor Contact Information: -->
     <h3>Professor Contact Information:</h3>
-  </head> <!-- end of head tag -->
 
-  <body> <!-- start of body tag -->
     <!-- The following code was created on October 16, 2023, using 
-   information from the following link:
-   https://www.youtube.com/watch?v=bwe-PsEoot4 */ -->
+    information from the following link:
+    https://www.youtube.com/watch?v=bwe-PsEoot4 */ -->
 
     <section class="dropdown-section"> <!-- start of section tag with dropdown-section class -->
 
-      <ul class="dropdown"> <!-- start of ul tag with dropdown class -->
-        <li> <!-- start of li (first question) -->
+      <ul class="dropdown"> <!-- start of ul tag with dropwdown class -->
           <div class="question"> <!-- start of div tag with question class -->
             <!-- create arrow -->
             <span class="arrow"></span>
@@ -92,9 +84,8 @@
               - T/TH: 1:00 - 3:00 PM<br>
             </p>
           </div> <!-- end of div tag -->
-        </li> <!-- end of li tag -->
 
-        <li> <!-- start of li (second question) -->
+        
           <div class="question"> <!-- start of div tag with question class -->
             <!-- create arrow -->
             <span class="arrow"></span>
@@ -110,9 +101,9 @@
               - T/TH: 1:00 - 3:00 PM<br>
             </p>
           </div> <!-- end of div tag -->
-        </li> <!-- end of li tag -->
+       
 
-        <li> <!-- start of li (third question) -->
+        
           <div class="question"> <!-- start of div tag with question class -->
             <!-- create arrow -->
             <span class="arrow"></span>
@@ -128,9 +119,9 @@
               - T/TH: 1:00 - 3:00 PM<br>
             </p>
           </div> <!-- end of div tag -->
-        </li> <!-- end of li tag -->
+        
 
-        <li> <!-- start of li (fourth question) -->
+       
           <div class="question"> <!-- start of div tag with question class -->
             <!-- create arrow -->
             <span class="arrow"></span>
@@ -146,9 +137,9 @@
               - T/TH: 1:00 - 3:00 PM<br>
             </p>
           </div> <!-- end of div tag -->
-        </li> <!-- end of li tag -->
+       
 
-        <li> <!-- start of li (fifth question) -->
+      
           <div class="question"> <!-- start of div tag with question class -->
             <!-- create arrow -->
             <span class="arrow"></span>
@@ -164,7 +155,7 @@
               - T/TH: 1:00 - 3:00 PM<br>
             </p>
           </div> <!-- end of div tag -->
-        </li> <!-- end of li tag -->
+       
       </ul> <!-- end of ul tag -->
     </section> <!-- end of section tag -->
 
