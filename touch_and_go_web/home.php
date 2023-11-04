@@ -8,10 +8,14 @@ if (!isset($_SESSION['loggedin'])) {
 }
 
 include 'db_connection.php';
-if (isset($_GET['firstName'])) {
-  $_SESSION['firstName'] = $_GET['firstName'];
-}
 
+$stmt = $pdo->prepare("SELECT studentFirstName FROM student WHERE `studentEmail={$_SESSION['email']}");
+$stmt->execute();
+$_SESSION["firstName"] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$stmt = $pdo->prepare("SELECT studentLastName FROM student WHERE `studentEmail={$_SESSION['email']}");
+$stmt->execute();
+$_SESSION["lastName"] = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 <!DOCTYPE html>
@@ -94,7 +98,7 @@ if (isset($_GET['firstName'])) {
   <h1>Home</h1>
   <!-- display hello message with student's name -->
   <h3>Hello
-    <?php echo $_SESSION['firstName'] ?>
+    <?php echo $_SESSION['firstName'] . ' ' . $_SESSION['lastName'] ?>
   </h3>
 
   <!-- display today is (day of the week, month, day, and year)-->
