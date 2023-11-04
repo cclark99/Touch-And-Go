@@ -7,7 +7,7 @@ if (!isset($_SESSION['loggedin'])) {
   exit();
 }
 
-// include 'db_connection.php';
+include 'db_connection.php';
 // if (isset($_GET['firstName'])) {
 //   $_SESSION['firstName'] = $_GET['firstName'];
 // }
