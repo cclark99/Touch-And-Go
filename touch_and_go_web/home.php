@@ -8,9 +8,9 @@ if (!isset($_SESSION['loggedin'])) {
 }
 
 include 'db_connection.php';
-// if (isset($_GET['firstName'])) {
-//   $_SESSION['firstName'] = $_GET['firstName'];
-// }
+if (isset($_GET['firstName'])) {
+  $_SESSION['firstName'] = $_GET['firstName'];
+}
 
 
 ?>
