@@ -98,7 +98,7 @@ if (!empty($_SESSION['id'])) {
   <h1>Home</h1>
   <!-- display hello message with student's name -->
   <h3>Hello
-    <?php echo $row['studentFirstName'] . $row['studentLastName'] ?>
+    <!-- <?php echo $row['studentFirstName'] . $row['studentLastName'] ?> -->
   </h3>
 
   <!-- display today is (day of the week, month, day, and year)-->
