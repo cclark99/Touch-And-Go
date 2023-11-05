@@ -8,15 +8,9 @@ if (!isset($_SESSION['loggedin'])) {
 }
 
 include 'db_connection.php';
-
-// $stmt = $pdo->prepare("SELECT studentFirstName FROM student WHERE `studentEmail={$_SESSION['email']}");
-// $stmt->execute();
-// $_SESSION["firstName"] = $stmt->fetchAll();
-
-// $stmt = $pdo->prepare("SELECT studentLastName FROM student WHERE `studentEmail={$_SESSION['email']}");
-// $stmt->execute();
-// $_SESSION["lastName"] = $stmt->fetchAll();
-
+$email = $_SESSION['email'];
+$result = mysqli_query($conn,"SELECT * FROM student WHERE studentEmail = $email");
+$row = mysqli_fetch_assoc($result); 
 ?>
 <!DOCTYPE html>
 
@@ -98,7 +92,7 @@ include 'db_connection.php';
   <h1>Home</h1>
   <!-- display hello message with student's name -->
   <h3>Hello
-    <?php echo $_SESSION['email'] ?>
+    <?php echo $row['studentFirstName'] . $row['studentLastName'] ?>
   </h3>
 
   <!-- display today is (day of the week, month, day, and year)-->
@@ -111,7 +105,7 @@ include 'db_connection.php';
   <script>
     // set variables
     var d = new Date();
-    var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "Sepetember", "October", "November", "December"];
+    var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     var dayOfWeek = d.getDay();
     var month = d.getMonth();
     var day = d.getDate();
