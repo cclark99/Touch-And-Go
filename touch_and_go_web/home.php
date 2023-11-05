@@ -7,10 +7,16 @@ if (!isset($_SESSION['loggedin'])) {
   exit();
 }
 
-include 'db_connection.php';
-$email = $_SESSION['email'];
-$result = mysqli_query($con,"SELECT * FROM student WHERE studentEmail = $email");
-$row = mysqli_fetch_assoc($result); 
+require 'db_connection.php';
+
+if (!empty($_SESSION['id'])) {
+  $email = $_SESSION['email'];
+  $result = mysqli_query($con, "SELECT * FROM student WHERE studentEmail = $email");
+  $row = mysqli_fetch_assoc($result);
+} else {
+  header("Location: index.html");
+}
+
 ?>
 <!DOCTYPE html>
 
