@@ -9,15 +9,15 @@ if (!isset($_SESSION['loggedin'])) {
 
 require 'db_connection.php';
 
-if (!empty($_SESSION['id'])) {
-  $email = $_SESSION['email'];
-  $sql = "SELECT * FROM student WHERE studentEmail = $email";
-  $result = mysqli_query($con, $sql);
-  $row = mysqli_fetch_assoc($result);
-  mysqli_free_result($result);
-} else {
-  header("Location: index.html");
-}
+// if (!empty($_SESSION['id'])) {
+//   $email = $_SESSION['email'];
+//   $sql = "SELECT * FROM student WHERE studentEmail = $email";
+//   $result = mysqli_query($con, $sql);
+//   $row = mysqli_fetch_assoc($result);
+//   mysqli_free_result($result);
+// } else {
+//   header("Location: index.html");
+// }
 
 ?>
 <!DOCTYPE html>
