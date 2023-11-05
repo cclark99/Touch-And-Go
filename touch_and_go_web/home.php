@@ -9,13 +9,13 @@ if (!isset($_SESSION['loggedin'])) {
 
 include 'db_connection.php';
 
-$stmt = $pdo->prepare("SELECT studentFirstName FROM student WHERE `studentEmail={$_SESSION['email']}");
-$stmt->execute();
-$_SESSION["firstName"] = $stmt->fetchAll();
+// $stmt = $pdo->prepare("SELECT studentFirstName FROM student WHERE `studentEmail={$_SESSION['email']}");
+// $stmt->execute();
+// $_SESSION["firstName"] = $stmt->fetchAll();
 
-$stmt = $pdo->prepare("SELECT studentLastName FROM student WHERE `studentEmail={$_SESSION['email']}");
-$stmt->execute();
-$_SESSION["lastName"] = $stmt->fetchAll();
+// $stmt = $pdo->prepare("SELECT studentLastName FROM student WHERE `studentEmail={$_SESSION['email']}");
+// $stmt->execute();
+// $_SESSION["lastName"] = $stmt->fetchAll();
 
 ?>
 <!DOCTYPE html>
