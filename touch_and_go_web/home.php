@@ -11,8 +11,11 @@ require 'db_connection.php';
 
 if (!empty($_SESSION['id'])) {
   $email = $_SESSION['email'];
-  $result = mysqli_query($con, "SELECT * FROM student WHERE studentEmail = $email");
+  $sql = "SELECT * FROM student WHERE studentEmail = $email";
+  $result = mysqli_query($con, $sql);
   $row = mysqli_fetch_assoc($result);
+  mysqli_free_result($result);
+  $con->close();
 } else {
   header("Location: index.html");
 }
@@ -98,7 +101,7 @@ if (!empty($_SESSION['id'])) {
   <h1>Home</h1>
   <!-- display hello message with student's name -->
   <h3>Hello
-    <!-- <?php echo $row['studentFirstName'] . $row['studentLastName'] ?> -->
+    <?php echo $row['studentFirstName'] . $row['studentLastName'] ?>
   </h3>
 
   <!-- display today is (day of the week, month, day, and year)-->
