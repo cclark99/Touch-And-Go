@@ -98,7 +98,7 @@ include 'db_connection.php';
   <h1>Home</h1>
   <!-- display hello message with student's name -->
   <h3>Hello
-    <?php echo $_SESSION['firstName'] . ' ' . $_SESSION['lastName'] ?>
+    <?php echo $_SESSION['email'] ?>
   </h3>
 
   <!-- display today is (day of the week, month, day, and year)-->
