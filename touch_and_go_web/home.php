@@ -9,7 +9,7 @@ if (!isset($_SESSION['loggedin'])) {
 
 include 'db_connection.php';
 $email = $_SESSION['email'];
-$result = mysqli_query($conn,"SELECT * FROM student WHERE studentEmail = $email");
+$result = mysqli_query($con,"SELECT * FROM student WHERE studentEmail = $email");
 $row = mysqli_fetch_assoc($result); 
 ?>
 <!DOCTYPE html>
