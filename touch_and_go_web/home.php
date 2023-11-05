@@ -15,7 +15,6 @@ if (!empty($_SESSION['id'])) {
   $result = mysqli_query($con, $sql);
   $row = mysqli_fetch_assoc($result);
   mysqli_free_result($result);
-  $con->close();
 } else {
   header("Location: index.html");
 }
