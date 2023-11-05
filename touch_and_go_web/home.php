@@ -9,6 +9,19 @@ if (!isset($_SESSION['loggedin'])) {
 
 require 'db_connection.php';
 
+// Prepare our SQL, preparing the SQL statement will prevent SQL injection.
+if ($stmt = $con->prepare('SELECT studentFirstName, studentLastName FROM student WHERE studentEmail = ?')) {
+  $stmt->bind_param('s', $_SESSION['email']);
+  $stmt->execute();
+  // Store the result so we can check if the account exists in the database.
+  $stmt->store_result();
+  if ($stmt->num_rows > 0) {
+    $stmt->bind_result($_SESSION['firstName'], $_SESSION['lastName']);
+    $stmt->fetch();
+  }
+  $stmt->close();
+}
+
 // if (!empty($_SESSION['id'])) {
 //   $email = $_SESSION['email'];
 //   $sql = "SELECT * FROM student WHERE studentEmail = $email";
@@ -100,7 +113,7 @@ require 'db_connection.php';
   <h1>Home</h1>
   <!-- display hello message with student's name -->
   <h3>Hello
-    <?php echo $row['studentFirstName'] . $row['studentLastName'] ?>
+    <?php echo $_SESSION['firstName'] . $_SESSION['lastName'] ?>
   </h3>
 
   <!-- display today is (day of the week, month, day, and year)-->

@@ -27,8 +27,7 @@ if ($stmt = $con->prepare('SELECT studentId, studentPassword FROM student WHERE 
 			$_SESSION['loggedin'] = TRUE;
 			$_SESSION['email'] = $_POST['email'];
 			$_SESSION['id'] = $id;
-			echo $id;
-			// header('Location: home.php');
+			header('Location: home.php');
 		} else {
 			// Incorrect password
 			echo 'Incorrect email and/or password!';
