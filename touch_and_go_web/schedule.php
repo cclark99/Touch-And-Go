@@ -30,9 +30,9 @@ if (
   if ($result->num_rows > 0) {
     // $stmt->bind_result($_courseId, $courseName, $courseDesc, $courseStart , $courseEnd, $courseLocation);
     $rows = $result->fetch_all(MYSQLI_ASSOC);
-    $result_array = array();
+    $course_array = array();
     foreach ($rows as $row) {
-      $result_array[] = $row;
+      $course_array[] = $row;
     }
 
     print_r($result_array);
@@ -117,19 +117,35 @@ if (
 
     <div class="dropdown"> <!-- start of ul tag with dropdown class -->
 
+      <?php
+      foreach ($course_array as $row) {
+        echo '<div class="question"> <!-- start of div tag with question class -->
+          <!-- create arrow -->
+          <span class="arrow"></span>
+          <!-- display first question -->
+          <span>' . $row['courseName'] . '</span>
+        </div> <!-- end of div tag -->
+        <div class="answer"> <!-- start of div tag with answer class -->
+          <!-- display answer to first question -->
+          <p>Time: ' . $row['courseStartTime'] . ' - ' . $row['courseEndTime'] . '<br>
+            Professor: Professor Name <br>
+            Location: ' . $row['courseLocation'] . ' <br>
+          </p>
+        </div>';
+      }
+
+      ?>
       <div class="question"> <!-- start of div tag with question class -->
         <!-- create arrow -->
         <span class="arrow"></span>
         <!-- display first question -->
-        <span>
-          <?php echo $result_array[0]['courseName'] ?>
-        </span>
+        <span>CSC 341 Introduction to Information Security</span>
       </div> <!-- end of div tag -->
       <div class="answer"> <!-- start of div tag with answer class -->
         <!-- display answer to first question -->
         <p>Time: 8:00 - 8:50 A.M. <br>
           Professor: Professor Name <br>
-          <?php echo 'Location: ' . $result_array[0]['courseLocation'] ?> <br>
+          Location: Old Main 159 <br>
         </p>
       </div> <!-- end of div tag -->
 
