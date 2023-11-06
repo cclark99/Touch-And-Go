@@ -3,29 +3,29 @@
 
 ##for lcd support
 import sys
-##for mysql support
-##import mysqlkey
 
 sys.path.append('lcdlib')
 
 from lcd_api import LcdApi
 from i2c_lcd import I2cLcd
 
-I2C_ADDR = 0x27
-I2C_NUM_ROWS = 4
-I2C_NUM_COLS = 20
-
-lcd = I2cLcd(1, I2C_ADDR, I2C_NUM_ROWS, I2C_NUM_COLS)
-
-#lcd.putstr("Great! It Works!")
-#lcd.move_to(0,3)
-#lcd.putstr("freva.com")
-
+##for adafruit lib
 import time
 import serial
 
 import adafruit_fingerprint
 
+##for mysql
+
+import mysql.connector
+
+##find a way to obfuscate this for security
+db_config = {
+    'host': '34.194.132.130',
+    'user': 'test',
+    'password': 'test123',
+    'database': 'touch_and_go_test',
+}
 
 # import board
 # uart = busio.UART(board.TX, board.RX, baudrate=57600)
@@ -41,24 +41,56 @@ uart = serial.Serial("/dev/ttyUSB0", baudrate=57600, timeout=1)
 
 finger = adafruit_fingerprint.Adafruit_Fingerprint(uart)
 
+##initialize lcd
+I2C_ADDR = 0x27
+I2C_NUM_ROWS = 4
+I2C_NUM_COLS = 20
 
-def get_fingerprint():
-    """Get a finger print image, template it, and see if it matches!"""
-    lcd.clear()
-    lcd.putstr("Place finger on ")
-    lcd.move_to(0,1)
-    lcd.putstr("sensor...")
-    print("Waiting for image...")
-    while finger.get_image() != adafruit_fingerprint.OK:
-        pass
-    print("Templating...")
-    if finger.image_2_tz(1) != adafruit_fingerprint.OK:
-        return False
-    print("Searching...")
-    if finger.finger_search() != adafruit_fingerprint.OK:
-        return False
-    return True
+lcd = I2cLcd(1, I2C_ADDR, I2C_NUM_ROWS, I2C_NUM_COLS)
 
+def insertdb(index):
+    try:
+        connection = mysql.connector.connect(**db_config)
+        cursor = connection.cursor()
+    
+        # Perform database operations here
+        # Example: cursor.execute("INSERT INTO your_table (column1, column2) VALUES (%s, %s)", (value1, value2))
+        # Example: cursor.execute("SELECT * FROM your_table")
+        # Don't forget to commit changes if necessary: connection.commit()
+        
+        # Execute your SELECT query
+        #query = "SELECT * FROM student"
+        #cursor.execute(query)
+    
+        # Fetch all the rows
+        #rows = cursor.fetchall()
+    
+        # Print the results to the console
+        #for row in rows:
+        #    print(row)
+        
+        #id first name lastname email password
+        insert_query = "INSERT INTO touch_and_go_test VALUES (%s, %s, %s, %s)"
+        
+        print("Enter your first name: ")
+        fname = input()
+        print("Enter your last name: ")
+        lname = input()
+        print("Enter your email: ")
+        email = input()
+        print("Enter your password: ")
+        pword = input()
+        
+        data = (index, fname, lname, email, pword)
+        
+        cursor.execute(insert_query, data)
+        connection.commit()
+        
+    except mysql.connector.Error as err:
+        print(f"Error: {err}")
+    finally:
+        if 'connection' in locals():
+            connection.close()
 
 # pylint: disable=too-many-branches
 def get_fingerprint_detail():
@@ -182,7 +214,6 @@ def enroll_finger(location):
         lcd.clear()
         lcd.putstr("Enter your name")
         name = input("Enter your name: ")
-        mysqlkey.query(name)
         time.sleep(2)
         lcd.clear()
     else:
@@ -195,43 +226,6 @@ def enroll_finger(location):
         return False
 
     return True
-
-
-def save_fingerprint_image(filename):
-    """Scan fingerprint then save image to filename."""
-    while finger.get_image():
-        pass
-
-    # let PIL take care of the image headers and file structure
-    from PIL import Image  # pylint: disable=import-outside-toplevel
-
-    img = Image.new("L", (256, 288), "white")
-    pixeldata = img.load()
-    mask = 0b00001111
-    result = finger.get_fpdata(sensorbuffer="image")
-
-    # this block "unpacks" the data received from the fingerprint
-    #   module then copies the image data to the image placeholder "img"
-    #   pixel by pixel.  please refer to section 4.2.1 of the manual for
-    #   more details.  thanks to Bastian Raschke and Danylo Esterman.
-    # pylint: disable=invalid-name
-    x = 0
-    # pylint: disable=invalid-name
-    y = 0
-    # pylint: disable=consider-using-enumerate
-    for i in range(len(result)):
-        pixeldata[x, y] = (int(result[i]) >> 4) * 17
-        x += 1
-        pixeldata[x, y] = (int(result[i]) & mask) * 17
-        if x == 255:
-            x = 0
-            y += 1
-        else:
-            x += 1
-
-    if not img.save(filename):
-        return True
-    return False
 
 
 ##################################################
@@ -260,45 +254,21 @@ while True:
         raise RuntimeError("Failed to get system parameters")
     print("Size of template library: ", finger.library_size)
     print("e) enroll print")
-    print("f) find print")
     print("d) delete print")
-    print("s) save fingerprint image")
     print("r) reset library")
     print("q) quit")
     print("----------------")
     c = input("> ")
 
     if c == "e":
-        enroll_finger(get_num(finger.library_size))
-    if c == "f":
-        if get_fingerprint():
-            lcd.clear()
-            lcd.putstr("Enter your name")
-            name = input("Enter your name: ")
-            output = "Detected #{}".format(finger.finger_id)
-            lcd.clear()
-            lcd.putstr(output)
-            lcd.move_to(0,1)
-            output = "with confidence {}".format(finger.confidence)
-            lcd.putstr(output)
-            lcd.move_to(0,3)
-            output = "Welcome {}".format(name)
-            lcd.putstr(output)
-            print("Detected #", finger.finger_id, "with confidence", finger.confidence)
-            time.sleep(3)
-            lcd.clear()
-        else:
-            print("Finger not found")
+        index = get_num(finger.library_size)
+        if enroll_finger(index):
+            insertdb(index)
     if c == "d":
         if finger.delete_model(get_num(finger.library_size)) == adafruit_fingerprint.OK:
             print("Deleted!")
         else:
             print("Failed to delete")
-    if c == "s":
-        if save_fingerprint_image("fingerprint.png"):
-            print("Fingerprint image saved")
-        else:
-            print("Failed to save fingerprint image")
     if c == "r":
         if finger.empty_library() == adafruit_fingerprint.OK:
             print("Library empty!")

@@ -4,7 +4,7 @@
 ##for lcd support
 import sys
 ##for mysql support
-##import mysqlkey
+import mysqlkey
 
 sys.path.append('lcdlib')
 
@@ -233,6 +233,35 @@ def save_fingerprint_image(filename):
         return True
     return False
 
+def save_fingerprint_data(filename):
+    if finger.read_templates() != adafruit_fingerprint.OK:
+        raise RuntimeError("Failed to read templates")
+
+    with open(filename, "wb") as file:
+        for template in finger.templates:
+            file.write(template)
+    
+    print("Fingerprint data saved to", filename)
+
+def load_fingerprint_data(filename):
+    templates = []
+
+    try:
+        with open(filename, "rb") as file:
+            while True:
+                template = file.read(512)  # Assuming each template is 512 bytes
+                if not template:
+                    break
+                templates.append(template)
+    except FileNotFoundError:
+        print("File not found:", filename)
+        return None
+
+    finger.templates = templates
+    finger.template_count = len(templates)
+
+    print("Fingerprint data loaded from", filename)
+
 
 ##################################################
    
@@ -263,6 +292,8 @@ while True:
     print("f) find print")
     print("d) delete print")
     print("s) save fingerprint image")
+    print("w) Save fingerprint data to a text file")
+    print("i) Import fingerprint data from a text file")
     print("r) reset library")
     print("q) quit")
     print("----------------")
@@ -294,6 +325,12 @@ while True:
             print("Deleted!")
         else:
             print("Failed to delete")
+    if c == "w":
+        save_fingerprint_data("fingerprint_data.txt")
+        print("Saved templates")
+    if c == "i":
+        import_fingerprint_data("fingerprint_data.txt")
+        print("Imported Templates")
     if c == "s":
         if save_fingerprint_image("fingerprint.png"):
             print("Fingerprint image saved")
