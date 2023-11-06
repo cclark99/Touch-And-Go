@@ -132,7 +132,7 @@ if (
         </div>';
         }
       } else {
-        echo '<span class="arrow">No classes found...</span>';
+        echo '<span style="color: #FAF8D6; line-height: 1.5em; padding-left: 2%; padding-right: 2%;">No classes found...</span>';
       }
 
       ?>
