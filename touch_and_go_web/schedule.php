@@ -28,14 +28,16 @@ if (
   // Store the result so we can check if the account exists in the database.
   // $stmt->store_result();
   $result = $stmt->get_result();
-  if ($stmt->num_rows > 0) {
+  if ($result->num_rows > 0) {
     // $stmt->bind_result($_courseId, $courseName, $courseDesc, $courseStart , $courseEnd, $courseLocation);
-    while ($row = $result->fetch_array()) {
-      foreach ($row as $r) {
-        print "$r ";
-      }
-      print "\n";
+    $row = $result->fetch_all(MYSQLI_ASSOC);
+    $result_array = array();
+    foreach ($rows as $row) {
+      $result_array[] = $row;
     }
+    
+    print_r($result_array);
+
     $stmt->close();
   }
 }
