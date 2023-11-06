@@ -28,7 +28,7 @@ if ($stmt = $con->prepare('select course.courseId,
   if ($stmt->num_rows > 0) {
     //$stmt->bind_result($_SESSION['firstName'], $_SESSION['lastName']);
     $stmt->fetch();
-    echo $stmt;
+    // echo $stmt;
   }
   $stmt->close();
 }
