@@ -121,13 +121,15 @@ if (
         <!-- create arrow -->
         <span class="arrow"></span>
         <!-- display first question -->
-        <span>CSC 341 Introduction to Information Security</span>
+        <span>
+          <?php echo $result_array[0]['courseName'] ?>
+        </span>
       </div> <!-- end of div tag -->
       <div class="answer"> <!-- start of div tag with answer class -->
         <!-- display answer to first question -->
         <p>Time: 8:00 - 8:50 A.M. <br>
           Professor: Professor Name <br>
-          Location: Old Main 159 <br>
+          <?php echo 'Location: ' . $result_array[0]['courseLocation'] ?> <br>
         </p>
       </div> <!-- end of div tag -->
 
