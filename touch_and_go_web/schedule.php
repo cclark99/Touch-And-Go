@@ -26,7 +26,7 @@ if (
   $stmt->bind_param('s', $_SESSION['id']);
   $stmt->execute();
   // Store the result so we can check if the account exists in the database.
-  $stmt->store_result();
+  // $stmt->store_result();
   $result = $stmt->get_result();
   if ($stmt->num_rows > 0) {
     // $stmt->bind_result($_courseId, $courseName, $courseDesc, $courseStart , $courseEnd, $courseLocation);
