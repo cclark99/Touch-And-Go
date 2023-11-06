@@ -25,21 +25,23 @@ if (
 ) {
   $stmt->bind_param('s', $_SESSION['id']);
   $stmt->execute();
-  // Store the result so we can check if the account exists in the database.
   // $stmt->store_result();
   $result = $stmt->get_result();
   if ($result->num_rows > 0) {
     // $stmt->bind_result($_courseId, $courseName, $courseDesc, $courseStart , $courseEnd, $courseLocation);
-    $row = $result->fetch_all(MYSQLI_ASSOC);
+    $rows = $result->fetch_all(MYSQLI_ASSOC);
     $result_array = array();
     foreach ($rows as $row) {
       $result_array[] = $row;
     }
-    
+
     print_r($result_array);
 
-    $stmt->close();
+  } else {
+    echo 'No classes found...';
   }
+  $stmt->close();
+  $con->close();
 }
 
 ?>
