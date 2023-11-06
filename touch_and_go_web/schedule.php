@@ -135,61 +135,6 @@ if (
       }
 
       ?>
-      <div class="question"> <!-- start of div tag with question class -->
-        <!-- create arrow -->
-        <span class="arrow"></span>
-        <!-- display first question -->
-        <span>CSC 341 Introduction to Information Security</span>
-      </div> <!-- end of div tag -->
-      <div class="answer"> <!-- start of div tag with answer class -->
-        <!-- display answer to first question -->
-        <p>Time: 8:00 - 8:50 A.M. <br>
-          Professor: Professor Name <br>
-          Location: Old Main 159 <br>
-        </p>
-      </div> <!-- end of div tag -->
-
-      <div class="question"> <!-- start of div tag with question class -->
-        <!-- create arrow -->
-        <span class="arrow"></span>
-        <!-- display second question -->
-        <span>CSC 256 SQL Programming</span>
-      </div> <!-- end of div tag -->
-      <div class="answer"> <!-- start of div tag with answer class -->
-        <!-- display answer to second question -->
-        <p>Time: 9:00 - 9:50 A.M. <br>
-          Professor: Professor Name <br>
-          Location: Old Main 158 <br>
-        </p>
-      </div> <!-- end of div tag -->
-
-      <div class="question"> <!-- start of div tag with question class -->
-        <!-- create arrow -->
-        <span class="arrow"></span>
-        <!-- display third question -->
-        <span>CSC 355 Software Engineering II</span>
-      </div> <!-- end of div tag -->
-      <div class="answer"> <!-- start of div tag with answer class -->
-        <!-- display answer to third question -->
-        <p>Time: 11:00 - 11:50 A.M. <br>
-          Professor: Professor Name <br>
-          Location: Old Main 159 <br>
-        </p>
-      </div> <!-- end of div tag -->
-
-      <div class="question"> <!-- start of div tag with question class -->
-        <!-- create arrow -->
-        <span class="arrow"></span>
-        <!-- display third question -->
-        <span>CSC 242 Server-Side Web Development</span>
-      </div> <!-- end of div tag -->
-      <div class="answer"> <!-- start of div tag with answer class -->
-        <!-- display answer to third question -->
-        <p>Time: 4:30 - 5:45 P.M. <br>
-          Professor: Professor Name <br>
-          Location: Old Main 159 <br>
-        </p>
-      </div> <!-- end of div tag -->
     </div> <!-- end of ul tag -->
   </section> <!-- end of section tag -->
 
