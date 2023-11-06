@@ -27,9 +27,7 @@ if ($stmt = $con->prepare('select course.courseId,
   $stmt->store_result();
   if ($stmt->num_rows > 0) {
     $stmt->bind_result($_courseId, $courseName, $courseDesc, $courseStart , $courseEnd, $courseLocation);
-    while ($stmt->fetch()) {
-      // printf ("%i %s %s\n", $courseId, $courseName, $courseDesc);
-    }
+    $stmt->fetch() or die(''. $stmt->error);
   }
   $stmt->close();
 }
