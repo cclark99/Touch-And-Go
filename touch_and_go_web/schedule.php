@@ -10,7 +10,8 @@ if (!isset($_SESSION['loggedin'])) {
 require 'db_connection.php';
 
 // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
-if ($stmt = $con->prepare('select course.courseId, 
+if (
+  $stmt = $con->prepare('select course.courseId, 
                                   courseName, 
                                   courseDescription, 
                                   courseDate, 
@@ -20,16 +21,23 @@ if ($stmt = $con->prepare('select course.courseId,
                             from course 
                               inner join student_course on student_course.courseId = course.courseId
                               inner join student on student.studentId = student_course.studentId 
-                            where student.studentId = ?')) {
+                            where student.studentId = ?')
+) {
   $stmt->bind_param('s', $_SESSION['id']);
   $stmt->execute();
   // Store the result so we can check if the account exists in the database.
   $stmt->store_result();
+  $result = $stmt->get_result();
   if ($stmt->num_rows > 0) {
     // $stmt->bind_result($_courseId, $courseName, $courseDesc, $courseStart , $courseEnd, $courseLocation);
-    $stmt->fetch() or die(''. $stmt->error);
+    while ($row = $result->fetch_array()) {
+      foreach ($row as $r) {
+        print "$r ";
+      }
+      print "\n";
+    }
+    $stmt->close();
   }
-  $stmt->close();
 }
 
 ?>
