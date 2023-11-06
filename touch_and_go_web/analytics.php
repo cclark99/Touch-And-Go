@@ -7,15 +7,38 @@ if (!isset($_SESSION['loggedin'])) {
   exit();
 }
 
-$DATABASE_HOST = 'localhost';
-$DATABASE_USER = 'test';
-$DATABASE_PASS = 'test123';
-$DATABASE_NAME = 'touch_and_go_test';
+require 'db_connection.php';
 
-$con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
-if (mysqli_connect_errno()) {
-  // If there is an error with the connection, stop the script and display the error.
-  exit('Failed to connect to MySQL: ' . mysqli_connect_error());
+// Prepare our SQL, preparing the SQL statement will prevent SQL injection.
+if (
+  $stmt = $con->prepare('select course.courseId, 
+                                  courseName, 
+                                  courseDescription, 
+                                  courseDate, 
+                                  courseStartTime, 
+                                  courseEndTime, 
+                                  courseLocation 
+                            from course 
+                              inner join student_course on student_course.courseId = course.courseId
+                              inner join student on student.studentId = student_course.studentId 
+                            where student.studentId = ?')
+) {
+
+  $stmt->bind_param('s', $_SESSION['id']);
+
+  $stmt->execute();
+
+  $result = $stmt->get_result();
+
+  if ($result->num_rows > 0) {
+    $rows = $result->fetch_all(MYSQLI_ASSOC);
+    $course_array = array();
+    foreach ($rows as $row) {
+      $course_array[] = $row;
+    }
+  }
+  $stmt->close();
+  $con->close();
 }
 
 ?>
@@ -143,50 +166,24 @@ if (mysqli_connect_errno()) {
     <h3>Today's Attendance</h3>
 
     <div class="dropdown"> <!-- start of ul tag with dropdown class -->
-
-      <div class="question"> <!-- start of div tag with question class -->
-        <!-- create arrow -->
-        <span class="arrow"></span>
-        <!-- display first question -->
-        <span>CSC 341 Introduction to Information Security</span>
-      </div> <!-- end of div tag -->
-      <div class="answer"> <!-- start of div tag with answer class -->
-        <!-- display answer to first question -->
-        <p>Status: Present</p>
-      </div> <!-- end of div tag -->
-
-      <div class="question"> <!-- start of div tag with question class -->
-        <!-- create arrow -->
-        <span class="arrow"></span>
-        <!-- display second question -->
-        <span>CSC 256 SQL Programming</span>
-      </div> <!-- end of div tag -->
-      <div class="answer"> <!-- start of div tag with answer class -->
-        <!-- display answer to second question -->
-        <p>Status: Late</p>
-      </div> <!-- end of div tag -->
-
-      <div class="question"> <!-- start of div tag with question class -->
-        <!-- create arrow -->
-        <span class="arrow"></span>
-        <!-- display third question -->
-        <span>CSC 355 Software Engineering II</span>
-      </div> <!-- end of div tag -->
-      <div class="answer"> <!-- start of div tag with answer class -->
-        <!-- display answer to third question -->
-        <p>Status: Awaiting Attendance</p>
-      </div> <!-- end of div tag -->
-
-      <div class="question"> <!-- start of div tag with question class -->
-        <!-- create arrow -->
-        <span class="arrow"></span>
-        <!-- display third question -->
-        <span>CSC 242 Server-Side Web Development</span>
-      </div> <!-- end of div tag -->
-      <div class="answer"> <!-- start of div tag with answer class -->
-        <!-- display answer to third question -->
-        <p>Status: Awaiting Attendance</p>
-      </div> <!-- end of div tag -->
+      <?php
+      if ($course_array) {
+        foreach ($course_array as $row) {
+          echo '<div class="question"> <!-- start of div tag with question class -->
+            <!-- create arrow -->
+            <span class="arrow"></span>
+            <!-- display first question -->
+            <span>' . $row['courseName'] . '</span>
+          </div> <!-- end of div tag -->
+          <div class="answer"> <!-- start of div tag with answer class -->
+            <!-- display answer to first question -->
+            <p>Status: </p>
+          </div>';
+        }
+      } else {
+        echo '<span style="color: #FAF8D6; line-height: 1.5em; padding-left: 2%; padding-right: 2%;">No classes found...</span>';
+      }
+      ?>
     </div> <!-- end of ul tag -->
   </section> <!-- end of section tag -->
 
