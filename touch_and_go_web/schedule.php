@@ -110,7 +110,7 @@ if ($stmt = $con->prepare('select course.courseId,
         <!-- create arrow -->
         <span class="arrow"></span>
         <!-- display first question -->
-        <span>CSC 341 Introduction to Information Security</span>
+        <span><?php echo $row ?></span>
       </div> <!-- end of div tag -->
       <div class="answer"> <!-- start of div tag with answer class -->
         <!-- display answer to first question -->
