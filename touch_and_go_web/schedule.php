@@ -26,8 +26,8 @@ if ($stmt = $con->prepare('select course.courseId,
   // Store the result so we can check if the account exists in the database.
   $stmt->store_result();
   if ($stmt->num_rows > 0) {
-    //$stmt->bind_result($_SESSION['firstName'], $_SESSION['lastName']);
-    $stmt->fetch();
+    // $stmt->bind_result($_SESSION['firstName'], $_SESSION['lastName']);
+    $row = $stmt->fetch();
     // echo $stmt;
   }
   $stmt->close();
