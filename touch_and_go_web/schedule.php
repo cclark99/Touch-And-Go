@@ -23,22 +23,19 @@ if (
                               inner join student on student.studentId = student_course.studentId 
                             where student.studentId = ?')
 ) {
+  
   $stmt->bind_param('s', $_SESSION['id']);
+  
   $stmt->execute();
-  // $stmt->store_result();
+  
   $result = $stmt->get_result();
+  
   if ($result->num_rows > 0) {
-    // $stmt->bind_result($_courseId, $courseName, $courseDesc, $courseStart , $courseEnd, $courseLocation);
     $rows = $result->fetch_all(MYSQLI_ASSOC);
     $course_array = array();
     foreach ($rows as $row) {
       $course_array[] = $row;
     }
-
-    print_r($result_array);
-
-  } else {
-    echo 'No classes found...';
   }
   $stmt->close();
   $con->close();
@@ -118,6 +115,7 @@ if (
     <div class="dropdown"> <!-- start of ul tag with dropdown class -->
 
       <?php
+      if ($course_array) {
       foreach ($course_array as $row) {
         echo '<div class="question"> <!-- start of div tag with question class -->
           <!-- create arrow -->
@@ -133,6 +131,9 @@ if (
           </p>
         </div>';
       }
+    } else {
+      echo 'No classes found...';
+    }
 
       ?>
     </div> <!-- end of ul tag -->
