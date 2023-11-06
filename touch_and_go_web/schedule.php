@@ -28,7 +28,7 @@ if ($stmt = $con->prepare('select course.courseId,
   if ($stmt->num_rows > 0) {
     // $stmt->bind_result($_SESSION['firstName'], $_SESSION['lastName']);
     $row = $stmt->fetch();
-    // echo $stmt;
+    echo $row;
   }
   $stmt->close();
 }
@@ -110,7 +110,7 @@ if ($stmt = $con->prepare('select course.courseId,
         <!-- create arrow -->
         <span class="arrow"></span>
         <!-- display first question -->
-        <span><?php echo $row[1] ?></span>
+        <span>CSC 341 Introduction to Information Security</span>
       </div> <!-- end of div tag -->
       <div class="answer"> <!-- start of div tag with answer class -->
         <!-- display answer to first question -->
