@@ -110,7 +110,7 @@ if ($stmt = $con->prepare('select course.courseId,
         <!-- create arrow -->
         <span class="arrow"></span>
         <!-- display first question -->
-        <span><?php echo $row ?></span>
+        <span><?php echo $row[1] ?></span>
       </div> <!-- end of div tag -->
       <div class="answer"> <!-- start of div tag with answer class -->
         <!-- display answer to first question -->
