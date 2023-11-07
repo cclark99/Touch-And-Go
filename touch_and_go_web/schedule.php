@@ -125,7 +125,7 @@ if (
         </div> <!-- end of div tag -->
         <div class="answer"> <!-- start of div tag with answer class -->
           <!-- display answer to first question -->
-          <p>Time: ' . date( 'g:i A', strtotime($row['courseStartTime'])) . ' - ' . date( 'g:i A', strtotime($row['courseEndTime'])) . '<br>
+          <p>Time: ' . date('g:i A', strtotime($row['courseStartTime'])) . ' - ' . date('g:i A', strtotime($row['courseEndTime'])) . '<br>
             Professor: Professor Name <br>
             Location: ' . $row['courseLocation'] . ' <br>
           </p>
