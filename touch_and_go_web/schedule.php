@@ -17,7 +17,12 @@ if (
                                   courseDate, 
                                   courseStartTime, 
                                   courseEndTime, 
-                                  courseLocation
+                                  courseLocation,
+                                  professor.professorId,
+                                  professor.professorFirstName,
+                                  professor.professorLastName,
+                                  professor.professorEmail,
+                                  professor.professorPhone
                             from course 
                               inner join student_course on student_course.courseId = course.courseId
                               inner join student on student.studentId = student_course.studentId
@@ -128,7 +133,7 @@ if (
         <div class="answer"> <!-- start of div tag with answer class -->
           <!-- display answer to first question -->
           <p>Time: ' . date('g:i A', strtotime($row['courseStartTime'])) . ' - ' . date('g:i A', strtotime($row['courseEndTime'])) . '<br>
-            Professor: Professor Name <br>
+            Professor: '. $row['professorLastName']  .' <br>
             Location: ' . $row['courseLocation'] . ' <br>
           </p>
         </div>';
