@@ -8,7 +8,6 @@ if (!isset($_SESSION['loggedin'])) {
 }
 
 require 'db_connection.php';
-
 include 'get_course.php';
 
 ?>
@@ -102,7 +101,7 @@ include 'get_course.php';
         </div>';
         }
       } else {
-        echo '<span style="color: #FAF8D6; line-height: 1.5em; padding-left: 2%; padding-right: 2%;">No classes found...</span>';
+        echo '<span style="color: #FAF8D6; line-height: 1.5em; padding-left: 2%; padding-right: 2%;">No classes today </span>';
       }
 
       ?>
@@ -129,8 +128,8 @@ include 'get_course.php';
         </div> <!-- end of div tag -->
         <div class="answer"> <!-- start of div tag with answer class -->
           <!-- display answer to first question -->
-          <p>Time: ' . $row['courseStartTime'] . ' - ' . $row['courseEndTime'] . '<br>
-            Professor: Professor Name <br>
+          <p>Time: ' . date('g:i A', strtotime($row['courseStartTime'])) . ' - ' . date('g:i A', strtotime($row['courseEndTime'])) . '<br>
+            Professor: ' . $row['professorLastName'] . '<br>
             Location: ' . $row['courseLocation'] . ' <br>
           </p>
         </div>';
