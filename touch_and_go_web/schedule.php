@@ -17,10 +17,17 @@ if (
                                   courseDate, 
                                   courseStartTime, 
                                   courseEndTime, 
-                                  courseLocation 
+                                  courseLocation
+                                  professor.professorId
+                                  professor.professorFirstName,
+                                  professor.professorLastName,
+                                  professor.professorEmail,
+                                  professor.professorPhone
                             from course 
                               inner join student_course on student_course.courseId = course.courseId
-                              inner join student on student.studentId = student_course.studentId 
+                              inner join student on student.studentId = student_course.studentId
+                              inner join professor_course on professor_course.courseId = course.courseId
+                              inner join professor on professor_course.professorId = professor.professorId 
                             where student.studentId = ?')
 ) {
 
