@@ -11,11 +11,11 @@ if (mysqli_connect_errno()) {
    exit('Failed to connect to MySQL: ' . mysqli_connect_error());
 }
 
-if (!isset($_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['password'], $_POST['passwordVerify'])) {
+if (!isset($_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['password'], $_POST['passwordVerify'], $_POST['userType'])) {
    exit('Please complete the registration form!');
 }
 
-if (empty($_POST['firstName']) || empty($_POST['lastName']) || empty($_POST['email']) || empty($_POST['password']) || empty($_POST['passwordVerify'])) {
+if (empty($_POST['firstName']) || empty($_POST['lastName']) || empty($_POST['email']) || empty($_POST['password']) || empty($_POST['passwordVerify']) || empty($_POST['userType'])) {
    exit('Please complete the registration form!');
 }
 
@@ -33,7 +33,7 @@ if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) 
          exit('Passwords did not match');
       } else if ($stmt = $con->prepare('INSERT INTO user (userEmail, userPassword, userType) VALUES (?, ?, ?)')) {
          $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-         $userType = "student";
+         $userType = $_POST['userType'];
          $stmt->bind_param('sss', $_POST['email'], $password, $userType);
          $stmt->execute();
          echo 'You have successfully registered! You can now login!';
