@@ -29,7 +29,7 @@ if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) 
       echo 'Email already exists, please choose your Kutztown University email address!';
    } else {
 
-      if (!$_POST['passwordVerify'] === $_POST['password']) {
+      if ($_POST['passwordVerify'] !== $_POST['password']) {
          exit('Passwords did not match');
       } else if ($stmt = $con->prepare('INSERT INTO user (userEmail, userPassword, userType) VALUES (?, ?, ?)')) {
          $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
