@@ -72,7 +72,7 @@ if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) 
          //       header('Location: register.php');
          //       exit();
          // }
-         
+
          $_SESSION['reg_msg'] = 'You have successfully registered! You can now login! Click the login link';
          header("Location: register.php");
 

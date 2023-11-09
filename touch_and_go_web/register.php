@@ -53,7 +53,7 @@
    </form> <!-- end of sign in forms -->
 
    <h1>
-      <?php echo $_SESSION['error_msg'] ?>
+      <?php echo $_SESSION['reg_msg'] ?>
    </h1>
 
    <h3 style="text-align: center;">Already have an account? <a href="index.html">Login Here</a></h2>
