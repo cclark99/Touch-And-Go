@@ -52,9 +52,9 @@
 
    </form> <!-- end of sign in forms -->
 
-   <p>
+   <h1>
       <?= $_SESSION['error_msg'] ?>
-   </p>
+</h1>
 
    <h3 style="text-align: center;">Already have an account? <a href="index.html">Login Here</a></h2>
 
