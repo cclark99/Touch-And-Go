@@ -44,31 +44,31 @@ if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) 
          $userType = $_POST['userType'];
          $stmt->bind_param('sss', $_POST['email'], $password, $userType);
          $stmt->execute();
-         $stmt->close();
+
          switch ($userType) {
             case 'student':
-               $stmt = $con->prepare('SELECT userId FROM user WHERE userEmail = ?');
-               $stmt->bind_param('s', $_POST['email']);
-               $stmt->execute();
-               $stmt->bind_result($userId);
-               $stmt->close();
+               $stmt1 = $con->prepare('SELECT userId FROM user WHERE userEmail = ?');
+               $stmt1->bind_param('s', $_POST['email']);
+               $stmt1->execute();
+               $stmt1->bind_result($userId);
+               $stmt1->close();
 
-               $stmt = $con->prepare('INSERT INTO student (studentId, studentFirstName, studentLastName) VALUES (?, ?, ?)');
-               $stmt->bind_param('iss', $userId, $_POST['firstName'], $_POST['lastName']);
-               $stmt->execute();
-               $stmt->close();
+               $stmt2 = $con->prepare('INSERT INTO student (studentId, studentFirstName, studentLastName) VALUES (?, ?, ?)');
+               $stmt2->bind_param('iss', $userId, $_POST['firstName'], $_POST['lastName']);
+               $stmt2->execute();
+               $stmt2->close();
                break;
             case 'professor';
-               $stmt = $con->prepare('SELECT userId FROM user WHERE userEmail = ?');
-               $stmt->bind_param('s', $_POST['email']);
-               $stmt->execute();
-               $stmt->bind_result($userId);
-               $stmt->close();
+               $stmt1 = $con->prepare('SELECT userId FROM user WHERE userEmail = ?');
+               $stmt1->bind_param('s', $_POST['email']);
+               $stmt1->execute();
+               $stmt1->bind_result($userId);
+               $stmt1->close();
 
-               $stmt = $con->prepare('INSERT INTO professor (professorId, professorFirstName, professorLastName) VALUES (?, ?, ?)');
-               $stmt->bind_param('iss', $userId, $_POST['firstName'], $_POST['lastName']);
-               $stmt->execute();
-               $stmt->close();
+               $stmt2 = $con->prepare('INSERT INTO professor (professorId, professorFirstName, professorLastName) VALUES (?, ?, ?)');
+               $stmt2->bind_param('iss', $userId, $_POST['firstName'], $_POST['lastName']);
+               $stmt2->execute();
+               $stmt2->close();
                break;
             default:
                // Need to hope that we don't ever get to this switch statement lol
