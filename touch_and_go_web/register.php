@@ -31,9 +31,10 @@ if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) 
 
       if (!$_POST['passwordVerify'] == $_POST['password']) {
          exit('Passwords did not match');
-      } else if ($stmt = $con->prepare('INSERT INTO user (userFirstName, userLastName, userEmail, userPassword) VALUES (?, ?, ?, ?)')) {
+      } else if ($stmt = $con->prepare('INSERT INTO user (userEmail, userPassword, userType) VALUES (?, ?, ?)')) {
          $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-         $stmt->bind_param('ssss', $_POST['id'], $_POST['firstName'], $_POST['lastName'], $_POST['email'], $password);
+         $userType = "student";
+         $stmt->bind_param('sss', $_POST['email'], $password, $userType);
          $stmt->execute();
          echo 'You have successfully registered! You can now login!';
       }
