@@ -11,15 +11,15 @@ if (mysqli_connect_errno()) {
    exit('Failed to connect to MySQL: ' . mysqli_connect_error());
 }
 
-if(!isset($_POST['id'], $_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['password'])) {
+if (!isset($_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['password'], $_POST['passwordVerify'])) {
    exit('Please complete the registration form!');
 }
 
-if (empty($_POST['id']) || empty($_POST['firstName']) || empty($_POST['lastName']) || empty($_POST['email']) || empty($_POST['password']) ) {
+if (empty($_POST['firstName']) || empty($_POST['lastName']) || empty($_POST['email']) || empty($_POST['password']) || empty($_POST['passwordVerify'])) {
    exit('Please complete the registration form!');
 }
 
-if ($stmt = $con->prepare('SELECT studentId, studentPassword FROM student WHERE studentEmail = ?')) {
+if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) {
    $stmt->bind_param('s', $_POST['email']);
    $stmt->execute();
    $stmt->store_result();
@@ -29,9 +29,11 @@ if ($stmt = $con->prepare('SELECT studentId, studentPassword FROM student WHERE 
       echo 'Email already exists, please choose your Kutztown University email address!';
    } else {
 
-      if ($stmt = $con->prepare('INSERT INTO student (studentId, studentFirstName, studentLastName, studentEmail, studentPassword) VALUES (?, ?, ?, ?, ?)')) {
+      if (!$_POST['passwordVerify'] == $_POST['password']) {
+         exit('Passwords did not match');
+      } else if ($stmt = $con->prepare('INSERT INTO user (userFirstName, userLastName, userEmail, userPassword) VALUES (?, ?, ?, ?)')) {
          $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-         $stmt->bind_param('issss', $_POST['id'], $_POST['firstName'], $_POST['lastName'], $_POST['email'], $password);
+         $stmt->bind_param('ssss', $_POST['id'], $_POST['firstName'], $_POST['lastName'], $_POST['email'], $password);
          $stmt->execute();
          echo 'You have successfully registered! You can now login!';
       }
