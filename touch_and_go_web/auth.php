@@ -10,14 +10,14 @@ if (!isset($_POST['email'], $_POST['password'])) {
 }
 
 // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
-if ($stmt = $con->prepare('SELECT studentId, studentPassword FROM student WHERE studentEmail = ?')) {
+if ($stmt = $con->prepare('SELECT userId, userPassword, userType FROM user WHERE userEmail = ?')) {
 	$stmt->bind_param('s', $_POST['email']);
 	$stmt->execute();
 	// Store the result so we can check if the account exists in the database.
 	$stmt->store_result();
 
 	if ($stmt->num_rows > 0) {
-		$stmt->bind_result($id, $password);
+		$stmt->bind_result($id, $password, $userType);
 		$stmt->fetch();
 		// Account exists, now we verify the password.
 		if (password_verify($_POST['password'], $password)) {
@@ -27,6 +27,7 @@ if ($stmt = $con->prepare('SELECT studentId, studentPassword FROM student WHERE 
 			$_SESSION['loggedin'] = TRUE;
 			$_SESSION['email'] = $_POST['email'];
 			$_SESSION['id'] = $id;
+			$_SESSION['userType'] = $userType;
 			header('Location: home.php');
 		} else {
 			// Incorrect password

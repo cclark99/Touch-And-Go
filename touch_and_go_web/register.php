@@ -1,49 +1,63 @@
-<?php
-// Database connection
-$DATABASE_HOST = 'localhost';
-$DATABASE_USER = 'test';
-$DATABASE_PASS = 'test123';
-$DATABASE_NAME = 'touch_and_go_test';
-// Try and connect using the info above.
-$con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
-if (mysqli_connect_errno()) {
-   // If there is an error with the connection, stop the script and display the error.
-   exit('Failed to connect to MySQL: ' . mysqli_connect_error());
-}
+<?php session_start() ?>
+<!DOCTYPE html>
 
-if (!isset($_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['password'], $_POST['passwordVerify'], $_POST['userType'])) {
-   exit('Please complete the registration form!');
-}
+<html lang="en"> <!-- start of html tag -->
 
-if (empty($_POST['firstName']) || empty($_POST['lastName']) || empty($_POST['email']) || empty($_POST['password']) || empty($_POST['passwordVerify']) || empty($_POST['userType'])) {
-   exit('Please complete the registration form!');
-}
+<head> <!-- start of head tag -->
+   <!-- set charset -->
+   <meta charset="utf-8">
+   <!-- set title -->
+   <title>Login</title>
+   <!-- link external styles.css sheet -->
+   <link rel="stylesheet" type="text/css" href="styles.css">
+</head> <!-- end of head tag -->
 
-if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) {
-   $stmt->bind_param('s', $_POST['email']);
-   $stmt->execute();
-   $stmt->store_result();
-   // Store the result so we can check if the account exists in the database.
-   if ($stmt->num_rows > 0) {
-      // User already exists
-      echo 'Email already exists, please choose your Kutztown University email address!';
-   } else {
+<body> <!-- start of body tag -->
+   <!-- display logo -->
+   <img src="../Touch__Go_Logo.jpg" alt="Touch and Go Logo" class="center">
 
-      if ($_POST['passwordVerify'] !== $_POST['password']) {
-         exit('Passwords did not match');
-      } else if ($stmt = $con->prepare('INSERT INTO user (userEmail, userPassword, userType) VALUES (?, ?, ?)')) {
-         $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-         $userType = $_POST['userType'];
-         $stmt->bind_param('sss', $_POST['email'], $password, $userType);
-         $stmt->execute();
-         echo 'You have successfully registered! You can now login!';
-      }
-   }
-   $stmt->close();
-} else {
-   echo 'Could not prepare statement!';
-}
+   <!-- Sign In heading -->
+   <h1>Register</h1>
 
-$con->close();
+   <!-- start of sign in forms -->
+   <form method="post" action="reg.php">
 
-?>
+      <!-- firstName form with with placeholder -->
+      <input name="firstName" type="text" placeholder="First Name" class="center" required>
+
+      <!-- firstName form with with placeholder -->
+      <input name="lastName" type="text" placeholder="Last Name" class="center" required>
+
+      <!-- email form with with placeholder -->
+      <input name="email" type="text" placeholder="Email Address" class="center" required>
+
+      <!-- password form with placeholder -->
+      <input name="password" type="password" placeholder="Password" class="center" required>
+
+      <!-- password re-enter form with placeholder -->
+      <input name="passwordVerify" type="password" placeholder="Re-enter Password" class="center" required>
+
+      <!-- userType radio buttons form with placeholder -->
+      <input type="radio" id="studentType" name="userType" checked required value="student">
+      <label for="studentType">Student</label><br>
+
+      <input type="radio" id="professorType" name="userType" value="professor">
+      <label for="professorType">Professor</label><br>
+
+      <!-- submit button -->
+      <input class="button" type="submit" value="Register">
+
+      <!-- clear button -->
+      <input class="button" type="reset" value="Clear">
+
+   </form> <!-- end of sign in forms -->
+
+   <p>
+      <?= $_SESSION['error_msg'] ?>
+   </p>
+
+   <h3 style="text-align: center;">Already have an account? <a href="index.html">Login Here</a></h2>
+
+</body> <!-- end of body tag -->
+
+</html> <!-- end of html tag -->
