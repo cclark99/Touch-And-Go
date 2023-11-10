@@ -16,7 +16,7 @@
    <img src="../Touch__Go_Logo.jpg" alt="Touch and Go Logo" class="center">
 
    <!-- Sign In heading -->
-   <h1>Sign In</h1>
+   <h1>Login</h1>
 
    <!-- start of sign in forms -->
    <form method="post" action="auth.php">

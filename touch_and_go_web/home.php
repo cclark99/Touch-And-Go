@@ -9,54 +9,61 @@ if (!isset($_SESSION['loggedin'])) {
 
 require 'db_connection.php';
 
-// Get user's name based on what account type they are
+// Get user's name based on what account type they are, as well as userId
 
-// switch ($_SESSION['userType']) {
-//   case 'student':
-//     // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
-//     if ($stmt = $con->prepare('SELECT studentFirstName, studentLastName FROM student WHERE userEmail = ?')) {
-//       $stmt->bind_param('s', $_SESSION['email']);
-//       $stmt->execute();
-//       $stmt->store_result();
-//       if ($stmt->num_rows > 0) {
-//         $stmt->bind_result($_SESSION['firstName'], $_SESSION['lastName']);
-//         $stmt->fetch();
-//       }
-//       $stmt->close();
-//     }
-//     break;
+switch ($_SESSION['userType']) {
+  case 'student':
+    // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
+    if (
+      $stmt = $con->prepare('SELECT user.userId, 
+                                      firstName, 
+                                      lastName 
+                              FROM student 
+                                inner join user on user.userId = student.userId
+                              WHERE userEmail = ?')
+    ) {
+      $stmt->bind_param('s', $_SESSION['email']);
+      $stmt->execute();
+      $stmt->store_result();
+      if ($stmt->num_rows > 0) {
+        $stmt->bind_result($_SESSION['firstName'], $_SESSION['lastName']);
+        $stmt->fetch();
+      }
+      $stmt->close();
+    }
+    break;
 
-//   case 'professor':
-//     // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
-//     if ($stmt = $con->prepare('SELECT professorFirstName, professorLastName FROM professor WHERE userEmail = ?')) {
-//       $stmt->bind_param('s', $_SESSION['email']);
-//       $stmt->execute();
-//       $stmt->store_result();
-//       if ($stmt->num_rows > 0) {
-//         $stmt->bind_result($_SESSION['firstName'], $_SESSION['lastName']);
-//         $stmt->fetch();
-//       }
-//       $stmt->close();
-//     }
-//     break;
+  case 'professor':
+    // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
+    if ($stmt = $con->prepare('SELECT firstName, lastName FROM professor WHERE userEmail = ?')) {
+      $stmt->bind_param('s', $_SESSION['email']);
+      $stmt->execute();
+      $stmt->store_result();
+      if ($stmt->num_rows > 0) {
+        $stmt->bind_result($_SESSION['firstName'], $_SESSION['lastName']);
+        $stmt->fetch();
+      }
+      $stmt->close();
+    }
+    break;
 
-//   case 'admin':
-//     // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
-//     if ($stmt = $con->prepare('SELECT studentFirstName, studentLastName FROM student WHERE userEmail = ?')) {
-//       $stmt->bind_param('s', $_SESSION['email']);
-//       $stmt->execute();
-//       $stmt->store_result();
-//       if ($stmt->num_rows > 0) {
-//         $stmt->bind_result($_SESSION['firstName'], $_SESSION['lastName']);
-//         $stmt->fetch();
-//       }
-//       $stmt->close();
-//     }
-//     break;
-//   default:
-//     include 'logout.php';
-//     break;
-// }
+  case 'admin':
+    // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
+    if ($stmt = $con->prepare('SELECT firstName, lastName FROM admin WHERE userEmail = ?')) {
+      $stmt->bind_param('s', $_SESSION['email']);
+      $stmt->execute();
+      $stmt->store_result();
+      if ($stmt->num_rows > 0) {
+        $stmt->bind_result($_SESSION['firstName'], $_SESSION['lastName']);
+        $stmt->fetch();
+      }
+      $stmt->close();
+    }
+    break;
+  default:
+    include 'logout.php';
+    break;
+}
 
 ?>
 <!DOCTYPE html>
