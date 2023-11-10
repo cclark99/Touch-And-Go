@@ -55,15 +55,12 @@ if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) 
                   $stmt->close();
                }
 
-               if ($stmt = $con->prepare('UPDATE student SET firstName = ?, lastName = ? WHERE userId = ?')) {
-                  $stmt->bind_param('ssi', $_POST['firstName'], $_POST['lastName'], $userId);
+               if ($stmt = $con->prepare('INSERT INTO student(userId, firstName, lastName) VALUES (?, ?, ?)')) {
+                  $stmt->bind_param('ssi', $userId, $_POST['firstName'], $_POST['lastName']);
                   $stmt->execute();
                   $stmt->close();
                }
-               // $stmt = $con->prepare('INSERT INTO student (studentId, studentFirstName, studentLastName) VALUES (?, ?, ?)');
-               // $stmt->bind_param('iss', $userId, $_POST['firstName'], $_POST['lastName']);
-               // $stmt->execute();
-               // $stmt->close();
+
                break;
             case $userType == 'professor';
                if ($stmt = $con->prepare('SELECT userId FROM user WHERE userEmail = ?')) {
@@ -73,8 +70,8 @@ if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) 
                   $stmt->close();
                }
 
-               if ($stmt = $con->prepare('UPDATE professor SET firstName = ?, lastName = ? WHERE userId = ?')) {
-                  $stmt->bind_param('ssi', $_POST['firstName'], $_POST['lastName'], $userId);
+               if ($stmt = $con->prepare('INSERT INTO professor(userId, firstName, lastName) VALUES (?, ?, ?)')) {
+                  $stmt->bind_param('ssi', $userId, $_POST['firstName'], $_POST['lastName']);
                   $stmt->execute();
                   $stmt->close();
                }
