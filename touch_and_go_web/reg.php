@@ -55,11 +55,11 @@ if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) 
                   $stmt->close();
                }
 
-               // if ($stmt = $con->prepare('INSERT INTO student(userId, firstName, lastName) VALUES (?, ?, ?)')) {
-               //    $stmt->bind_param('iss', $userId, $_POST['firstName'], $_POST['lastName']);
-               //    $stmt->execute();
-               //    $stmt->close();
-               // }
+               if ($stmt = $con->prepare('INSERT INTO student (userId, firstName, lastName) VALUES (?, \'?\', \'?\')')) {
+                  $stmt->bind_param('iss', $userId, $_POST['firstName'], $_POST['lastName']);
+                  $stmt->execute();
+                  $stmt->close();
+               }
 
                break;
             case $userType == 'professor';
@@ -70,11 +70,11 @@ if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) 
                   $stmt->close();
                }
 
-               // if ($stmt = $con->prepare('INSERT INTO professor(userId, firstName, lastName) VALUES (?, ?, ?)')) {
-               //    $stmt->bind_param('iss', $userId, $_POST['firstName'], $_POST['lastName']);
-               //    $stmt->execute();
-               //    $stmt->close();
-               // }
+               if ($stmt = $con->prepare('INSERT INTO professor (userId, firstName, lastName) VALUES (?, \'?\', \'?\')')) {
+                  $stmt->bind_param('iss', $userId, $_POST['firstName'], $_POST['lastName']);
+                  $stmt->execute();
+                  $stmt->close();
+               }
                break;
             default:
                // Need to hope that we don't ever get to this switch statement lol
