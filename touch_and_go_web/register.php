@@ -52,12 +52,12 @@
 
    </form> <!-- end of sign in forms -->
 
-   <p>
+   <h2>
       <?php 
          echo $_SESSION['reg_msg'];
-         // unset($_SESSION['reg_msg']); 
+         unset($_SESSION['reg_msg']); 
       ?>
-   </p>
+   </h2>
 
    <h3 style="text-align: center;">Already have an account? <a href="index.html">Login Here</a></h2>
 
