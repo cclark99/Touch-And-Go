@@ -15,18 +15,13 @@ switch (true) {
   case $_SESSION['userType'] == 'student':
     // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
     if (
-      $stmt = $con->prepare('SELECT user.userId, 
-                                      firstName, 
-                                      lastName 
-                              FROM student 
-                                inner join user on user.userId = student.userId
-                              WHERE userEmail = ?')
+      $stmt = $con->prepare('SELECT user.userId, FROM user WHERE userEmail = ?')
     ) {
       $stmt->bind_param('s', $_SESSION['email']);
       $stmt->execute();
       $stmt->store_result();
       if ($stmt->num_rows > 0) {
-        $stmt->bind_result($_SESSION['userId'], $_SESSION['firstName'], $_SESSION['lastName']);
+        $stmt->bind_result($_SESSION['userId']);
         $stmt->fetch();
       }
       $stmt->close();
