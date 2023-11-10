@@ -48,28 +48,36 @@ if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) 
 
          switch (true) {
             case $userType == 'student':
-               $stmt = $con->prepare('SELECT userId FROM user WHERE userEmail = ?');
-               $stmt->bind_param('s', $_POST['email']);
-               $stmt->execute();
-               $stmt->bind_result($userId);
-               $stmt->close();
+               if ($stmt = $con->prepare('SELECT userId FROM user WHERE userEmail = ?')) {
+                  $stmt->bind_param('s', $_POST['email']);
+                  $stmt->execute();
+                  $stmt->bind_result($userId);
+                  $stmt->close();
+               }
 
+               if ($stmt = $con->prepare('UPDATE student SET firstName = ?, lastName = ? WHERE userId = ?')) {
+                  $stmt->bind_param('ssi', $_POST['firstName'], $_POST['lastName'], $userId);
+                  $stmt->execute();
+                  $stmt->close();
+               }
                // $stmt = $con->prepare('INSERT INTO student (studentId, studentFirstName, studentLastName) VALUES (?, ?, ?)');
                // $stmt->bind_param('iss', $userId, $_POST['firstName'], $_POST['lastName']);
                // $stmt->execute();
                // $stmt->close();
                break;
             case $userType == 'professor';
-               $stmt = $con->prepare('SELECT userId FROM user WHERE userEmail = ?');
-               $stmt->bind_param('s', $_POST['email']);
-               $stmt->execute();
-               $stmt->bind_result($userId);
-               $stmt->close();
+               if ($stmt = $con->prepare('SELECT userId FROM user WHERE userEmail = ?')) {
+                  $stmt->bind_param('s', $_POST['email']);
+                  $stmt->execute();
+                  $stmt->bind_result($userId);
+                  $stmt->close();
+               }
 
-               // $stmt = $con->prepare('INSERT INTO professor (professorId, professorFirstName, professorLastName) VALUES (?, ?, ?)');
-               // $stmt->bind_param('iss', $userId, $_POST['firstName'], $_POST['lastName']);
-               // $stmt->execute();
-               // $stmt->close();
+               if ($stmt = $con->prepare('UPDATE professor SET firstName = ?, lastName = ? WHERE userId = ?')) {
+                  $stmt->bind_param('ssi', $_POST['firstName'], $_POST['lastName'], $userId);
+                  $stmt->execute();
+                  $stmt->close();
+               }
                break;
             default:
                // Need to hope that we don't ever get to this switch statement lol
