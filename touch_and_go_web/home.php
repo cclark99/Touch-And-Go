@@ -24,6 +24,17 @@ switch (true) {
       }
       $stmt->close();
     }
+
+    if ($stmt = $con->prepare('SELECT firstName, lastName FROM student WHERE userId = ?')) {
+      $stmt->bind_param('i', $_SESSION['userId']);
+      $stmt->execute();
+      $stmt->store_result();
+      if ($stmt->num_rows > 0) {
+        $stmt->bind_result($_SESSION['firstName'], $_SESSION['lastName']);
+        $stmt->fetch();
+      }
+      $stmt->close();
+    }
     break;
 
   case $_SESSION['userType'] == 'professor':
@@ -38,6 +49,18 @@ switch (true) {
       }
       $stmt->close();
     }
+
+    if ($stmt = $con->prepare('SELECT firstName, lastName FROM professor WHERE userId = ?')) {
+      $stmt->bind_param('i', $_SESSION['userId']);
+      $stmt->execute();
+      $stmt->store_result();
+      if ($stmt->num_rows > 0) {
+        $stmt->bind_result($_SESSION['firstName'], $_SESSION['lastName']);
+        $stmt->fetch();
+      }
+      $stmt->close();
+    }
+
     break;
 
   case $_SESSION['userType'] == 'admin':
@@ -52,6 +75,18 @@ switch (true) {
       }
       $stmt->close();
     }
+
+    if ($stmt = $con->prepare('SELECT firstName, lastName FROM admin WHERE userId = ?')) {
+      $stmt->bind_param('i', $_SESSION['userId']);
+      $stmt->execute();
+      $stmt->store_result();
+      if ($stmt->num_rows > 0) {
+        $stmt->bind_result($_SESSION['firstName'], $_SESSION['lastName']);
+        $stmt->fetch();
+      }
+      $stmt->close();
+    }
+
     break;
   default:
     include 'logout.php';
