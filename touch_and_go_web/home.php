@@ -14,7 +14,7 @@ require 'db_connection.php';
 switch (true) {
   case $_SESSION['userType'] == 'student':
     // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
-    if ($stmt = $con->prepare('SELECT userId, FROM user WHERE userEmail = ?')) {
+    if ($stmt = $con->prepare('SELECT userId FROM user WHERE userEmail = ?')) {
       $stmt->bind_param('s', $_SESSION['email']);
       $stmt->execute();
       $stmt->store_result();
