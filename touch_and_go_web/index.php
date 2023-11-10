@@ -26,7 +26,9 @@
    
       <!-- password form with placeholder -->
       <input name="password" type="password" size="20" placeholder="Password" class="center" required>
-   
+      
+      <br>
+      
       <!-- submit button -->
       <input class="button" type="submit" value="Login">
    

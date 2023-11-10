@@ -37,12 +37,16 @@
       <!-- password re-enter form with placeholder -->
       <input name="passwordVerify" type="password" placeholder="Re-enter Password" class="center" required>
 
+      <br>
+
       <!-- userType radio buttons form with placeholder -->
       <input type="radio" id="studentType" name="userType" checked required value="student">
       <label for="studentType">Student</label><br>
 
       <input type="radio" id="professorType" name="userType" value="professor">
       <label for="professorType">Professor</label><br>
+
+      <br>
 
       <!-- submit button -->
       <input class="button" type="submit" value="Register">
