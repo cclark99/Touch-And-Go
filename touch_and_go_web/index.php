@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <!DOCTYPE html>
 
 <html lang="en"> <!-- start of html tag -->
@@ -33,6 +34,13 @@
       <input class="button" type="reset" value="Clear">
    
    </form> <!-- end of sign in forms -->
+
+   <?php 
+      if (isset($_SESSION['login_msg'])) {
+      echo '<h2 style="margin-top: 15px;">' . $_SESSION['login_msg'] . '</h2>';
+      unset($_SESSION['login_msg']); 
+      }
+   ?>
    
    <h3 style="text-align: center;">Need an account? <a href="register.php">Register Here</a></h3>
 

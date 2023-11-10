@@ -6,7 +6,9 @@ include "db_connection.php";
 // Now we check if the data from the login form was submitted, isset() will check if the data exists.
 if (!isset($_POST['email'], $_POST['password'])) {
 	// Could not get the data that should have been sent.
-	exit('Please fill both the email and password fields!');
+	$_SESSION['login_msg'] = ('Please fill both the email and password fields!');
+	header('Location: index.php');
+	exit();
 }
 
 // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
@@ -31,11 +33,15 @@ if ($stmt = $con->prepare('SELECT userId, userPassword, userType FROM user WHERE
 			header('Location: home.php');
 		} else {
 			// Incorrect password
-			echo 'Incorrect email and/or password!';
+			$_SESSION['login_msg'] = 'Incorrect password!';
+			header('Location: index.php');
+			exit();
 		}
 	} else {
-		// Incorrect username
-		echo 'Incorrect email and/or password!';
+		// Incorrect email
+		$_SESSION['login_msg'] = 'Incorrect email!';
+		header('Location: index.php');
+		exit();
 	}
 	$stmt->close();
 }
