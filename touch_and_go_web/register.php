@@ -7,7 +7,7 @@
    <!-- set charset -->
    <meta charset="utf-8">
    <!-- set title -->
-   <title>Login</title>
+   <title>Register</title>
    <!-- link external styles.css sheet -->
    <link rel="stylesheet" type="text/css" href="styles.css">
 </head> <!-- end of head tag -->
@@ -52,14 +52,14 @@
 
    </form> <!-- end of sign in forms -->
 
-   <h2>
+   
       <?php 
          if (isset($_SESSION['reg_msg'])) {
-         echo $_SESSION['reg_msg'];
+         echo '<h2>' . $_SESSION['reg_msg'] . '</h2>';
          unset($_SESSION['reg_msg']); 
          }
       ?>
-   </h2>
+   
 
    <h3 style="text-align: center;">Already have an account? <a href="index.html">Login Here</a></h2>
 
