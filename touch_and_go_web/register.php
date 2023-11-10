@@ -54,8 +54,10 @@
 
    <h2>
       <?php 
+         if (isset($_SESSION['reg_msg'])) {
          echo $_SESSION['reg_msg'];
          unset($_SESSION['reg_msg']); 
+         }
       ?>
    </h2>
 
