@@ -52,11 +52,11 @@ if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) 
                   $stmt->bind_param('s', $_POST['email']);
                   $stmt->execute();
                   $stmt->bind_result($userId);
-                  // $stmt->close();
+                  $stmt->close();
                }
-
-               if ($stmt = $con->prepare("INSERT INTO student (userId, firstName, lastName) VALUES (1, ?, ?)")) {
-                  $stmt->bind_param('ss', $firstName, $lastName);
+               //This is causing the app to break, above stmt still selects...
+               if ($stmt = $con->prepare("INSERT INTO student (userId, firstName, lastName) VALUES (?, ?, ?)")) {
+                  $stmt->bind_param('iss', $firstName, $lastName);
 
                   $firstName = $_POST['firstName'];
                   $lastName = $_POST['lastName'];
@@ -71,9 +71,9 @@ if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) 
                   $stmt->bind_param('s', $_POST['email']);
                   $stmt->execute();
                   $stmt->bind_result($userId);
-                  // $stmt->close();
+                  $stmt->close();
                }
-
+               
                if ($stmt = $con->prepare('INSERT INTO professor (userId, firstName, lastName) VALUES (?, ?, ?)')) {
                  $stmt->bind_param('iss', $userId, $firstName, $lastName);
 
@@ -81,7 +81,7 @@ if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) 
                   $lastName = $_POST['lastName'];
 
                   $stmt->execute();
-                  // $stmt->close();
+                  $stmt->close();
                }
                break;
             default:
