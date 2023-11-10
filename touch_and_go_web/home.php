@@ -11,13 +11,8 @@ require 'db_connection.php';
 
 // Get user's name based on what account type they are, as well as userId
 
-if ($_SESSION['userType'] == 'student')
-{
-  echo'<h3>STUDENT</h3>';
-}
-
 switch (true) {
-  case $_SESSION['userType'] === 'student':
+  case $_SESSION['userType'] == 'student':
     // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
     if (
       $stmt = $con->prepare('SELECT user.userId, 
@@ -38,7 +33,7 @@ switch (true) {
     }
     break;
 
-    case $_SESSION['userType'] === 'professor':
+    case $_SESSION['userType'] == 'professor':
     // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
     if ($stmt = $con->prepare('SELECT firstName, lastName FROM professor WHERE userEmail = ?')) {
       $stmt->bind_param('s', $_SESSION['email']);
@@ -52,7 +47,7 @@ switch (true) {
     }
     break;
 
-    case $_SESSION['userType'] === 'admin':
+    case $_SESSION['userType'] == 'admin':
     // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
     if ($stmt = $con->prepare('SELECT firstName, lastName FROM admin WHERE userEmail = ?')) {
       $stmt->bind_param('s', $_SESSION['email']);
