@@ -56,7 +56,7 @@ if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) 
                }
 
                if ($stmt = $con->prepare('INSERT INTO student(userId, firstName, lastName) VALUES (?, ?, ?)')) {
-                  $stmt->bind_param('ssi', $userId, $_POST['firstName'], $_POST['lastName']);
+                  $stmt->bind_param('iss', $userId, $_POST['firstName'], $_POST['lastName']);
                   $stmt->execute();
                   $stmt->close();
                }
@@ -71,7 +71,7 @@ if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) 
                }
 
                if ($stmt = $con->prepare('INSERT INTO professor(userId, firstName, lastName) VALUES (?, ?, ?)')) {
-                  $stmt->bind_param('ssi', $userId, $_POST['firstName'], $_POST['lastName']);
+                  $stmt->bind_param('iss', $userId, $_POST['firstName'], $_POST['lastName']);
                   $stmt->execute();
                   $stmt->close();
                }
