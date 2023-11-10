@@ -33,7 +33,7 @@ switch (true) {
       $stmt->execute();
       $stmt->store_result();
       if ($stmt->num_rows > 0) {
-        $stmt->bind_result($_SESSION['firstName'], $_SESSION['lastName']);
+        $stmt->bind_result($_SESSION['userId']);
         $stmt->fetch();
       }
       $stmt->close();
@@ -47,7 +47,7 @@ switch (true) {
       $stmt->execute();
       $stmt->store_result();
       if ($stmt->num_rows > 0) {
-        $stmt->bind_result($_SESSION['firstName'], $_SESSION['lastName']);
+        $stmt->bind_result($_SESSION['userId']);
         $stmt->fetch();
       }
       $stmt->close();
