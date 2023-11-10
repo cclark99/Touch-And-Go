@@ -28,7 +28,7 @@ switch (true) {
 
   case $_SESSION['userType'] == 'professor':
     // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
-    if ($stmt = $con->prepare('SELECT firstName, lastName FROM professor WHERE userEmail = ?')) {
+    if ($stmt = $con->prepare('SELECT userId FROM user WHERE userEmail = ?')) {
       $stmt->bind_param('s', $_SESSION['email']);
       $stmt->execute();
       $stmt->store_result();
@@ -42,7 +42,7 @@ switch (true) {
 
   case $_SESSION['userType'] == 'admin':
     // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
-    if ($stmt = $con->prepare('SELECT firstName, lastName FROM admin WHERE userEmail = ?')) {
+    if ($stmt = $con->prepare('SELECT userId FROM user WHERE userEmail = ?')) {
       $stmt->bind_param('s', $_SESSION['email']);
       $stmt->execute();
       $stmt->store_result();
@@ -142,7 +142,7 @@ switch (true) {
 
   <!-- display hello message with student's name -->
   <h3>Hello
-    <?php echo $_SESSION['userId'] . ' ' . $_SESSION['lastName'] ?>
+    <?php echo $_SESSION['firstName'] . ' ' . $_SESSION['lastName'] ?>
   </h3>
 
   <!-- display today is (day of the week, month, day, and year)-->
