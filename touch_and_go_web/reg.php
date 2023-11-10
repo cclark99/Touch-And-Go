@@ -44,6 +44,17 @@ if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) 
          $userType = $_POST['userType'];
          $stmt->bind_param('sss', $_POST['email'], $password, $userType);
          $stmt->execute();
+         
+         if($idStmt = mysqli_prepare($con, "SELECT userId FROM user WHERE userEmail = ? LIMIT 1"))
+         {
+            mysqli_stmt_bind_param($idStmt, 's', $_POST['email']);
+            mysqli_stmt_execute($idStmt);
+
+            /* bind variables to prepared statement */
+            mysqli_stmt_bind_result($idStmt, $uid);
+
+
+         }
 
          // switch ($userType) {
          //    case 'student':
