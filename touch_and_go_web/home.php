@@ -173,7 +173,7 @@ switch (true) {
   <!-- home header -->
   <h1>Home</h1>
 
-  <?php echo '<h3>' . $_SESSION['email'] . $_SESSION['userId'] . $_SESSION['lastName'] . '</h3>' ?>
+  <?php echo '<h3>' . $_SESSION['firstName'] . $_SESSION['lastName'] . '</h3>' ?>
 
   <!-- display hello message with student's name -->
   <h3>Hello
