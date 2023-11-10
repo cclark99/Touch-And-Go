@@ -11,7 +11,7 @@ require 'db_connection.php';
 
 // Get user's name based on what account type they are, as well as userId
 
-if ($_SESSON['userType'] == 'student')
+if ($_SESSION['userType'] == 'student')
 {
   echo'<h3>STUDENT</h3>';
 }
