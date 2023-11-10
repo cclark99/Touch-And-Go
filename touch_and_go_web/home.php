@@ -18,8 +18,8 @@ switch (true) {
       $stmt = $con->prepare('SELECT user.userId, 
                                       firstName, 
                                       lastName 
-                              FROM student 
-                                inner join user on user.userId = student.userId
+                              FROM user 
+                                inner join student on student.userId = user.userId
                               WHERE userEmail = ?')
     ) {
       $stmt->bind_param('s', $_SESSION['email']);
