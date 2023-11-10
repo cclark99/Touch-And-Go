@@ -55,7 +55,7 @@
    
       <?php 
          if (isset($_SESSION['reg_msg'])) {
-         echo '<h2>' . $_SESSION['reg_msg'] . '</h2>';
+         echo '<h2 style="margin-top: 15px;">' . $_SESSION['reg_msg'] . '</h2>';
          unset($_SESSION['reg_msg']); 
          }
       ?>
