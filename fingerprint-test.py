@@ -39,7 +39,7 @@ uart = serial.Serial("/dev/ttyUSB0", baudrate=57600, timeout=1)
 # If using with Linux/Raspberry Pi 3 with pi3-disable-bt
 # uart = serial.Serial("/dev/ttyAMA0", baudrate=57600, timeout=1)
 
-finger = adafruit_fingerprint.Adafruit_Fingerprint(uart)
+finger = adafruit_fingerprint.AdafruitFingerprint(uart)
 
 
 def get_fingerprint():

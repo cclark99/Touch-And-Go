@@ -70,7 +70,7 @@ def insertdb(index):
         #    print(row)
         
         #id first name lastname email password
-        insert_query = "INSERT INTO touch_and_go_test VALUES (%s, %s, %s, %s)"
+        insert_query = "INSERT INTO touch_and_go_test VALUES (%s, %s, %s, %s, %s)"
         
         print("Enter your first name: ")
         fname = input()
