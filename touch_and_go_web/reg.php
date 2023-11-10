@@ -56,37 +56,37 @@ if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) 
 
          }
 
-         // switch ($userType) {
-         //    case 'student':
-         //       $stmt1 = $con->prepare('SELECT userId FROM user WHERE userEmail = ?');
-         //       $stmt1->bind_param('s', $_POST['email']);
-         //       $stmt1->execute();
-         //       $stmt1->bind_result($userId);
-         //       $stmt1->close();
+         switch (true) {
+            case $userType == 'student':
+               $stmt1 = $con->prepare('SELECT userId FROM user WHERE userEmail = ?');
+               $stmt1->bind_param('s', $_POST['email']);
+               $stmt1->execute();
+               $stmt1->bind_result($userId);
+               $stmt1->close();
 
-         //       $stmt2 = $con->prepare('INSERT INTO student (studentId, studentFirstName, studentLastName) VALUES (?, ?, ?)');
-         //       $stmt2->bind_param('iss', $userId, $_POST['firstName'], $_POST['lastName']);
-         //       $stmt2->execute();
-         //       $stmt2->close();
-         //       break;
-         //    case 'professor';
-         //       $stmt1 = $con->prepare('SELECT userId FROM user WHERE userEmail = ?');
-         //       $stmt1->bind_param('s', $_POST['email']);
-         //       $stmt1->execute();
-         //       $stmt1->bind_result($userId);
-         //       $stmt1->close();
+               $stmt2 = $con->prepare('INSERT INTO student (studentId, studentFirstName, studentLastName) VALUES (?, ?, ?)');
+               $stmt2->bind_param('iss', $userId, $_POST['firstName'], $_POST['lastName']);
+               $stmt2->execute();
+               $stmt2->close();
+               break;
+            case $userType == 'professor';
+               $stmt1 = $con->prepare('SELECT userId FROM user WHERE userEmail = ?');
+               $stmt1->bind_param('s', $_POST['email']);
+               $stmt1->execute();
+               $stmt1->bind_result($userId);
+               $stmt1->close();
 
-         //       $stmt2 = $con->prepare('INSERT INTO professor (professorId, professorFirstName, professorLastName) VALUES (?, ?, ?)');
-         //       $stmt2->bind_param('iss', $userId, $_POST['firstName'], $_POST['lastName']);
-         //       $stmt2->execute();
-         //       $stmt2->close();
-         //       break;
-         //    default:
-         //       // Need to hope that we don't ever get to this switch statement lol
-         //       $_SESSION['reg_msg'] = 'Contact Touch And Go Administration - There is a problem with your account...';
-         //       header('Location: register.php');
-         //       exit();
-         // }
+               $stmt2 = $con->prepare('INSERT INTO professor (professorId, professorFirstName, professorLastName) VALUES (?, ?, ?)');
+               $stmt2->bind_param('iss', $userId, $_POST['firstName'], $_POST['lastName']);
+               $stmt2->execute();
+               $stmt2->close();
+               break;
+            default:
+               // Need to hope that we don't ever get to this switch statement lol
+               $_SESSION['reg_msg'] = 'Contact Touch And Go Administration - There is a problem with your account...';
+               header('Location: register.php');
+               exit();
+         }
 
          $_SESSION['reg_msg'] = 'You have successfully registered! You can now login! Click the login link';
          header("Location: register.php");
