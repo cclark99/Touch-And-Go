@@ -44,42 +44,32 @@ if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) 
          $userType = $_POST['userType'];
          $stmt->bind_param('sss', $_POST['email'], $password, $userType);
          $stmt->execute();
-         
-         if($idStmt = mysqli_prepare($con, "SELECT userId FROM user WHERE userEmail = ? LIMIT 1"))
-         {
-            mysqli_stmt_bind_param($idStmt, 's', $_POST['email']);
-            mysqli_stmt_execute($idStmt);
-
-            /* bind variables to prepared statement */
-            mysqli_stmt_bind_result($idStmt, $uid);
-
-
-         }
+         $stmt->close();
 
          switch (true) {
             case $userType == 'student':
-               $stmt1 = $con->prepare('SELECT userId FROM user WHERE userEmail = ?');
-               $stmt1->bind_param('s', $_POST['email']);
-               $stmt1->execute();
-               $stmt1->bind_result($userId);
-               $stmt1->close();
+               $stmt = $con->prepare('SELECT userId FROM user WHERE userEmail = ?');
+               $stmt->bind_param('s', $_POST['email']);
+               $stmt->execute();
+               $stmt->bind_result($userId);
+               $stmt->close();
 
-               $stmt2 = $con->prepare('INSERT INTO student (studentId, studentFirstName, studentLastName) VALUES (?, ?, ?)');
-               $stmt2->bind_param('iss', $userId, $_POST['firstName'], $_POST['lastName']);
-               $stmt2->execute();
-               $stmt2->close();
+               $stmt = $con->prepare('INSERT INTO student (studentId, studentFirstName, studentLastName) VALUES (?, ?, ?)');
+               $stmt->bind_param('iss', $userId, $_POST['firstName'], $_POST['lastName']);
+               $stmt->execute();
+               $stmt->close();
                break;
             case $userType == 'professor';
-               $stmt1 = $con->prepare('SELECT userId FROM user WHERE userEmail = ?');
-               $stmt1->bind_param('s', $_POST['email']);
-               $stmt1->execute();
-               $stmt1->bind_result($userId);
-               $stmt1->close();
+               $stmt = $con->prepare('SELECT userId FROM user WHERE userEmail = ?');
+               $stmt->bind_param('s', $_POST['email']);
+               $stmt->execute();
+               $stmt->bind_result($userId);
+               $stmt->close();
 
-               $stmt2 = $con->prepare('INSERT INTO professor (professorId, professorFirstName, professorLastName) VALUES (?, ?, ?)');
-               $stmt2->bind_param('iss', $userId, $_POST['firstName'], $_POST['lastName']);
-               $stmt2->execute();
-               $stmt2->close();
+               $stmt = $con->prepare('INSERT INTO professor (professorId, professorFirstName, professorLastName) VALUES (?, ?, ?)');
+               $stmt->bind_param('iss', $userId, $_POST['firstName'], $_POST['lastName']);
+               $stmt->execute();
+               $stmt->close();
                break;
             default:
                // Need to hope that we don't ever get to this switch statement lol
@@ -91,10 +81,9 @@ if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) 
          $_SESSION['reg_msg'] = 'You have successfully registered! You can now login! Click the login link';
          header("Location: register.php");
 
-
       }
    }
-   $stmt->close();
+
 } else {
    $_SESSION['reg_msg'] = 'Could not prepare statement';
    header("Location: register.php");
