@@ -11,6 +11,11 @@ require 'db_connection.php';
 
 // Get user's name based on what account type they are, as well as userId
 
+if ($_SESSON['userType'] === 'student')
+{
+  echo'<h3>STUDENT</h3>';
+}
+
 switch (true) {
   case $_SESSION['userType'] === 'student':
     // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
@@ -145,7 +150,7 @@ switch (true) {
   <!-- home header -->
   <h1>Home</h1>
 
-  <?php echo '<h3>'. $_SESSION['email'] . $_SESSION['firstName'] . $_SESSION['lastName'] . '</h3>'?>
+  <?php echo '<h3>'. $_SESSION['email'] . $_SESSION['userId'] . $_SESSION['lastName'] . '</h3>'?>
 
   <!-- display hello message with student's name -->
   <h3>Hello
