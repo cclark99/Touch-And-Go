@@ -52,7 +52,6 @@
 
    </form> <!-- end of sign in forms -->
 
-   
       <?php 
          if (isset($_SESSION['reg_msg'])) {
          echo '<h2 style="margin-top: 15px;">' . $_SESSION['reg_msg'] . '</h2>';
@@ -61,7 +60,7 @@
       ?>
    
 
-   <h3 style="text-align: center;">Already have an account? <a href="index.html">Login Here</a></h2>
+   <h3 style="text-align: center;">Already have an account? <a href="index.php">Login Here</a></h2>
 
 </body> <!-- end of body tag -->
 
