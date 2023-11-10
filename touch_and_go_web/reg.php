@@ -52,7 +52,7 @@ if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) 
                   $stmt->bind_param('s', $_POST['email']);
                   $stmt->execute();
                   $stmt->bind_result($userId);
-                  $stmt->close();
+                  // $stmt->close();
                }
 
                if ($stmt = $con->prepare("INSERT INTO student (userId, firstName, lastName) VALUES (?, ?, ?)")) {
@@ -71,53 +71,24 @@ if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) 
                   $stmt->bind_param('s', $_POST['email']);
                   $stmt->execute();
                   $stmt->bind_result($userId);
-                  $stmt->close();
+                  // $stmt->close();
                }
 
                if ($stmt = $con->prepare('INSERT INTO professor (userId, firstName, lastName) VALUES (?, ?, ?)')) {
-                  $stmt->bind_param('iss', $userId, $firstName, $lastName);
+                 $stmt->bind_param('iss', $userId, $firstName, $lastName);
 
                   $firstName = $_POST['firstName'];
                   $lastName = $_POST['lastName'];
 
                   $stmt->execute();
-                  $stmt->close();
+                  // $stmt->close();
                }
                break;
             default:
                // Need to hope that we don't ever get to this switch statement lol
                $_SESSION['reg_msg'] = 'Contact Touch And Go Administration - There is a problem with your account...';
                header('Location: register.php');
-               exit();
-         }
-
-         switch (true) {
-            case $userType == 'student':
-               if ($stmt = $con->prepare("INSERT INTO student (userId, firstName, lastName) VALUES (?, ?, ?)")) {
-                  $stmt->bind_param('iss', $userId, $firstName, $lastName);
-
-                  $firstName = $_POST['firstName'];
-                  $lastName = $_POST['lastName'];
-
-                  $stmt->execute();
-                  $stmt->close();
-               }
-               break;
-            case $userType == 'professor';
-               if ($stmt = $con->prepare('INSERT INTO professor (userId, firstName, lastName) VALUES (?, ?, ?)')) {
-                  $stmt->bind_param('iss', $userId, $firstName, $lastName);
-
-                  $firstName = $_POST['firstName'];
-                  $lastName = $_POST['lastName'];
-
-                  $stmt->execute();
-                  $stmt->close();
-               }
-               break;
-            default:
-               // Need to hope that we don't ever get to this switch statement lol
-               $_SESSION['reg_msg'] = 'Contact Touch And Go Administration - There is a problem with your account...';
-               header('Location: register.php');
+               $stmt->close();
                exit();
          }
 
