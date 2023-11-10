@@ -14,9 +14,7 @@ require 'db_connection.php';
 switch (true) {
   case $_SESSION['userType'] == 'student':
     // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
-    if (
-      $stmt = $con->prepare('SELECT user.userId, FROM user WHERE userEmail = ?')
-    ) {
+    if ($stmt = $con->prepare('SELECT userId, FROM user WHERE userEmail = ?')) {
       $stmt->bind_param('s', $_SESSION['email']);
       $stmt->execute();
       $stmt->store_result();
@@ -28,7 +26,7 @@ switch (true) {
     }
     break;
 
-    case $_SESSION['userType'] == 'professor':
+  case $_SESSION['userType'] == 'professor':
     // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
     if ($stmt = $con->prepare('SELECT firstName, lastName FROM professor WHERE userEmail = ?')) {
       $stmt->bind_param('s', $_SESSION['email']);
@@ -42,7 +40,7 @@ switch (true) {
     }
     break;
 
-    case $_SESSION['userType'] == 'admin':
+  case $_SESSION['userType'] == 'admin':
     // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
     if ($stmt = $con->prepare('SELECT firstName, lastName FROM admin WHERE userEmail = ?')) {
       $stmt->bind_param('s', $_SESSION['email']);
@@ -140,7 +138,7 @@ switch (true) {
   <!-- home header -->
   <h1>Home</h1>
 
-  <?php echo '<h3>'. $_SESSION['email'] . $_SESSION['userId'] . $_SESSION['lastName'] . '</h3>'?>
+  <?php echo '<h3>' . $_SESSION['email'] . $_SESSION['userId'] . $_SESSION['lastName'] . '</h3>' ?>
 
   <!-- display hello message with student's name -->
   <h3>Hello
