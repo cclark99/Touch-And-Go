@@ -25,7 +25,7 @@ if (empty($_POST['firstName']) || empty($_POST['lastName']) || empty($_POST['ema
    exit();
 }
 
-if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) {
+if ($stmt = $con->prepare('SELECT password FROM       WHERE email = ?')) {
    $stmt->bind_param('s', $_POST['email']);
    $stmt->execute();
    // Store the result so we can check if the account exists in the database.
@@ -39,7 +39,7 @@ if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) 
          $_SESSION['reg_msg'] = 'Passwords did not match. Make sure to enter the same passwords';
          header("Location: register.php");
          exit();
-      } else if ($stmt = $con->prepare('INSERT INTO user (userEmail, userPassword, userType) VALUES (?, ?, ?)')) {
+      } else if ($stmt = $con->prepare('INSERT INTO user (email, password, userType) VALUES (?, ?, ?)')) {
          $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
          $userType = $_POST['userType'];
          $stmt->bind_param('sss', $_POST['email'], $password, $userType);
@@ -48,7 +48,7 @@ if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) 
 
          switch (true) {
             case $userType == 'student':
-               if ($stmt = $con->prepare('SELECT userId FROM user WHERE userEmail = ? LIMIT 1')) {
+               if ($stmt = $con->prepare('SELECT userId FROM user WHERE email = ? LIMIT 1')) {
                   $stmt->bind_param('s', $_POST['email']);
                   $stmt->execute();
                   $result = $stmt->get_result();
@@ -70,7 +70,7 @@ if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) 
 
                break;
             case $userType == 'professor';
-               if ($stmt = $con->prepare('SELECT userId FROM user WHERE userEmail = ?')) {
+               if ($stmt = $con->prepare('SELECT userId FROM user WHERE email = ?')) {
                   $stmt->bind_param('s', $_POST['email']);
                   $stmt->execute();
                   $result = $stmt->get_result();

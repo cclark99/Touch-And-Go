@@ -12,7 +12,7 @@ if (!isset($_POST['email'], $_POST['password'])) {
 }
 
 // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
-if ($stmt = $con->prepare('SELECT userId, userPassword, userType FROM user WHERE userEmail = ?')) {
+if ($stmt = $con->prepare('SELECT userId, password, userType FROM user WHERE email = ?')) {
 	$stmt->bind_param('s', $_POST['email']);
 	$stmt->execute();
 	// Store the result so we can check if the account exists in the database.
