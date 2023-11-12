@@ -55,7 +55,7 @@ if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) 
                   $stmt->close();
                }
                //This is causing the app to break, above stmt still selects...
-               if ($stmt = $con->prepare("INSERT INTO student (userId, firstName, lastName) VALUES (?, ?, ?)")) {
+               if ($stmt = $con->prepare('INSERT INTO student (userId, firstName, lastName) VALUES (?, ?, ?)')) {
                   $stmt->bind_param('iss', $firstName, $lastName);
 
                   $firstName = $_POST['firstName'];
@@ -63,7 +63,7 @@ if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) 
 
                   $stmt->execute();
                   // $stmt->close();
-               }
+               } else echo 'Error with insert into student using auto increment userId';
 
                break;
             case $userType == 'professor';
