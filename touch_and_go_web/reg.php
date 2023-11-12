@@ -63,11 +63,7 @@ if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) 
                }
 
                if ($stmt = $con->prepare('INSERT INTO student (userId, firstName, lastName) VALUES (?, ?, ?)')) {
-                  $stmt->bind_param('iss', $firstName, $lastName);
-
-                  $firstName = $_POST['firstName'];
-                  $lastName = $_POST['lastName'];
-
+                  $stmt->bind_param('iss', $userId, $_POST['firstName'], $_POST['lastName']);
                   $stmt->execute();
                   $stmt->close();
                }
@@ -77,17 +73,18 @@ if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) 
                if ($stmt = $con->prepare('SELECT userId FROM user WHERE userEmail = ?')) {
                   $stmt->bind_param('s', $_POST['email']);
                   $stmt->execute();
-                  $stmt->bind_result($userId);
-                  $stmt->store_result();
+                  $result = $stmt->get_result();
+
+                  while ($row = $result->fetch_array(MYSQLI_NUM)) {
+                     foreach ($row as $r) {
+                        $userId = $r;
+                     }
+                  }
                   $stmt->close();
                }
 
                if ($stmt = $con->prepare('INSERT INTO professor (userId, firstName, lastName) VALUES (?, ?, ?)')) {
-                  $stmt->bind_param('iss', $userId, $firstName, $lastName);
-
-                  $firstName = $_POST['firstName'];
-                  $lastName = $_POST['lastName'];
-
+                  $stmt->bind_param('iss', $userId, $_POST['firstName'], $_POST['lastName']);
                   $stmt->execute();
                   $stmt->close();
                }
