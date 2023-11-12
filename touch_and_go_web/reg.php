@@ -51,6 +51,7 @@ if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) 
                if ($stmt = $con->prepare('SELECT userId FROM user WHERE userEmail = ?')) {
                   $stmt->bind_param('s', $_POST['email']);
                   $stmt->execute();
+                  $stmt->store_result();
                   $stmt->bind_result($userId);
                   $stmt->close();
                }
@@ -70,6 +71,7 @@ if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) 
                if ($stmt = $con->prepare('SELECT userId FROM user WHERE userEmail = ?')) {
                   $stmt->bind_param('s', $_POST['email']);
                   $stmt->execute();
+                  $stmt->store_result();
                   $stmt->bind_result($userId);
                   $stmt->close();
                }
