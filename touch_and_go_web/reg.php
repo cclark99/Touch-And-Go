@@ -89,12 +89,6 @@ if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) 
                   $stmt->close();
                }
                break;
-            default:
-               // Need to hope that we don't ever get to this switch statement lol
-               $_SESSION['reg_msg'] = 'Contact Touch And Go Administration - There is a problem with your account...';
-               header('Location: register.php');
-               $stmt->close();
-               exit();
          }
 
          $_SESSION['reg_msg'] = 'You have successfully registered! You can now login! Click the login link';
