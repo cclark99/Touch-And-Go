@@ -62,7 +62,7 @@ if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) 
                   $lastName = $_POST['lastName'];
 
                   $stmt->execute();
-                  $stmt->close();
+                  // $stmt->close();
                }
 
                break;
@@ -81,7 +81,7 @@ if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) 
                   $lastName = $_POST['lastName'];
 
                   $stmt->execute();
-                  $stmt->close();
+                  // $stmt->close();
                }
                break;
             default:
