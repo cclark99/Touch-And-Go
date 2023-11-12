@@ -55,8 +55,7 @@ if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) 
 
                   while ($row = $result->fetch_array(MYSQLI_NUM)) {
                      foreach ($row as $r) {
-                        print $r;
-                        // $userId = $r;
+                        $userId = $r;
                      }
                   }
 
@@ -101,7 +100,7 @@ if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) 
                exit();
          }
 
-         $_SESSION['reg_msg'] = 'You have successfully registered! You can now login! Click the login link' . '\nUser ID: ' . $userId;
+         $_SESSION['reg_msg'] = 'You have successfully registered! You can now login! Click the login link' . ' User ID: ' . $userId;
          header("Location: register.php");
 
       }
