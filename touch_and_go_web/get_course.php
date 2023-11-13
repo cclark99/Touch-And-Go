@@ -3,23 +3,23 @@
 if (
   $stmt = $con->prepare('select course.courseId, 
                                   course.name, 
-                                  course.description, 
+                                  course.description,
                                   course.date, 
-                                  course.startTime, 
+                                  course.dateStart, 
                                   course.endTime, 
-                                  course.location,
+                                  courseEndTime, 
+                                  courseLocation,
                                   professor.userId,
-                                  user.userId,
                                   professor.firstName,
                                   professor.lastName,
-                                  professor.phone
+                                  professor.professorEmail,
+                                  professor.professorPhone
                             from course 
                               inner join student_course on student_course.courseId = course.courseId
-                              inner join student on student.userId = student_course.userId
+                              inner join student on student.studentId = student_course.studentId
                               inner join professor_course on professor_course.courseId = course.courseId
-                              inner join professor on professor_course.userId = professor.userId
-                              inner join user on professor.userId = user.userId
-                            where student.userId = ?')
+                              inner join professor on professor_course.professorId = professor.professorId 
+                            where student.studentId = ?')
 ) {
 
   $stmt->bind_param('s', $_SESSION['id']);
