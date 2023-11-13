@@ -80,11 +80,12 @@ include 'get_course.php';
   <section class="dropdown-section"> <!-- start of section tag with dropdown-section class -->
     <!-- display Today's Schedule -->
     <h3>Today's Schedule</h3>
+    
+    <?php echo '<h2>'; print_r($course_array); echo '</h2>'; ?>
 
     <div class="dropdown"> <!-- start of ul tag with dropdown class -->
-
+    
       <?php
-      echo '<pre>'; print_r($course_array); echo '</pre>';
       if ($course_array) {
         foreach ($course_array as $row) {
           echo '<div class="question"> <!-- start of div tag with question class -->
