@@ -104,7 +104,7 @@ include 'get_course.php';
       //   echo '<span style="color: #FAF8D6; line-height: 1.5em; padding-left: 2%; padding-right: 2%;">No classes today </span>';
       // }
 
-      echo '<pre>'; print_r($course_array); echo '</pre>';
+      // echo '<pre>'; print_r($course_array); echo '</pre>';
 
       ?>
     </div> <!-- end of ul tag -->
