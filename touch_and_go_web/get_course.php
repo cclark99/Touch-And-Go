@@ -9,16 +9,17 @@ if (
                                   course.endTime, 
                                   course.location,
                                   professor.userId,
-                                  professor.firsName,
+                                  user.userId,
+                                  professor.firstName,
                                   professor.lastName,
-                                  professor.email,
                                   professor.phone
                             from course 
                               inner join student_course on student_course.courseId = course.courseId
                               inner join student on student.userId = student_course.userId
                               inner join professor_course on professor_course.courseId = course.courseId
-                              inner join professor on professor_course.userId = professor.userId 
-                            where student.studentId = ?')
+                              inner join professor on professor_course.userId = professor.userId
+                              inner join user on professor.userId = user.userId
+                            where student.userId = ?')
 ) {
 
   $stmt->bind_param('s', $_SESSION['id']);
