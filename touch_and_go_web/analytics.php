@@ -218,29 +218,29 @@ if (
       ?>
 
       <script>
-        function asearch() {
-          // (A) GET SEARCH TERM
-          var data = new FormData(document.getElementById("form"));
-          data.append("ajax", 1);
+        // function asearch() {
+        //   // (A) GET SEARCH TERM
+        //   var data = new FormData(document.getElementById("form"));
+        //   data.append("ajax", 1);
 
-          // (B) AJAX SEARCH REQUEST
-          fetch("search.php", { method: "POST", body: data })
-            .then(res => res.json())
-            .then(res => {
-              var wrapper = document.getElementById("results");
-              if (res.length > 0) {
-                wrapper.innerHTML = "<table><tr><th>First Name</th><th>Email</th></tr>";
-                for (let r of res) {
-                  let line = document.createElement("tr");
-                  line.innerHTML = `<tr><td>${r["studentFirstName"]}</td><td>${r["studentEmail"]}</td></tr>`;
-                  wrapper.appendChild(line);
-                }
-                line.innerHTML = "</table>";
-                wrapper.appendChild(line);
-              } else { wrapper.innerHTML = "No results found"; }
-            });
-          return false;
-        }
+        //   // (B) AJAX SEARCH REQUEST
+        //   fetch("search.php", { method: "POST", body: data })
+        //     .then(res => res.json())
+        //     .then(res => {
+        //       var wrapper = document.getElementById("results");
+        //       if (res.length > 0) {
+        //         wrapper.innerHTML = "<table><tr><th>First Name</th><th>Email</th></tr>";
+        //         for (let r of res) {
+        //           let line = document.createElement("tr");
+        //           line.innerHTML = `<tr><td>${r["firstName"]}</td><td>${r["userEmail"]}</td></tr>`;
+        //           wrapper.appendChild(line);
+        //         }
+        //         line.innerHTML = "</table>";
+        //         wrapper.appendChild(line);
+        //       } else { wrapper.innerHTML = "No results found"; }
+        //     });
+        //   return false;
+        // }
 
         // set variables
         const question = document.querySelectorAll('.question');
