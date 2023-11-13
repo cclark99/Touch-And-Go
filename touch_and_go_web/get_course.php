@@ -2,22 +2,22 @@
 // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
 if (
   $stmt = $con->prepare('select course.courseId, 
-                                  courseName, 
-                                  courseDescription, 
-                                  courseDate, 
-                                  courseStartTime, 
-                                  courseEndTime, 
-                                  courseLocation,
-                                  professor.professorId,
-                                  professor.professorFirstName,
-                                  professor.professorLastName,
-                                  professor.professorEmail,
-                                  professor.professorPhone
+                                  course.name, 
+                                  course.description, 
+                                  course.date, 
+                                  course.startTime, 
+                                  course.endTime, 
+                                  course.location,
+                                  professor.userId,
+                                  professor.firsName,
+                                  professor.lastName,
+                                  professor.email,
+                                  professor.phone
                             from course 
                               inner join student_course on student_course.courseId = course.courseId
-                              inner join student on student.studentId = student_course.studentId
+                              inner join student on student.userId = student_course.userId
                               inner join professor_course on professor_course.courseId = course.courseId
-                              inner join professor on professor_course.professorId = professor.professorId 
+                              inner join professor on professor_course.userId = professor.userId 
                             where student.studentId = ?')
 ) {
 
