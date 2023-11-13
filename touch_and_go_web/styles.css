@@ -215,3 +215,12 @@ li a:hover {
  /* this ends the code that was created using information from the 
     following link:
     https://www.w3schools.com/css/css_navbar_horizontal.asp */
+
+.login_reg {
+    width: 50%;
+    margin: auto;    
+}
+
+.login_reg input {
+    margin-bottom: 10px;
+}
