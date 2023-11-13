@@ -46,8 +46,10 @@ if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) 
          $stmt->execute();
          $stmt->close();
 
+         // Switch statment to determine what type of user was selected. 
          switch (true) {
             case $userType == 'student':
+               // Get userId from the user that was just create. Using autoincrement so we need to search the database
                if ($stmt = $con->prepare('SELECT userId FROM user WHERE userEmail = ? LIMIT 1')) {
                   $stmt->bind_param('s', $_POST['email']);
                   $stmt->execute();
@@ -62,6 +64,7 @@ if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) 
                   $stmt->close();
                }
 
+               // Insert userId, firstName, and lastName into the corresponding userType table (student)
                if ($stmt = $con->prepare('INSERT INTO student (userId, firstName, lastName) VALUES (?, ?, ?)')) {
                   $stmt->bind_param('iss', $userId, $_POST['firstName'], $_POST['lastName']);
                   $stmt->execute();
@@ -70,6 +73,7 @@ if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) 
 
                break;
             case $userType == 'professor';
+               // Get userId from the user that was just create. Using autoincrement so we need to search the database
                if ($stmt = $con->prepare('SELECT userId FROM user WHERE userEmail = ?')) {
                   $stmt->bind_param('s', $_POST['email']);
                   $stmt->execute();
@@ -83,6 +87,7 @@ if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) 
                   $stmt->close();
                }
 
+               // Insert userId, firstName, and lastName into the corresponding userType table (professor)
                if ($stmt = $con->prepare('INSERT INTO professor (userId, firstName, lastName) VALUES (?, ?, ?)')) {
                   $stmt->bind_param('iss', $userId, $_POST['firstName'], $_POST['lastName']);
                   $stmt->execute();
