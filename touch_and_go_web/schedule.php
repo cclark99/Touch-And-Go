@@ -81,7 +81,7 @@ include 'get_course.php';
     <!-- display Today's Schedule -->
     <h3>Today's Schedule</h3>
     
-    <?php echo '<h2>'; print_r($course_array); echo '</h2>'; ?>
+    <?php echo '<h1>'; print_r($course_array); echo '</h1>'; ?>
 
     <div class="dropdown"> <!-- start of ul tag with dropdown class -->
     
