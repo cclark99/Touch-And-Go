@@ -29,7 +29,7 @@ try:
     #    print(row)
     
     #id first name lastname email password
-    insert_query = "INSERT INTO student VALUES (%s, %s, %s, %s, %s)"
+    insert_query = "INSERT INTO student VALUES (%s, %s, %s)"
     
     print("Enter ID: ")
     index = input()
@@ -37,12 +37,8 @@ try:
     fname = input()
     print("Enter your last name: ")
     lname = input()
-    print("Enter your email: ")
-    email = input()
-    print("Enter your password: ")
-    pword = input()
-    
-    data = (index, fname, lname, email, pword)
+   
+    data = (index, fname, lname)
     
     cursor.execute(insert_query, data)
     connection.commit()

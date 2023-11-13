@@ -5,6 +5,14 @@ from i2c_lcd import I2cLcd
 import time
 import serial
 import adafruit_fingerprint
+import mysql.connector
+
+db_config = {
+    'host': '34.194.132.130',
+    'user': 'test',
+    'password': 'test123',
+    'database': 'touch_and_go_test',
+}
 
 I2C_ADDR = 0x27
 I2C_NUM_ROWS = 4
@@ -15,6 +23,30 @@ lcd = I2cLcd(1, I2C_ADDR, I2C_NUM_ROWS, I2C_NUM_COLS)
 # Initialize fingerprint sensor and UART
 uart = serial.Serial("/dev/ttyUSB0", baudrate=57600, timeout=1)
 finger = adafruit_fingerprint.Adafruit_Fingerprint(uart)
+
+def insertdb(index):
+    try:
+        connection = mysql.connector.connect(**db_config)
+        cursor = connection.cursor()
+
+        insert_query = "INSERT INTO student VALUES (%s, %s, %s)"
+
+        print("Enter your first name: ")
+        fname = input()
+        print("Enter your last name: ")
+        lname = input()
+
+        data = (index, fname, lname)
+
+        cursor.execute(insert_query, data)
+        connection.commit()
+    
+    except mysql.connector.Error as err:
+        print(f"Error: {err}")
+    finally:
+        if 'connection' in locals():
+            connection.close()
+
 
 def get_fingerprint_name():
     print("Waiting for a fingerprint scan...")
@@ -34,6 +66,7 @@ def get_fingerprint_name():
 try:
     while True:
         fingerprint_id = get_fingerprint_name()
+        insertdb(fingerprint_id)
         print("Detected #", fingerprint_id)
         time.sleep(5)
 except KeyboardInterrupt:
