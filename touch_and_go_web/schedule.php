@@ -84,27 +84,26 @@ include 'get_course.php';
     <div class="dropdown"> <!-- start of ul tag with dropdown class -->
 
       <?php
-      // if ($course_array) {
-      //   foreach ($course_array as $row) {
-      //     echo '<div class="question"> <!-- start of div tag with question class -->
-      //     <!-- create arrow -->
-      //     <span class="arrow"></span>
-      //     <!-- display first question -->
-      //     <span>' . $row['courseName'] . '</span>
-      //   </div> <!-- end of div tag -->
-      //   <div class="answer"> <!-- start of div tag with answer class -->
-      //     <!-- display answer to first question -->
-      //     <p>Time: ' . date('g:i A', strtotime($row['courseStartTime'])) . ' - ' . date('g:i A', strtotime($row['courseEndTime'])) . '<br>
-      //       Professor: '. $row['professorLastName']  .' <br>
-      //       Location: ' . $row['courseLocation'] . ' <br>
-      //     </p>
-      //   </div>';
-      //   }
-      // } else {
-      //   echo '<span style="color: #FAF8D6; line-height: 1.5em; padding-left: 2%; padding-right: 2%;">No classes today </span>';
-      // }
-
-      // echo '<pre>'; print_r($course_array); echo '</pre>';
+      echo '<pre>'; print_r($course_array); echo '</pre>';
+      if ($course_array) {
+        foreach ($course_array as $row) {
+          echo '<div class="question"> <!-- start of div tag with question class -->
+          <!-- create arrow -->
+          <span class="arrow"></span>
+          <!-- display first question -->
+          <span>' . $row['courseName'] . '</span>
+        </div> <!-- end of div tag -->
+        <div class="answer"> <!-- start of div tag with answer class -->
+          <!-- display answer to first question -->
+          <p>Time: ' . date('g:i A', strtotime($row['courseStartTime'])) . ' - ' . date('g:i A', strtotime($row['courseEndTime'])) . '<br>
+            Professor: '. $row['professorLastName']  .' <br>
+            Location: ' . $row['courseLocation'] . ' <br>
+          </p>
+        </div>';
+        }
+      } else {
+        echo '<span style="color: #FAF8D6; line-height: 1.5em; padding-left: 2%; padding-right: 2%;">No classes today </span>';
+      }
 
       ?>
     </div> <!-- end of ul tag -->
@@ -120,25 +119,25 @@ include 'get_course.php';
     <div class="dropdown"> <!-- start of ul tag with dropdown class -->
 
       <?php
-      // if ($course_array) {
-      //   foreach ($course_array as $row) {
-      //     echo '<div class="question"> <!-- start of div tag with question class -->
-      //     <!-- create arrow -->
-      //     <span class="arrow"></span>
-      //     <!-- display first question -->
-      //     <span>' . $row['courseName'] . '</span>
-      //   </div> <!-- end of div tag -->
-      //   <div class="answer"> <!-- start of div tag with answer class -->
-      //     <!-- display answer to first question -->
-      //     <p>Time: ' . date('g:i A', strtotime($row['courseStartTime'])) . ' - ' . date('g:i A', strtotime($row['courseEndTime'])) . '<br>
-      //       Professor: ' . $row['professorLastName'] . '<br>
-      //       Location: ' . $row['courseLocation'] . ' <br>
-      //     </p>
-      //   </div>';
-      //   }
-      // } else {
-      //   echo '<span style="color: #FAF8D6; line-height: 1.5em; padding-left: 2%; padding-right: 2%;">No classes found...</span>';
-      // }
+      if ($course_array) {
+        foreach ($course_array as $row) {
+          echo '<div class="question"> <!-- start of div tag with question class -->
+          <!-- create arrow -->
+          <span class="arrow"></span>
+          <!-- display first question -->
+          <span>' . $row['courseName'] . '</span>
+        </div> <!-- end of div tag -->
+        <div class="answer"> <!-- start of div tag with answer class -->
+          <!-- display answer to first question -->
+          <p>Time: ' . date('g:i A', strtotime($row['courseStartTime'])) . ' - ' . date('g:i A', strtotime($row['courseEndTime'])) . '<br>
+            Professor: ' . $row['professorLastName'] . '<br>
+            Location: ' . $row['courseLocation'] . ' <br>
+          </p>
+        </div>';
+        }
+      } else {
+        echo '<span style="color: #FAF8D6; line-height: 1.5em; padding-left: 2%; padding-right: 2%;">No classes found...</span>';
+      }
 
       ?>
 
