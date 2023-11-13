@@ -20,7 +20,7 @@
    <h1>Register</h1>
 
    <!-- start of sign in forms -->
-   <form method="post" action="reg.php">
+   <form class="login_reg" method="post" action="reg.php">
 
       <!-- firstName form with with placeholder -->
       <input name="firstName" type="text" placeholder="First Name" class="center" required>
@@ -56,13 +56,13 @@
 
    </form> <!-- end of sign in forms -->
 
-      <?php 
-         if (isset($_SESSION['reg_msg'])) {
-         echo '<h2 style="margin-top: 15px;">' . $_SESSION['reg_msg'] . '</h2>';
-         unset($_SESSION['reg_msg']); 
-         }
-      ?>
-   
+   <?php
+   if (isset($_SESSION['reg_msg'])) {
+      echo '<h2 style="margin-top: 15px;">' . $_SESSION['reg_msg'] . '</h2>';
+      unset($_SESSION['reg_msg']);
+   }
+   ?>
+
 
    <h3 style="text-align: center;">Already have an account? <a href="index.php">Login Here</a></h2>
 
