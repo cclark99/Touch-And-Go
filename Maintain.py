@@ -70,22 +70,20 @@ def insertdb(index):
         #    print(row)
         
         #id first name lastname email password
-        insert_query = "INSERT INTO touch_and_go_test VALUES (%s, %s, %s, %s, %s)"
+        insert_query = "UPDATE student SET fingerId = %s WHERE firstName = %s AND lastName = %s"
         
         print("Enter your first name: ")
         fname = input()
         print("Enter your last name: ")
         lname = input()
-        print("Enter your email: ")
-        email = input()
-        print("Enter your password: ")
-        pword = input()
         
-        data = (index, fname, lname, email, pword)
+        data = (index, fname, lname)
         
         cursor.execute(insert_query, data)
         connection.commit()
         
+        print("Stored in DB")
+
     except mysql.connector.Error as err:
         print(f"Error: {err}")
     finally:
@@ -210,10 +208,7 @@ def enroll_finger(location):
         lcd.clear()
         lcd.putstr("Stored successfully")
         print("Stored")
-        time.sleep(2)
-        lcd.clear()
-        lcd.putstr("Enter your name")
-        name = input("Enter your name: ")
+        insertdb(location)
         time.sleep(2)
         lcd.clear()
     else:
@@ -262,8 +257,7 @@ while True:
 
     if c == "e":
         index = get_num(finger.library_size)
-        if enroll_finger(index):
-            insertdb(index)
+        enroll_finger(index)
     if c == "d":
         if finger.delete_model(get_num(finger.library_size)) == adafruit_fingerprint.OK:
             print("Deleted!")

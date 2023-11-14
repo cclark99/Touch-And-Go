@@ -6,6 +6,7 @@ import time
 import serial
 import adafruit_fingerprint
 import mysql.connector
+from datetime import datetime
 
 db_config = {
     'host': '34.194.132.130',
@@ -29,14 +30,17 @@ def insertdb(index):
         connection = mysql.connector.connect(**db_config)
         cursor = connection.cursor()
 
-        insert_query = "INSERT INTO student VALUES (%s, %s, %s)"
+        select_query = "SELECT userID FROM student WHERE fingerId = %s"
+        
+        cursor.execute(select_query, (index,))
+        
+        result = cursor.fetchone()  # Assuming fingerId is unique, use fetchone
+        userId = result[0]  # Return the UserID
 
-        print("Enter your first name: ")
-        fname = input()
-        print("Enter your last name: ")
-        lname = input()
+        insert_query = "INSERT INTO fingerprint VALUES (%s, %s)"
 
-        data = (index, fname, lname)
+        timestamp = datetime.now()
+        data = (userId, timestamp)
 
         cursor.execute(insert_query, data)
         connection.commit()
