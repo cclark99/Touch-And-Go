@@ -18,7 +18,7 @@ $pdo = new PDO(
 );
 
 // (C) SEARCH
-$stmt = $pdo->prepare($stmt = $pdo->prepare("SELECT firstName, lastName, userEmail, userType
+$stmt = ($stmt = $pdo->prepare("SELECT firstName, lastName, userEmail, userType
                                              FROM student
                                              WHERE firstName LIKE ? OR lastName LIKE ? OR userEmail LIKE ?
                                              UNION
@@ -29,8 +29,13 @@ $stmt = $pdo->prepare($stmt = $pdo->prepare("SELECT firstName, lastName, userEma
                                              SELECT firstName, lastName, userEmail, userType
                                              FROM admin
                                              WHERE firstName LIKE ? OR lastName LIKE ? OR userEmail LIKE ?"));
-$stmt->execute(["%" . $_POST["search"] . "%", "%" . $_POST["search"] . "%", "%" . $_POST["search"] . "%"]);
+
+$stmt->execute(["%" . $_POST["search"] . "%", "%" . $_POST["search"] . "%", "%" . $_POST["search"] . "%",
+                "%" . $_POST["search"] . "%", "%" . $_POST["search"] . "%", "%" . $_POST["search"] . "%",
+                "%" . $_POST["search"] . "%", "%" . $_POST["search"] . "%", "%" . $_POST["search"] . "%"]);
+
 $results = $stmt->fetchAll();
+
 if (isset($_POST["ajax"])) {
     echo json_encode($results);
 }
