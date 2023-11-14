@@ -201,15 +201,17 @@ include 'get_course.php';
                 wrapper.innerHTML = "<table><tr><th>First Name</th><th>Last Name</th><th>Email</th></tr>";
                 for (let r of res) {
                   let line = document.createElement("tr");
-                  line.innerHTML = `<tr><td>${r["firstName"]}</td><td>${r["lastName"]}</td><td>${r["userEmail"]}</td></tr>`;
+                  line.innerHTML = `<td>${r["firstName"]}</td><td>${r["lastName"]}</td><td>${r["userEmail"]}</td>`;
                   wrapper.appendChild(line);
                 }
-                line.innerHTML = "</table>";
-                wrapper.appendChild(line);
-              } else { wrapper.innerHTML = "No results found"; }
+                wrapper.innerHTML += "</table>"; // Move this line outside of the loop
+              } else {
+                wrapper.innerHTML = "No results found";
+              }
             });
           return false;
         }
+
 
         // set variables
         const question = document.querySelectorAll('.question');
