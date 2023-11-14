@@ -213,6 +213,8 @@ include 'get_course.php';
                   // Append the new table row to the table
                   wrapper.querySelector("table").appendChild(line);
                 }
+                // Move the closing </table> outside of the loop
+                wrapper.innerHTML += "</table>";
               } else {
                 wrapper.innerHTML = "No results found";
               }
