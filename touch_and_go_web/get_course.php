@@ -5,21 +5,23 @@ if (
                                   course.name, 
                                   course.description,
                                   course.date, 
-                                  course.dateStart, 
-                                  course.endTime, 
-                                  courseEndTime, 
-                                  courseLocation,
+                                  course.startTime, 
+                                  course.endTime,
+                                  course.date,  
+                                  course.location,
+                                  course.prefix,
                                   professor.userId,
                                   professor.firstName,
                                   professor.lastName,
-                                  professor.professorEmail,
-                                  professor.professorPhone
+                                  user.userEmail,
+                                  professor.phone
                             from course 
                               inner join student_course on student_course.courseId = course.courseId
-                              inner join student on student.studentId = student_course.studentId
+                              inner join student on student.userId = student_course.userId
                               inner join professor_course on professor_course.courseId = course.courseId
-                              inner join professor on professor_course.professorId = professor.professorId 
-                            where student.studentId = ?')
+                              inner join professor on professor_course.userId = professor.userId 
+                              inner join user on professor.userId = user.userId
+                            where student.userId = ?')
 ) {
 
   $stmt->bind_param('s', $_SESSION['id']);
