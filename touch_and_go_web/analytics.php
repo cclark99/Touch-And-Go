@@ -106,8 +106,6 @@ include 'get_course.php';
       cursor: pointer;
     }
 
-    /* Add these styles to your existing CSS */
-
     /* Style for the search results */
     #results {
       margin-top: 20px;
@@ -276,7 +274,7 @@ include 'get_course.php';
               console.log("JSON Response:", JSON.stringify(res, null, 2)); // Add this line for debugging
               var wrapper = document.getElementById("results");
               if (res.length > 0) {
-                wrapper.innerHTML = "<table><tr><th>User Type</th><th>First Name</th><th>Last Name</th><th>Email</th></tr>";
+                wrapper.innerHTML = "<table><tr><th>User Type</th><th>First Name</th><th>Last Name</th><th>Email</th><th> </th></tr>";
                 for (let r of res) {
                   // Check if the user is a student, professor, or admin
                   let userType = r["userType"] ? r["userType"] : "";
