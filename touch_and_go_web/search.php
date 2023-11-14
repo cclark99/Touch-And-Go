@@ -18,7 +18,7 @@ $pdo = new PDO(
 );
 
 // (C) SEARCH
-$stmt = $pdo->prepare("SELECT firstName, lastName, user.userEmail, user.userType
+$stmt = $pdo->prepare("SELECT student.firstName, student.lastName, professor.firstName, student.lastName, admin.firstName, admin.lastName, user.userEmail, user.userType
                        FROM `student`
                          INNER JOIN user on student.userId = user.userId
                          INNER JOIN professor on professor.userId = user.userId
