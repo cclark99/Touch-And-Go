@@ -200,18 +200,19 @@ include 'get_course.php';
               if (res.length > 0) {
                 wrapper.innerHTML = "<table><tr><th>User Type</th><th>First Name</th><th>Last Name</th><th>Email</th></tr>";
                 for (let r of res) {
-                  let line = document.createElement("tr");
-
                   // Check if the fields exist before displaying them
                   let userType = r["userType"] ? r["userType"] : "";
                   let firstName = r["firstName"] ? r["firstName"] : "";
                   let lastName = r["lastName"] ? r["lastName"] : "";
                   let userEmail = r["userEmail"] ? r["userEmail"] : "";
 
+                  // Create a new table row for each user
+                  let line = document.createElement("tr");
                   line.innerHTML = `<td>${userType}</td><td>${firstName}</td><td>${lastName}</td><td>${userEmail}</td>`;
-                  wrapper.appendChild(line);
+
+                  // Append the new table row to the table
+                  wrapper.querySelector("table").appendChild(line);
                 }
-                wrapper.innerHTML += "</table>";
               } else {
                 wrapper.innerHTML = "No results found";
               }
