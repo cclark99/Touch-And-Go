@@ -18,7 +18,10 @@ $pdo = new PDO(
 );
 
 // (C) SEARCH
-$stmt = $pdo->prepare("SELECT firstName, lastName FROM `student` WHERE `firstName` LIKE ? OR `lastName` LIKE ?");
+$stmt = $pdo->prepare("SELECT firstName, lastName, user.userEmail
+                       FROM `student`
+                         INNER JOIN user on student.userId = user.userId
+                       WHERE `firstName` LIKE ? OR `lastName` LIKE ? or 'userEmail' LIKE ?");
 $stmt->execute(["%" . $_POST["search"] . "%", "%" . $_POST["search"] . "%"]);
 $results = $stmt->fetchAll();
 if (isset($_POST["ajax"])) {

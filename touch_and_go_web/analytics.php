@@ -198,7 +198,7 @@ include 'get_course.php';
             .then(res => {
               var wrapper = document.getElementById("results");
               if (res.length > 0) {
-                wrapper.innerHTML = "<table><tr><th>First Name</th><th>Email</th></tr>";
+                wrapper.innerHTML = "<table><tr><th>First Name</th><th>Last Name</th><th>Email</th></tr>";
                 for (let r of res) {
                   let line = document.createElement("tr");
                   line.innerHTML = `<tr><td>${r["firstName"]}</td><td>${r["lastName"]}</td></tr>`;
