@@ -18,12 +18,17 @@ $pdo = new PDO(
 );
 
 // (C) SEARCH
-$stmt = $pdo->prepare("SELECT student.firstName, student.lastName, professor.firstName, student.lastName, admin.firstName, admin.lastName, user.userEmail, user.userType
-                       FROM `student`
-                         INNER JOIN user on student.userId = user.userId
-                         INNER JOIN professor on professor.userId = user.userId
-                         INNER JOIN admin on admin.userId = user.userId
-                       WHERE `firstName` LIKE ? OR `lastName` LIKE ? or user.userEmail LIKE ?");
+$stmt = $pdo->prepare($stmt = $pdo->prepare("SELECT firstName, lastName, userEmail, userType
+                                             FROM student
+                                             WHERE firstName LIKE ? OR lastName LIKE ? OR userEmail LIKE ?
+                                             UNION
+                                             SELECT firstName, lastName, userEmail, userType
+                                             FROM professor
+                                             WHERE firstName LIKE ? OR lastName LIKE ? OR userEmail LIKE ?
+                                             UNION
+                                             SELECT firstName, lastName, userEmail, userType
+                                             FROM admin
+                                             WHERE firstName LIKE ? OR lastName LIKE ? OR userEmail LIKE ?"));
 $stmt->execute(["%" . $_POST["search"] . "%", "%" . $_POST["search"] . "%", "%" . $_POST["search"] . "%"]);
 $results = $stmt->fetchAll();
 if (isset($_POST["ajax"])) {
