@@ -208,7 +208,7 @@ include 'get_course.php';
                   let lastName = r["lastName"] ? r["lastName"] : "";
                   let userEmail = r["userEmail"] ? r["userEmail"] : "";
 
-                  line.innerHTML = `<td>${userEmail}</td><td>${firstName}</td><td>${lastName}</td><td>${userType}</td>`;
+                  line.innerHTML = `<td>${userType}</td><td>${firstName}</td><td>${lastName}</td><td>${userEmail}</td>`;
                   wrapper.appendChild(line);
                 }
                 wrapper.innerHTML += "</table>";
