@@ -201,7 +201,7 @@ include 'get_course.php';
                 wrapper.innerHTML = "<table><tr><th>First Name</th><th>Last Name</th><th>Email</th></tr>";
                 for (let r of res) {
                   let line = document.createElement("tr");
-                  line.innerHTML = `<tr><td>${r["firstName"]}</td><td>${r["lastName"]}</td><td>${r["userEmail"]}</td></tr>`;
+                  line.innerHTML = `<tr><td>${r["firstName"]}</td><td>${r["lastName"]}</td><td>${r["userEmail"]}</td><td>${r["userType"]}</td></tr>`;
                   wrapper.appendChild(line);
                 }
                 line.innerHTML = "</table>";
