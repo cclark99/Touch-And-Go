@@ -218,7 +218,9 @@ include 'get_course.php';
               } else {
                 wrapper.innerHTML = "No results found";
               }
-            });
+            })
+            .catch(error => console.error("Error:", error)); // Add this line for error handling
+
           return false;
         }
 
