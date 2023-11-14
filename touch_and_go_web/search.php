@@ -22,7 +22,7 @@ $stmt = $pdo->prepare("SELECT firstName, lastName, user.userEmail
                        FROM `student`
                          INNER JOIN user on student.userId = user.userId
                        WHERE `firstName` LIKE ? OR `lastName` LIKE ? or 'userEmail' LIKE ?");
-$stmt->execute(["%" . $_POST["search"] . "%", "%" . $_POST["search"] . "%"]);
+$stmt->execute(["%" . $_POST["search"] . "%", "%" . $_POST["search"] . "%", "%" . $_POST["search"] . "%"]);
 $results = $stmt->fetchAll();
 if (isset($_POST["ajax"])) {
     echo json_encode($results);
