@@ -222,7 +222,7 @@ include 'get_course.php';
 
                   // Create a new table row for each user
                   let line = document.createElement("tr");
-                  line.innerHTML = `<td>${userType}</td><td>${firstName}</td><td>${lastName}</td><td>${userEmail}</td>`;
+                  line.innerHTML = `<td>${userType}</td><td>${firstName}</td><td>${lastName}</td><td>${userEmail}</td><td><button onclick="editUser('${userType}', '${userEmail}')">Edit</button></td>`;
 
                   // Append the new table row to the table
                   wrapper.querySelector("table").appendChild(line);
