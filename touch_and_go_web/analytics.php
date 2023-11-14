@@ -196,15 +196,26 @@ include 'get_course.php';
           fetch("search.php", { method: "POST", body: data })
             .then(res => res.json())
             .then(res => {
-              console.log("JSON Response:", JSON.stringify(res, null, 2)); // Add this line for debugging
-              var wrapper = document.getElementById("results");
               if (res.length > 0) {
                 wrapper.innerHTML = "<table><tr><th>User Type</th><th>First Name</th><th>Last Name</th><th>Email</th></tr>";
                 for (let r of res) {
-                  // Check if the fields exist before displaying them
+                  // Check if the user is a student, professor, or admin
                   let userType = r["userType"] ? r["userType"] : "";
-                  let firstName = r["firstName"] ? r["firstName"] : "";
-                  let lastName = r["lastName"] ? r["lastName"] : "";
+                  let firstName = "";
+                  let lastName = "";
+
+                  // Set the first name and last name based on the user type
+                  if (userType === "student") {
+                    firstName = r["studentFirstName"] ? r["studentFirstName"] : "";
+                    lastName = r["studentLastName"] ? r["studentLastName"] : "";
+                  } else if (userType === "professor") {
+                    firstName = r["professorFirstName"] ? r["professorFirstName"] : "";
+                    lastName = r["professorLastName"] ? r["professorLastName"] : "";
+                  } else if (userType === "admin") {
+                    firstName = r["adminFirstName"] ? r["adminFirstName"] : "";
+                    lastName = r["adminLastName"] ? r["adminLastName"] : "";
+                  }
+
                   let userEmail = r["userEmail"] ? r["userEmail"] : "";
 
                   // Create a new table row for each user
@@ -220,7 +231,6 @@ include 'get_course.php';
                 wrapper.innerHTML = "No results found";
               }
             })
-            .catch(error => console.error("Error:", error)); // Add this line for error handling
 
           return false;
         }
