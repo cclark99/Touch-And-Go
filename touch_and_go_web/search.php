@@ -21,6 +21,8 @@ $pdo = new PDO(
 $stmt = $pdo->prepare("SELECT firstName, lastName, user.userEmail, user.userType
                        FROM `student`
                          INNER JOIN user on student.userId = user.userId
+                         INNER JOIN professor on professor.userId = user.userId
+                         INNER JOIN admin on admin.userId = user.userId
                        WHERE `firstName` LIKE ? OR `lastName` LIKE ? or user.userEmail LIKE ?");
 $stmt->execute(["%" . $_POST["search"] . "%", "%" . $_POST["search"] . "%", "%" . $_POST["search"] . "%"]);
 $results = $stmt->fetchAll();
