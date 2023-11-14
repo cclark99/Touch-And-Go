@@ -67,6 +67,45 @@ include 'get_course.php';
       margin: auto;
     }
 
+    /* Add these styles to your existing CSS */
+
+    /* Style for the dropdown menu */
+    .searchBox select {
+      padding: 10px;
+      margin-right: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    /* Style for the search form */
+    .searchBox form {
+      padding: 20px;
+      margin: auto;
+      border: 1px solid #eee;
+      background: #f7f7f7;
+      display: grid;
+      align-content: center;
+    }
+
+    .searchBox input {
+      display: block;
+      padding: 10px;
+    }
+
+    .searchBox input[type=text],
+    .searchBox select {
+      width: 50%;
+      /* Adjust the width as needed */
+    }
+
+    .searchBox input[type=submit] {
+      margin-top: 20px;
+      border: 0;
+      color: #fff;
+      background: #10222e;
+      cursor: pointer;
+    }
+
     /* start of style rules for h3 tag */
     h3 {
       color: #10222E;
@@ -121,7 +160,7 @@ include 'get_course.php';
 
 
   <div class="searchBox">
-    <form id="form" onsubmit="return asearch();">
+    <form id="search" onsubmit="return asearch();">
       <input type="text" name="search" placeholder="Search..." required>
 
       <!-- Add a dropdown menu to select user type -->
@@ -198,7 +237,7 @@ include 'get_course.php';
       <script>
         function asearch() {
           // (A) GET SEARCH TERM
-          var data = new FormData(document.getElementById("form"));
+          var data = new FormData(document.getElementById("search"));
           data.append("ajax", 1);
 
           // (B) AJAX SEARCH REQUEST
