@@ -106,6 +106,35 @@ include 'get_course.php';
       cursor: pointer;
     }
 
+    /* Add these styles to your existing CSS */
+
+    /* Style for the search results */
+    #results {
+      margin-top: 20px;
+    }
+
+    #results table {
+      width: 80%;
+      margin: auto;
+      border-collapse: collapse;
+    }
+
+    #results th,
+    #results td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    #results th {
+      background-color: #10222e;
+      color: #fff;
+    }
+
+    #results tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
     /* start of style rules for h3 tag */
     h3 {
       color: #10222E;
