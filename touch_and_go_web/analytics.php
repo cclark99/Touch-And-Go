@@ -196,6 +196,8 @@ include 'get_course.php';
           fetch("search.php", { method: "POST", body: data })
             .then(res => res.json())
             .then(res => {
+              console.log("JSON Response:", JSON.stringify(res, null, 2)); // Add this line for debugging
+              var wrapper = document.getElementById("results");
               if (res.length > 0) {
                 wrapper.innerHTML = "<table><tr><th>User Type</th><th>First Name</th><th>Last Name</th><th>Email</th></tr>";
                 for (let r of res) {
@@ -231,7 +233,7 @@ include 'get_course.php';
                 wrapper.innerHTML = "No results found";
               }
             })
-
+            .catch(error => console.error("Error:", error)); // Add this line for error handling
           return false;
         }
 
