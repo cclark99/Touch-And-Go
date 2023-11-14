@@ -20,26 +20,32 @@ $pdo = new PDO(
 // (C) SEARCH
 $stmt = $pdo->prepare("
     SELECT 
-        student.userId AS studentUserId, student.firstName AS studentFirstName, student.lastName AS studentLastName, student.userEmail AS studentUserEmail, student.userType AS studentUserType,
-        professor.userId AS professorUserId, professor.firstName AS professorFirstName, professor.lastName AS professorLastName, professor.userEmail AS professorUserEmail, professor.userType AS professorUserType,
-        admin.userId AS adminUserId, admin.firstName AS adminFirstName, admin.lastName AS adminLastName, admin.userEmail AS adminUserEmail, admin.userType AS adminUserType,
-        user.userId AS userUserId, user.firstName AS userFirstName, user.lastName AS userLastName, user.userEmail AS userUserEmail, user.userType AS userUserType
+        user.userId,
+        user.userEmail,
+        user.userType,
+        student.firstName AS studentFirstName,
+        student.lastName AS studentLastName,
+        professor.firstName AS professorFirstName,
+        professor.lastName AS professorLastName,
+        admin.firstName AS adminFirstName,
+        admin.lastName AS adminLastName
     FROM user
     LEFT JOIN student ON user.userId = student.userId
     LEFT JOIN professor ON user.userId = professor.userId
     LEFT JOIN admin ON user.userId = admin.userId
     WHERE 
-        student.firstName LIKE ? OR student.lastName LIKE ? OR student.userEmail LIKE ? OR student.userType LIKE ? OR
-        professor.firstName LIKE ? OR professor.lastName LIKE ? OR professor.userEmail LIKE ? OR professor.userType LIKE ? OR
-        admin.firstName LIKE ? OR admin.lastName LIKE ? OR admin.userEmail LIKE ? OR admin.userType LIKE ? OR
-        user.firstName LIKE ? OR user.lastName LIKE ? OR user.userEmail LIKE ? OR user.userType LIKE ?
+        user.userEmail LIKE ? OR
+        student.firstName LIKE ? OR student.lastName LIKE ? OR
+        professor.firstName LIKE ? OR professor.lastName LIKE ? OR
+        admin.firstName LIKE ? OR admin.lastName LIKE ?
 ");
 
+$searchTerm = "%" . $_POST["search"] . "%";
 $stmt->execute([
-    "%" . $_POST["search"] . "%", "%" . $_POST["search"] . "%", "%" . $_POST["search"] . "%", "%" . $_POST["search"] . "%",
-    "%" . $_POST["search"] . "%", "%" . $_POST["search"] . "%", "%" . $_POST["search"] . "%", "%" . $_POST["search"] . "%",
-    "%" . $_POST["search"] . "%", "%" . $_POST["search"] . "%", "%" . $_POST["search"] . "%", "%" . $_POST["search"] . "%",
-    "%" . $_POST["search"] . "%", "%" . $_POST["search"] . "%", "%" . $_POST["search"] . "%", "%" . $_POST["search"] . "%"
+    $searchTerm,
+    $searchTerm, $searchTerm,
+    $searchTerm, $searchTerm,
+    $searchTerm, $searchTerm
 ]);
 
 $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
