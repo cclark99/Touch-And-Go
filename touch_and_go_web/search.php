@@ -34,18 +34,25 @@ $stmt = $pdo->prepare("
     LEFT JOIN professor ON user.userId = professor.userId
     LEFT JOIN admin ON user.userId = admin.userId
     WHERE 
-        user.userEmail LIKE ? OR
+        (user.userEmail LIKE ? OR
         student.firstName LIKE ? OR student.lastName LIKE ? OR
         professor.firstName LIKE ? OR professor.lastName LIKE ? OR
-        admin.firstName LIKE ? OR admin.lastName LIKE ?
+        admin.firstName LIKE ? OR admin.lastName LIKE ?)
+        AND (? = '' OR user.userType = ?)
 ");
 
 $searchTerm = "%" . $_POST["search"] . "%";
+$userType = $_POST["userType"];
 $stmt->execute([
     $searchTerm,
-    $searchTerm, $searchTerm,
-    $searchTerm, $searchTerm,
-    $searchTerm, $searchTerm
+    $searchTerm,
+    $searchTerm,
+    $searchTerm,
+    $searchTerm,
+    $searchTerm,
+    $searchTerm,
+    $userType,
+    $userType
 ]);
 
 $results = $stmt->fetchAll(PDO::FETCH_ASSOC);

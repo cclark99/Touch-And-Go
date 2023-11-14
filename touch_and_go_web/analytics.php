@@ -123,6 +123,15 @@ include 'get_course.php';
   <div class="searchBox">
     <form id="form" onsubmit="return asearch();">
       <input type="text" name="search" placeholder="Search..." required>
+
+      <!-- Add a dropdown menu to select user type -->
+      <select name="userType">
+        <option value="">All Users</option>
+        <option value="admin">Admins</option>
+        <option value="professor">Professors</option>
+        <option value="student">Students</option>
+      </select>
+
       <input type="submit" value="Search">
     </form>
 
@@ -237,6 +246,10 @@ include 'get_course.php';
           return false;
         }
 
+        function editUser(userType, userEmail) {
+          // Redirect to the edit.php page with user type and email as parameters
+          window.location.href = `edit.php?userType=${userType}&userEmail=${userEmail}`;
+        }
 
         // set variables
         const question = document.querySelectorAll('.question');
