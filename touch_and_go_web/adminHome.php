@@ -229,6 +229,49 @@ switch (true) {
         #results tr:nth-child(even) {
             background-color: #f2f2f2;
         }
+
+        .searchBox {
+            width: 50%;
+            margin: auto;
+            text-align: center;
+            /* Center align the content */
+        }
+
+        /* Style for the dropdown menu */
+        .searchBox select {
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        /* Style for the search form */
+        .searchBox form {
+            padding: 20px;
+            border: 1px solid #eee;
+            background: #f7f7f7;
+            display: inline-block;
+            /* Display the form as inline-block to center it */
+        }
+
+        .searchBox input {
+            display: block;
+            padding: 10px;
+        }
+
+        .searchBox input[type=text],
+        .searchBox select {
+            width: 50%;
+            /* Adjust the width as needed */
+        }
+
+        .searchBox input[type=submit] {
+            margin-top: 20px;
+            border: 0;
+            color: #fff;
+            background: #10222e;
+            cursor: pointer;
+        }
     </style> <!-- end of style tag -->
 
 <body> <!-- start of body tag -->
