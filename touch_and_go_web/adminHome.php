@@ -120,48 +120,10 @@ switch (true) {
             /* make margin-top 5% */
         }
 
-        /* end of style rules for h3 tag */
-        form {
-            padding: 20px;
-            margin: auto;
-            border: 1px solid #eee;
-            background: #f7f7f7;
-            display: grid;
-            align-content: center;
-        }
-
-        input {
-            display: block;
-            padding: 10px;
-        }
-
-        input[type=text] {
-            border: 1px solid #ddd;
-        }
-
-        input[type=submit] {
-            margin-top: 20px;
-            border: 0;
-            color: #fff;
-            background: #10222e;
-            cursor: pointer;
-        }
-
-        #results div {
-            padding: 10px;
-            border: 1px solid #eee;
-            background: #f7f7f7;
-            width: 60%;
-            margin: auto;
-        }
-
-        #results div:nth-child(even) {
-            background: #fff;
-        }
-
         .searchBox {
             width: 50%;
             margin: auto;
+            text-align: center;
         }
 
         /* Add these styles to your existing CSS */
@@ -177,11 +139,9 @@ switch (true) {
         /* Style for the search form */
         .searchBox form {
             padding: 20px;
-            margin: auto;
             border: 1px solid #eee;
             background: #f7f7f7;
-            display: grid;
-            align-content: center;
+            display: inline-block;
         }
 
         .searchBox input {
@@ -191,8 +151,7 @@ switch (true) {
 
         .searchBox input[type=text],
         .searchBox select {
-            width: 50%;
-            /* Adjust the width as needed */
+            width: 75%;
         }
 
         .searchBox input[type=submit] {
@@ -228,49 +187,6 @@ switch (true) {
 
         #results tr:nth-child(even) {
             background-color: #f2f2f2;
-        }
-
-        .searchBox {
-            width: 50%;
-            margin: auto;
-            text-align: center;
-            /* Center align the content */
-        }
-
-        /* Style for the dropdown menu */
-        .searchBox select {
-            padding: 10px;
-            margin-right: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-
-        /* Style for the search form */
-        .searchBox form {
-            padding: 20px;
-            border: 1px solid #eee;
-            background: #f7f7f7;
-            display: inline-block;
-            /* Display the form as inline-block to center it */
-        }
-
-        .searchBox input {
-            display: block;
-            padding: 10px;
-        }
-
-        .searchBox input[type=text],
-        .searchBox select {
-            width: 50%;
-            /* Adjust the width as needed */
-        }
-
-        .searchBox input[type=submit] {
-            margin-top: 20px;
-            border: 0;
-            color: #fff;
-            background: #10222e;
-            cursor: pointer;
         }
     </style> <!-- end of style tag -->
 
