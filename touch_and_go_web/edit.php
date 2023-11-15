@@ -95,25 +95,37 @@ if (!$userData) {
     <form method="post" action="update_user.php">
         <!-- Display current user data in form fields -->
         <!-- Include form fields for editing user information -->
-        <!-- <input type="text" name="firstName" value="...">
-        <input type="text" name="lastName" value="..."> -->
 
         <label for="userEmail">User ID#: </label>
         <input type="number" name="userId" value="<?= htmlspecialchars($userData['userId']) ?>" readonly>
 
+        <br>
+
+        <label for="userEmail">First Name: </label>
+        <input type="text" name="firstName" value="...">
+
+        <br>
+
+        <label for="userEmail">Last Name: </label>
+        <input type="text" name="lastName" value="...">
+
+        <br>
+
         <label for="userEmail">Email: </label>
-        <input type="text" name="userEmail" value="<?= htmlspecialchars($userData['userEmail']) ?>"
-            >
+        <input type="text" name="userEmail" value="<?= htmlspecialchars($userData['userEmail']) ?>">
+
+        <br>
 
         <label for="userType">userType: </label>
-        <input type="text" name="userType" value="<?= htmlspecialchars($userData['userType']) ?>"
-            ><!-- User type is readonly -->
+        <input type="text" name="userType"
+            value="<?= htmlspecialchars($userData['userType']) ?>"><!-- User type is readonly -->
 
         <!-- Add other form fields for additional user information -->
 
         <!-- Add a submit button to update user information -->
         <input type="submit" value="Update">
-        <input type="submit" name="delete" value="Delete" onclick="return confirm('Are you sure you want to delete this user?')">
+        <input type="submit" name="delete" value="Delete"
+            onclick="return confirm('Are you sure you want to delete this user?')">
     </form>
 </body>
 

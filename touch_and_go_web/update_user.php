@@ -21,6 +21,9 @@ $stmtUser = $con->prepare("UPDATE user SET userEmail = ? WHERE userId = ?");
 $stmtUser->bind_param("si", $userEmail, $userId);
 $stmtUser->execute();
 
+header('Location: analytics.php?success=1');
+exit();
+
 // Check if the update was successful
 // if ($stmtUser->affected_rows > 0) {
 
