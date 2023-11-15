@@ -261,7 +261,7 @@ switch (true) {
     <!-- home header -->
     <h1>Home</h1>
 
-    <h2 class="center">Search</h2>
+    <h3 class="center">Search & Edit Users</h3>
     <div class="searchBox">
         <form id="search" onsubmit="return asearch();">
             <input type="text" name="search" placeholder="Search..." required>
