@@ -6,6 +6,16 @@ include("db_connection.php");
 $userType = $_GET['userType'];
 $userEmail = $_GET['userEmail'];
 
+$stmt = $pdo->prepare("SELECT * FROM user WHERE userEmail = ?");
+$stmt->execute([$userEmail]);
+$userData = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// If user data is not found, you may want to handle this scenario, e.g., redirect to an error page
+if (!$userData) {
+    header('Location: analytics.php');
+    exit();
+}
+
 // Fetch user data based on user type and email from the database
 // Perform necessary database queries to retrieve user data
 
@@ -82,10 +92,14 @@ $userEmail = $_GET['userEmail'];
     <form method="post" action="update_user.php">
         <!-- Display current user data in form fields -->
         <!-- Include form fields for editing user information -->
-        <input type="text" name="firstName" value="..."><!-- Include other fields as needed -->
-        <input type="text" name="lastName" value="...">
-        <input type="text" name="userEmail" value="..." readonly><!-- User email is readonly -->
-        <input type="text" name="userType" value="..." readonly><!-- User type is readonly -->
+        <!-- <input type="text" name="firstName" value="...">
+        <input type="text" name="lastName" value="..."> -->
+        
+        <label for="userEmail">Email:</label>
+        <input type="text" name="userEmail" value="<?= htmlspecialchars($userData['userEmail']) ?>" readonly><!-- User email is readonly -->
+        
+        <label for="userType">userType:</label>
+        <input type="text" name="userType" value="<?= htmlspecialchars($userData['userType']) ?>" readonly><!-- User type is readonly -->
 
         <!-- Add other form fields for additional user information -->
 

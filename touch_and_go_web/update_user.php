@@ -9,7 +9,7 @@ $userEmail = $_POST['userEmail'];
 $userType = $_POST['userType'];
 
 // Update the user table
-$stmtUser = $pdo->prepare("UPDATE user SET userEmail = ?, WHERE userEmail = ?");
+$stmtUser = $pdo->prepare("UPDATE user SET userEmail = ? WHERE userEmail = ?");
 $stmtUser->execute([$userEmail, $userEmail]);
 
 // Check if the update was successful
@@ -35,8 +35,6 @@ if ($stmtUser->rowCount() > 0) {
             $stmtAdmin = $pdo->prepare("UPDATE admin SET firstName = ?, lastName = ? WHERE userId = ?");
             $stmtAdmin->execute([$firstName, $lastName, $userId]);
             break;
-
-        // Add more cases if you have other user types
 
         default:
             // Handle unknown user types if needed
