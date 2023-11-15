@@ -80,8 +80,6 @@ include 'get_course.php';
   <section class="dropdown-section"> <!-- start of section tag with dropdown-section class -->
     <!-- display Today's Schedule -->
     <h3>Today's Schedule</h3>
-    
-    <?php echo '<h1>'; print_r($course_array); echo '</h1>'; ?>
 
     <div class="dropdown"> <!-- start of ul tag with dropdown class -->
     
