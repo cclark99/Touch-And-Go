@@ -1,19 +1,17 @@
 <?php
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-// Include necessary files and establish database connection
 include("db_connection.php");
 
 // Retrieve user type and email from the parameters
 $userType = $_GET['userType'];
 $userEmail = $_GET['userEmail'];
 
-$stmt = $pdo->prepare("SELECT * FROM user WHERE userEmail = ?");
-$stmt->execute([$userEmail]);
-$userData = $stmt->fetch(PDO::FETCH_ASSOC);
+// Fetch user data based on user type and email from the database
+$stmt = $con->prepare("SELECT * FROM user WHERE userEmail = ?");
+$stmt->bind_param("s", $userEmail);
+$stmt->execute();
+$result = $stmt->get_result();
+$userData = $result->fetch_assoc();
 
 // If user data is not found, you may want to handle this scenario, e.g., redirect to an error page
 if (!$userData) {
@@ -99,12 +97,14 @@ if (!$userData) {
         <!-- Include form fields for editing user information -->
         <!-- <input type="text" name="firstName" value="...">
         <input type="text" name="lastName" value="..."> -->
-        
+
         <label for="userEmail">Email:</label>
-        <input type="text" name="userEmail" value="<?= htmlspecialchars($userData['userEmail']) ?>" readonly><!-- User email is readonly -->
-        
+        <input type="text" name="userEmail" value="<?= htmlspecialchars($userData['userEmail']) ?>"
+            readonly><!-- User email is readonly -->
+
         <label for="userType">userType:</label>
-        <input type="text" name="userType" value="<?= htmlspecialchars($userData['userType']) ?>" readonly><!-- User type is readonly -->
+        <input type="text" name="userType" value="<?= htmlspecialchars($userData['userType']) ?>"
+            readonly><!-- User type is readonly -->
 
         <!-- Add other form fields for additional user information -->
 
