@@ -2,8 +2,6 @@
 
 session_start();
 
-session_start();
-
 // Check for success or error message
 $successMessage = isset($_GET['success']) ? "User information updated successfully!" : "";
 $errorMessage = isset($_GET['error']) ? "Failed to update user information." : "";
