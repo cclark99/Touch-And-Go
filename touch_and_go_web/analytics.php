@@ -2,6 +2,14 @@
 
 session_start();
 
+session_start();
+
+// Check for success or error message
+$successMessage = isset($_GET['success']) ? "User information updated successfully!" : "";
+$errorMessage = isset($_GET['error']) ? "Failed to update user information." : "";
+
+// Include other necessary files and HTML structure
+
 if (!isset($_SESSION['loggedin'])) {
   header('Location: index.php');
   exit();
@@ -203,6 +211,10 @@ include 'get_course.php';
 
     <!-- (B) SEARCH RESULTS -->
     <div id="results"></div>
+    <?php
+    echo "<p style='color: green;'>$successMessage</p>";
+    echo "<p style='color: red;'>$errorMessage</p>";
+    ?>
   </div>
 
   <section class="dropdown-section"> <!-- start of section tag with dropdown-section class -->
