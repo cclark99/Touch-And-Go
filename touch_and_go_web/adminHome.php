@@ -2,7 +2,7 @@
 
 session_start();
 
-if (!isset($_SESSION['loggedin']) || $_SESSION['userType'] !== 'admin') {
+if (!isset($_SESSION['loggedin']) || $_SESSION['userType'] != 'admin') {
   include 'logout.php';
   exit();
 }
