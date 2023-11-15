@@ -30,7 +30,18 @@ if ($stmt = $con->prepare('SELECT userId, userPassword, userType FROM user WHERE
 			$_SESSION['email'] = $_POST['email'];
 			$_SESSION['id'] = $id;
 			$_SESSION['userType'] = $userType;
-			header('Location: home.php');
+			switch ($userType) {
+				case 'student':
+					header('Location: home.php');
+					break;
+				case 'professor':
+					header('Location: home.php');
+					break;
+				case 'admin':
+					header('Location adminHome.php');
+					break;
+			}
+
 		} else {
 			// Incorrect password
 			$_SESSION['login_msg'] = 'Incorrect password!';
