@@ -20,7 +20,7 @@ $userPassword = $_POST['userPassword'];
 // Update the user table
 $stmtUser = $con->prepare("UPDATE user SET userEmail = ?, userPassword= ? WHERE userId = ?");
 $newPassword = password_hash($_POST['userPassword'], PASSWORD_BCRYPT);
-$stmtUser->bind_param("ssi", $newPassword, $userEmail, $userId);
+$stmtUser->bind_param("ssi", $userEmail ,$newPassword, $userId);
 $stmtUser->execute();
 
 header('Location: analytics.php?success=1');
