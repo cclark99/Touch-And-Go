@@ -9,31 +9,34 @@ $userEmail = $_POST['userEmail'];
 $userType = $_POST['userType'];
 
 // Update the user table
-$stmtUser = $pdo->prepare("UPDATE user SET userEmail = ? WHERE userEmail = ?");
-$stmtUser->execute([$userEmail, $userEmail]);
+$stmtUser = $con->prepare("UPDATE user SET firstName = ?, lastName = ? WHERE userEmail = ?");
+$stmtUser->bind_param("sss", $firstName, $lastName, $userEmail);
+$stmtUser->execute();
 
 // Check if the update was successful
-if ($stmtUser->rowCount() > 0) {
-    // Successful update for the user table
+if ($stmtUser->affected_rows > 0) {
 
     // Check the user type to update the corresponding table
     switch ($userType) {
         case 'student':
             // Update the student table
-            $stmtStudent = $pdo->prepare("UPDATE student SET firstName = ?, lastName = ? WHERE userId = ?");
-            $stmtStudent->execute([$firstName, $lastName, $userId]);
+            $stmtStudent = $con->prepare("UPDATE student SET firstName = ?, lastName = ? WHERE userEmail = ?");
+            $stmtStudent->bind_param("sss", $firstName, $lastName, $userEmail);
+            $stmtStudent->execute();
             break;
 
         case 'professor':
             // Update the professor table
-            $stmtProfessor = $pdo->prepare("UPDATE professor SET firstName = ?, lastName = ? WHERE userId = ?");
-            $stmtProfessor->execute([$firstName, $lastName, $userId]);
+            $stmtProfessor = $con->prepare("UPDATE professor SET firstName = ?, lastName = ? WHERE userEmail = ?");
+            $stmtProfessor->bind_param("sss", $firstName, $lastName, $userEmail);
+            $stmtProfessor->execute();
             break;
 
         case 'admin':
             // Update the admin table
-            $stmtAdmin = $pdo->prepare("UPDATE admin SET firstName = ?, lastName = ? WHERE userId = ?");
-            $stmtAdmin->execute([$firstName, $lastName, $userId]);
+            $stmtAdmin = $con->prepare("UPDATE admin SET firstName = ?, lastName = ? WHERE userEmail = ?");
+            $stmtAdmin->bind_param("sss", $firstName, $lastName, $userEmail);
+            $stmtAdmin->execute();
             break;
 
         default:

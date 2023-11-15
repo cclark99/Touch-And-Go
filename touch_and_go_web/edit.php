@@ -110,6 +110,7 @@ if (!$userData) {
 
         <!-- Add a submit button to update user information -->
         <input type="submit" value="Update">
+        <input type="submit" name="delete" value="Delete" onclick="return confirm('Are you sure you want to delete this user?')">
     </form>
 </body>
 
