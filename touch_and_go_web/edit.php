@@ -98,13 +98,14 @@ if (!$userData) {
         <!-- <input type="text" name="firstName" value="...">
         <input type="text" name="lastName" value="..."> -->
 
+        <label for="userEmail">User ID#: </label>
         <input type="number" name="userId" value="<?= htmlspecialchars($userData['userId']) ?>" readonly>
 
-        <label for="userEmail">Email:</label>
+        <label for="userEmail">Email: </label>
         <input type="text" name="userEmail" value="<?= htmlspecialchars($userData['userEmail']) ?>"
-            ><!-- User email is readonly -->
+            >
 
-        <label for="userType">userType:</label>
+        <label for="userType">userType: </label>
         <input type="text" name="userType" value="<?= htmlspecialchars($userData['userType']) ?>"
             ><!-- User type is readonly -->
 
