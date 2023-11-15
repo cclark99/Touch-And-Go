@@ -102,11 +102,11 @@ if (!$userData) {
 
         <label for="userEmail">Email:</label>
         <input type="text" name="userEmail" value="<?= htmlspecialchars($userData['userEmail']) ?>"
-            readonly><!-- User email is readonly -->
+            ><!-- User email is readonly -->
 
         <label for="userType">userType:</label>
         <input type="text" name="userType" value="<?= htmlspecialchars($userData['userType']) ?>"
-            readonly><!-- User type is readonly -->
+            ><!-- User type is readonly -->
 
         <!-- Add other form fields for additional user information -->
 
