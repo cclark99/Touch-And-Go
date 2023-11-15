@@ -10,14 +10,15 @@ error_reporting(E_ALL);
 include("db_connection.php");
 
 // Retrieve form data
-$firstName = $_POST['firstName'];
-$lastName = $_POST['lastName'];
+// $firstName = $_POST['firstName'];
+// $lastName = $_POST['lastName'];
+$userId = $_POST['userId'];
 $userEmail = $_POST['userEmail'];
 $userType = $_POST['userType'];
 
 // Update the user table
-$stmtUser = $con->prepare("UPDATE user SET firstName = ?, lastName = ? WHERE userEmail = ?");
-$stmtUser->bind_param("sss", $firstName, $lastName, $userEmail);
+$stmtUser = $con->prepare("UPDATE user SET userEmail = ? WHERE userId = ?");
+$stmtUser->bind_param("si", $userEmail, $userId);
 $stmtUser->execute();
 
 // Check if the update was successful
@@ -27,22 +28,22 @@ if ($stmtUser->affected_rows > 0) {
     switch ($userType) {
         case 'student':
             // Update the student table
-            $stmtStudent = $con->prepare("UPDATE student SET firstName = ?, lastName = ? WHERE userEmail = ?");
-            $stmtStudent->bind_param("sss", $firstName, $lastName, $userEmail);
+            $stmtStudent = $con->prepare("UPDATE student SET firstName = ?, lastName = ? WHERE userId = ?");
+            $stmtStudent->bind_param("ssi", $firstName, $lastName, $userId);
             $stmtStudent->execute();
             break;
 
         case 'professor':
             // Update the professor table
-            $stmtProfessor = $con->prepare("UPDATE professor SET firstName = ?, lastName = ? WHERE userEmail = ?");
-            $stmtProfessor->bind_param("sss", $firstName, $lastName, $userEmail);
+            $stmtProfessor = $con->prepare("UPDATE professor SET firstName = ?, lastName = ? WHERE userId = ?");
+            $stmtProfessor->bind_param("ssi", $firstName, $lastName, $userId);
             $stmtProfessor->execute();
             break;
 
         case 'admin':
             // Update the admin table
-            $stmtAdmin = $con->prepare("UPDATE admin SET firstName = ?, lastName = ? WHERE userEmail = ?");
-            $stmtAdmin->bind_param("sss", $firstName, $lastName, $userEmail);
+            $stmtAdmin = $con->prepare("UPDATE admin SET firstName = ?, lastName = ? WHERE userId = ?");
+            $stmtAdmin->bind_param("ssi", $firstName, $lastName, $userId);
             $stmtAdmin->execute();
             break;
 
@@ -52,12 +53,12 @@ if ($stmtUser->affected_rows > 0) {
     }
 
     // Redirect back to the search page with a success message
-    header('Location: search.php?success=1');
+    header('Location: analytics.php?success=1');
     exit();
 } else {
     // Failed to update the user table (e.g., user not found)
     // Redirect back to the search page with an error message
-    header('Location: search.php?error=1');
+    header('Location: analytics.php?error=1');
     exit();
 }
 ?>

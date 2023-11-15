@@ -98,6 +98,8 @@ if (!$userData) {
         <!-- <input type="text" name="firstName" value="...">
         <input type="text" name="lastName" value="..."> -->
 
+        <input type="number" name="userId" value="<?= htmlspecialchars($userData['userEmail']) ?>" hidden readonly>
+
         <label for="userEmail">Email:</label>
         <input type="text" name="userEmail" value="<?= htmlspecialchars($userData['userEmail']) ?>"
             readonly><!-- User email is readonly -->
