@@ -99,7 +99,7 @@ if (!$userData) {
         <label for="userEmail">User ID#: </label>
         <input type="number" name="userId" value="<?= htmlspecialchars($userData['userId']) ?>" readonly>
 
-        <br>
+        <!-- <br>
 
         <label for="userEmail">First Name: </label>
         <input type="text" name="firstName" value="...">
@@ -107,14 +107,17 @@ if (!$userData) {
         <br>
 
         <label for="userEmail">Last Name: </label>
-        <input type="text" name="lastName" value="...">
+        <input type="text" name="lastName" value="..."> -->
 
         <br>
 
-        <label for="userEmail">Email: </label>
+        <label for="userEmail">Password: </label>
+        <input type="password" name="userPassword" value="<?= htmlspecialchars($userData['userPassword']) ?>">
+
+        <br>
+
+        <label for="userPassword">Email: </label>
         <input type="text" name="userEmail" value="<?= htmlspecialchars($userData['userEmail']) ?>">
-
-        <br>
 
         <label for="userType">userType: </label>
         <input type="text" name="userType"

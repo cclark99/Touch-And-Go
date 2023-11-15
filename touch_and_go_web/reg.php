@@ -46,10 +46,10 @@ if ($stmt = $con->prepare('SELECT userPassword FROM user WHERE userEmail = ?')) 
          $stmt->execute();
          $stmt->close();
 
-         // Switch statment to determine what type of user was selected. 
+         // Switch statement to determine what type of user was selected. 
          switch (true) {
             case $userType == 'student':
-               // Get userId from the user that was just create. Using autoincrement so we need to search the database
+               // Get userId from the user that was just create. Using auto-increment so we need to search the database
                if ($stmt = $con->prepare('SELECT userId FROM user WHERE userEmail = ? LIMIT 1')) {
                   $stmt->bind_param('s', $_POST['email']);
                   $stmt->execute();

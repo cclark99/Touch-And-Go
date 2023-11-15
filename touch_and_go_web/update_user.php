@@ -15,10 +15,12 @@ include("db_connection.php");
 $userId = $_POST['userId'];
 $userEmail = $_POST['userEmail'];
 $userType = $_POST['userType'];
+$userPassword = $_POST['userPassword'];
 
 // Update the user table
-$stmtUser = $con->prepare("UPDATE user SET userEmail = ? WHERE userId = ?");
-$stmtUser->bind_param("si", $userEmail, $userId);
+$stmtUser = $con->prepare("UPDATE user SET userEmail = ?, userPassword= ? WHERE userId = ?");
+$newPassword = password_hash($_POST['password'], PASSWORD_BCRYPT);
+$stmtUser->bind_param("ssi", $newPassword, $userEmail, $userId);
 $stmtUser->execute();
 
 header('Location: analytics.php?success=1');
