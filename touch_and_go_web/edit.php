@@ -6,9 +6,9 @@ include("db_connection.php");
 $userType = $_GET['userType'];
 $userEmail = $_GET['userEmail'];
 
-$stmt = $pdo->prepare("SELECT * FROM user WHERE userEmail = ?");
-$stmt->execute([$userEmail]);
-$userData = $stmt->fetch(PDO::FETCH_ASSOC);
+// $stmt = $pdo->prepare("SELECT * FROM user WHERE userEmail = ?");
+// $stmt->execute([$userEmail]);
+// $userData = $stmt->fetch(PDO::FETCH_ASSOC);
 
 // If user data is not found, you may want to handle this scenario, e.g., redirect to an error page
 if (!$userData) {
