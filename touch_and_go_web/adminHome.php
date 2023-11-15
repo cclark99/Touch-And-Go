@@ -142,115 +142,6 @@ switch (true) {
 
         /* end of style rules for div tag */
 
-
-        form {
-            padding: 20px;
-            margin: auto;
-            border: 1px solid #eee;
-            background: #f7f7f7;
-            display: grid;
-            align-content: center;
-        }
-
-        input {
-            display: block;
-            padding: 10px;
-        }
-
-        input[type=text] {
-            border: 1px solid #ddd;
-        }
-
-        input[type=submit] {
-            margin-top: 20px;
-            border: 0;
-            color: #fff;
-            background: #10222e;
-            cursor: pointer;
-        }
-
-        #results div {
-            padding: 10px;
-            border: 1px solid #eee;
-            background: #f7f7f7;
-            width: 60%;
-            margin: auto;
-        }
-
-        #results div:nth-child(even) {
-            background: #fff;
-        }
-
-        .searchBox {
-            width: 50%;
-            margin: auto;
-        }
-
-        /* Add these styles to your existing CSS */
-
-        /* Style for the dropdown menu */
-        .searchBox select {
-            padding: 10px;
-            margin-right: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-
-        /* Style for the search form */
-        .searchBox form {
-            padding: 20px;
-            margin: auto;
-            border: 1px solid #eee;
-            background: #f7f7f7;
-            display: grid;
-            align-content: center;
-        }
-
-        .searchBox input {
-            display: block;
-            padding: 10px;
-        }
-
-        .searchBox input[type=text],
-        .searchBox select {
-            width: 50%;
-            /* Adjust the width as needed */
-        }
-
-        .searchBox input[type=submit] {
-            margin-top: 20px;
-            border: 0;
-            color: #fff;
-            background: #10222e;
-            cursor: pointer;
-        }
-
-        /* Style for the search results */
-        #results {
-            margin-top: 20px;
-        }
-
-        #results table {
-            width: 80%;
-            margin: auto;
-            border-collapse: collapse;
-        }
-
-        #results th,
-        #results td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-
-        #results th {
-            background-color: #10222e;
-            color: #fff;
-        }
-
-        #results tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
     </style> <!-- end of style tag -->
 
 <body> <!-- start of body tag -->
@@ -265,13 +156,13 @@ switch (true) {
         <!-- list schedule.php link -->
         <li><a class="link" href="courseEdit.php">Courses</a></li>
         <!-- list analytics.php link -->
-        <!-- <li><a class="link" href="analytics.php">Analytics</a></li> -->
+        <li></li> 
         <!-- list Touch & Go logo -->
         <li><img src="../newLogo.png" alt="Touch and Go Logo" height="60"></li>
         <!-- list contact.php link -->
-        <!-- <li><a class='link' href="contact.php">Contact</a></li> -->
+        <li></li>
         <!-- list help.php link -->
-        <!-- <li><a class='link' href="help.php">Help</a></li> -->
+        <li></li>
         <!-- list logout.php link -->
         <li><a class='link' href="logout.php">Logout</a></li>
     </ul> <!-- end of ul for menu bar -->
