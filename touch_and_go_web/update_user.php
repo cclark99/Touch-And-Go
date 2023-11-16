@@ -32,7 +32,7 @@ if ($stmtUser = $con->prepare("UPDATE user SET userEmail = ?, userPassword= ? WH
             $stmtStudent->bind_param("ssi", $firstName, $lastName, $userId);
             $stmtStudent->execute();
             // Redirect back to the search page with a success message
-            header('Location: analytics.php?success=1');
+            header('Location: adminHome.php?success=1');
             exit();
 
         case 'professor':
@@ -41,7 +41,7 @@ if ($stmtUser = $con->prepare("UPDATE user SET userEmail = ?, userPassword= ? WH
             $stmtProfessor->bind_param("ssi", $firstName, $lastName, $userId);
             $stmtProfessor->execute();
             // Redirect back to the search page with a success message
-            header('Location: analytics.php?success=1');
+            header('Location: adminHome.php?success=1');
             exit();
 
         case 'admin':
@@ -50,20 +50,20 @@ if ($stmtUser = $con->prepare("UPDATE user SET userEmail = ?, userPassword= ? WH
             $stmtAdmin->bind_param("ssi", $firstName, $lastName, $userId);
             $stmtAdmin->execute();
             // Redirect back to the search page with a success message
-            header('Location: analytics.php?success=1');
+            header('Location: adminHome.php?success=1');
             exit();
 
         default:
             // Failed to update the user table (e.g., user not found)
             // Redirect back to the search page with an error message
-            header('Location: analytics.php?error=1');
+            header('Location: adminHome.php?error=1');
             exit();
     }
 
 } else {
     // Failed to update the user table (e.g., user not found)
     // Redirect back to the search page with an error message
-    header('Location: analytics.php?error=1');
+    header('Location: adminHome.php?error=1');
     exit();
 }
 ?>
