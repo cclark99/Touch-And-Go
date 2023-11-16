@@ -275,8 +275,10 @@ switch (true) {
 
         <div id="results"></div>
         <?php
-        echo "<p style='color: green;'>$successMessage</p>";
-        echo "<p style='color: red;'>$errorMessage</p>";
+        if (isset($_SESSION['updateMsg'])) {
+            echo '<h2 style="margin-top: 15px;">' . $_SESSION['updateMsg'] . '</h2>';
+            unset($_SESSION['updateMsg']);
+        }
         ?>
     </div>
 

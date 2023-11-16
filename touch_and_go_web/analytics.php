@@ -2,10 +2,6 @@
 
 session_start();
 
-// Check for success or error message
-$successMessage = isset($_GET['success']) ? "User information updated successfully!" : "";
-$errorMessage = isset($_GET['error']) ? "Failed to update user information." : "";
-
 // Include other necessary files and HTML structure
 
 if (!isset($_SESSION['loggedin'])) {
@@ -191,30 +187,6 @@ include 'get_course.php';
   <!-- analytics header -->
   <h1>Analytics</h1>
 
-
-  <div class="searchBox">
-    <form id="search" onsubmit="return asearch();">
-      <input type="text" name="search" placeholder="Search..." required>
-
-      <!-- Add a dropdown menu to select user type -->
-      <select name="userType">
-        <option value="">All Users</option>
-        <option value="admin">Admins</option>
-        <option value="professor">Professors</option>
-        <option value="student">Students</option>
-      </select>
-
-      <input type="submit" value="Search">
-    </form>
-
-    <!-- (B) SEARCH RESULTS -->
-    <div id="results"></div>
-    <?php
-    echo "<p style='color: green;'>$successMessage</p>";
-    echo "<p style='color: red;'>$errorMessage</p>";
-    ?>
-  </div>
-
   <section class="dropdown-section"> <!-- start of section tag with dropdown-section class -->
     <!-- display Today's Attendance -->
     <h3>Today's Attendance</h3>
@@ -272,61 +244,6 @@ include 'get_course.php';
       ?>
 
       <script>
-        function asearch() {
-          // (A) GET SEARCH TERM
-          var data = new FormData(document.getElementById("search"));
-          data.append("ajax", 1);
-
-          // (B) AJAX SEARCH REQUEST
-          fetch("search.php", { method: "POST", body: data })
-            .then(res => res.json())
-            .then(res => {
-              console.log("JSON Response:", JSON.stringify(res, null, 2)); // Add this line for debugging
-              var wrapper = document.getElementById("results");
-              if (res.length > 0) {
-                wrapper.innerHTML = "<table><tr><th>User Type</th><th>First Name</th><th>Last Name</th><th>Email</th><th> </th></tr>";
-                for (let r of res) {
-                  // Check if the user is a student, professor, or admin
-                  let userType = r["userType"] ? r["userType"] : "";
-                  let firstName = "";
-                  let lastName = "";
-
-                  // Set the first name and last name based on the user type
-                  if (userType === "student") {
-                    firstName = r["studentFirstName"] ? r["studentFirstName"] : "";
-                    lastName = r["studentLastName"] ? r["studentLastName"] : "";
-                  } else if (userType === "professor") {
-                    firstName = r["professorFirstName"] ? r["professorFirstName"] : "";
-                    lastName = r["professorLastName"] ? r["professorLastName"] : "";
-                  } else if (userType === "admin") {
-                    firstName = r["adminFirstName"] ? r["adminFirstName"] : "";
-                    lastName = r["adminLastName"] ? r["adminLastName"] : "";
-                  }
-
-                  let userEmail = r["userEmail"] ? r["userEmail"] : "";
-
-                  // Create a new table row for each user
-                  let line = document.createElement("tr");
-                  line.innerHTML = `<td>${userType}</td><td>${firstName}</td><td>${lastName}</td><td>${userEmail}</td><td><button onclick="editUser('${userType}', '${userEmail}')">Edit</button></td>`;
-
-                  // Append the new table row to the table
-                  wrapper.querySelector("table").appendChild(line);
-                }
-                // Move the closing </table> outside of the loop
-                wrapper.innerHTML += "</table>";
-              } else {
-                wrapper.innerHTML = "No results found";
-              }
-            })
-            .catch(error => console.error("Error:", error)); // Add this line for error handling
-          return false;
-        }
-
-        function editUser(userType, userEmail) {
-          // Redirect to the edit.php page with user type and email as parameters
-          window.location.href = `edit.php?userType=${userType}&userEmail=${userEmail}`;
-        }
-
         // set variables
         const question = document.querySelectorAll('.question');
         const answer = document.querySelectorAll('.answer');
