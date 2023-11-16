@@ -200,7 +200,7 @@ switch (true) {
             width: 90%;
             margin: auto;
             border-collapse: collapse;
-            font-size: 18px;  
+            font-size: 18px;
         }
 
         #results th,
@@ -218,6 +218,10 @@ switch (true) {
         #results tr:nth-child(even) {
             background-color: #f2f2f2;
         }
+
+        #fakeNav a:hover {
+            background-color: #0f222e;
+        }
     </style> <!-- end of style tag -->
 
 <body> <!-- start of body tag -->
@@ -232,13 +236,13 @@ switch (true) {
         <!-- list schedule.php link -->
         <li><a class="link" href="courseEdit.php">Courses</a></li>
         <!-- list analytics.php link -->
-        <li><a></a></li>
+        <li><a id="fakeNav"></a></li>
         <!-- list Touch & Go logo -->
         <li><img src="../newLogo.png" alt="Touch and Go Logo" height="60"></li>
         <!-- list contact.php link -->
-        <li><a></a></li>
+        <li><a id="fakeNav"></a></li>
         <!-- list help.php link -->
-        <li><a></a></li>
+        <li><a id="fakeNav"></a></li>
         <!-- list logout.php link -->
         <li><a class='link' href="logout.php">Logout</a></li>
     </ul> <!-- end of ul for menu bar -->
