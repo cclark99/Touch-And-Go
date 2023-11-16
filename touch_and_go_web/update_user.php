@@ -17,52 +17,8 @@ $userId = $_POST['userId'];
 $userEmail = $_POST['userEmail'];
 $userType = $_POST['userType'];
 $userPassword = $_POST['userPassword'];
-
-switch (true) {
-    case $userType == 'student':
-        if ($stmt = $con->prepare('SELECT firstName, lastName FROM student WHERE userId = ?')) {
-            $stmt->bind_param('i', $userId);
-            $stmt->execute();
-            $stmt->store_result();
-            if ($stmt->num_rows > 0) {
-                $stmt->bind_result($firstName, $lastName);
-                $stmt->fetch();
-            }
-            $stmt->close();
-        }
-        break;
-
-    case $userType == 'professor':
-        if ($stmt = $con->prepare('SELECT firstName, lastName FROM professor WHERE userId = ?')) {
-            $stmt->bind_param('i', $userId);
-            $stmt->execute();
-            $stmt->store_result();
-            if ($stmt->num_rows > 0) {
-                $stmt->bind_result($firstName, $lastName);
-                $stmt->fetch();
-            }
-            $stmt->close();
-        }
-        break;
-
-    case $userType == 'admin':
-        if ($stmt = $con->prepare('SELECT firstName, lastName FROM admin WHERE userId = ?')) {
-            $stmt->bind_param('i', $userId);
-            $stmt->execute();
-            $stmt->store_result();
-            if ($stmt->num_rows > 0) {
-                $stmt->bind_result($firstName, $lastName);
-                $stmt->fetch();
-            }
-            $stmt->close();
-        }
-        break;
-
-    default:
-        include 'logout.php';
-        break;
-}
-
+$firstName = $_POST['firstName'];
+$lastName = $_POST['lastName'];
 
 // Update the user table
 if ($stmtUser = $con->prepare("UPDATE user SET userEmail = ?, userPassword= ? WHERE userId = ?")) {
