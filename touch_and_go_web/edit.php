@@ -105,10 +105,6 @@ if (!$userData) {
             margin-top: 20px;
         }
 
-        .editBox input[type="submit"]:hover {
-            background: #2a3c4e;
-        }
-
         .editBox input.update {
             background: #4CAF50;
             /* Green background for the update button */
@@ -117,6 +113,21 @@ if (!$userData) {
         .editBox input.delete {
             background: #FF6347;
             /* Red background for the delete button */
+        }
+
+
+        .editBox input[type="submit"]:hover {
+            background: #2a3c4e;
+        }
+
+        .editBox input.update:hover {
+            background: #397d13;
+            /* Darker green color for update button on hover */
+        }
+
+        .editBox input.delete:hover {
+            background: #8b0000;
+            /* Darker red color for delete button on hover */
         }
     </style> <!-- end of style tag -->
 </head> <!-- end of head tag -->
@@ -157,7 +168,7 @@ if (!$userData) {
 
             <label for="userType">User Type: </label>
             <input type="text" name="userType" value="<?= htmlspecialchars($userData['userType']) ?>" readonly>
-            
+
             <label for="userEmail">Password: </label>
             <input type="password" name="userPassword" value="<?= htmlspecialchars($userData['userPassword']) ?>">
 
