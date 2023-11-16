@@ -132,6 +132,8 @@ switch (true) {
             /* Add a subtle box shadow for depth */
             padding: 20px;
             /* Add padding for space inside the box */
+            background-color: #FFFFFF;
+            /* Set a white background color */
         }
 
         /* Add these styles for better alignment of the form elements */
