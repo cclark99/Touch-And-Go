@@ -222,6 +222,17 @@ switch (true) {
         #fakeNav a:hover {
             background-color: #0f222e;
         }
+
+        .update-message {
+            margin-top: 15px;
+            padding: 10px;
+            font-size: 18px;
+            text-align: center;
+            background-color: #2a3c4e;
+            color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
     </style> <!-- end of style tag -->
 
 <body> <!-- start of body tag -->
@@ -273,7 +284,7 @@ switch (true) {
         <div id="results"></div>
         <?php
         if (isset($_SESSION['updateMsg'])) {
-            echo '<h2 style="margin-top: 15px;">' . $_SESSION['updateMsg'] . '</h2>';
+            echo '<h2 class="update-message">' . $_SESSION['updateMsg'] . '</h2>';
             unset($_SESSION['updateMsg']);
         }
         ?>
@@ -326,7 +337,6 @@ switch (true) {
                         wrapper.innerHTML = "No results found";
                     }
                 })
-                .catch(error => console.error("Error:", error)); // Add this line for error handling
             return false;
         }
 
