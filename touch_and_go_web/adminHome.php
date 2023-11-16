@@ -192,7 +192,6 @@ switch (true) {
             background: #2a3c4e;
         }
 
-        /* Style for the search results */
         #results {
             margin-top: 20px;
         }
@@ -201,12 +200,15 @@ switch (true) {
             width: 80%;
             margin: auto;
             border-collapse: collapse;
+            font-size: 18px;
+            /* Increase font size for the table */
         }
 
         #results th,
         #results td {
             border: 1px solid #ddd;
-            padding: 8px;
+            padding: 12px;
+            /* Increase padding for better spacing */
             text-align: left;
         }
 
