@@ -197,18 +197,16 @@ switch (true) {
         }
 
         #results table {
-            width: 80%;
+            width: 90%;
             margin: auto;
             border-collapse: collapse;
-            font-size: 18px;
-            /* Increase font size for the table */
+            font-size: 18px;  
         }
 
         #results th,
         #results td {
             border: 1px solid #ddd;
             padding: 12px;
-            /* Increase padding for better spacing */
             text-align: left;
         }
 
