@@ -136,16 +136,37 @@ switch (true) {
             /* Set a white background color */
         }
 
-        /* Add these styles for better alignment of the form elements */
         .searchBox form {
             display: inline-block;
             text-align: left;
         }
 
-        .searchBox input,
-        .searchBox select,
-        .searchBox input[type=submit] {
-            margin-bottom: 10px;
+        /* Add modern styling for the search input */
+        .searchBox input[type="text"],
+        .searchBox select {
+            padding: 15px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 75%;
+            margin-right: 10px;
+        }
+
+        /* Add modern styling for the search button */
+        .searchBox input[type="submit"] {
+            padding: 15px 30px;
+            font-size: 18px;
+            border: 0;
+            color: #fff;
+            background: #10222e;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s ease-in-out;
+        }
+
+        /* Change background color on hover for the search button */
+        .searchBox input[type="submit"]:hover {
+            background: #2a3c4e;
         }
 
         /* Style for the search results */
