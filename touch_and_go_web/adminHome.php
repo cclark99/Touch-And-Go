@@ -313,7 +313,7 @@ switch (true) {
 
                             // Create a new table row for each user
                             let line = document.createElement("tr");
-                            line.innerHTML = `<td>${userType}</td><td>${firstName}</td><td>${lastName}</td><td>${userEmail}</td><td><button onclick="editUser('${userType}', '${userEmail}')">Edit</button></td>`;
+                            line.innerHTML = `<td>${userType}</td><td>${firstName}</td><td>${lastName}</td><td>${userEmail}</td><td><button onclick="editUser(this)">Edit</button></td>`;
 
                             // Append the new table row to the table
                             wrapper.querySelector("table").appendChild(line);
@@ -328,13 +328,17 @@ switch (true) {
             return false;
         }
 
-        function editUser(userType, userEmail, firstName, lastName) {
+        function editUser(button) {
+            let row = button.parentNode.parentNode;
+
+            // Get values from the row
+            let userType = row.cells[0].textContent;
+            let userEmail = row.cells[3].textContent;
+            let firstName = row.cells[1].textContent;
+            let lastName = row.cells[2].textContent;
+
             // Redirect to the edit.php page with user type and email as parameters
-            console.log("userType:", userType);
-            console.log("userEmail:", userEmail);
-            console.log("firstName:", firstName);
-            console.log("lastName:", lastName);
-            // window.location.href = `edit.php?userType=${encodeURIComponent(userType)}&userEmail=${encodeURIComponent(userEmail)}&firstName=${encodeURIComponent(firstName)}&lastName=${encodeURIComponent(lastName)}`;
+            window.location.href = `edit.php?userType=${userType}&userEmail=${userEmail}&firstName=${firstName}&lastName=${lastName}`;
         }
     </script>
 </body>
