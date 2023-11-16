@@ -194,19 +194,21 @@ switch (true) {
 
         #results {
             margin-top: 20px;
+            width: 90%;
+            margin: auto;
         }
 
         #results table {
-            width: 90%;
-            margin: auto;
+            width: 100%;
             border-collapse: collapse;
-            font-size: 18px;
+            font-size: 16px;
+            margin-top: 10px;
         }
 
         #results th,
         #results td {
             border: 1px solid #ddd;
-            padding: 12px;
+            padding: 10px;
             text-align: left;
         }
 
@@ -217,6 +219,20 @@ switch (true) {
 
         #results tr:nth-child(even) {
             background-color: #f2f2f2;
+        }
+
+        #results button {
+            padding: 8px;
+            font-size: 14px;
+            background: #10222e;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #results button:hover {
+            background: #2a3c4e;
         }
 
         #fakeNav a:hover {
@@ -234,7 +250,6 @@ switch (true) {
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: auto;
         }
-     
     </style> <!-- end of style tag -->
 
 <body> <!-- start of body tag -->
