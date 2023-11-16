@@ -7,9 +7,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['userType'] != 'admin') {
     exit();
 }
 
-$successMessage = isset($_GET['success']) ? "User information updated successfully!" : "";
-$errorMessage = isset($_GET['error']) ? "Failed to update user information." : "";
-
 require 'db_connection.php';
 
 // Get user's name based on what account type they are, as well as userId
