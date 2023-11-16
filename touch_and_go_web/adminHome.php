@@ -137,19 +137,27 @@ switch (true) {
         }
 
         .searchBox form {
-            display: inline-block;
-            text-align: left;
+            display: flex;
+            /* Use flexbox for easier spacing */
+            flex-wrap: wrap;
+            /* Allow items to wrap to the next line if there's not enough space */
+            align-items: center;
+            /* Align items vertically in the center */
+            justify-content: center;
+            /* Center items horizontally */
         }
 
         /* Add modern styling for the search input */
         .searchBox input[type="text"],
         .searchBox select {
+            flex: 1;
+            /* Allow the input and select to grow and fill the available space */
             padding: 15px;
             font-size: 16px;
             border: 1px solid #ddd;
             border-radius: 5px;
-            width: 75%;
-            margin-right: 10px;
+            margin: 0 5px;
+            /* Add some horizontal margin */
         }
 
         /* Add modern styling for the search button */
@@ -162,6 +170,8 @@ switch (true) {
             cursor: pointer;
             border-radius: 5px;
             transition: background 0.3s ease-in-out;
+            margin: 0 5px;
+            /* Add some horizontal margin */
         }
 
         /* Change background color on hover for the search button */
