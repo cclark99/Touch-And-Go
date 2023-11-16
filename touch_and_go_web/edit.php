@@ -3,10 +3,10 @@
 include("db_connection.php");
 
 // Retrieve user type and email from the parameters
-$userType = $_GET['userType'];
-$userEmail = $_GET['userEmail'];
-$firstName = $_GET['firstName'];
-$lastName = $_GET['lastName'];
+$userType = urldecode($_GET['userType']);
+$userEmail = urldecode($_GET['userEmail']);
+$firstName = urldecode($_GET['firstName']);
+$lastName = urldecode($_GET['lastName']);
 
 // Fetch user data based on user type and email from the database
 $stmt = $con->prepare("SELECT * FROM user WHERE userEmail = ?");
@@ -170,16 +170,16 @@ if (!$userData) {
 
             <label for="userType">User Type: </label>
             <input type="text" name="userType" value="<?= htmlspecialchars($userData['userType']) ?>" readonly>
-           
+
             <label for="firstName">First Name: </label>
             <input type="text" name="firstName" value="<?= htmlspecialchars($firstName) ?>">
 
             <label for="lastName">Last Name: </label>
-            <input type="text" name="lastName" value="<?= htmlspecialchars($lastName) ?>" >
-            
+            <input type="text" name="lastName" value="<?= htmlspecialchars($lastName) ?>">
+
             <label for="userPassword">Email: </label>
             <input type="text" name="userEmail" value="<?= htmlspecialchars($userData['userEmail']) ?>">
-            
+
             <label for="userEmail">Password: </label>
             <input type="password" name="userPassword" value="<?= htmlspecialchars($userData['userPassword']) ?>">
 

@@ -330,7 +330,7 @@ switch (true) {
 
         function editUser(userType, userEmail, firstName, lastName) {
             // Redirect to the edit.php page with user type and email as parameters
-            window.location.href = `edit.php?userType=${userType}&userEmail=${userEmail}&firstName=${firstName}&lastName=${lastName}`;
+            window.location.href = `edit.php?userType=${encodeURIComponent(userType)}&userEmail=${encodeURIComponent(userEmail)}&firstName=${encodeURIComponent(firstName)}&lastName=${encodeURIComponent(lastName)}`;
         }
     </script>
 </body>
