@@ -155,21 +155,18 @@ if (!$userData) {
             <label for="userEmail">User ID#: </label>
             <input type="number" name="userId" value="<?= htmlspecialchars($userData['userId']) ?>" readonly>
 
-            <br>
-
+            <label for="userType">User Type: </label>
+            <input type="text" name="userType" value="<?= htmlspecialchars($userData['userType']) ?>" readonly>
+            
             <label for="userEmail">Password: </label>
             <input type="password" name="userPassword" value="<?= htmlspecialchars($userData['userPassword']) ?>">
-
-            <br>
 
             <label for="userPassword">Email: </label>
             <input type="text" name="userEmail" value="<?= htmlspecialchars($userData['userEmail']) ?>">
 
-            <label for="userType">userType: </label>
-            <input type="text" name="userType" value="<?= htmlspecialchars($userData['userType']) ?>" readonly>
 
-            <input type="submit" value="Update">
-            <input type="submit" name="delete" value="Delete"
+            <input type="submit" class="update" value="Update">
+            <input type="submit" class="delete" name="delete" value="Delete"
                 onclick="return confirm('Are you sure you want to delete this user?')">
         </form>
     </div>
