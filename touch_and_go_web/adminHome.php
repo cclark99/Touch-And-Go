@@ -126,6 +126,12 @@ switch (true) {
             text-align: center;
             margin-top: 20px;
             /* Add margin-top for better spacing */
+            border-radius: 10px;
+            /* Add border-radius for rounded corners */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            /* Add a subtle box shadow for depth */
+            padding: 20px;
+            /* Add padding for space inside the box */
         }
 
         /* Add these styles for better alignment of the form elements */
