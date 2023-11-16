@@ -124,42 +124,20 @@ switch (true) {
             width: 50%;
             margin: auto;
             text-align: center;
-        }
-
-        /* Add these styles to your existing CSS */
-
-        /* Style for the dropdown menu */
-        .searchBox select {
-            padding: 10px;
-            margin-right: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-
-        /* Style for the search form */
-        .searchBox form {
-            padding: 20px;
-            border: 1px solid #eee;
-            background: #f7f7f7;
-            display: inline-block;
-        }
-
-        .searchBox input {
-            display: block;
-            padding: 10px;
-        }
-
-        .searchBox input[type=text],
-        .searchBox select {
-            width: 75%;
-        }
-
-        .searchBox input[type=submit] {
             margin-top: 20px;
-            border: 0;
-            color: #fff;
-            background: #10222e;
-            cursor: pointer;
+            /* Add margin-top for better spacing */
+        }
+
+        /* Add these styles for better alignment of the form elements */
+        .searchBox form {
+            display: inline-block;
+            text-align: left;
+        }
+
+        .searchBox input,
+        .searchBox select,
+        .searchBox input[type=submit] {
+            margin-bottom: 10px;
         }
 
         /* Style for the search results */
