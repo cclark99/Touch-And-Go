@@ -334,7 +334,7 @@ switch (true) {
             console.log("userEmail:", userEmail);
             console.log("firstName:", firstName);
             console.log("lastName:", lastName);
-            window.location.href = `edit.php?userType=${encodeURIComponent(userType)}&userEmail=${encodeURIComponent(userEmail)}&firstName=${encodeURIComponent(firstName)}&lastName=${encodeURIComponent(lastName)}`;
+            // window.location.href = `edit.php?userType=${encodeURIComponent(userType)}&userEmail=${encodeURIComponent(userEmail)}&firstName=${encodeURIComponent(firstName)}&lastName=${encodeURIComponent(lastName)}`;
         }
     </script>
 </body>
