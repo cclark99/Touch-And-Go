@@ -148,10 +148,21 @@ switch (true) {
         }
 
         /* Add modern styling for the search input */
-        .searchBox input[type="text"],
+        .searchBox input[type="text"] {
+            flex: 2;
+            /* Make the search input twice as wide as the dropdown */
+            padding: 15px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            /* Add some horizontal margin */
+        }
+
+        /* Add modern styling for the dropdown */
         .searchBox select {
             flex: 1;
-            /* Allow the input and select to grow and fill the available space */
+            /* Make the dropdown one-third as wide as the search input */
             padding: 15px;
             font-size: 16px;
             border: 1px solid #ddd;
@@ -162,6 +173,8 @@ switch (true) {
 
         /* Add modern styling for the search button */
         .searchBox input[type="submit"] {
+            flex: 1;
+            /* Make the search button one-third as wide as the search input */
             padding: 15px 30px;
             font-size: 18px;
             border: 0;
