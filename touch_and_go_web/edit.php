@@ -73,12 +73,12 @@ if (!$userData) {
             background-color: #FFFFFF;
         }
 
-        /* end of class style rules for editBox */
-
         /* Add modern styling for the form inputs and labels */
         .editBox label {
             display: block;
             margin-top: 10px;
+            font-weight: bold;
+            font-size: 18px;
         }
 
         .editBox input[type="number"],
@@ -90,6 +90,7 @@ if (!$userData) {
             border: 1px solid #ddd;
             border-radius: 5px;
             margin-top: 5px;
+            box-sizing: border-box;
         }
 
         .editBox input[type="submit"] {
@@ -98,7 +99,6 @@ if (!$userData) {
             font-size: 18px;
             border: 0;
             color: #fff;
-            background: #10222e;
             cursor: pointer;
             border-radius: 5px;
             transition: background 0.3s ease-in-out;
@@ -107,6 +107,16 @@ if (!$userData) {
 
         .editBox input[type="submit"]:hover {
             background: #2a3c4e;
+        }
+
+        .editBox input.update {
+            background: #4CAF50;
+            /* Green background for the update button */
+        }
+
+        .editBox input.delete {
+            background: #FF6347;
+            /* Red background for the delete button */
         }
     </style> <!-- end of style tag -->
 </head> <!-- end of head tag -->
