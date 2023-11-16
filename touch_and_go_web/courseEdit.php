@@ -9,6 +9,90 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['userType'] != 'admin') {
 
 require 'db_connection.php';
 
+// Get user's name based on what account type they are, as well as userId
+
+switch (true) {
+    case $_SESSION['userType'] == 'student':
+        // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
+        if ($stmt = $con->prepare('SELECT userId FROM user WHERE userEmail = ?')) {
+            $stmt->bind_param('s', $_SESSION['email']);
+            $stmt->execute();
+            $stmt->store_result();
+            if ($stmt->num_rows > 0) {
+                $stmt->bind_result($_SESSION['userId']);
+                $stmt->fetch();
+            }
+            $stmt->close();
+        }
+
+        if ($stmt = $con->prepare('SELECT firstName, lastName FROM student WHERE userId = ?')) {
+            $stmt->bind_param('i', $_SESSION['userId']);
+            $stmt->execute();
+            $stmt->store_result();
+            if ($stmt->num_rows > 0) {
+                $stmt->bind_result($_SESSION['firstName'], $_SESSION['lastName']);
+                $stmt->fetch();
+            }
+            $stmt->close();
+        }
+        break;
+
+    case $_SESSION['userType'] == 'professor':
+        // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
+        if ($stmt = $con->prepare('SELECT userId FROM user WHERE userEmail = ?')) {
+            $stmt->bind_param('s', $_SESSION['email']);
+            $stmt->execute();
+            $stmt->store_result();
+            if ($stmt->num_rows > 0) {
+                $stmt->bind_result($_SESSION['userId']);
+                $stmt->fetch();
+            }
+            $stmt->close();
+        }
+
+        if ($stmt = $con->prepare('SELECT firstName, lastName FROM professor WHERE userId = ?')) {
+            $stmt->bind_param('i', $_SESSION['userId']);
+            $stmt->execute();
+            $stmt->store_result();
+            if ($stmt->num_rows > 0) {
+                $stmt->bind_result($_SESSION['firstName'], $_SESSION['lastName']);
+                $stmt->fetch();
+            }
+            $stmt->close();
+        }
+
+        break;
+
+    case $_SESSION['userType'] == 'admin':
+        // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
+        if ($stmt = $con->prepare('SELECT userId FROM user WHERE userEmail = ?')) {
+            $stmt->bind_param('s', $_SESSION['email']);
+            $stmt->execute();
+            $stmt->store_result();
+            if ($stmt->num_rows > 0) {
+                $stmt->bind_result($_SESSION['userId']);
+                $stmt->fetch();
+            }
+            $stmt->close();
+        }
+
+        if ($stmt = $con->prepare('SELECT firstName, lastName FROM admin WHERE userId = ?')) {
+            $stmt->bind_param('i', $_SESSION['userId']);
+            $stmt->execute();
+            $stmt->store_result();
+            if ($stmt->num_rows > 0) {
+                $stmt->bind_result($_SESSION['firstName'], $_SESSION['lastName']);
+                $stmt->fetch();
+            }
+            $stmt->close();
+        }
+
+        break;
+    default:
+        include 'logout.php';
+        break;
+}
+
 ?>
 <!DOCTYPE html>
 
