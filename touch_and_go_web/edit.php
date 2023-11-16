@@ -171,11 +171,11 @@ if (!$userData) {
             <label for="userType">User Type: </label>
             <input type="text" name="userType" value="<?= htmlspecialchars($userData['userType']) ?>" readonly>
            
-            <label for="userType">First Name: </label>
-            <input type="text" name="userType" value="<?= htmlspecialchars($firstName) ?>">
+            <label for="firstName">First Name: </label>
+            <input type="text" name="firstName" value="<?= htmlspecialchars($firstName) ?>">
 
-            <label for="userType">Last Name: </label>
-            <input type="text" name="userType" value="<?= htmlspecialchars($lastName) ?>" >
+            <label for="lastName">Last Name: </label>
+            <input type="text" name="lastName" value="<?= htmlspecialchars($lastName) ?>" >
             
             <label for="userPassword">Email: </label>
             <input type="text" name="userEmail" value="<?= htmlspecialchars($userData['userEmail']) ?>">
