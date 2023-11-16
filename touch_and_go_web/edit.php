@@ -60,6 +60,54 @@ if (!$userData) {
         }
 
         /* end of class style rules for dropdown */
+
+        /* start of class style rules for editBox */
+        .editBox {
+            width: 50%;
+            margin: auto;
+            text-align: center;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            background-color: #FFFFFF;
+        }
+
+        /* end of class style rules for editBox */
+
+        /* Add modern styling for the form inputs and labels */
+        .editBox label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        .editBox input[type="number"],
+        .editBox input[type="password"],
+        .editBox input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+
+        .editBox input[type="submit"] {
+            width: 100%;
+            padding: 15px 0;
+            font-size: 18px;
+            border: 0;
+            color: #fff;
+            background: #10222e;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s ease-in-out;
+            margin-top: 20px;
+        }
+
+        .editBox input[type="submit"]:hover {
+            background: #2a3c4e;
+        }
     </style> <!-- end of style tag -->
 </head> <!-- end of head tag -->
 
@@ -92,44 +140,29 @@ if (!$userData) {
 
     <!-- contact header -->
     <h1>Contact</h1>
-    <form method="post" action="update_user.php">
-        <!-- Display current user data in form fields -->
-        <!-- Include form fields for editing user information -->
+    <div class="editBox">
+        <form method="post" action="update_user.php">
+            <label for="userEmail">User ID#: </label>
+            <input type="number" name="userId" value="<?= htmlspecialchars($userData['userId']) ?>" readonly>
 
-        <label for="userEmail">User ID#: </label>
-        <input type="number" name="userId" value="<?= htmlspecialchars($userData['userId']) ?>" readonly>
+            <br>
 
-        <!-- <br>
+            <label for="userEmail">Password: </label>
+            <input type="password" name="userPassword" value="<?= htmlspecialchars($userData['userPassword']) ?>">
 
-        <label for="userEmail">First Name: </label>
-        <input type="text" name="firstName" value="...">
+            <br>
 
-        <br>
+            <label for="userPassword">Email: </label>
+            <input type="text" name="userEmail" value="<?= htmlspecialchars($userData['userEmail']) ?>">
 
-        <label for="userEmail">Last Name: </label>
-        <input type="text" name="lastName" value="..."> -->
+            <label for="userType">userType: </label>
+            <input type="text" name="userType" value="<?= htmlspecialchars($userData['userType']) ?>" readonly>
 
-        <br>
-
-        <label for="userEmail">Password: </label>
-        <input type="password" name="userPassword" value="<?= htmlspecialchars($userData['userPassword']) ?>">
-
-        <br>
-
-        <label for="userPassword">Email: </label>
-        <input type="text" name="userEmail" value="<?= htmlspecialchars($userData['userEmail']) ?>">
-
-        <label for="userType">userType: </label>
-        <input type="text" name="userType"
-            value="<?= htmlspecialchars($userData['userType']) ?>"><!-- User type is readonly -->
-
-        <!-- Add other form fields for additional user information -->
-
-        <!-- Add a submit button to update user information -->
-        <input type="submit" value="Update">
-        <input type="submit" name="delete" value="Delete"
-            onclick="return confirm('Are you sure you want to delete this user?')">
-    </form>
+            <input type="submit" value="Update">
+            <input type="submit" name="delete" value="Delete"
+                onclick="return confirm('Are you sure you want to delete this user?')">
+        </form>
+    </div>
 </body>
 
 </html>
