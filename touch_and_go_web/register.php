@@ -39,12 +39,13 @@
 
       <br style="clear: both;">
 
-      <!-- userType radio buttons form with placeholder -->
-      <input type="radio" id="studentType" name="userType" checked required value="student">
-      <label for="studentType">Student</label><br>
+      <div style="display: flex; align-items: center;">
+         <input type="radio" id="studentType" name="userType" checked required value="student">
+         <label for="studentType">Student</label>
 
-      <input type="radio" id="professorType" name="userType" value="professor">
-      <label for="professorType">Professor</label><br>
+         <input type="radio" id="professorType" name="userType" value="professor">
+         <label for="professorType">Professor</label>
+      </div>
 
       <br style="clear: both;">
 
