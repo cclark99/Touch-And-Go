@@ -131,6 +131,10 @@ if (!$userData) {
             background: #8b0000;
             /* Darker red color for delete button on hover */
         }
+
+        #fakeNav a:hover {
+            background-color: #0f222e;
+        }
     </style> <!-- end of style tag -->
 </head> <!-- end of head tag -->
 
@@ -142,17 +146,17 @@ if (!$userData) {
 
     <ul> <!-- start of ul for menu bar -->
         <!-- list home.php link -->
-        <li><a class="link" href="home.php">Home</a></li>
+        <li><a class="link" href="adminHome.php">Home</a></li>
         <!-- list schedule.php link -->
-        <li><a class="link" href="schedule.php">Schedule</a></li>
+        <li><a class="link" href="courseEdit.php">Courses</a></li>
         <!-- list analytics.php link -->
-        <li><a class="link" href="analytics.php">Analytics</a></li>
+        <li id="fakeNav"><a></a></li>
         <!-- list Touch & Go logo -->
         <li><img src="../newLogo.png" alt="Touch and Go Logo" height="60"></li>
         <!-- list contact.php link -->
-        <li><a class='link' href="contact.php">Contact</a></li>
+        <li id="fakeNav"><a></a></li>
         <!-- list help.php link -->
-        <li><a class='link' href="help.php">Help</a></li>
+        <li id="fakeNav"><a></a></li>
         <!-- list logout.php link -->
         <li><a class='link' href="logout.php">Logout</a></li>
     </ul> <!-- end of ul for menu bar -->
