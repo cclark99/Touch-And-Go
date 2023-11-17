@@ -372,9 +372,27 @@ switch (true) {
 
                             // Create a new table row for each user
                             let line = document.createElement("tr");
-                            line.classList.add("row-container"); // Add the row-container class
 
-                            line.innerHTML = `<td>${userType}</td><td>${firstName}</td><td>${lastName}</td><td>${userEmail}</td>`;
+                            // Add the row-container class to each cell
+                            let userTypeCell = document.createElement("td");
+                            userTypeCell.textContent = userType;
+                            userTypeCell.classList.add("row-container");
+                            line.appendChild(userTypeCell);
+
+                            let firstNameCell = document.createElement("td");
+                            firstNameCell.textContent = firstName;
+                            firstNameCell.classList.add("row-container");
+                            line.appendChild(firstNameCell);
+
+                            let lastNameCell = document.createElement("td");
+                            lastNameCell.textContent = lastName;
+                            lastNameCell.classList.add("row-container");
+                            line.appendChild(lastNameCell);
+
+                            let userEmailCell = document.createElement("td");
+                            userEmailCell.textContent = userEmail;
+                            userEmailCell.classList.add("row-container");
+                            line.appendChild(userEmailCell);
 
                             // Create the "Edit" button
                             let editButton = document.createElement("button");
@@ -386,6 +404,7 @@ switch (true) {
                             // Append the "Edit" button to the table row
                             let actionCell = document.createElement("td");
                             actionCell.appendChild(editButton);
+                            actionCell.classList.add("row-container");
                             line.appendChild(actionCell);
 
                             // Append the new table row to the table
