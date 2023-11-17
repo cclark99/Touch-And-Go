@@ -121,7 +121,7 @@ switch (true) {
         }
 
         form.create_course {
-            max-width: 400px;
+            max-width: 600px;
             margin: auto;
             background-color: #FFFFFF;
             padding: 20px;
@@ -135,19 +135,21 @@ switch (true) {
             margin-top: 10px;
         }
 
-        form.create_course select {
-            width: 100%;
-            padding: 10px;
-            font-size: 16px;
+        form.create_course fieldset {
             border: 1px solid #ddd;
             border-radius: 5px;
-            margin-top: 5px;
-            box-sizing: border-box;
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        form.create_course legend {
+            font-weight: bold;
         }
 
         form.create_course input[type="text"],
         form.create_course input[type="checkbox"] {
-            width: 100%;
+            width: calc(20% - 10px);
+            /* Adjusted width and added spacing */
             padding: 10px;
             font-size: 16px;
             border: 1px solid #ddd;
