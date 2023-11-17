@@ -135,8 +135,17 @@ switch (true) {
             margin-top: 10px;
         }
 
+        form.create_course select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+
         form.create_course input[type="text"],
-        form.create_course select,
         form.create_course input[type="checkbox"] {
             width: 100%;
             padding: 10px;
@@ -212,29 +221,16 @@ switch (true) {
         <label for="courseName">Course Name:</label>
         <input type="text" name="courseName" required>
 
-        <label for="daysOfWeek">Days of the Week:</label>
-        <div>
-            <input type="checkbox" id="monday" name="daysOfWeek[]" value="Monday">
-            <label for="monday">Monday</label>
-
-            <input type="checkbox" id="tuesday" name="daysOfWeek[]" value="Tuesday">
-            <label for="tuesday">Tuesday</label>
-
-            <input type="checkbox" id="wednesday" name="daysOfWeek[]" value="Wednesday">
-            <label for="wednesday">Wednesday</label>
-
-            <input type="checkbox" id="thursday" name="daysOfWeek[]" value="Thursday">
-            <label for="thursday">Thursday</label>
-
-            <input type="checkbox" id="friday" name="daysOfWeek[]" value="Friday">
-            <label for="friday">Friday</label>
-
-            <input type="checkbox" id="saturday" name="daysOfWeek[]" value="Saturday">
-            <label for="saturday">Saturday</label>
-
-            <input type="checkbox" id="sunday" name="daysOfWeek[]" value="Sunday">
-            <label for="sunday">Sunday</label>
-        </div>
+        <fieldset>
+            <legend>Days of the Week:</legend>
+            <input type="checkbox" name="daysOfWeek[]" value="Monday"> Monday
+            <input type="checkbox" name="daysOfWeek[]" value="Tuesday"> Tuesday
+            <input type="checkbox" name="daysOfWeek[]" value="Wednesday"> Wednesday
+            <input type="checkbox" name="daysOfWeek[]" value="Thursday"> Thursday
+            <input type="checkbox" name="daysOfWeek[]" value="Friday"> Friday
+            <input type="checkbox" name="daysOfWeek[]" value="Saturday"> Saturday
+            <input type="checkbox" name="daysOfWeek[]" value="Sunday"> Sunday
+        </fieldset>
 
         <label for="startTime">Start Time:</label>
         <input type="text" name="startTime" placeholder="HH:MM AM/PM" required>
