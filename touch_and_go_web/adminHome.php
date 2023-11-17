@@ -219,6 +219,16 @@ switch (true) {
             background-color: #f2f2f2;
         }
 
+        #results p {
+            font-size: 20px;
+            /* Increase font size */
+            color: #555;
+            /* Change text color to a subdued gray */
+            margin-top: 20px;
+            /* Add some top margin */
+        }
+
+
         #fakeNav a:hover {
             background-color: #0f222e;
         }
