@@ -146,10 +146,12 @@ switch (true) {
             font-weight: bold;
         }
 
-        form.create_course input[type="text"],
+        form.create_course input[type="text"] {
+            width 50%:
+        }
+
         form.create_course input[type="checkbox"] {
-            width: calc(14% - 10px);
-            /* Adjusted width and added spacing */
+            width: auto;
             padding: 10px;
             font-size: 16px;
             border: 1px solid #ddd;
