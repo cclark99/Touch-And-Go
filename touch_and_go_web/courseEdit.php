@@ -121,7 +121,7 @@ switch (true) {
         }
 
         form.create_course {
-            max-width: 600px;
+            max-width: 800px;
             margin: auto;
             background-color: #FFFFFF;
             padding: 20px;
@@ -148,7 +148,7 @@ switch (true) {
 
         form.create_course input[type="text"],
         form.create_course input[type="checkbox"] {
-            width: calc(20% - 10px);
+            width: calc(14% - 10px);
             /* Adjusted width and added spacing */
             padding: 10px;
             font-size: 16px;
