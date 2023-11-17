@@ -354,31 +354,62 @@ switch (true) {
                     console.log("JSON Response:", JSON.stringify(res, null, 2)); // Add this line for debugging
                     var wrapper = document.getElementById("results");
                     if (res.length > 0) {
+                        wrapper.innerHTML = ""; // Clear previous results
+
                         // Create a table and header row
-                        let tableHTML = "<table><tr><th>User Type</th><th>First Name</th><th>Last Name</th><th>Email</th><th>Actions</th></tr>";
+                        let table = document.createElement("table");
+                        table.innerHTML = "<tr><th>User Type</th><th>First Name</th><th>Last Name</th><th>Email</th><th>Actions</th></tr>";
 
                         // Loop through each result
                         for (let r of res) {
-                            let userType = r["userType"] ? r["userType"] : "";
-                            let firstName = r["firstName"] ? r["firstName"] : "";
-                            let lastName = r["lastName"] ? r["lastName"] : "";
-                            let userEmail = r["userEmail"] ? r["userEmail"] : "";
+                            let userType = r["userType"] || "";
+                            let firstName = r[`${userType}FirstName`] || "";
+                            let lastName = r[`${userType}LastName`] || "";
+                            let userEmail = r["userEmail"] || "";
 
-                            // Append the new table row to the table HTML
-                            tableHTML += `<tr>
-                            <td>${userType}</td>
-                            <td>${firstName}</td>
-                            <td>${lastName}</td>
-                            <td>${userEmail}</td>
-                            <td><button onclick="editUser('${userType}', '${userEmail}', '${firstName}', '${lastName}')">Edit</button></td>
-                        </tr>`;
+                            // Create a new table row for each user
+                            let line = document.createElement("tr");
+
+                            // Add the "row-container" class to each cell in the row
+                            let userTypeCell = document.createElement("td");
+                            userTypeCell.textContent = userType;
+                            userTypeCell.classList.add("row-container");
+                            line.appendChild(userTypeCell);
+
+                            let firstNameCell = document.createElement("td");
+                            firstNameCell.textContent = firstName;
+                            firstNameCell.classList.add("row-container");
+                            line.appendChild(firstNameCell);
+
+                            let lastNameCell = document.createElement("td");
+                            lastNameCell.textContent = lastName;
+                            lastNameCell.classList.add("row-container");
+                            line.appendChild(lastNameCell);
+
+                            let userEmailCell = document.createElement("td");
+                            userEmailCell.textContent = userEmail;
+                            userEmailCell.classList.add("row-container");
+                            line.appendChild(userEmailCell);
+
+                            // Create the "Edit" button
+                            let editButton = document.createElement("button");
+                            editButton.textContent = "Edit";
+                            editButton.onclick = function () {
+                                editUser(userType, userEmail, firstName, lastName);
+                            };
+
+                            // Add the "row-container" class to the action cell
+                            let actionCell = document.createElement("td");
+                            actionCell.appendChild(editButton);
+                            actionCell.classList.add("row-container");
+                            line.appendChild(actionCell);
+
+                            // Append the new table row to the table
+                            table.appendChild(line);
                         }
 
-                        // Close the table HTML
-                        tableHTML += "</table>";
-
-                        // Replace the wrapper content with the generated table HTML
-                        wrapper.innerHTML = tableHTML;
+                        // Append the table to the wrapper
+                        wrapper.appendChild(table);
                     } else {
                         wrapper.innerHTML = "No results found";
                     }
@@ -388,10 +419,11 @@ switch (true) {
         }
 
         function editUser(userType, userEmail, firstName, lastName) {
-            // Redirect to the edit.php page with user type and email as parameters
+            // Redirect to the edit.php page with user type, email, first name, and last name as parameters
             window.location.href = `edit.php?userType=${userType}&userEmail=${userEmail}&firstName=${firstName}&lastName=${lastName}`;
         }
     </script>
+
 </body>
 
 </html>
