@@ -373,7 +373,7 @@ switch (true) {
                             // Create a new table row for each user
                             let line = document.createElement("tr");
 
-                            // Add the row-container class to each cell
+                            // Add the "row-container" class to each cell in the row
                             let userTypeCell = document.createElement("td");
                             userTypeCell.textContent = userType;
                             userTypeCell.classList.add("row-container");
@@ -401,7 +401,7 @@ switch (true) {
                                 editUser(userType, userEmail, firstName, lastName);
                             };
 
-                            // Append the "Edit" button to the table row
+                            // Add the "row-container" class to the action cell
                             let actionCell = document.createElement("td");
                             actionCell.appendChild(editButton);
                             actionCell.classList.add("row-container");
