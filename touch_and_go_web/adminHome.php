@@ -194,21 +194,19 @@ switch (true) {
 
         #results {
             margin-top: 20px;
-            width: 90%;
-            margin: auto;
         }
 
         #results table {
-            width: 100%;
+            width: 90%;
+            margin: auto;
             border-collapse: collapse;
-            font-size: 16px;
-            margin-top: 10px;
+            font-size: 18px;
         }
 
         #results th,
         #results td {
             border: 1px solid #ddd;
-            padding: 10px;
+            padding: 12px;
             text-align: left;
         }
 
@@ -219,20 +217,6 @@ switch (true) {
 
         #results tr:nth-child(even) {
             background-color: #f2f2f2;
-        }
-
-        #results button {
-            padding: 8px;
-            font-size: 14px;
-            background: #10222e;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        #results button:hover {
-            background: #2a3c4e;
         }
 
         #fakeNav a:hover {
@@ -249,30 +233,6 @@ switch (true) {
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: auto;
-        }
-
-        .row-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px;
-            border: 1px solid #ddd;
-            margin-bottom: 10px;
-            background-color: #fff;
-        }
-
-        .row-container button {
-            padding: 8px;
-            font-size: 14px;
-            background: #10222e;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .row-container button:hover {
-            background: #2a3c4e;
         }
     </style> <!-- end of style tag -->
 
