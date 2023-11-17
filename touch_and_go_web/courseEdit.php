@@ -157,6 +157,10 @@ switch (true) {
             box-sizing: border-box;
         }
 
+        form.create_course input[type="text"] {
+            width: 50%;
+        }
+
         form.create_course input[type="submit"],
         form.create_course input[type="reset"] {
             width: 100%;
