@@ -384,7 +384,7 @@ switch (true) {
                         // Append the table to the wrapper
                         wrapper.appendChild(table);
                     } else {
-                        wrapper.innerHTML = "No results found";
+                        wrapper.innerHTML = "<p>No results found</p>";
                     }
                 })
                 .catch(error => console.error("Error:", error)); // Add this line for error handling
