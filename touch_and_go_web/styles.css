@@ -377,11 +377,11 @@ form.login_reg input[type="reset"] {
 
 
 form.login_reg input[type="submit"]:hover {
-    background-color: #8b0000;
+    background-color: #397d13;
 }
 
 form.login_reg input[type="reset"]:hover {
-    background-color: #397d13;
+    background-color: #8b0000;
 }
 
 form.login_reg {
@@ -421,4 +421,8 @@ form.login_reg label {
 
 form.login_reg input[type="radio"]:checked+label {
     background-color: #397d13;
+}
+
+br {
+    clear: both;
 }
