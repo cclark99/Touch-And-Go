@@ -120,107 +120,60 @@ switch (true) {
             /* make margin-top 5% */
         }
 
-        .searchBox {
-            width: 50%;
+        form.create_course {
+            max-width: 400px;
             margin: auto;
-            text-align: center;
-            margin-top: 20px;
-            /* Add margin-top for better spacing */
-            border-radius: 10px;
-            /* Add border-radius for rounded corners */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            /* Add a subtle box shadow for depth */
-            padding: 20px;
-            /* Add padding for space inside the box */
             background-color: #FFFFFF;
-            /* Set a white background color */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
         }
 
-        .searchBox form {
-            display: flex;
-            /* Use flexbox for easier spacing */
-            flex-wrap: wrap;
-            /* Allow items to wrap to the next line if there's not enough space */
-            align-items: center;
-            /* Align items vertically in the center */
-            justify-content: center;
-            /* Center items horizontally */
+        form.create_course label {
+            display: block;
+            margin-top: 10px;
         }
 
-        /* Add modern styling for the search input */
-        .searchBox input[type="text"] {
-            flex: 2;
-            /* Make the search input twice as wide as the dropdown */
-            padding: 15px;
+        form.create_course input[type="text"],
+        form.create_course select,
+        form.create_course input[type="checkbox"] {
+            width: 100%;
+            padding: 10px;
             font-size: 16px;
             border: 1px solid #ddd;
             border-radius: 5px;
-            margin: 0 5px;
-            /* Add some horizontal margin */
+            margin-top: 5px;
+            box-sizing: border-box;
         }
 
-        /* Add modern styling for the dropdown */
-        .searchBox select {
-            flex: 1;
-            /* Make the dropdown one-third as wide as the search input */
-            padding: 15px;
-            font-size: 16px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            margin: 0 5px;
-            /* Add some horizontal margin */
-        }
-
-        /* Add modern styling for the search button */
-        .searchBox input[type="submit"] {
-            flex: 1;
-            /* Make the search button one-third as wide as the search input */
-            padding: 15px 30px;
+        form.create_course input[type="submit"],
+        form.create_course input[type="reset"] {
+            width: 100%;
+            padding: 15px 0;
             font-size: 18px;
             border: 0;
             color: #fff;
-            background: #10222e;
             cursor: pointer;
             border-radius: 5px;
             transition: background 0.3s ease-in-out;
-            margin: 0 5px;
-            /* Add some horizontal margin */
-        }
-
-        /* Change background color on hover for the search button */
-        .searchBox input[type="submit"]:hover {
-            background: #2a3c4e;
-        }
-
-        #results {
             margin-top: 20px;
         }
 
-        #results table {
-            width: 90%;
-            margin: auto;
-            border-collapse: collapse;
-            font-size: 18px;
+        form.create_course input[type="submit"] {
+            background: #4CAF50;
         }
 
-        #results th,
-        #results td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
+        form.create_course input[type="submit"]:hover {
+            background: #2a3c4e;
         }
 
-        #results th {
-            background-color: #10222e;
-            color: #fff;
+        form.create_course input[type="reset"] {
+            background: #FF6347;
         }
 
-        #results tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        #fakeNav a:hover {
-            background-color: #0f222e;
+        form.create_course input[type="reset"]:hover {
+            background: #8b0000;
         }
     </style> <!-- end of style tag -->
 
@@ -254,9 +207,94 @@ switch (true) {
     <!-- home header -->
     <h1>Home</h1>
 
-    <h3 class="center">Search & Edit Users</h3>
+    <h3 class="center">Create Course</h3>
+    <form class="create_course" method="post" action="process_course.php">
+        <label for="courseName">Course Name:</label>
+        <input type="text" name="courseName" required>
+
+        <label for="daysOfWeek">Days of the Week:</label>
+        <div>
+            <input type="checkbox" id="monday" name="daysOfWeek[]" value="Monday">
+            <label for="monday">Monday</label>
+
+            <input type="checkbox" id="tuesday" name="daysOfWeek[]" value="Tuesday">
+            <label for="tuesday">Tuesday</label>
+
+            <input type="checkbox" id="wednesday" name="daysOfWeek[]" value="Wednesday">
+            <label for="wednesday">Wednesday</label>
+
+            <input type="checkbox" id="thursday" name="daysOfWeek[]" value="Thursday">
+            <label for="thursday">Thursday</label>
+
+            <input type="checkbox" id="friday" name="daysOfWeek[]" value="Friday">
+            <label for="friday">Friday</label>
+
+            <input type="checkbox" id="saturday" name="daysOfWeek[]" value="Saturday">
+            <label for="saturday">Saturday</label>
+
+            <input type="checkbox" id="sunday" name="daysOfWeek[]" value="Sunday">
+            <label for="sunday">Sunday</label>
+        </div>
+
+        <label for="startTime">Start Time:</label>
+        <input type="text" name="startTime" placeholder="HH:MM AM/PM" required>
+
+        <label for="endTime">End Time:</label>
+        <input type="text" name="endTime" placeholder="HH:MM AM/PM" required>
+
+        <input type="submit" value="Create Course">
+        <input type="reset" value="Clear">
+    </form>
+
+    <h3 class="center">Edit Courses</h3>
     <div class="searchBox">
-        <form id="search" onsubmit="return asearch();">
+        <form id="search" onsubmit="">
+            <input type="text" name="search" placeholder="Search..." required>
+
+            <!-- Add a dropdown menu to select user type -->
+            <select name="userType">
+                <option value="">All Users</option>
+                <option value="admin">Admins</option>
+                <option value="professor">Professors</option>
+                <option value="student">Students</option>
+            </select>
+
+            <input type="submit" value="Search">
+        </form>
+
+        <div id="results"></div>
+        <?php
+        echo "<p style='color: green;'>$successMessage</p>";
+        echo "<p style='color: red;'>$errorMessage</p>";
+        ?>
+    </div>
+
+    <h3 class="center">Edit students in course</h3>
+    <div class="searchBox">
+        <form id="search" onsubmit="">
+            <input type="text" name="search" placeholder="Search..." required>
+
+            <!-- Add a dropdown menu to select user type -->
+            <select name="userType">
+                <option value="">All Users</option>
+                <option value="admin">Admins</option>
+                <option value="professor">Professors</option>
+                <option value="student">Students</option>
+            </select>
+
+            <input type="submit" value="Search">
+        </form>
+
+        <div id="results"></div>
+        <?php
+        echo "<p style='color: green;'>$successMessage</p>";
+        echo "<p style='color: red;'>$errorMessage</p>";
+        ?>
+    </div>
+
+    <h3 class="center">Edit Professor in course</h3>
+    <div class="searchBox">
+        <form id="search" onsubmit="">
             <input type="text" name="search" placeholder="Search..." required>
 
             <!-- Add a dropdown menu to select user type -->
