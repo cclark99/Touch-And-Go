@@ -39,7 +39,7 @@
 
       <br style="clear: both;">
 
-      <div style="display: flex; align-items: center;">
+      <div style="display: flex; align-items: center; justify-content: center;">
          <input type="radio" id="studentType" name="userType" checked required value="student">
          <label for="studentType">Student</label>
 
