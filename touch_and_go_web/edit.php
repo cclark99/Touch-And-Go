@@ -187,7 +187,8 @@ if (!$userData) {
         </form>
         <form method="post" action="delete_user.php"
             onsubmit="return confirm('Are you sure you want to delete this user?')">
-            <input type="hidden" name="userEmail" value="<?= htmlspecialchars($userData['userEmail']) ?>">
+            <input type="hidden" name="userId" value="<?= htmlspecialchars($userData['userId']) ?>">
+            <input type="hidden" name="userType" value="<?= htmlspecialchars($userData['userType']) ?>">
             <input type="submit" class="delete" value="Delete">
         </form>
     </div>
