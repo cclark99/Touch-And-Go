@@ -184,8 +184,11 @@ if (!$userData) {
             <input type="password" name="userPassword" value="<?= htmlspecialchars($userData['userPassword']) ?>">
 
             <input type="submit" class="update" value="Update">
-            <input type="submit" class="delete" name="delete" value="Delete"
-                onclick="return confirm('Are you sure you want to delete this user?')">
+        </form>
+        <form method="post" action="delete_user.php"
+            onsubmit="return confirm('Are you sure you want to delete this user?')">
+            <input type="hidden" name="userEmail" value="<?= htmlspecialchars($userData['userEmail']) ?>">
+            <input type="submit" class="delete" value="Delete">
         </form>
     </div>
 </body>
