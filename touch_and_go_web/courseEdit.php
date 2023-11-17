@@ -158,7 +158,8 @@ switch (true) {
             box-sizing: border-box;
         }
 
-        form.create_course input[type="text"] {
+        form.create_course input[type="text"],
+        form.create_course input[type="time"] {
             width: 50%;
         }
 
