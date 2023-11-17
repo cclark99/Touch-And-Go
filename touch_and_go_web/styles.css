@@ -372,7 +372,7 @@ form.login_reg input[type="reset"] {
     border: 0;
     border-radius: 5px;
     transition: background 0.3s ease-in-out;
-    margin-top: 20px; 
+    margin-top: 20px;
 }
 
 
@@ -410,7 +410,7 @@ form.login_reg input[type="radio"] {
 
 form.login_reg label {
     display: inline-block;
-    background-color: #4CAF50;
+    background-color: #0f57a0;
     color: #fff;
     padding: 10px 15px;
     font-size: 16px;
@@ -420,9 +420,5 @@ form.login_reg label {
 }
 
 form.login_reg input[type="radio"]:checked+label {
-    background-color: #397d13;
-}
-
-br {
-    clear: both;
+    background-color: #0a3c6e;
 }
