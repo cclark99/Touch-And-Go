@@ -181,7 +181,7 @@ switch (true) {
         }
 
         form.create_course input[type="submit"]:hover {
-            background: #2a3c4e;
+            background: #397d13;
         }
 
         form.create_course input[type="reset"] {
