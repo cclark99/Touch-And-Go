@@ -320,6 +320,25 @@ switch (true) {
         .addUserBox input[type="submit"]:hover {
             background: #2a3c4e;
         }
+
+        .addUserBox input[type="submit"] {
+            width: 100%;
+            padding: 15px 0;
+            font-size: 18px;
+            border: 0;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s ease-in-out;
+            margin-top: 20px;
+            background: #4CAF50;
+            /* Green background for the Add User button */
+        }
+
+        .addUserBox input[type="submit"]:hover {
+            background: #397d13;
+            /* Darker green color for Add User button on hover */
+        }
     </style> <!-- end of style tag -->
 
 <body> <!-- start of body tag -->
