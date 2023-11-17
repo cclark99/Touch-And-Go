@@ -261,16 +261,6 @@ switch (true) {
             width: auto;
         }
 
-        .row-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px;
-            border: 1px solid #ddd;
-            margin-bottom: 10px;
-            background-color: #fff;
-        }
-
         .row-container button {
             padding: 8px;
             font-size: 14px;
