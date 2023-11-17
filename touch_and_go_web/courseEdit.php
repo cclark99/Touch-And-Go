@@ -144,6 +144,12 @@ switch (true) {
 
         form.create_course legend {
             font-weight: bold;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 5px;
+            box-sizing: border-box;
         }
 
         form.create_course input[type="text"] {
