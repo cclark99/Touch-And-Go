@@ -381,7 +381,7 @@ switch (true) {
     <div class="addUserBox">
         <form method="post" action="create_user.php">
             <label for="userType">User Type:</label>
-            <select name="userType">
+            <select name="userType" id="userType" required>
                 <option value="student">Student</option>
                 <option value="professor">Professor</option>
                 <option value="admin">Admin</option>
@@ -400,22 +400,22 @@ switch (true) {
             <input type="password" name="userPassword" required>
 
             <!-- Additional field for phone number, visible only if the user type is "professor" -->
-            <label for="phoneNumber" id="phoneNumberLabel" style="display: none;">Phone Number:</label>
-            <input type="text" name="phoneNumber" id="phoneNumber" style="display: none;">
+            <div id="phoneNumberFields" style="display: none;">
+                <label for="phoneNumber">Phone Number:</label>
+                <input type="text" name="phoneNumber">
+            </div>
 
             <script>
                 // JavaScript to show/hide the phone number field based on the selected user type
-                document.querySelector('select[name="userType"]').addEventListener('change', function () {
-                    var phoneNumberLabel = document.getElementById('phoneNumberLabel');
-                    var phoneNumberInput = document.getElementById('phoneNumber');
+                var userTypeSelect = document.getElementById('userType');
+                var phoneNumberFields = document.getElementById('phoneNumberFields');
 
+                userTypeSelect.addEventListener('change', function () {
                     // Show the phone number field only if the selected user type is "professor"
                     if (this.value === 'professor') {
-                        phoneNumberLabel.style.display = 'block';
-                        phoneNumberInput.style.display = 'block';
+                        phoneNumberFields.style.display = 'block';
                     } else {
-                        phoneNumberLabel.style.display = 'none';
-                        phoneNumberInput.style.display = 'none';
+                        phoneNumberFields.style.display = 'none';
                     }
                 });
             </script>
@@ -423,6 +423,7 @@ switch (true) {
             <input type="submit" value="Add User">
         </form>
     </div>
+
 
     <script>
         function asearch() {
