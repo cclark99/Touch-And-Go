@@ -216,7 +216,7 @@ switch (true) {
     https://www.w3schools.com/css/css_navbar_horizontal.asp -->
 
     <!-- home header -->
-    <h1>Home</h1>
+    <h1>Courses</h1>
 
     <h3 class="center">Create Course</h3>
     <form class="create_course" method="post" action="process_course.php">
