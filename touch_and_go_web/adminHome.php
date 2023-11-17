@@ -274,6 +274,52 @@ switch (true) {
         .row-container button:hover {
             background: #2a3c4e;
         }
+
+        .addUserBox {
+            width: 50%;
+            margin: auto;
+            text-align: center;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            background-color: #FFFFFF;
+        }
+
+        .addUserBox label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .addUserBox select,
+        .addUserBox input[type="text"],
+        .addUserBox input[type="password"] {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+
+        .addUserBox input[type="submit"] {
+            width: 100%;
+            padding: 15px 0;
+            font-size: 18px;
+            border: 0;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s ease-in-out;
+            margin-top: 20px;
+        }
+
+        .addUserBox input[type="submit"]:hover {
+            background: #2a3c4e;
+        }
     </style> <!-- end of style tag -->
 
 <body> <!-- start of body tag -->
@@ -332,19 +378,49 @@ switch (true) {
     </div>
 
     <h3 class="center">Create Users</h3>
-    <div class="searchBox">
-        <form id="search" onsubmit="return asearch();">
-            <input type="text" name="search" placeholder="Search..." required>
-
-            <!-- Add a dropdown menu to select user type -->
+    <div class="addUserBox">
+        <form method="post" action="create_user.php">
+            <label for="userType">User Type:</label>
             <select name="userType">
-                <option value="">All Users</option>
-                <option value="admin">Admins</option>
-                <option value="professor">Professors</option>
-                <option value="student">Students</option>
+                <option value="student">Student</option>
+                <option value="professor">Professor</option>
+                <option value="admin">Admin</option>
             </select>
 
-            <input type="submit" value="Create">
+            <label for="firstName">First Name:</label>
+            <input type="text" name="firstName" required>
+
+            <label for="lastName">Last Name:</label>
+            <input type="text" name="lastName" required>
+
+            <label for="userEmail">Email:</label>
+            <input type="text" name="userEmail" required>
+
+            <label for="userPassword">Password:</label>
+            <input type="password" name="userPassword" required>
+
+            <!-- Additional field for phone number, visible only if the user type is "professor" -->
+            <label for="phoneNumber" id="phoneNumberLabel" style="display: none;">Phone Number:</label>
+            <input type="text" name="phoneNumber" id="phoneNumber" style="display: none;">
+
+            <script>
+                // JavaScript to show/hide the phone number field based on the selected user type
+                document.querySelector('select[name="userType"]').addEventListener('change', function () {
+                    var phoneNumberLabel = document.getElementById('phoneNumberLabel');
+                    var phoneNumberInput = document.getElementById('phoneNumber');
+
+                    // Show the phone number field only if the selected user type is "professor"
+                    if (this.value === 'professor') {
+                        phoneNumberLabel.style.display = 'block';
+                        phoneNumberInput.style.display = 'block';
+                    } else {
+                        phoneNumberLabel.style.display = 'none';
+                        phoneNumberInput.style.display = 'none';
+                    }
+                });
+            </script>
+
+            <input type="submit" value="Add User">
         </form>
     </div>
 
