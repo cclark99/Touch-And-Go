@@ -160,7 +160,8 @@ switch (true) {
         }
 
         form.create_course input[type="text"],
-        form.create_course input[type="time"] {
+        form.create_course input[type="time"],
+        form.create_course input[type="date"] {
             width: 50%;
         }
 
