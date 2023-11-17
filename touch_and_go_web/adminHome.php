@@ -250,6 +250,30 @@ switch (true) {
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: auto;
         }
+
+        .row-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+            background-color: #fff;
+        }
+
+        .row-container button {
+            padding: 8px;
+            font-size: 14px;
+            background: #10222e;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .row-container button:hover {
+            background: #2a3c4e;
+        }
     </style> <!-- end of style tag -->
 
 <body> <!-- start of body tag -->
@@ -320,9 +344,14 @@ switch (true) {
                     console.log("JSON Response:", JSON.stringify(res, null, 2)); // Add this line for debugging
                     var wrapper = document.getElementById("results");
                     if (res.length > 0) {
-                        wrapper.innerHTML = "<table><tr><th>User Type</th><th>First Name</th><th>Last Name</th><th>Email</th><th> </th></tr>";
+                        wrapper.innerHTML = ""; // Clear previous results
+
+                        // Create a table and header row
+                        let table = document.createElement("table");
+                        table.innerHTML = "<tr><th>User Type</th><th>First Name</th><th>Last Name</th><th>Email</th><th>Actions</th></tr>";
+
+                        // Loop through each result
                         for (let r of res) {
-                            // Check if the user is a student, professor, or admin
                             let userType = r["userType"] ? r["userType"] : "";
                             let firstName = "";
                             let lastName = "";
@@ -343,19 +372,36 @@ switch (true) {
 
                             // Create a new table row for each user
                             let line = document.createElement("tr");
-                            line.innerHTML = `<td>${userType}</td><td>${firstName}</td><td>${lastName}</td><td>${userEmail}</td><td><button onclick="editUser(this)">Edit</button></td>`;
+                            line.classList.add("row-container"); // Add the row-container class
+
+                            line.innerHTML = `<td>${userType}</td><td>${firstName}</td><td>${lastName}</td><td>${userEmail}</td>`;
+
+                            // Create the "Edit" button
+                            let editButton = document.createElement("button");
+                            editButton.textContent = "Edit";
+                            editButton.onclick = function () {
+                                editUser(userType, userEmail, firstName, lastName);
+                            };
+
+                            // Append the "Edit" button to the table row
+                            let actionCell = document.createElement("td");
+                            actionCell.appendChild(editButton);
+                            line.appendChild(actionCell);
 
                             // Append the new table row to the table
-                            wrapper.querySelector("table").appendChild(line);
+                            table.appendChild(line);
                         }
-                        // Move the closing </table> outside of the loop
-                        wrapper.innerHTML += "</table>";
+
+                        // Append the table to the wrapper
+                        wrapper.appendChild(table);
                     } else {
                         wrapper.innerHTML = "No results found";
                     }
                 })
+                .catch(error => console.error("Error:", error)); // Add this line for error handling
             return false;
         }
+
 
         function editUser(button) {
             let row = button.parentNode.parentNode;
