@@ -148,7 +148,8 @@ switch (true) {
 
         form.create_course input[type="text"],
         form.create_course input[type="checkbox"],
-        form.create_course input[type="time"] {
+        form.create_course input[type="time"],
+        form.create_course input[type="date"] {
             width: auto;
             padding: 10px;
             font-size: 16px;
@@ -225,8 +226,23 @@ switch (true) {
 
     <h3 class="center">Create Course</h3>
     <form class="create_course" method="post" action="process_course.php">
-        <label for="courseName">Course Name:</label>
-        <input type="text" name="courseName" required>
+        <label for="prefix">Course Prefix:</label>
+        <input type="text" maxlength="6" name="prefix" required>
+        
+        <label for="name">Course Name:</label>
+        <input type="text" name="name" required>
+
+        <label for="description">Description</label>
+        <input type="text" name="description" >
+
+        <label for="location">Location:</label>
+        <input type="text" maxlength="5" name="location" required>
+
+        <label for="startDate">Start Date</label>
+        <input type="date" name="startDate" value="2023-08-28" >
+
+        <label for="endDate">End Date</label>
+        <input type="date" name="endDate" value="2023-12-16">
 
         <fieldset>
             <legend>Days of the Week:</legend>
