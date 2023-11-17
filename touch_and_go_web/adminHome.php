@@ -407,8 +407,8 @@ switch (true) {
                             // Create the "Edit" button
                             let editButton = document.createElement("button");
                             editButton.textContent = "Edit";
-                            editButton.onclick = function () {
-                                editUser(userType, userEmail, firstName, lastName);
+                            editButton.onclick = function (event) {
+                                editUser(event.target);
                             };
 
                             // Add the "row-container" class to the action cell
@@ -430,7 +430,6 @@ switch (true) {
                 .catch(error => console.error("Error:", error)); // Add this line for error handling
             return false;
         }
-
 
         function editUser(button) {
             let row = button.parentNode.parentNode;
