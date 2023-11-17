@@ -355,8 +355,7 @@ form.login_reg input {
     box-sizing: border-box;
 }
 
-form.login_reg input[type="submit"],
-form.login_reg input[type="reset"] {
+form.login_reg input[type="submit"] {
     background-color: #4CAF50;
     color: #fff;
     cursor: pointer;
@@ -366,7 +365,60 @@ form.login_reg input[type="reset"] {
     margin-top: 20px;
 }
 
-form.login_reg input[type="submit"]:hover,
+form.login_reg input[type="reset"] {
+    background-color: #FF6347;
+    color: #fff;
+    cursor: pointer;
+    border: 0;
+    border-radius: 5px;
+    transition: background 0.3s ease-in-out;
+    margin-top: 20px; 
+}
+
+
+form.login_reg input[type="submit"]:hover {
+    background-color: #8b0000;
+}
+
 form.login_reg input[type="reset"]:hover {
+    background-color: #397d13;
+}
+
+form.login_reg {
+    max-width: 400px;
+    margin: auto;
+    background-color: #FFFFFF;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+form.login_reg input {
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 10px;
+    box-sizing: border-box;
+}
+
+form.login_reg input[type="radio"] {
+    display: none;
+}
+
+form.login_reg label {
+    display: inline-block;
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+form.login_reg input[type="radio"]:checked+label {
     background-color: #397d13;
 }
