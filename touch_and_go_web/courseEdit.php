@@ -147,7 +147,8 @@ switch (true) {
         }
 
         form.create_course input[type="text"],
-        form.create_course input[type="checkbox"] {
+        form.create_course input[type="checkbox"],
+        form.create_course input[type="time"] {
             width: auto;
             padding: 10px;
             font-size: 16px;
@@ -238,10 +239,10 @@ switch (true) {
         </fieldset>
 
         <label for="startTime">Start Time:</label>
-        <input type="text" name="startTime" placeholder="HH:MM AM/PM" required>
+        <input type="time" name="startTime" placeholder="HH:MM AM/PM" required>
 
         <label for="endTime">End Time:</label>
-        <input type="text" name="endTime" placeholder="HH:MM AM/PM" required>
+        <input type="time" name="endTime" placeholder="HH:MM AM/PM" required>
 
         <input type="submit" value="Create Course">
         <input type="reset" value="Clear">
