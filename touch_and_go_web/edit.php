@@ -1,5 +1,12 @@
 <?php
 
+session_start();
+
+if (!isset($_SESSION['loggedin']) || $_SESSION['userType'] != 'admin') {
+    include 'logout.php';
+    exit();
+}
+
 include("db_connection.php");
 
 // Retrieve user type and email from the parameters

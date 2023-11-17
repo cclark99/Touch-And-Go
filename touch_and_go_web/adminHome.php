@@ -331,6 +331,23 @@ switch (true) {
         ?>
     </div>
 
+    <h3 class="center">Create Users</h3>
+    <div class="searchBox">
+        <form id="search" onsubmit="return asearch();">
+            <input type="text" name="search" placeholder="Search..." required>
+
+            <!-- Add a dropdown menu to select user type -->
+            <select name="userType">
+                <option value="">All Users</option>
+                <option value="admin">Admins</option>
+                <option value="professor">Professors</option>
+                <option value="student">Students</option>
+            </select>
+
+            <input type="submit" value="Create">
+        </form>
+    </div>
+
     <script>
         function asearch() {
             // (A) GET SEARCH TERM
