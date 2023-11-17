@@ -236,7 +236,7 @@ switch (true) {
         }
 
         #results p {
-            font-size: 28px;
+            font-size: 20px;
             /* Increase font size */
             color: #555;
             /* Change text color to a subdued gray */
