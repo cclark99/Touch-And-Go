@@ -197,6 +197,48 @@ switch (true) {
         form.create_course input[type="reset"]:hover {
             background: #8b0000;
         }
+
+        form.search_course {
+            max-width: 600px;
+            margin: auto;
+            background-color: #FFFFFF;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        form.search_course label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        form.search_course input[type="text"] {
+            width: 50%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+
+        form.search_course input[type="submit"] {
+            width: 100%;
+            padding: 15px 0;
+            font-size: 18px;
+            border: 0;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 5px;
+            background: #4CAF50;
+            transition: background 0.3s ease-in-out;
+            margin-top: 20px;
+        }
+
+        form.search_course input[type="submit"]:hover {
+            background: #397d13;
+        }
     </style> <!-- end of style tag -->
 
 <body> <!-- start of body tag -->
@@ -271,6 +313,12 @@ switch (true) {
     </form>
 
     <h3 class="center">Edit Courses</h3>
+    <form class="search_course" method="post" action="editCourse.php">
+        <label for="courseName">Course Name:</label>
+        <input type="text" name="courseName" required>
+
+        <input type="submit" value="Search and Edit">
+    </form>
 
     <h3 class="center">Edit students in course</h3>
 
