@@ -25,7 +25,7 @@ $startTime = $_POST['startTime'] ?? '';
 $endTime = $_POST['endTime'] ?? '';
 
 // Prepare and execute the SQL query to insert course data into the database
-if ($stmt = $con->prepare('INSERT INTO courses (prefix, name, description, location, startDate, endDate, daysOfWeek, startTime, endTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)')) {
+if ($stmt = $con->prepare('INSERT INTO course (prefix, name, description, location, startDate, endDate, daysOfWeek, startTime, endTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)')) {
     $stmt->bind_param('sssssssss', $prefix, $name, $description, $location, $startDate, $endDate, $daysOfWeek, $startTime, $endTime);
 
     if ($stmt->execute()) {
