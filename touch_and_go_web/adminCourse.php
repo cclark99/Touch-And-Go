@@ -241,7 +241,7 @@ switch (true) {
         }
 
         div.search_course {
-            max-width: 600px;
+            max-width: 800px;
             margin: auto;
             background-color: #FFFFFF;
             padding: 20px;
