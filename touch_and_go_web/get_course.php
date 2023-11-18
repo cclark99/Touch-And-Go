@@ -5,7 +5,7 @@ if (
                                   course.name, 
                                   course.description,
                                   course.startDate,
-                                  course.endDate 
+                                  course.endDate,
                                   course.startTime, 
                                   course.endTime,  
                                   course.location,
