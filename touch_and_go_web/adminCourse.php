@@ -430,15 +430,15 @@ switch (true) {
                             // Create a new table row for each course
                             let line = document.createElement("tr");
 
-                            // Add the course name cell
-                            let nameCell = document.createElement("td");
-                            nameCell.textContent = name;
-                            line.appendChild(nameCell);
-
                             // Add the prefix cell
                             let prefixCell = document.createElement("td");
                             prefixCell.textContent = prefix;
                             line.appendChild(prefixCell);
+
+                            // Add the course name cell
+                            let nameCell = document.createElement("td");
+                            nameCell.textContent = name;
+                            line.appendChild(nameCell);
 
                             // Add the daysOfWeek cell
                             let daysCell = document.createElement("td");
