@@ -298,6 +298,18 @@ switch (true) {
         .course-table th {
             background-color: #f2f2f2;
         }
+
+        .update-message {
+            margin-top: 15px;
+            padding: 10px;
+            font-size: 18px;
+            text-align: center;
+            background-color: #2a3c4e;
+            color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: auto;
+        }
     </style> <!-- end of style tag -->
 
 <body> <!-- start of body tag -->
@@ -370,9 +382,9 @@ switch (true) {
         <input type="submit" value="Create Course">
         <input type="reset" value="Clear">
         <?php
-        if (isset($_SESSION['updateMsg'])) {
-            echo '<h2 class="update-message">' . $_SESSION['updateMsg'] . '</h2>';
-            unset($_SESSION['updateMsg']);
+        if (isset($_SESSION['createMsg'])) {
+            echo '<h2 class="update-message">' . $_SESSION['createMsg'] . '</h2>';
+            unset($_SESSION['createMsg']);
         }
         ?>
     </form>
@@ -437,7 +449,7 @@ switch (true) {
                             // Add the courseId as a hidden input
                             let courseIdInput = document.createElement("input");
                             courseIdInput.type = "hidden";
-                            courseIdInput.name = "courseId"; 
+                            courseIdInput.name = "courseId";
                             courseIdInput.value = courseId;
                             line.appendChild(courseIdInput);
 
