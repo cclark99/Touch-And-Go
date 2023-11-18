@@ -22,7 +22,7 @@ $stmt = $pdo->prepare("
     SELECT * FROM course WHERE name LIKE ? 
 ");
 
-$searchTerm = "%" . $_POST["search"] . "%";
+$searchTerm = "%" . $_POST["courseSearch"] . "%";
 $stmt->execute([$searchTerm]);
 
 $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
