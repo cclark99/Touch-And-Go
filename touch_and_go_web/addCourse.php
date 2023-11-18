@@ -30,17 +30,17 @@ if ($stmt = $con->prepare('INSERT INTO course (prefix, name, description, locati
     if ($stmt->execute()) {
         // Course created successfully
         $stmt->close(); // Close the statement before sending headers
-        $_SESSION['reg_msg'] = 'Course created successfully!';
+        $_SESSION['updateMsg'] = 'Course created successfully!';
         header('Location: adminCourse.php');
         exit();
     } else {
         // Error inserting course data
         $stmt->close(); // Close the statement before sending headers
-        $_SESSION['error_msg'] = 'Error creating course. Please try again.';
+        $_SESSION['updateMsg'] = 'Error creating course. Please try again.';
     }
 } else {
     // Error in preparing the SQL query
-    $_SESSION['error_msg'] = 'Error preparing SQL query. Please try again.';
+    $_SESSION['updateMsg'] = 'Error preparing SQL query. Please try again.';
 }
 
 // Close the database connection
