@@ -18,7 +18,7 @@ if (isset($_GET['courseId'])) {
     $courseId = $_GET['courseId'];
 
     // Retrieve course information based on the courseId
-    $stmt = $con->prepare('SELECT * FROM courses WHERE courseId = ?');
+    $stmt = $con->prepare('SELECT * FROM course WHERE courseId = ?');
     $stmt->bind_param('s', $courseId);
     $stmt->execute();
     $result = $stmt->get_result();
