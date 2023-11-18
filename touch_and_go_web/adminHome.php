@@ -451,7 +451,7 @@ switch (true) {
             data.append("ajax", 1);
 
             // (B) AJAX SEARCH REQUEST
-            fetch("search.php", { method: "POST", body: data })
+            fetch("userSearch.php", { method: "POST", body: data })
                 .then(res => res.json())
                 .then(res => {
                     console.log("JSON Response:", JSON.stringify(res, null, 2)); // Add this line for debugging

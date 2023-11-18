@@ -324,6 +324,70 @@ switch (true) {
 
     <h3 class="center">Edit Professor in course</h3>
 
+    <script>
+        function asearch() {
+            // (A) GET SEARCH TERM
+            var data = new FormData(document.getElementById("search"));
+            data.append("ajax", 1);
+
+            // (B) AJAX SEARCH REQUEST
+            fetch("courseSearch.php", { method: "POST", body: data })
+                .then(res => res.json())
+                .then(res => {
+                    console.log("JSON Response:", JSON.stringify(res, null, 2)); // Add this line for debugging
+                    var wrapper = document.getElementById("results");
+                    if (res.length > 0) {
+                        wrapper.innerHTML = ""; // Clear previous results
+
+                        // Create a table and header row
+                        let table = document.createElement("table");
+                        table.innerHTML = "<tr><th>Course Name</th><th>Professor</th></tr>";
+
+                        // Loop through each result
+                        for (let r of res) {
+                            let name = r["name"] || "";
+
+                            // Create a new table row for each user
+                            let line = document.createElement("tr");
+
+                            // Add the "row-container" class to each cell in the row
+                            let nameCell = document.createElement("td");
+                            nameCell.textContent = name;
+                            userTypeCell.classList.add("row-container");
+                            line.appendChild(nameCell);
+
+                            // Create the "Edit" button
+                            let editButton = document.createElement("button");
+                            editButton.textContent = "Edit";
+                            editButton.onclick = function () {
+                                editUser(name);
+                            };
+
+                            // Add the "row-container" class to the action cell
+                            let actionCell = document.createElement("td");
+                            actionCell.appendChild(editButton);
+                            actionCell.classList.add("row-container");
+                            line.appendChild(actionCell);
+
+                            // Append the new table row to the table
+                            table.appendChild(line);
+                        }
+
+                        // Append the table to the wrapper
+                        wrapper.appendChild(table);
+                    } else {
+                        wrapper.innerHTML = "No results found";
+                    }
+                })
+                .catch(error => console.error("Error:", error)); // Add this line for error handling
+            return false;
+        }
+
+        function editCourse(name) {
+            // Redirect to the edit.php page with user type, email, first name, and last name as parameters
+            window.location.href = `edit.php?name=${name}`;
+        }
+    </script>
 </body>
 
 </html>
