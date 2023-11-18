@@ -381,6 +381,7 @@ switch (true) {
     <div class="search_course">
         <form id="courseSearch" onsubmit="return courseSearch();">
             <label for="courseName">Course Name:</label>
+            <input type="hidden" name="courseId" value="<?= htmlspecialchars($course['courseId']) ?>">
             <input type="text" name="courseName" required>
 
             <input type="submit" value="Search">
@@ -423,6 +424,7 @@ switch (true) {
 
                         // Loop through each result
                         for (let r of res) {
+                            let courseId = r["courseId"] || "";
                             let name = r["name"] || "";
                             let prefix = r["prefix"] || "";
                             let daysOfWeek = r["daysOfWeek"] || "";
@@ -431,6 +433,13 @@ switch (true) {
 
                             // Create a new table row for each course
                             let line = document.createElement("tr");
+
+                            // Add the courseId as a hidden input
+                            let courseIdInput = document.createElement("input");
+                            courseIdInput.type = "hidden";
+                            courseIdInput.name = "courseId"; 
+                            courseIdInput.value = courseId;
+                            line.appendChild(courseIdInput);
 
                             // Add the course name cell
                             let nameCell = document.createElement("td");
@@ -483,9 +492,9 @@ switch (true) {
             return false;
         }
 
-        function editCourse(name) {
+        function editCourse(courseId) {
             // Redirect to the edit.php page with user type, email, first name, and last name as parameters
-            window.location.href = `courseEdit.php?name=${name}`;
+            window.location.href = `courseEdit.php?courseId=${courseId}`;
         }
     </script>
 </body>

@@ -24,7 +24,7 @@ $userData = $result->fetch_assoc();
 
 // If user data is not found, you may want to handle this scenario, e.g., redirect to an error page
 if (!$userData) {
-    header('Location: analytics.php');
+    header('Location: adminHome.php');
     exit();
 }
 
