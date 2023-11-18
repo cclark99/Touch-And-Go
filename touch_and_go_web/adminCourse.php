@@ -205,7 +205,7 @@ switch (true) {
         <!-- list home.php link -->
         <li><a class="link" href="adminHome.php">Home</a></li>
         <!-- list schedule.php link -->
-        <li><a class="link" href="courseEdit.php">Courses</a></li>
+        <li><a class="link" href="#">Courses</a></li>
         <!-- list analytics.php link -->
         <li id="fakeNav"><a></a></li>
         <!-- list Touch & Go logo -->
