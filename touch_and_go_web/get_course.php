@@ -4,7 +4,8 @@ if (
   $stmt = $con->prepare('select course.courseId, 
                                   course.name, 
                                   course.description,
-                                  course.date, 
+                                  course.startDate,
+                                  course.endDate 
                                   course.startTime, 
                                   course.endTime,
                                   course.date,  
