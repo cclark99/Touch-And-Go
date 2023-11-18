@@ -120,6 +120,10 @@ switch (true) {
             /* make margin-top 5% */
         }
 
+        #fakeNav a:hover {
+            background-color: #0f222e;
+        }
+
         form.create_course {
             max-width: 800px;
             margin: auto;
@@ -193,6 +197,8 @@ switch (true) {
         form.create_course input[type="reset"]:hover {
             background: #8b0000;
         }
+
+
     </style> <!-- end of style tag -->
 
 <body> <!-- start of body tag -->
