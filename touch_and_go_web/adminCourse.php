@@ -424,6 +424,8 @@ switch (true) {
                         // Loop through each result
                         for (let r of res) {
                             let name = r["name"] || "";
+                            let prefix = r["prefix"] || "";
+                            let daysOfWeek = r["daysOfWeek"] || "";
 
                             // Create a new table row for each course
                             let line = document.createElement("tr");
@@ -432,6 +434,16 @@ switch (true) {
                             let nameCell = document.createElement("td");
                             nameCell.textContent = name;
                             line.appendChild(nameCell);
+
+                            // Add the prefix cell
+                            let prefixCell = document.createElement("td");
+                            prefixCell.textContent = prefix;
+                            line.appendChild(prefixCell);
+
+                            // Add the daysOfWeek cell
+                            let daysCell = document.createElement("td");
+                            daysCell.textContent = daysOfWeek;
+                            line.appendChild(daysCell);
 
                             // Add the "Edit" button
                             let editButton = document.createElement("button");
