@@ -418,7 +418,7 @@ switch (true) {
                         let table = document.createElement("table");
                         table.classList.add("course-table"); // Add a class for styling
                         let headerRow = document.createElement("tr");
-                        headerRow.innerHTML = "<th>Course Prefix</th><th>Course Name</th><th>Meeting Days</th><th>Action</th>"; // Add header cells
+                        headerRow.innerHTML = "<th>Course Prefix</th><th>Course Name</th><th>Meeting Days</th><th>Start Time</th><th>End Time</th><th>Action</th>"; // Add header cells
                         table.appendChild(headerRow);
 
                         // Loop through each result
@@ -426,6 +426,8 @@ switch (true) {
                             let name = r["name"] || "";
                             let prefix = r["prefix"] || "";
                             let daysOfWeek = r["daysOfWeek"] || "";
+                            let startTime = r["startTime"] || "";
+                            let endTime = r["endTime"] || "";
 
                             // Create a new table row for each course
                             let line = document.createElement("tr");
@@ -444,6 +446,16 @@ switch (true) {
                             let daysCell = document.createElement("td");
                             daysCell.textContent = daysOfWeek;
                             line.appendChild(daysCell);
+
+                            // Add the startTime cell
+                            let startTimeCell = document.createElement("td");
+                            startCell.textContent = ;
+                            line.appendChild(startCell);
+
+                            // Add the endTime cell
+                            let daysCell = document.createElement("td");
+                            endCell.textContent = daysOfWeek;
+                            line.appendChild(endCell);
 
                             // Add the "Edit" button
                             let editButton = document.createElement("button");
