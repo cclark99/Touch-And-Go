@@ -310,6 +310,12 @@ switch (true) {
 
         <input type="submit" value="Create Course">
         <input type="reset" value="Clear">
+        <?php
+        if (isset($_SESSION['updateMsg'])) {
+            echo '<h2 class="update-message">' . $_SESSION['updateMsg'] . '</h2>';
+            unset($_SESSION['updateMsg']);
+        }
+        ?>
     </form>
 
     <h3 class="center">Edit Courses</h3>
