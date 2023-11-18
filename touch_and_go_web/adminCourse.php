@@ -470,7 +470,7 @@ switch (true) {
                             let editButton = document.createElement("button");
                             editButton.textContent = "Edit";
                             editButton.onclick = function () {
-                                editCourse(name);
+                                editCourse(courseId);
                             };
 
                             // Add the action cell
