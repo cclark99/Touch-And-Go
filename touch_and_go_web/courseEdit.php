@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-// ini_set('display_errors', 1);
-// ini_set('display_startup_errors', 1);
-// error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 
 if (!isset($_SESSION['loggedin']) || $_SESSION['userType'] != 'admin') {
@@ -115,6 +115,32 @@ if (isset($_GET['courseId'])) {
 
                     <label for="description">Description:</label>
                     <input type="text" name="description" value="<?= htmlspecialchars($course['description']) ?>">
+
+                    <label for="location">Location:</label>
+                    <input type="text" name="location" value="<?= htmlspecialchars($course['location']) ?>" required>
+
+                    <label for="startDate">Start Date</label>
+                    <input type="date" name="startDate" value="<?= htmlspecialchars($course['startDate']) ?>" required>
+
+                    <label for="endDate">End Date</label>
+                    <input type="date" name="endDate" value="<?= htmlspecialchars($course['endDate']) ?>" required>
+
+                    <fieldset>
+                        <legend>Days of the Week:</legend>
+                        <input type="checkbox" name="daysOfWeek[]" value="Monday"> Monday
+                        <input type="checkbox" name="daysOfWeek[]" value="Tuesday"> Tuesday
+                        <input type="checkbox" name="daysOfWeek[]" value="Wednesday"> Wednesday
+                        <input type="checkbox" name="daysOfWeek[]" value="Thursday"> Thursday
+                        <input type="checkbox" name="daysOfWeek[]" value="Friday"> Friday
+                        <input type="checkbox" name="daysOfWeek[]" value="Saturday"> Saturday
+                        <input type="checkbox" name="daysOfWeek[]" value="Sunday"> Sunday
+                    </fieldset>
+
+                    <label for="startTime">Start Time:</label>
+                    <input type="time" name="startTime" value="<?= htmlspecialchars($course['startTime']) ?>" required>
+
+                    <label for="endTime">End Time:</label>
+                    <input type="text" name="endTime" value="<?= htmlspecialchars($course['endTime']) ?>" required>
 
                     <input type="hidden" name="courseId" value="<?= $courseId ?>">
                     <input type="submit" value="Update Course">
