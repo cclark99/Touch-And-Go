@@ -418,7 +418,7 @@ switch (true) {
                         let table = document.createElement("table");
                         table.classList.add("course-table"); // Add a class for styling
                         let headerRow = document.createElement("tr");
-                        headerRow.innerHTML = "<th>Course Name</th><th>Action</th>"; // Add header cells
+                        headerRow.innerHTML = "<th>Course Prefix</th><th>Course Name</th><th>Meeting Days</th><th>Action</th>"; // Add header cells
                         table.appendChild(headerRow);
 
                         // Loop through each result
