@@ -107,6 +107,9 @@ if (isset($_GET['courseId'])) {
             <div class="update_course">
                 <form method="post" action="updateCourse.php">
                     <!-- Include input fields for editing course information -->
+                    <label for="courseName">Course Prefix:</label>
+                    <input type="text" name="prefix" value="<?= htmlspecialchars($course['prefix']) ?>" required>
+
                     <label for="courseName">Course Name:</label>
                     <input type="text" name="courseName" value="<?= htmlspecialchars($course['name']) ?>" required>
 
