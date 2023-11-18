@@ -319,19 +319,27 @@ switch (true) {
     </form>
 
     <h3 class="center">Edit Courses</h3>
-    <form class="search_course" method="post" action="searchCourse.php">
+    <form class="search_course" method="post" onsubmit="return courseSearch();">
         <label for="courseName">Course Name:</label>
         <input type="text" name="courseName" required>
 
         <input type="submit" value="Search and Edit">
     </form>
+    <div id="results"></div>
+    <?php
+    if (isset($_SESSION['updateMsg'])) {
+        echo '<h2 class="update-message">' . $_SESSION['updateMsg'] . '</h2>';
+        unset($_SESSION['updateMsg']);
+    }
+    ?>
+
 
     <h3 class="center">Edit students in course</h3>
 
     <h3 class="center">Edit Professor in course</h3>
 
     <script>
-        function asearch() {
+        function courseSearch() {
             // (A) GET SEARCH TERM
             var data = new FormData(document.getElementById("search"));
             data.append("ajax", 1);
