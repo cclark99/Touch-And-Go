@@ -197,8 +197,6 @@ switch (true) {
         form.create_course input[type="reset"]:hover {
             background: #8b0000;
         }
-
-
     </style> <!-- end of style tag -->
 
 <body> <!-- start of body tag -->
@@ -232,21 +230,21 @@ switch (true) {
     <h1>Courses</h1>
 
     <h3 class="center">Create Course</h3>
-    <form class="create_course" method="post" action="process_course.php">
+    <form class="create_course" method="post" action="addCourse.php">
         <label for="prefix">Course Prefix:</label>
         <input type="text" maxlength="6" name="prefix" required>
-        
+
         <label for="name">Course Name:</label>
         <input type="text" name="name" required>
 
         <label for="description">Description</label>
-        <input type="text" name="description" >
+        <input type="text" name="description">
 
         <label for="location">Location:</label>
         <input type="text" maxlength="5" name="location" required>
 
         <label for="startDate">Start Date</label>
-        <input type="date" name="startDate" value="2023-08-28" >
+        <input type="date" name="startDate" value="2023-08-28">
 
         <label for="endDate">End Date</label>
         <input type="date" name="endDate" value="2023-12-16">
@@ -273,130 +271,11 @@ switch (true) {
     </form>
 
     <h3 class="center">Edit Courses</h3>
-    <div class="searchBox">
-        <form id="search" onsubmit="">
-            <input type="text" name="search" placeholder="Search..." required>
-
-            <!-- Add a dropdown menu to select user type -->
-            <select name="userType">
-                <option value="">All Users</option>
-                <option value="admin">Admins</option>
-                <option value="professor">Professors</option>
-                <option value="student">Students</option>
-            </select>
-
-            <input type="submit" value="Search">
-        </form>
-
-        <div id="results"></div>
-        <?php
-        echo "<p style='color: green;'>$successMessage</p>";
-        echo "<p style='color: red;'>$errorMessage</p>";
-        ?>
-    </div>
 
     <h3 class="center">Edit students in course</h3>
-    <div class="searchBox">
-        <form id="search" onsubmit="">
-            <input type="text" name="search" placeholder="Search..." required>
-
-            <!-- Add a dropdown menu to select user type -->
-            <select name="userType">
-                <option value="">All Users</option>
-                <option value="admin">Admins</option>
-                <option value="professor">Professors</option>
-                <option value="student">Students</option>
-            </select>
-
-            <input type="submit" value="Search">
-        </form>
-
-        <div id="results"></div>
-        <?php
-        echo "<p style='color: green;'>$successMessage</p>";
-        echo "<p style='color: red;'>$errorMessage</p>";
-        ?>
-    </div>
 
     <h3 class="center">Edit Professor in course</h3>
-    <div class="searchBox">
-        <form id="search" onsubmit="">
-            <input type="text" name="search" placeholder="Search..." required>
 
-            <!-- Add a dropdown menu to select user type -->
-            <select name="userType">
-                <option value="">All Users</option>
-                <option value="admin">Admins</option>
-                <option value="professor">Professors</option>
-                <option value="student">Students</option>
-            </select>
-
-            <input type="submit" value="Search">
-        </form>
-
-        <div id="results"></div>
-        <?php
-        echo "<p style='color: green;'>$successMessage</p>";
-        echo "<p style='color: red;'>$errorMessage</p>";
-        ?>
-    </div>
-
-    <script>
-        function asearch() {
-            // (A) GET SEARCH TERM
-            var data = new FormData(document.getElementById("search"));
-            data.append("ajax", 1);
-
-            // (B) AJAX SEARCH REQUEST
-            fetch("search.php", { method: "POST", body: data })
-                .then(res => res.json())
-                .then(res => {
-                    console.log("JSON Response:", JSON.stringify(res, null, 2)); // Add this line for debugging
-                    var wrapper = document.getElementById("results");
-                    if (res.length > 0) {
-                        wrapper.innerHTML = "<table><tr><th>User Type</th><th>First Name</th><th>Last Name</th><th>Email</th><th> </th></tr>";
-                        for (let r of res) {
-                            // Check if the user is a student, professor, or admin
-                            let userType = r["userType"] ? r["userType"] : "";
-                            let firstName = "";
-                            let lastName = "";
-
-                            // Set the first name and last name based on the user type
-                            if (userType === "student") {
-                                firstName = r["studentFirstName"] ? r["studentFirstName"] : "";
-                                lastName = r["studentLastName"] ? r["studentLastName"] : "";
-                            } else if (userType === "professor") {
-                                firstName = r["professorFirstName"] ? r["professorFirstName"] : "";
-                                lastName = r["professorLastName"] ? r["professorLastName"] : "";
-                            } else if (userType === "admin") {
-                                firstName = r["adminFirstName"] ? r["adminFirstName"] : "";
-                                lastName = r["adminLastName"] ? r["adminLastName"] : "";
-                            }
-
-                            let userEmail = r["userEmail"] ? r["userEmail"] : "";
-
-                            // Create a new table row for each user
-                            let line = document.createElement("tr");
-                            line.innerHTML = `<td>${userType}</td><td>${firstName}</td><td>${lastName}</td><td>${userEmail}</td><td><button onclick="editUser('${userType}', '${userEmail}')">Edit</button></td>`;
-
-                            // Append the new table row to the table
-                            wrapper.querySelector("table").appendChild(line);
-                        }
-                        // Move the closing </table> outside of the loop
-                        wrapper.innerHTML += "</table>";
-                    } else {
-                        wrapper.innerHTML = "No results found";
-                    }
-                })
-                .catch(error => console.error("Error:", error)); // Add this line for error handling
-            return false;
-        }
-
-        function editUser(userType, userEmail) {
-            // Redirect to the edit.php page with user type and email as parameters
-            window.location.href = `edit.php?userType=${userType}&userEmail=${userEmail}`;
-        }
-    </script>
 </body>
 
 </html>
