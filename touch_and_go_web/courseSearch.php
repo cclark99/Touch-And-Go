@@ -22,12 +22,12 @@ $stmt = $pdo->prepare("
     SELECT * FROM course WHERE name LIKE ? 
 ");
 
-$searchTerm = "%" . $_POST["courseSearch"] . "%";
+$searchTerm = "%" . $_POST["courseName"] . "%";
 $stmt->execute([$searchTerm]);
 
 $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 if (isset($_POST["ajax"])) {
-    echo json_encode($courseResults);
+    echo json_encode($results);
 }
 ?>
