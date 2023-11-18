@@ -323,9 +323,9 @@ switch (true) {
         <label for="courseName">Course Name:</label>
         <input type="text" name="courseName" required>
 
-        <input type="submit" value="Search and Edit">
+        <input type="submit" value="Search">
     </form>
-    <div id="results"></div>
+    <div id="courseResults"></div>
     <?php
     if (isset($_SESSION['updateMsg'])) {
         echo '<h2 class="update-message">' . $_SESSION['updateMsg'] . '</h2>';
@@ -349,13 +349,13 @@ switch (true) {
                 .then(res => res.json())
                 .then(res => {
                     console.log("JSON Response:", JSON.stringify(res, null, 2)); // Add this line for debugging
-                    var wrapper = document.getElementById("results");
+                    var wrapper = document.getElementById("courseResults");
                     if (res.length > 0) {
                         wrapper.innerHTML = ""; // Clear previous results
 
                         // Create a table and header row
                         let table = document.createElement("table");
-                        table.innerHTML = "<tr><th>Course Name</th><th>Professor</th></tr>";
+                        table.innerHTML = "<tr><th>Course Name</th></tr>";
 
                         // Loop through each result
                         for (let r of res) {
@@ -367,14 +367,14 @@ switch (true) {
                             // Add the "row-container" class to each cell in the row
                             let nameCell = document.createElement("td");
                             nameCell.textContent = name;
-                            userTypeCell.classList.add("row-container");
+                            nameCell.classList.add("row-container");
                             line.appendChild(nameCell);
 
                             // Create the "Edit" button
                             let editButton = document.createElement("button");
                             editButton.textContent = "Edit";
                             editButton.onclick = function () {
-                                editUser(name);
+                                editCourse(name);
                             };
 
                             // Add the "row-container" class to the action cell
