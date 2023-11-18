@@ -398,7 +398,7 @@ switch (true) {
 
     <h3 class="center">Create Users</h3>
     <div class="addUserBox">
-        <form method="post" action="create_user.php">
+        <form method="post" action="createUser.php">
             <label for="userType">User Type:</label>
             <select name="userType" id="userType" required>
                 <option value="student">Student</option>

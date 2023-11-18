@@ -175,7 +175,7 @@ if (!$userData) {
     <!-- contact header -->
     <h1>Contact</h1>
     <div class="editBox">
-        <form method="post" action="update_user.php">
+        <form method="post" action="updateUser.php">
             <label for="userEmail">User ID#: </label>
             <input type="number" name="userId" value="<?= htmlspecialchars($userData['userId']) ?>" readonly>
 
@@ -196,7 +196,7 @@ if (!$userData) {
 
             <input type="submit" class="update" value="Update">
         </form>
-        <form method="post" action="delete_user.php"
+        <form method="post" action="deleteUser.php"
             onsubmit="return confirm('Are you sure you want to delete this user?')">
             <input type="hidden" name="userId" value="<?= htmlspecialchars($userData['userId']) ?>">
             <input type="hidden" name="userType" value="<?= htmlspecialchars($userData['userType']) ?>">

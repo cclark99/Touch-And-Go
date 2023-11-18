@@ -385,7 +385,7 @@ switch (true) {
 
         function editCourse(name) {
             // Redirect to the edit.php page with user type, email, first name, and last name as parameters
-            window.location.href = `edit.php?name=${name}`;
+            window.location.href = `courseEdit.php?name=${name}`;
         }
     </script>
 </body>
