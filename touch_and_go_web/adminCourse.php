@@ -313,7 +313,7 @@ switch (true) {
     </form>
 
     <h3 class="center">Edit Courses</h3>
-    <form class="search_course" method="post" action="editCourse.php">
+    <form class="search_course" method="post" action="searchCourse.php">
         <label for="courseName">Course Name:</label>
         <input type="text" name="courseName" required>
 

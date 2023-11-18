@@ -28,7 +28,7 @@ if ($stmt = $con->prepare('SELECT * FROM course WHERE name = ?')) {
         $course = $result->fetch_assoc();
 
         // Redirect to the course editing page with course ID as a parameter
-        header("Location: edit_course.php?courseId={$course['id']}");
+        header("Location: editCourse.php?courseId={$course['id']}");
         exit();
     } else {
         // No course found
