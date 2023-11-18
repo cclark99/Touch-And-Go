@@ -319,19 +319,21 @@ switch (true) {
     </form>
 
     <h3 class="center">Edit Courses</h3>
-    <form class="search_course" id="courseSearch" onsubmit="return courseSearch();">
-        <label for="courseName">Course Name:</label>
-        <input type="text" name="courseName" required>
+    <div class="search_course">
+        <form id="courseSearch" onsubmit="return courseSearch();">
+            <label for="courseName">Course Name:</label>
+            <input type="text" name="courseName" required>
 
-        <input type="submit" value="Search">
-    </form>
-    <div id="courseResults"></div>
-    <?php
-    if (isset($_SESSION['updateMsg'])) {
-        echo '<h2 class="update-message">' . $_SESSION['updateMsg'] . '</h2>';
-        unset($_SESSION['updateMsg']);
-    }
-    ?>
+            <input type="submit" value="Search">
+        </form>
+        <div id="courseResults"></div>
+        <?php
+        if (isset($_SESSION['updateMsg'])) {
+            echo '<h2 class="update-message">' . $_SESSION['updateMsg'] . '</h2>';
+            unset($_SESSION['updateMsg']);
+        }
+        ?>
+    </div>
 
 
     <h3 class="center">Edit students in course</h3>
