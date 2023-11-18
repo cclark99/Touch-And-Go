@@ -7,8 +7,7 @@ if (
                                   course.startDate,
                                   course.endDate 
                                   course.startTime, 
-                                  course.endTime,
-                                  course.date,  
+                                  course.endTime,  
                                   course.location,
                                   course.prefix,
                                   professor.userId,
