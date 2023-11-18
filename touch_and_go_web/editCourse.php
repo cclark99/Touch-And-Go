@@ -22,7 +22,7 @@ $courseId = filter_var($courseId, FILTER_VALIDATE_INT);
 // Check if a valid course ID is provided
 if (!$courseId) {
     $_SESSION['reg_msg'] = 'Invalid course ID';
-    header('Location: edit_courses.php');
+    header('Location: editCourse.php');
     exit();
 }
 
@@ -159,7 +159,7 @@ if ($stmt = $con->prepare('SELECT * FROM course WHERE id = ?')) {
     } else {
         // No course found with the specified ID
         $_SESSION['reg_msg'] = 'No course found with the specified ID';
-        header('Location: edit_courses.php');
+        header('Location: editCourse.php');
         exit();
     }
 }
