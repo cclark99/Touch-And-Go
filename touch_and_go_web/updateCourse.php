@@ -15,9 +15,9 @@ $endDate = $_POST['endDate'];
 $startTime = $_POST['startTime'];
 $endTime = $_POST['endTime'];
 
-// Update the user table
+// Update the course table
 if (
-    $stmtUser = $con->prepare("UPDATE course 
+    $stmtCourse = $con->prepare("UPDATE course 
                                SET name = ?, 
                                    prefix= ?,
                                    description= ?, 
@@ -28,18 +28,15 @@ if (
                                    endTime = ?
                                WHERE courseId = ?")
 ) {
-    $_SESSION['updateMsg'] = 'Successfully updated Admin: ' . $userId;
-    header('Location: adminHome.php?');
-
-    // Failed to update the user table (e.g., user not found)
-    // Redirect back to the search page with an error message
-    $_SESSION['updateMsg'] = 'Unsuccessfully updated User';
-    header('Location: adminHome.php');
+    $stmtCourse->bind_param("sssssssi", $name, $prefix, $description, $location, $startDate, $endDate, $startTime, $endTime);
+    $stmtCourse->execute();
+    $_SESSION['updateMsg'] = 'Successfully updated course: ' . $courseId;
+    header('Location: adminCourse.php');
     exit();
 } else {
-    // Failed to update the user table (e.g., user not found)
+    // Failed to update the course table (e.g., course not found)
     // Redirect back to the search page with an error message
-    $_SESSION['updateMsg'] = 'Unsuccessfully updated User';
+    $_SESSION['updateMsg'] = 'Unsuccessfully updated course';
     header('Location: adminHome.php');
     exit();
 }

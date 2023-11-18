@@ -5,9 +5,6 @@ session_start();
 // Include necessary files and establish database connection
 include("db_connection.php");
 
-
-
-
 // Retrieve form data
 $userId = $_POST['userId'];
 $userEmail = $_POST['userEmail'];
