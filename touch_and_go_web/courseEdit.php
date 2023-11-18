@@ -133,7 +133,7 @@ if (isset($_GET['courseId'])) {
                     <input type="text" name="prefix" value="<?= htmlspecialchars($course['prefix']) ?>" required>
 
                     <label for="courseName">Course Name:</label>
-                    <input type="text" name="courseName" value="<?= htmlspecialchars($course['name']) ?>" required>
+                    <input type="text" name="name" value="<?= htmlspecialchars($course['name']) ?>" required>
 
                     <label for="description">Description:</label>
                     <input type="text" name="description" value="<?= htmlspecialchars($course['description']) ?>">
