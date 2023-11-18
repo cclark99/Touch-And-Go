@@ -33,7 +33,7 @@ if ($stmt = $con->prepare('SELECT * FROM course WHERE name = ?')) {
     } else {
         // No course found
         $_SESSION['reg_msg'] = 'No course found with the specified name';
-        header('Location: edit_courses.php');
+        header('Location: editCourse.php');
         exit();
     }
 }
