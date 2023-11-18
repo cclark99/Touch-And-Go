@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
 
 
 if (!isset($_SESSION['loggedin']) || $_SESSION['userType'] != 'admin') {
@@ -82,6 +82,20 @@ if (isset($_GET['courseId'])) {
                     border-radius: 5px;
                     transition: background 0.3s ease-in-out;
                     margin-top: 20px;
+                }
+
+                .update_course input[type="checkbox"] {
+                    width: auto;
+                    padding: 10px;
+                    font-size: 16px;
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                    margin-top: 5px;
+                    box-sizing: border-box;
+                }
+
+                .update_course legend {
+                    font-weight: bold;
                 }
 
                 .update_course input[type="submit"] {
