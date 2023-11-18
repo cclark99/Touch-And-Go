@@ -32,7 +32,18 @@ if (
                                    endTime = ?
                                WHERE courseId = ?")
 ) {
-    $stmtCourse->bind_param("sssssssi", $name, $prefix, $description, $location, $startDate, $endDate, $startTime, $endTime);
+    $stmtCourse->bind_param(
+        "ssssssssi",
+        $name,
+        $prefix,
+        $description,
+        $location,
+        $startDate,
+        $endDate,
+        $startTime,
+        $endTime,
+        $courseId
+    );
     $stmtCourse->execute();
     $_SESSION['updateMsg'] = 'Successfully updated course: ' . $courseId;
     header('Location: adminCourse.php');
