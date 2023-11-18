@@ -102,7 +102,7 @@ switch (true) {
     <!-- set charset -->
     <meta charset="utf-8">
     <!-- set title -->
-    <title>Home</title>
+    <title>Courses</title>
     <!-- link external style.css sheet -->
     <link rel="stylesheet" type="text/css" href="../styles.css">
 
