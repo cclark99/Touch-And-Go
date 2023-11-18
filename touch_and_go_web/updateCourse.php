@@ -18,6 +18,7 @@ $startDate = $_POST['startDate'];
 $endDate = $_POST['endDate'];
 $startTime = $_POST['startTime'];
 $endTime = $_POST['endTime'];
+$courseId = $_POST['courseId'];
 
 // Update the course table
 if (

@@ -162,7 +162,7 @@ if (isset($_GET['courseId'])) {
                     <input type="time" name="startTime" value="<?= htmlspecialchars($course['startTime']) ?>" required>
 
                     <label for="endTime">End Time:</label>
-                    <input type="text" name="endTime" value="<?= htmlspecialchars($course['endTime']) ?>" required>
+                    <input type="time" name="endTime" value="<?= htmlspecialchars($course['endTime']) ?>" required>
 
                     <input type="hidden" name="courseId" value="<?= $courseId ?>">
                     <input type="submit" value="Update Course">
