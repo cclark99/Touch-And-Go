@@ -423,10 +423,16 @@ switch (true) {
 
                         // Loop through each result
                         for (let r of res) {
+                            let prefix = r["prefix"] || "";
                             let name = r["name"] || "";
 
                             // Create a new table row for each course
                             let line = document.createElement("tr");
+
+                            // Add the course prefix cell
+                            let nameCell = document.createElement("td");
+                            prefixCell.textContent = prefix;
+                            line.appendChild(prefixCell);
 
                             // Add the course name cell
                             let nameCell = document.createElement("td");
