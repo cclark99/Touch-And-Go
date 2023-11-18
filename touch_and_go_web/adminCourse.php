@@ -239,6 +239,65 @@ switch (true) {
         form.search_course input[type="submit"]:hover {
             background: #397d13;
         }
+
+        div.search_course {
+            max-width: 600px;
+            margin: auto;
+            background-color: #FFFFFF;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        div.search_course label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        div.search_course input[type="text"] {
+            width: 50%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+
+        div.search_course input[type="submit"] {
+            width: 100%;
+            padding: 15px 0;
+            font-size: 18px;
+            border: 0;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 5px;
+            background: #4CAF50;
+            transition: background 0.3s ease-in-out;
+            margin-top: 20px;
+        }
+
+        div.search_course input[type="submit"]:hover {
+            background: #397d13;
+        }
+
+        .course-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .course-table th,
+        .course-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .course-table th {
+            background-color: #f2f2f2;
+        }
     </style> <!-- end of style tag -->
 
 <body> <!-- start of body tag -->
@@ -357,32 +416,33 @@ switch (true) {
 
                         // Create a table and header row
                         let table = document.createElement("table");
-                        table.innerHTML = "<tr><th>Course Name</th></tr>";
+                        table.classList.add("course-table"); // Add a class for styling
+                        let headerRow = document.createElement("tr");
+                        headerRow.innerHTML = "<th>Course Name</th><th>Action</th>"; // Add header cells
+                        table.appendChild(headerRow);
 
                         // Loop through each result
                         for (let r of res) {
                             let name = r["name"] || "";
 
-                            // Create a new table row for each user
+                            // Create a new table row for each course
                             let line = document.createElement("tr");
 
-                            // Add the "row-container" class to each cell in the row
+                            // Add the course name cell
                             let nameCell = document.createElement("td");
                             nameCell.textContent = name;
-                            nameCell.classList.add("row-container");
                             line.appendChild(nameCell);
 
-                            // Create the "Edit" button
+                            // Add the "Edit" button
                             let editButton = document.createElement("button");
                             editButton.textContent = "Edit";
                             editButton.onclick = function () {
                                 editCourse(name);
                             };
 
-                            // Add the "row-container" class to the action cell
+                            // Add the action cell
                             let actionCell = document.createElement("td");
                             actionCell.appendChild(editButton);
-                            actionCell.classList.add("row-container");
                             line.appendChild(actionCell);
 
                             // Append the new table row to the table
