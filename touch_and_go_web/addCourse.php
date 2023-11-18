@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 
 ini_set('display_errors', 1);
@@ -20,7 +19,7 @@ $description = $_POST['description'] ?? '';
 $location = $_POST['location'] ?? '';
 $startDate = $_POST['startDate'] ?? '';
 $endDate = $_POST['endDate'] ?? '';
-$daysOfWeek = isset($_POST['daysOfWeek']) ? implode(', ', $_POST['daysOfWeek']) : '';
+$daysOfWeek = isset($_POST['daysOfWeek']) ? implode('', $_POST['daysOfWeek']) : '';
 $startTime = $_POST['startTime'] ?? '';
 $endTime = $_POST['endTime'] ?? '';
 
@@ -30,17 +29,22 @@ if ($stmt = $con->prepare('INSERT INTO course (prefix, name, description, locati
 
     if ($stmt->execute()) {
         // Course created successfully
-        header('Location: adminHome.php?success=Course created successfully');
+        $stmt->close(); // Close the statement before sending headers
+        $_SESSION['reg_msg'] = 'Course created successfully!';
+        header('Location: adminCourse.php');
         exit();
     } else {
         // Error inserting course data
-        header('Location: adminHome.php?error=Error creating course');
-        exit();
+        $stmt->close(); // Close the statement before sending headers
+        $_SESSION['error_msg'] = 'Error creating course. Please try again.';
     }
-
-    $stmt->close();
+} else {
+    // Error in preparing the SQL query
+    $_SESSION['error_msg'] = 'Error preparing SQL query. Please try again.';
 }
 
 // Close the database connection
 $con->close();
+header('Location: adminCourse.php');
+exit();
 ?>
