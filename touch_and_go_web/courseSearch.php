@@ -28,6 +28,6 @@ $stmt->execute([$searchTerm]);
 $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 if (isset($_POST["ajax"])) {
-    echo json_encode($results);
+    echo json_encode($courseResults);
 }
 ?>
