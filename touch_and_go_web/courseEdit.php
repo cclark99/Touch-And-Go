@@ -96,6 +96,7 @@ if (isset($_GET['courseId'])) {
 
                 .update_course legend {
                     font-weight: bold;
+                    margin-top: 10px;
                 }
 
                 .update_course input[type="submit"] {
