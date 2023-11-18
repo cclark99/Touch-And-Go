@@ -379,9 +379,9 @@ switch (true) {
 
     <h3 class="center">Edit Courses</h3>
     <div class="search_course">
-        <form id="courseSearch" onsubmit="return courseSearch();">
+        <form id="courseSearchForm" onsubmit="return courseSearch();">
             <label for="courseName">Course Name:</label>
-            <input type="text" name="courseName" required>
+            <input type="text" name="courseSearch" required>
 
             <input type="submit" value="Search">
         </form>
@@ -402,7 +402,7 @@ switch (true) {
     <script>
         function courseSearch() {
             // (A) GET SEARCH TERM
-            var data = new FormData(document.getElementById("courseSearch"));
+            var data = new FormData(document.getElementById("courseSearchForm"));
             data.append("ajax", 1);
 
             // (B) AJAX SEARCH REQUEST
