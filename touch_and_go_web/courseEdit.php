@@ -96,6 +96,13 @@ if (isset($_GET['courseId'])) {
 
                 .update_course legend {
                     font-weight: bold;
+
+                }
+
+                .update_course fieldset {
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                    padding: 10px;
                     margin-top: 10px;
                 }
 
