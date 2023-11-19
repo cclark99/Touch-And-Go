@@ -417,7 +417,7 @@ switch (true) {
     <div class="search_course">
         <form id="studentSearch" onsubmit="return studentSearch();">
             <label for="studentName">Student Name:</label>
-            <input type="hidden" name="courseId" value="<?= htmlspecialchars($course['courseId']) ?>">
+            <!-- <input type="hidden" name="courseId" value="<?= htmlspecialchars($course['courseId']) ?>"> -->
             <input type="text" name="studentName" required>
             <input type="submit" value="Search">
         </form>
@@ -431,6 +431,21 @@ switch (true) {
     </div>
 
     <h3 class="center">Edit Professor in course</h3>
+    <div class="search_course">
+        <form id="studentSearch" onsubmit="return professorSearch();">
+            <label for="studentName">Professor Name:</label>
+            <!-- <input type="hidden" name="courseId" value="<?= htmlspecialchars($course['courseId']) ?>"> -->
+            <input type="text" name="professorName" required>
+            <input type="submit" value="Search">
+        </form>
+        <div id="studentResults"></div>
+        <?php
+        if (isset($_SESSION['updateMsg'])) {
+            echo '<h2 class="update-message">' . $_SESSION['updateMsg'] . '</h2>';
+            unset($_SESSION['updateMsg']);
+        }
+        ?>
+    </div>
 
     <script>
         function courseSearch() {
@@ -593,6 +608,72 @@ switch (true) {
             console.log("Editing student courses for ID: " + studentId);
             // Redirect or open a new page for editing student courses
             // Example: window.location.href = `editStudentCourse.php?studentId=${studentId}`;
+        }
+
+        function professorSearch() {
+            var data = new FormData(document.getElementById("professorSearch"));
+            data.append("ajax", 1);
+
+            fetch("professorSearch.php", { method: "POST", body: data })
+                .then(res => res.json())
+                .then(res => {
+                    console.log("JSON Response:", JSON.stringify(res, null, 2));
+
+                    var wrapper = document.getElementById("professorResults");
+                    if (res.length > 0) {
+                        wrapper.innerHTML = ""; // Clear previous results
+
+                        // Create a table and header row
+                        let table = document.createElement("table");
+                        table.classList.add("course-table"); // Add a class for styling
+                        let headerRow = document.createElement("tr");
+                        headerRow.innerHTML = "<th>Professor Name</th><th>Action</th>"; // Add header cells
+                        table.appendChild(headerRow);
+
+                        // Assuming that the response is an array of professors
+                        for (let professor of res) {
+                            let professorId = professor["userId"] || "";
+                            let professorName = professor["firstName"] + " " + professor["lastName"] || "";
+
+                            // Create a new table row for each professor
+                            let line = document.createElement("tr");
+
+                            // Add the professor name cell
+                            let nameCell = document.createElement("td");
+                            nameCell.textContent = professorName;
+                            line.appendChild(nameCell);
+
+                            // Add the "Edit" button
+                            let editButton = document.createElement("button");
+                            editButton.textContent = "Edit";
+                            editButton.onclick = function () {
+                                editProfessorCourse(professorId);
+                            };
+
+                            // Add the action cell with the "Edit" button
+                            let actionCell = document.createElement("td");
+                            actionCell.appendChild(editButton);
+                            line.appendChild(actionCell);
+
+                            // Append the new table row to the table
+                            table.appendChild(line);
+                        }
+
+                        // Append the table to the wrapper
+                        wrapper.appendChild(table);
+                    } else {
+                        wrapper.innerHTML = "No results found";
+                    }
+                })
+                .catch(error => console.error("Error:", error));
+            return false;
+        }
+
+        function editProfessorCourse(professorId) {
+            // Implement the logic to edit the professor's courses
+            console.log("Editing professor courses for ID: " + professorId);
+            // Redirect or open a new page for editing professor courses
+            // Example: window.location.href = `editProfessorCourse.php?professorId=${professorId}`;
         }
     </script>
 </body>
