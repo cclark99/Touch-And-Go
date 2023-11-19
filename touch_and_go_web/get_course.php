@@ -34,8 +34,6 @@ if (
       foreach ($rows as $row) {
         $course_array[] = $row;
       }
-    } else {
-      echo 'No rows found.';
     }
   } else {
     echo 'Error executing the query: ' . $stmt->error;
