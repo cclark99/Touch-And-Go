@@ -559,7 +559,7 @@ require 'db_connection.php';
                             let editButton = document.createElement("button");
                             editButton.textContent = "Edit";
                             editButton.onclick = function () {
-                                editProfessorCourse(professorId);
+                                editProfessorCourse(professorId, professorName);
                             };
 
                             // Add the action cell with the "Edit" button
