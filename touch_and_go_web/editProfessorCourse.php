@@ -182,9 +182,9 @@ if (!is_numeric($professorId)) {
         <li><a class='link' href="logout.php">Logout</a></li>
     </ul>
 
-    <h2>Current Courses for
+    <h3>Current Courses for
         <?php echo $professorName; ?>
-    </h2>
+    </h3>
 
     <form method="post" action="editProfessorCourse.php">
         <input type="hidden" name="professorId" value="<?= $professorId ?>">
@@ -209,7 +209,7 @@ if (!is_numeric($professorId)) {
         ?>
     </form>
 
-    <h2>Add New Courses</h2>
+    <h3>Add New Courses</h3>
 
     <form method="post" action="editProfessorCourse.php">
         <input type="hidden" name="professorId" value="<?= $professorId ?>">
