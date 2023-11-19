@@ -65,61 +65,6 @@ if (!is_numeric($professorId)) {
     <title>Edit Professor Courses</title>
     <link rel="stylesheet" type="text/css" href="../styles.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-
-        ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-color: #333;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-        }
-
-        li {
-            float: left;
-            border-right: 1px solid #bbb;
-        }
-
-        li:last-child {
-            border-right: none;
-        }
-
-        .link {
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-        }
-
-        .link:hover {
-            background-color: #111;
-        }
-
-        #fakeNav {
-            display: block;
-            color: white;
-            padding: 14px 16px;
-        }
-
-        img {
-            margin-left: 20px;
-        }
-
-        h2 {
-            text-align: center;
-            margin-top: 70px;
-        }
-
         form {
             max-width: 600px;
             margin: auto;
@@ -162,6 +107,19 @@ if (!is_numeric($professorId)) {
             background: #397d13;
         }
 
+        .update-message {
+            margin-top: 15px;
+            padding: 10px;
+            font-size: 18px;
+            text-align: center;
+            background-color: #2a3c4e;
+            color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: auto;
+            margin-bottom: 20px;
+        }
+
         div {
             margin-bottom: 10px;
         }
@@ -169,6 +127,38 @@ if (!is_numeric($professorId)) {
         span {
             color: black;
             font-size: larger;
+        }
+
+        h3 {
+            text-align: center;
+            font-size: xx-large;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        button {
+            padding: 5px;
+            font-size: 14px;
+            background-color: transparent;
+            /* No background color */
+            border: none;
+            cursor: pointer;
         }
 
         .no-courses-message {
