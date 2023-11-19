@@ -54,10 +54,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $removeCourseStmt->close();
     }
 
-    // Store the student name in a session variable
+    // Store the student's name in a session variable
     $_SESSION['studentName'] = $_POST['studentName'];
 
     // Redirect back to the page with a success message
+    $_SESSION['updateMsg'] = 'Student courses updated successfully';
     header("Location: editStudentCourse.php?studentId=$studentId");
     exit();
 }
@@ -220,7 +221,7 @@ $currentCoursesStmt->close();
         <li><a class='link' href="logout.php">Logout</a></li>
     </ul>
 
-    <h3 class="center">Current Courses for
+    <h3>Current Courses for
         <?php echo $studentName; ?>
     </h3>
 

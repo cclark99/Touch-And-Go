@@ -23,12 +23,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $removeCourseId = $_POST['removeCourseId'] ?? null;
 
     if ($addCourseId) {
-        // Add the course to the professor's courses
-        $addCourseQuery = "INSERT INTO professor_course (userId, courseId) VALUES (?, ?)";
-        $addCourseStmt = $con->prepare($addCourseQuery);
-        $addCourseStmt->bind_param('ii', $professorId, $addCourseId);
-        $addCourseStmt->execute();
-        $addCourseStmt->close();
+        // Fetch professor's current courses
+        $currentCoursesQuery = "SELECT courseId FROM professor_course WHERE userId = ?";
+        $currentCoursesStmt = $con->prepare($currentCoursesQuery);
+        $currentCoursesStmt->bind_param('i', $professorId);
+        $currentCoursesStmt->execute();
+        $currentCoursesStmt->bind_result($courseId);
+        $currentCourses = [];
+
+        $currentCoursesStmt->close();
+
+        while ($currentCoursesStmt->fetch()) {
+            $currentCourses[] = $courseId;
+        }
+
+        // Check if the course is already in the professor's courses
+        if (in_array($addCourseId, $currentCourses)) {
+            $_SESSION['updateMsg'] = 'The professor is already teaching this course.';
+        } else {
+            // Add the course to the professor's courses
+            $addCourseQuery = "INSERT INTO professor_course (userId, courseId) VALUES (?, ?)";
+            $addCourseStmt = $con->prepare($addCourseQuery);
+            $addCourseStmt->bind_param('ii', $professorId, $addCourseId);
+            $addCourseStmt->execute();
+            $addCourseStmt->close();
+        }
+
     }
 
     if ($removeCourseId) {
@@ -40,6 +60,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $removeCourseStmt->close();
     }
 
+    // Store the professor's name in a session variable
+    $_SESSION['professorName'] = $_POST['professorName'];
+
     // Redirect back to the page with a success message
     $_SESSION['updateMsg'] = 'Professor courses updated successfully';
     header("Location: editProfessorCourse.php?professorId=$professorId");
@@ -48,13 +71,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // Retrieve professorId from GET parameter
 $professorId = $_GET['professorId'] ?? null;
-$professorName = $_GET['professorName'] ?? null;
+
+// Check if the professorName is in the session, use it, and then unset it
+if (isset($_SESSION['professorName'])) {
+    $professorName = $_SESSION['professorName'];
+    unset($_SESSION['professorName']);
+} else {
+    $professorName = $_GET['professorName'] ?? null;
+}
 
 // If professorId is not provided or not a valid number, redirect back
 if (!is_numeric($professorId)) {
     header('Location: adminCourse.php');
     exit();
 }
+
+// Fetch professor's current courses
+$currentCoursesQuery = "SELECT c.courseId, c.name, c.prefix FROM professor_course sc JOIN course c ON sc.courseId = c.courseId WHERE sc.userId = ?";
+$currentCoursesStmt = $con->prepare($currentCoursesQuery);
+$currentCoursesStmt->bind_param('i', $professorId);
+$currentCoursesStmt->execute();
+$currentCoursesStmt->bind_result($courseId, $courseName, $coursePrefix);
+$currentCourses = [];
+
+while ($currentCoursesStmt->fetch()) {
+    $currentCourses[] = ['courseId' => $courseId, 'courseName' => $courseName, 'coursePrefix' => $coursePrefix];
+}
+
+$currentCoursesStmt->close();
 ?>
 
 <!DOCTYPE html>
@@ -195,23 +239,21 @@ if (!is_numeric($professorId)) {
             <input type="hidden" name="professorId" value="<?= $professorId ?>">
             <input type="hidden" name="professorName" value="<?= $professorName ?>">
 
-            <?php
-            $currentCoursesQuery = "SELECT c.courseId, c.name FROM professor_course pc JOIN course c ON pc.courseId = c.courseId WHERE pc.userId = ?";
-            $currentCoursesStmt = $con->prepare($currentCoursesQuery);
-            $currentCoursesStmt->bind_param('i', $professorId);
-            $currentCoursesStmt->execute();
-            $currentCoursesStmt->bind_result($courseId, $courseName);
-
-            while ($currentCoursesStmt->fetch()) {
-                echo '<div>';
-                echo "<span>$courseName</span>";
-                echo "<input type='hidden' name='currentCourseIds[]' value='$courseId'>";
-                echo "<button type='submit' name='removeCourseId' value='$courseId'>Remove</button>";
-                echo '</div>';
-            }
-
-            $currentCoursesStmt->close();
-            ?>
+            <table>
+                <tr>
+                    <th>Prefix</th>
+                    <th>Course Name</th>
+                    <th>Edit</th>
+                </tr>
+                <?php
+                foreach ($currentCourses as $course) {
+                    echo '<tr>';
+                    echo "<td>{$course['coursePrefix']}</td>";
+                    echo "<td>{$course['courseName']}</td>";
+                    echo "<td><button type='submit' class='removeButton' name='removeCourseId' value='{$course['courseId']}'>Remove</button></td>";
+                    echo '</tr>';
+                }
+                ?>
         </form>
     <?php endif; ?>
 
