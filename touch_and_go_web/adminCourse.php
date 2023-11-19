@@ -583,7 +583,7 @@ require 'db_connection.php';
 
         function editProfessorCourse(professorId) {
             // Redirect for editing professor teaching courses
-            window.location.href = `editProfessorCourse.php?professorId=${professorId}`;
+            window.location.href = `editProfessorCourse.php?professorId=${professorId}&professorName=${professorName}`;
         }
     </script>
 </body>
