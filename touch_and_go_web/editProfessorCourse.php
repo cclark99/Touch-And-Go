@@ -255,6 +255,7 @@ $currentCoursesStmt->close();
                     echo '</tr>';
                 }
                 ?>
+            </table>
         </form>
     <?php endif; ?>
 
