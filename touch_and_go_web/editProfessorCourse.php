@@ -73,7 +73,7 @@ if (!is_numeric($professorId)) {
         <input type="hidden" name="professorId" value="<?= $professorId ?>">
 
         <?php
-        $currentCoursesQuery = "SELECT c.courseId, c.name FROM professor_course pc JOIN course c ON pc.courseId = c.courseId WHERE pc.professorId = ?";
+        $currentCoursesQuery = "SELECT c.courseId, c.name FROM professor_course pc JOIN course c ON pc.courseId = c.courseId WHERE pc.userId = ?";
         $currentCoursesStmt = $con->prepare($currentCoursesQuery);
         $currentCoursesStmt->bind_param('i', $professorId);
         $currentCoursesStmt->execute();
