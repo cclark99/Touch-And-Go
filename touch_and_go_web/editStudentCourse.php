@@ -14,10 +14,10 @@ $studentId = $_GET['studentId'] ?? null;
 $studentName = $_GET['studentName'] ?? null;
 
 // If studentId is not provided or not a valid number, redirect back
-if (!is_numeric($studentId)) {
-    header('Location: adminCourse.php');
-    exit();
-}
+// if (!is_numeric($studentId)) {
+//     header('Location: adminCourse.php');
+//     exit();
+// }
 
 // Fetch student's current courses
 $currentCoursesQuery = "SELECT c.courseId, c.name, c.prefix FROM student_course sc JOIN course c ON sc.courseId = c.courseId WHERE sc.userId = ?";
@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Redirect back to the page with a success message
         $_SESSION['updateMsg'] = 'Student courses updated successfully';
-        header("Location: editStudentCourse.php?studentId=$studentId");
+        header("Location: editStudentCourse.php?studentId=$studentId&studentName=$studentName");
         exit();
     }
 }
