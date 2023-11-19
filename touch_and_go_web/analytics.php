@@ -199,7 +199,7 @@ include 'get_course.php';
             <!-- create arrow -->
             <span class="arrow"></span>
             <!-- display first question -->
-            <span>' . $row['courseName'] . '</span>
+            <span>' . $row['name'] . '</span>
           </div> <!-- end of div tag -->
           <div class="answer"> <!-- start of div tag with answer class -->
             <!-- display answer to first question -->
@@ -228,7 +228,7 @@ include 'get_course.php';
           <!-- create arrow -->
           <span class="arrow"></span>
           <!-- display first question -->
-          <span>' . $row['courseName'] . '</span>
+          <span>' . $row['name'] . '</span>
         </div> <!-- end of div tag -->
         <div class="answer"> <!-- start of div tag with answer class -->
           <!-- display answer to first question -->
