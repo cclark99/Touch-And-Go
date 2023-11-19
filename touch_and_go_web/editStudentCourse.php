@@ -173,7 +173,7 @@ $currentCoursesStmt->close();
         <?php
         foreach ($currentCourses as $course) {
             echo '<div>';
-            echo "<span>{$course['prefix']}</span>";
+            echo "<span>{$course['coursePrefix']}</span>";
             echo "<span>{$course['courseName']}</span>";
             echo "<button type='submit' name='removeCourseId' value='{$course['courseId']}'>Remove</button>";
             echo '</div>';
