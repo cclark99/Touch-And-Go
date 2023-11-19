@@ -30,34 +30,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                    JOIN course c ON f.checkIn BETWEEN CONCAT(CURDATE(), ' ', c.startTime) AND CONCAT(CURDATE(), ' ', c.endTime)
                    WHERE f.userId = ? AND c.courseId = ?";
 
-  try {
-    // Check if the connection is open before preparing the statement
-    if (!$con->connect_error) {
-      $checkInStmt = $con->prepare($checkInQuery);
+  $checkInStmt = $con->prepare($checkInQuery);
+  $checkInStmt->bind_param('ii', $userId, $courseId);
+  $checkInStmt->execute();
+  $checkInStmt->bind_result($checkIn, $startTime, $endTime);
+  $checkInStmt->fetch();
+  $checkInStmt->close();
 
-      if ($checkInStmt) {
-        $checkInStmt->bind_param('ii', $userId, $courseId);
-        $checkInStmt->execute();
-        $checkInStmt->bind_result($checkIn, $startTime, $endTime);
-        $checkInStmt->fetch();
-        $checkInStmt->close();
-
-        if ($checkIn) {
-          echo "You checked in at: $checkIn during the class from $startTime to $endTime.";
-        } else {
-          echo "No check-in records found for the specified class.";
-        }
-      } else {
-        throw new Exception("Failed to prepare the statement.");
-      }
-    } else {
-      throw new Exception("Database connection error.");
-    }
-  } catch (Exception $e) {
-    echo "Error: " . $e->getMessage();
-  } finally {
-    // Explicitly close the connection
-    $con->close();
+  if ($checkIn) {
+    echo "You checked in at: $checkIn during the class from $startTime to $endTime.";
+  } else {
+    echo "No check-in records found for the specified class.";
   }
 }
 
