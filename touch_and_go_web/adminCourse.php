@@ -549,10 +549,10 @@ switch (true) {
                         headerRow.innerHTML = "<th>Student ID</th><th>Student Name</th><th>Action</th>"; // Add header cells
                         table.appendChild(headerRow);
 
-                        // Loop through each result
-                        for (let r of res) {
-                            let studentId = r["studentId"] || "";
-                            let studentName = r["studentName"] || "";
+                        // Assuming that the response is an array of students
+                        for (let student of res) {
+                            let studentId = student["userId"] || "";
+                            let studentName = student["firstName"] + " " + student["lastName"] || "";
 
                             // Create a new table row for each student
                             let line = document.createElement("tr");
