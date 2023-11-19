@@ -38,7 +38,6 @@ if (
     }
   }
   $stmt->close();
-  $con->close();
 }
 
 ?>
