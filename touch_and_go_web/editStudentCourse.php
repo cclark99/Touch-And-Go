@@ -56,15 +56,15 @@ if (!is_numeric($studentId)) {
 }
 
 // Fetch student's current courses
-$currentCoursesQuery = "SELECT c.courseId, c.name FROM student_course sc JOIN course c ON sc.courseId = c.courseId WHERE sc.userId = ?";
+$currentCoursesQuery = "SELECT c.courseId, c.name, c.prefix FROM student_course sc JOIN course c ON sc.courseId = c.courseId WHERE sc.userId = ?";
 $currentCoursesStmt = $con->prepare($currentCoursesQuery);
 $currentCoursesStmt->bind_param('i', $studentId);
 $currentCoursesStmt->execute();
-$currentCoursesStmt->bind_result($courseId, $courseName);
+$currentCoursesStmt->bind_result($courseId, $courseName, $coursePrefix);
 $currentCourses = [];
 
 while ($currentCoursesStmt->fetch()) {
-    $currentCourses[] = ['courseId' => $courseId, 'courseName' => $courseName];
+    $currentCourses[] = ['courseId' => $courseId, 'courseName' => $courseName, 'coursePrefix' => $coursePrefix];
 }
 
 $currentCoursesStmt->close();
