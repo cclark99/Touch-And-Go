@@ -136,11 +136,32 @@ $currentCoursesStmt->close();
 
         div {
             margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            /* Align items horizontally with space between them */
+            align-items: center;
+            /* Align items vertically at the center */
         }
 
         span {
             color: black;
             font-size: larger;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 14px;
+            background-color: #e74c3c;
+            /* Use your preferred color */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #c0392b;
+            /* Use your preferred hover color */
         }
 
         h3 {
