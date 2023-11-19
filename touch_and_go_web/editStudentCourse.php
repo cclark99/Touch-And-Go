@@ -201,7 +201,7 @@ $currentCoursesStmt->close();
     </h3>
 
     <?php if (empty($currentCourses)): ?>
-        <p class="no-courses-message">This student has no courses.</p>
+        <form><p class="no-courses-message">This student has no courses.</p></form>
     <?php else: ?>
 
         <form method="post" action="editStudentCourse.php">
