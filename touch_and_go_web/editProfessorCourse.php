@@ -63,6 +63,8 @@ if (!is_numeric($professorId)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Professor Courses</title>
+    <!-- link external style.css sheet -->
+    <link rel="stylesheet" type="text/css" href="../styles.css">
 </head>
 
 <body>
