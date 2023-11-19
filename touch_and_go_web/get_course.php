@@ -23,21 +23,26 @@ if (
                               inner join user on professor.userId = user.userId
                             where student.userId = ?')
 ) {
-
   $stmt->bind_param('s', $_SESSION['id']);
 
-  $stmt->execute();
+  if ($stmt->execute()) {
+    $result = $stmt->get_result();
 
-  $result = $stmt->get_result();
-
-  if ($result->num_rows > 0) {
-    $rows = $result->fetch_all(MYSQLI_ASSOC);
-    $course_array = array();
-    foreach ($rows as $row) {
-      $course_array[] = $row;
+    if ($result->num_rows > 0) {
+      $rows = $result->fetch_all(MYSQLI_ASSOC);
+      $course_array = array();
+      foreach ($rows as $row) {
+        $course_array[] = $row;
+      }
+    } else {
+      echo 'No rows found.';
     }
+  } else {
+    echo 'Error executing the query: ' . $stmt->error;
   }
-  $stmt->close();
-}
 
+  $stmt->close();
+} else {
+  echo 'Error preparing the statement: ' . $con->error;
+}
 ?>
