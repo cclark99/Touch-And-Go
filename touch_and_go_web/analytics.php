@@ -12,6 +12,34 @@ if (!isset($_SESSION['loggedin'])) {
 require 'db_connection.php';
 include 'get_course.php';
 
+// Check if the form is submitted
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  // Assuming you have a form field named 'courseId'
+  $courseId = $_POST['courseId'] ?? null;
+
+  // Assuming you have the student's userId stored in the session
+  $userId = $_SESSION['userId'] ?? null;
+
+  // Check if the student has already checked in for today's class
+  $checkInQuery = "SELECT f.checkIn, c.startTime, c.endTime
+                   FROM fingerprint f
+                   JOIN course c ON f.checkIn BETWEEN CONCAT(CURDATE(), ' ', c.startTime) AND CONCAT(CURDATE(), ' ', c.endTime)
+                   WHERE f.userId = ? AND c.courseId = ?";
+
+  $checkInStmt = $con->prepare($checkInQuery);
+  $checkInStmt->bind_param('ii', $userId, $courseId);
+  $checkInStmt->execute();
+  $checkInStmt->bind_result($checkIn, $startTime, $endTime);
+  $checkInStmt->fetch();
+  $checkInStmt->close();
+
+  if ($checkIn) {
+    echo "You checked in at: $checkIn during the class from $startTime to $endTime.";
+  } else {
+    echo "No check-in records found for the specified class.";
+  }
+}
+
 ?>
 <!DOCTYPE html>
 
@@ -212,6 +240,26 @@ include 'get_course.php';
       ?>
     </div> <!-- end of ul tag -->
   </section> <!-- end of section tag -->
+
+  <section class="dropdown-section">
+    <h3>Check-In</h3>
+    <div class="dropdown">
+      <form method="post" action="analytics.php">
+        <select name="courseId">
+          <?php
+          if ($course_array) {
+            foreach ($course_array as $row) {
+              echo "<option value='{$row['courseId']}'>{$row['name']}</option>";
+            }
+          } else {
+            echo '<option value="">No courses found...</option>';
+          }
+          ?>
+        </select>
+        <input type="submit" value="Check-In">
+      </form>
+    </div>
+  </section>
 
   <hr>
 
