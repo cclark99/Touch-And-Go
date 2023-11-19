@@ -41,10 +41,6 @@ require 'db_connection.php';
             /* make margin-top 5% */
         }
 
-        #fakeNav a:hover {
-            background-color: #0f222e;
-        }
-
         form.create_course {
             max-width: 800px;
             margin: auto;
