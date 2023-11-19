@@ -95,12 +95,12 @@ include 'get_course.php';
             <!-- create arrow -->
             <span class="arrow"></span>
             <!-- display first professor -->
-            <span>' . $row['professorFirstName'] . ' ' . $row['professorLastName'] . '</span>
+            <span>' . $row['firstName'] . ' ' . $row['lastName'] . '</span>
           </div> <!-- end of div tag -->
           <div class="answer"> <!-- start of div tag with answer class -->
             <!-- display professor information -->
-            <p>Email: <a class="link" href="mailto:' . $row['professorEmail'] . '">' . $row['professorEmail'] . '</a><br>
-              Phone: '. $row['professorPhone'] .'<br>
+            <p>Email: <a class="link" href="mailto:' . $row['userEmail'] . '">' . $row['userEmail'] . '</a><br>
+              Phone: '. $row['phone'] .'<br>
               Office Hours:<br>
               - M/W: 4:30 - 5:00 PM<br>
               - T/TH: 1:00 - 3:00 PM<br>
