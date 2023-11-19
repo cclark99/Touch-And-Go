@@ -14,7 +14,7 @@ if (!isset($_SESSION['loggedin'])) {
 }
 
 require 'db_connection.php';
-require 'get_course.php';
+include 'get_course.php';
 
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
