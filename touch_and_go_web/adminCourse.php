@@ -546,7 +546,7 @@ switch (true) {
                         let table = document.createElement("table");
                         table.classList.add("course-table"); // Add a class for styling
                         let headerRow = document.createElement("tr");
-                        headerRow.innerHTML = "<th>Student ID</th><th>Student Name</th><th>Action</th>"; // Add header cells
+                        headerRow.innerHTML = "<th>Student Name</th><th>Action</th>"; // Add header cells
                         table.appendChild(headerRow);
 
                         // Assuming that the response is an array of students
@@ -557,36 +557,21 @@ switch (true) {
                             // Create a new table row for each student
                             let line = document.createElement("tr");
 
-                            // Add the studentId as a hidden input
-                            let studentIdInput = document.createElement("input");
-                            studentIdInput.type = "hidden";
-                            studentIdInput.name = "studentId";
-                            studentIdInput.value = studentId;
-                            line.appendChild(studentIdInput);
-
                             // Add the student name cell
                             let nameCell = document.createElement("td");
                             nameCell.textContent = studentName;
                             line.appendChild(nameCell);
 
-                            // Add the "Add" button
-                            let addButton = document.createElement("button");
-                            addButton.textContent = "Add";
-                            addButton.onclick = function () {
-                                addStudentToCourse(studentId);
+                            // Add the "Edit" button
+                            let editButton = document.createElement("button");
+                            editButton.textContent = "Edit";
+                            editButton.onclick = function () {
+                                editStudentCourse(studentId);
                             };
 
-                            // Add the "Remove" button
-                            let removeButton = document.createElement("button");
-                            removeButton.textContent = "Remove";
-                            removeButton.onclick = function () {
-                                removeStudentFromCourse(studentId);
-                            };
-
-                            // Add the action cell with both "Add" and "Remove" buttons
+                            // Add the action cell with the "Edit" button
                             let actionCell = document.createElement("td");
-                            actionCell.appendChild(addButton);
-                            actionCell.appendChild(removeButton);
+                            actionCell.appendChild(editButton);
                             line.appendChild(actionCell);
 
                             // Append the new table row to the table
@@ -603,14 +588,11 @@ switch (true) {
             return false;
         }
 
-        function addStudentToCourse(studentId) {
-            // Implement the logic to add the student to the course
-            console.log("Adding student to course with ID: " + studentId);
-        }
-
-        function removeStudentFromCourse(studentId) {
-            // Implement the logic to remove the student from the course
-            console.log("Removing student from course with ID: " + studentId);
+        function editStudentCourse(studentId) {
+            // Implement the logic to edit the student's courses
+            console.log("Editing student courses for ID: " + studentId);
+            // Redirect or open a new page for editing student courses
+            // Example: window.location.href = `editStudentCourse.php?studentId=${studentId}`;
         }
     </script>
 </body>
