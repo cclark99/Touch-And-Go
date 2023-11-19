@@ -1,7 +1,12 @@
+html {
+    margin: 0px;
+}
+
 /* start of style rules for body tag */
 body {
     background-color: #FAF8D6;
     /* yellow background color */
+    margin: 0px
 }
 
 /* end of body tag style rules */
@@ -290,8 +295,9 @@ ul {
     /* make font serif */
     overflow: hidden;
     /* hide overflow */
-    padding: 0;
+    padding: 0px;
     /* make padding 0 */
+    margin: 0px;
 }
 
 /* end of style rules for ul tag */
