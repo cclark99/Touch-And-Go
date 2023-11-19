@@ -7,12 +7,31 @@ error_reporting(E_ALL);
 
 session_start();
 
-if (!isset($_SESSION['loggedin']) || $_SESSION['userType'] != 'admin') {
-    include 'logout.php';
+require 'db_connection.php';
+
+// Retrieve studentId from GET parameter
+$studentId = $_GET['studentId'] ?? null;
+$studentName = $_GET['studentName'] ?? null;
+
+// If studentId is not provided or not a valid number, redirect back
+if (!is_numeric($studentId)) {
+    header('Location: adminCourse.php');
     exit();
 }
 
-require 'db_connection.php';
+// Fetch student's current courses
+$currentCoursesQuery = "SELECT c.courseId, c.name, c.prefix FROM student_course sc JOIN course c ON sc.courseId = c.courseId WHERE sc.userId = ?";
+$currentCoursesStmt = $con->prepare($currentCoursesQuery);
+$currentCoursesStmt->bind_param('i', $studentId);
+$currentCoursesStmt->execute();
+$currentCoursesStmt->bind_result($courseId, $courseName, $coursePrefix);
+$currentCourses = [];
+
+while ($currentCoursesStmt->fetch()) {
+    $currentCourses[] = ['courseId' => $courseId, 'courseName' => $courseName, 'coursePrefix' => $coursePrefix];
+}
+
+$currentCoursesStmt->close();
 
 // Check if the form data is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -52,29 +71,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Retrieve studentId from GET parameter
-$studentId = $_GET['studentId'] ?? null;
-$studentName = $_GET['studentName'] ?? null;
-
-// If studentId is not provided or not a valid number, redirect back
-if (!is_numeric($studentId)) {
-    header('Location: adminCourse.php');
-    exit();
-}
-
-// Fetch student's current courses
-$currentCoursesQuery = "SELECT c.courseId, c.name, c.prefix FROM student_course sc JOIN course c ON sc.courseId = c.courseId WHERE sc.userId = ?";
-$currentCoursesStmt = $con->prepare($currentCoursesQuery);
-$currentCoursesStmt->bind_param('i', $studentId);
-$currentCoursesStmt->execute();
-$currentCoursesStmt->bind_result($courseId, $courseName, $coursePrefix);
-$currentCourses = [];
-
-while ($currentCoursesStmt->fetch()) {
-    $currentCourses[] = ['courseId' => $courseId, 'courseName' => $courseName, 'coursePrefix' => $coursePrefix];
-}
-
-$currentCoursesStmt->close();
 ?>
 
 <!DOCTYPE html>
@@ -208,9 +204,7 @@ $currentCoursesStmt->close();
     </h3>
 
     <?php if (empty($currentCourses)): ?>
-        <form>
-            <p class="no-courses-message">This student has no courses.</p>
-        </form>
+        <p class="no-courses-message">This student has no courses.</p>
     <?php else: ?>
 
         <form method="post" action="editStudentCourse.php">
@@ -233,35 +227,36 @@ $currentCoursesStmt->close();
                 ?>
             </table>
         </form>
-    <?php endif; ?>
-    <h3 class="center">Add New Courses</h3>
 
-    <form method="post" action="editStudentCourse.php">
-        <input type="hidden" name="studentId" value="<?= $studentId ?>">
+        <h3 class="center">Add New Courses</h3>
 
-        <label for="addCourseId">Add Course:</label>
-        <select name="addCourseId">
+        <form method="post" action="editStudentCourse.php">
+            <input type="hidden" name="studentId" value="<?= $studentId ?>">
+
+            <label for="addCourseId">Add Course:</label>
+            <select name="addCourseId">
+                <?php
+                $availableCoursesQuery = "SELECT courseId, name FROM course";
+                $availableCoursesResult = $con->query($availableCoursesQuery);
+
+                while ($course = $availableCoursesResult->fetch_assoc()) {
+                    echo "<option value='{$course['courseId']}'>{$course['name']}</option>";
+                }
+
+                $availableCoursesResult->close();
+                ?>
+            </select>
+
+            <button type="submit">Add Course</button>
             <?php
-            $availableCoursesQuery = "SELECT courseId, name FROM course";
-            $availableCoursesResult = $con->query($availableCoursesQuery);
-
-            while ($course = $availableCoursesResult->fetch_assoc()) {
-                echo "<option value='{$course['courseId']}'>{$course['name']}</option>";
+            if (isset($_SESSION['updateMsg'])) {
+                echo '<h2 class="update-message">' . $_SESSION['updateMsg'] . '</h2>';
+                unset($_SESSION['updateMsg']);
             }
-
-            $availableCoursesResult->close();
             ?>
-        </select>
+        </form>
 
-        <button type="submit">Add Course</button>
-        <?php
-        if (isset($_SESSION['updateMsg'])) {
-            echo '<h2 class="update-message">' . $_SESSION['updateMsg'] . '</h2>';
-            unset($_SESSION['updateMsg']);
-        }
-        ?>
-    </form>
-
+    <?php endif; ?>
 
 </body>
 
