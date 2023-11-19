@@ -186,28 +186,33 @@ if (!is_numeric($professorId)) {
         <?php echo $professorName; ?>
     </h3>
 
-    <form method="post" action="editProfessorCourse.php">
-        <input type="hidden" name="professorId" value="<?= $professorId ?>">
-        <input type="hidden" name="professorName" value="<?= $professorName ?>">
+    <?php if (empty($currentCourses)): ?>
+        <p class="no-courses-message">This student has no courses.</p>
+    <?php else: ?>
 
-        <?php
-        $currentCoursesQuery = "SELECT c.courseId, c.name FROM professor_course pc JOIN course c ON pc.courseId = c.courseId WHERE pc.userId = ?";
-        $currentCoursesStmt = $con->prepare($currentCoursesQuery);
-        $currentCoursesStmt->bind_param('i', $professorId);
-        $currentCoursesStmt->execute();
-        $currentCoursesStmt->bind_result($courseId, $courseName);
+        <form method="post" action="editProfessorCourse.php">
+            <input type="hidden" name="professorId" value="<?= $professorId ?>">
+            <input type="hidden" name="professorName" value="<?= $professorName ?>">
 
-        while ($currentCoursesStmt->fetch()) {
-            echo '<div>';
-            echo "<span>$courseName</span>";
-            echo "<input type='hidden' name='currentCourseIds[]' value='$courseId'>";
-            echo "<button type='submit' name='removeCourseId' value='$courseId'>Remove</button>";
-            echo '</div>';
-        }
+            <?php
+            $currentCoursesQuery = "SELECT c.courseId, c.name FROM professor_course pc JOIN course c ON pc.courseId = c.courseId WHERE pc.userId = ?";
+            $currentCoursesStmt = $con->prepare($currentCoursesQuery);
+            $currentCoursesStmt->bind_param('i', $professorId);
+            $currentCoursesStmt->execute();
+            $currentCoursesStmt->bind_result($courseId, $courseName);
 
-        $currentCoursesStmt->close();
-        ?>
-    </form>
+            while ($currentCoursesStmt->fetch()) {
+                echo '<div>';
+                echo "<span>$courseName</span>";
+                echo "<input type='hidden' name='currentCourseIds[]' value='$courseId'>";
+                echo "<button type='submit' name='removeCourseId' value='$courseId'>Remove</button>";
+                echo '</div>';
+            }
+
+            $currentCoursesStmt->close();
+            ?>
+        </form>
+    <?php endif; ?>
 
     <h3>Add New Courses</h3>
 
@@ -231,6 +236,12 @@ if (!is_numeric($professorId)) {
             </select>
 
             <button type="submit">Add Course</button>
+            <?php
+            if (isset($_SESSION['updateMsg'])) {
+                echo '<h2 class="update-message">' . $_SESSION['updateMsg'] . '</h2>';
+                unset($_SESSION['updateMsg']);
+            }
+            ?>
         </div>
     </form>
 

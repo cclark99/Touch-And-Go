@@ -249,36 +249,36 @@ $currentCoursesStmt->close();
                 ?>
             </table>
         </form>
-        <?php endif; ?>
-        
-        <h3 class="center">Add New Courses</h3>
+    <?php endif; ?>
 
-        <form method="post" action="editStudentCourse.php">
-            <input type="hidden" name="studentId" value="<?= $studentId ?>">
-            <input type="hidden" name="studentName" value="<?= $studentName ?>">
+    <h3 class="center">Add New Courses</h3>
 
-            <label for="addCourseId">Add Course:</label>
-            <select name="addCourseId">
-                <?php
-                $availableCoursesQuery = "SELECT courseId, name FROM course";
-                $availableCoursesResult = $con->query($availableCoursesQuery);
+    <form method="post" action="editStudentCourse.php">
+        <input type="hidden" name="studentId" value="<?= $studentId ?>">
+        <input type="hidden" name="studentName" value="<?= $studentName ?>">
 
-                while ($course = $availableCoursesResult->fetch_assoc()) {
-                    echo "<option value='{$course['courseId']}'>{$course['name']}</option>";
-                }
-
-                $availableCoursesResult->close();
-                ?>
-            </select>
-
-            <button type="submit">Add Course</button>
+        <label for="addCourseId">Add Course:</label>
+        <select name="addCourseId">
             <?php
-            if (isset($_SESSION['updateMsg'])) {
-                echo '<h2 class="update-message">' . $_SESSION['updateMsg'] . '</h2>';
-                unset($_SESSION['updateMsg']);
+            $availableCoursesQuery = "SELECT courseId, name FROM course";
+            $availableCoursesResult = $con->query($availableCoursesQuery);
+
+            while ($course = $availableCoursesResult->fetch_assoc()) {
+                echo "<option value='{$course['courseId']}'>{$course['name']}</option>";
             }
+
+            $availableCoursesResult->close();
             ?>
-        </form>
+        </select>
+
+        <button type="submit">Add Course</button>
+        <?php
+        if (isset($_SESSION['updateMsg'])) {
+            echo '<h2 class="update-message">' . $_SESSION['updateMsg'] . '</h2>';
+            unset($_SESSION['updateMsg']);
+        }
+        ?>
+    </form>
 
 </body>
 
