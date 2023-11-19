@@ -31,13 +31,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $currentCoursesStmt->bind_result($courseId);
         $currentCourses = [];
 
-        
+
         while ($currentCoursesStmt->fetch()) {
             $currentCourses[] = $courseId;
         }
-        
+
         $currentCoursesStmt->close();
-        
+
         // Check if the course is already in the professor's courses
         if (in_array($addCourseId, $currentCourses)) {
             $_SESSION['updateMsg'] = 'The professor is already teaching this course.';
