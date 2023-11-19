@@ -82,7 +82,7 @@ include 'get_course.php';
     <h3>Today's Schedule</h3>
 
     <div class="dropdown"> <!-- start of ul tag with dropdown class -->
-    
+
       <?php
       if ($course_array) {
         foreach ($course_array as $row) {
@@ -90,13 +90,13 @@ include 'get_course.php';
           <!-- create arrow -->
           <span class="arrow"></span>
           <!-- display first question -->
-          <span>' . $row['courseName'] . '</span>
+          <span>' . $row['name'] . '</span>
         </div> <!-- end of div tag -->
         <div class="answer"> <!-- start of div tag with answer class -->
           <!-- display answer to first question -->
-          <p>Time: ' . date('g:i A', strtotime($row['courseStartTime'])) . ' - ' . date('g:i A', strtotime($row['courseEndTime'])) . '<br>
-            Professor: '. $row['professorLastName']  .' <br>
-            Location: ' . $row['courseLocation'] . ' <br>
+          <p>Time: ' . date('g:i A', strtotime($row['startTime'])) . ' - ' . date('g:i A', strtotime($row['endTime'])) . '<br>
+            Professor: ' . $row['firstName'] . $row['lastName'] . ' <br>
+            Location: ' . $row['location'] . ' <br>
           </p>
         </div>';
         }
@@ -124,13 +124,13 @@ include 'get_course.php';
           <!-- create arrow -->
           <span class="arrow"></span>
           <!-- display first question -->
-          <span>' . $row['courseName'] . '</span>
+          <span>' . $row['name'] . '</span>
         </div> <!-- end of div tag -->
         <div class="answer"> <!-- start of div tag with answer class -->
           <!-- display answer to first question -->
-          <p>Time: ' . date('g:i A', strtotime($row['courseStartTime'])) . ' - ' . date('g:i A', strtotime($row['courseEndTime'])) . '<br>
-            Professor: ' . $row['professorLastName'] . '<br>
-            Location: ' . $row['courseLocation'] . ' <br>
+          <p>Time: ' . date('g:i A', strtotime($row['startTime'])) . ' - ' . date('g:i A', strtotime($row['endTime'])) . '<br>
+            Professor: ' . $row['firstName'] . $row['lastName'] . '<br>
+            Location: ' . $row['location'] . ' <br>
           </p>
         </div>';
         }
