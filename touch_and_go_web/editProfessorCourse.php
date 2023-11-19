@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($addCourseId) {
         // Add the course to the professor's courses
-        $addCourseQuery = "INSERT INTO professor_course (professorId, courseId) VALUES (?, ?)";
+        $addCourseQuery = "INSERT INTO professor_course (userId, courseId) VALUES (?, ?)";
         $addCourseStmt = $con->prepare($addCourseQuery);
         $addCourseStmt->bind_param('ii', $professorId, $addCourseId);
         $addCourseStmt->execute();
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($removeCourseId) {
         // Remove the course from the professor's courses
-        $removeCourseQuery = "DELETE FROM professor_course WHERE professorId = ? AND courseId = ?";
+        $removeCourseQuery = "DELETE FROM professor_course WHERE userId = ? AND courseId = ?";
         $removeCourseStmt = $con->prepare($removeCourseQuery);
         $removeCourseStmt->bind_param('ii', $professorId, $removeCourseId);
         $removeCourseStmt->execute();
@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // Retrieve professorId from GET parameter
 $professorId = $_GET['professorId'] ?? null;
-$professorName = $_POST['professorName'] ?? null;
+$professorName = $_GET['professorName'] ?? null;
 
 // If professorId is not provided or not a valid number, redirect back
 if (!is_numeric($professorId)) {
