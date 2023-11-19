@@ -21,28 +21,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $addCourseId = $_POST['addCourseId'] ?? null;
     $removeCourseId = $_POST['removeCourseId'] ?? null;
 
-    if ($addCourseId) {
-        // Add the course to the student's courses
-        $addCourseQuery = "INSERT INTO student_course (userId, courseId) VALUES (?, ?)";
-        $addCourseStmt = $con->prepare($addCourseQuery);
-        $addCourseStmt->bind_param('ii', $studentId, $addCourseId);
-        $addCourseStmt->execute();
-        $addCourseStmt->close();
-    }
+    // Check if the selected course is already in the list of current courses
+    $isCourseAlreadyTaken = in_array($addCourseId, array_column($currentCourses, 'courseId'));
 
-    if ($removeCourseId) {
-        // Remove the course from the student's courses
-        $removeCourseQuery = "DELETE FROM student_course WHERE userId = ? AND courseId = ?";
-        $removeCourseStmt = $con->prepare($removeCourseQuery);
-        $removeCourseStmt->bind_param('ii', $studentId, $removeCourseId);
-        $removeCourseStmt->execute();
-        $removeCourseStmt->close();
-    }
+    if ($isCourseAlreadyTaken) {
+        $_SESSION['updateMsg'] = 'The student is already taking this course.';
+    } else {
+        if ($addCourseId) {
+            // Add the course to the student's courses
+            $addCourseQuery = "INSERT INTO student_course (userId, courseId) VALUES (?, ?)";
+            $addCourseStmt = $con->prepare($addCourseQuery);
+            $addCourseStmt->bind_param('ii', $studentId, $addCourseId);
+            $addCourseStmt->execute();
+            $addCourseStmt->close();
+        }
 
-    // Redirect back to the page with a success message
-    $_SESSION['updateMsg'] = 'Student courses updated successfully';
-    header("Location: editStudentCourse.php?studentId=$studentId");
-    exit();
+        if ($removeCourseId) {
+            // Remove the course from the student's courses
+            $removeCourseQuery = "DELETE FROM student_course WHERE userId = ? AND courseId = ?";
+            $removeCourseStmt = $con->prepare($removeCourseQuery);
+            $removeCourseStmt->bind_param('ii', $studentId, $removeCourseId);
+            $removeCourseStmt->execute();
+            $removeCourseStmt->close();
+        }
+
+        // Redirect back to the page with a success message
+        $_SESSION['updateMsg'] = 'Student courses updated successfully';
+        header("Location: editStudentCourse.php?studentId=$studentId");
+        exit();
+    }
 }
 
 // Retrieve studentId from GET parameter
@@ -201,7 +208,9 @@ $currentCoursesStmt->close();
     </h3>
 
     <?php if (empty($currentCourses)): ?>
-        <form><p class="no-courses-message">This student has no courses.</p></form>
+        <form>
+            <p class="no-courses-message">This student has no courses.</p>
+        </form>
     <?php else: ?>
 
         <form method="post" action="editStudentCourse.php">
