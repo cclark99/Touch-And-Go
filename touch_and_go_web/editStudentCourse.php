@@ -78,6 +78,66 @@ $currentCoursesStmt->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Student Courses</title>
     <link rel="stylesheet" type="text/css" href="../styles.css">
+    <style>
+        form {
+            max-width: 600px;
+            margin: auto;
+            background-color: #FFFFFF;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        form label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        form select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+
+        form button {
+            width: 100%;
+            padding: 15px 0;
+            font-size: 18px;
+            border: 0;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 5px;
+            background: #4CAF50;
+            transition: background 0.3s ease-in-out;
+            margin-top: 20px;
+        }
+
+        form button:hover {
+            background: #397d13;
+        }
+
+        .update-message {
+            margin-top: 15px;
+            padding: 10px;
+            font-size: 18px;
+            text-align: center;
+            background-color: #2a3c4e;
+            color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: auto;
+            margin-bottom: 20px;
+        }
+
+        div {
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 
 <body>
@@ -102,7 +162,7 @@ $currentCoursesStmt->close();
         <?php
         foreach ($currentCourses as $course) {
             echo '<div>';
-            echo "<span>{$course['prefix']}</span>"; 
+            echo "<span>{$course['prefix']}</span>";
             echo "<span>{$course['courseName']}</span>";
             echo "<button type='submit' name='removeCourseId' value='{$course['courseId']}'>Remove</button>";
             echo '</div>';
