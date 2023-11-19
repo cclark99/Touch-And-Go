@@ -1,5 +1,10 @@
 <?php
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+
 session_start();
 
 if (!isset($_SESSION['loggedin']) || $_SESSION['userType'] != 'admin') {
@@ -409,6 +414,21 @@ switch (true) {
 
 
     <h3 class="center">Edit students in course</h3>
+    <div class="search_course">
+        <form id="studentSearch" onsubmit="return studentSearch();">
+            <label for="studentName">Student Name:</label>
+            <input type="hidden" name="courseId" value="<?= htmlspecialchars($course['courseId']) ?>">
+            <input type="text" name="studentName" required>
+            <input type="submit" value="Search">
+        </form>
+        <div id="studentResults"></div>
+        <?php
+        if (isset($_SESSION['updateMsg'])) {
+            echo '<h2 class="update-message">' . $_SESSION['updateMsg'] . '</h2>';
+            unset($_SESSION['updateMsg']);
+        }
+        ?>
+    </div>
 
     <h3 class="center">Edit Professor in course</h3>
 
@@ -457,7 +477,7 @@ switch (true) {
                             let prefixCell = document.createElement("td");
                             prefixCell.textContent = prefix;
                             line.appendChild(prefixCell);
-                            
+
                             // Add the course name cell
                             let nameCell = document.createElement("td");
                             nameCell.textContent = name;
@@ -507,6 +527,90 @@ switch (true) {
         function editCourse(courseId) {
             // Redirect to the edit.php page with user type, email, first name, and last name as parameters
             window.location.href = `courseEdit.php?courseId=${courseId}`;
+        }
+
+        function studentSearch() {
+            var data = new FormData(document.getElementById("studentSearch"));
+            data.append("ajax", 1);
+
+            fetch("studentSearch.php", { method: "POST", body: data })
+                .then(res => res.json())
+                .then(res => {
+                    console.log("JSON Response:", JSON.stringify(res, null, 2));
+
+                    var wrapper = document.getElementById("studentResults");
+                    if (res.length > 0) {
+                        wrapper.innerHTML = ""; // Clear previous results
+
+                        // Create a table and header row
+                        let table = document.createElement("table");
+                        table.classList.add("course-table"); // Add a class for styling
+                        let headerRow = document.createElement("tr");
+                        headerRow.innerHTML = "<th>Student ID</th><th>Student Name</th><th>Action</th>"; // Add header cells
+                        table.appendChild(headerRow);
+
+                        // Loop through each result
+                        for (let r of res) {
+                            let studentId = r["studentId"] || "";
+                            let studentName = r["studentName"] || "";
+
+                            // Create a new table row for each student
+                            let line = document.createElement("tr");
+
+                            // Add the studentId as a hidden input
+                            let studentIdInput = document.createElement("input");
+                            studentIdInput.type = "hidden";
+                            studentIdInput.name = "studentId";
+                            studentIdInput.value = studentId;
+                            line.appendChild(studentIdInput);
+
+                            // Add the student name cell
+                            let nameCell = document.createElement("td");
+                            nameCell.textContent = studentName;
+                            line.appendChild(nameCell);
+
+                            // Add the "Add" button
+                            let addButton = document.createElement("button");
+                            addButton.textContent = "Add";
+                            addButton.onclick = function () {
+                                addStudentToCourse(studentId);
+                            };
+
+                            // Add the "Remove" button
+                            let removeButton = document.createElement("button");
+                            removeButton.textContent = "Remove";
+                            removeButton.onclick = function () {
+                                removeStudentFromCourse(studentId);
+                            };
+
+                            // Add the action cell with both "Add" and "Remove" buttons
+                            let actionCell = document.createElement("td");
+                            actionCell.appendChild(addButton);
+                            actionCell.appendChild(removeButton);
+                            line.appendChild(actionCell);
+
+                            // Append the new table row to the table
+                            table.appendChild(line);
+                        }
+
+                        // Append the table to the wrapper
+                        wrapper.appendChild(table);
+                    } else {
+                        wrapper.innerHTML = "No results found";
+                    }
+                })
+                .catch(error => console.error("Error:", error));
+            return false;
+        }
+
+        function addStudentToCourse(studentId) {
+            // Implement the logic to add the student to the course
+            console.log("Adding student to course with ID: " + studentId);
+        }
+
+        function removeStudentFromCourse(studentId) {
+            // Implement the logic to remove the student from the course
+            console.log("Removing student from course with ID: " + studentId);
         }
     </script>
 </body>
