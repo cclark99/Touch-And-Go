@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Redirect back to the page with a success message
-    header("Location: editStudentCourse.php?studentId=$studentId&studentName=$studentName");
+    header("Location: editStudentCourse.php?studentId=$studentId&studentName=" . urlencode($studentName));
     exit();
 }
 
