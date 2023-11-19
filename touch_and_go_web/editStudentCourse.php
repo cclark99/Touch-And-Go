@@ -138,6 +138,11 @@ $currentCoursesStmt->close();
         div {
             margin-bottom: 10px;
         }
+
+        span {
+            color: black;
+            font-size: larger;
+        }
     </style>
 </head>
 
@@ -153,9 +158,9 @@ $currentCoursesStmt->close();
         <li><a class='link' href="logout.php">Logout</a></li>
     </ul>
 
-    <h2>Current Courses for
+    <h3 class="center">Current Courses for
         <?php echo $studentName; ?>
-    </h2>
+    </h3>
 
     <form method="post" action="editStudentCourse.php">
         <input type="hidden" name="studentId" value="<?= $studentId ?>">
@@ -171,7 +176,7 @@ $currentCoursesStmt->close();
         ?>
     </form>
 
-    <h2>Add New Courses</h2>
+    <h3 class="center">Add New Courses</h3>
 
     <form method="post" action="editStudentCourse.php">
         <input type="hidden" name="studentId" value="<?= $studentId ?>">
