@@ -491,7 +491,7 @@ require 'db_connection.php';
                             let editButton = document.createElement("button");
                             editButton.textContent = "Edit";
                             editButton.onclick = function () {
-                                editStudentCourse(studentId);
+                                editStudentCourse(studentId, studentName);
                             };
 
                             // Add the action cell with the "Edit" button
@@ -513,9 +513,9 @@ require 'db_connection.php';
             return false;
         }
 
-        function editStudentCourse(studentId) {
+        function editStudentCourse(studentId, studentName) {
             // Redirect for editing students taking courses
-            window.location.href = `editStudentCourse.php?studentId=${studentId}`;
+            window.location.href = `editStudentCourse.php?studentId=${studentId}&studentName=${studentName}`;
         }
 
         function professorSearch() {
