@@ -14,90 +14,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['userType'] != 'admin') {
 
 require 'db_connection.php';
 
-// Get user's name based on what account type they are, as well as userId
-
-switch (true) {
-    case $_SESSION['userType'] == 'student':
-        // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
-        if ($stmt = $con->prepare('SELECT userId FROM user WHERE userEmail = ?')) {
-            $stmt->bind_param('s', $_SESSION['email']);
-            $stmt->execute();
-            $stmt->store_result();
-            if ($stmt->num_rows > 0) {
-                $stmt->bind_result($_SESSION['userId']);
-                $stmt->fetch();
-            }
-            $stmt->close();
-        }
-
-        if ($stmt = $con->prepare('SELECT firstName, lastName FROM student WHERE userId = ?')) {
-            $stmt->bind_param('i', $_SESSION['userId']);
-            $stmt->execute();
-            $stmt->store_result();
-            if ($stmt->num_rows > 0) {
-                $stmt->bind_result($_SESSION['firstName'], $_SESSION['lastName']);
-                $stmt->fetch();
-            }
-            $stmt->close();
-        }
-        break;
-
-    case $_SESSION['userType'] == 'professor':
-        // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
-        if ($stmt = $con->prepare('SELECT userId FROM user WHERE userEmail = ?')) {
-            $stmt->bind_param('s', $_SESSION['email']);
-            $stmt->execute();
-            $stmt->store_result();
-            if ($stmt->num_rows > 0) {
-                $stmt->bind_result($_SESSION['userId']);
-                $stmt->fetch();
-            }
-            $stmt->close();
-        }
-
-        if ($stmt = $con->prepare('SELECT firstName, lastName FROM professor WHERE userId = ?')) {
-            $stmt->bind_param('i', $_SESSION['userId']);
-            $stmt->execute();
-            $stmt->store_result();
-            if ($stmt->num_rows > 0) {
-                $stmt->bind_result($_SESSION['firstName'], $_SESSION['lastName']);
-                $stmt->fetch();
-            }
-            $stmt->close();
-        }
-
-        break;
-
-    case $_SESSION['userType'] == 'admin':
-        // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
-        if ($stmt = $con->prepare('SELECT userId FROM user WHERE userEmail = ?')) {
-            $stmt->bind_param('s', $_SESSION['email']);
-            $stmt->execute();
-            $stmt->store_result();
-            if ($stmt->num_rows > 0) {
-                $stmt->bind_result($_SESSION['userId']);
-                $stmt->fetch();
-            }
-            $stmt->close();
-        }
-
-        if ($stmt = $con->prepare('SELECT firstName, lastName FROM admin WHERE userId = ?')) {
-            $stmt->bind_param('i', $_SESSION['userId']);
-            $stmt->execute();
-            $stmt->store_result();
-            if ($stmt->num_rows > 0) {
-                $stmt->bind_result($_SESSION['firstName'], $_SESSION['lastName']);
-                $stmt->fetch();
-            }
-            $stmt->close();
-        }
-
-        break;
-    default:
-        include 'logout.php';
-        break;
-}
-
 ?>
 <!DOCTYPE html>
 
@@ -413,11 +329,10 @@ switch (true) {
     </div>
 
 
-    <h3 class="center">Edit students in course</h3>
+    <h3 class="center">Edit students taking courses</h3>
     <div class="search_course">
         <form id="studentSearch" onsubmit="return studentSearch();">
             <label for="studentName">Student Name:</label>
-            <!-- <input type="hidden" name="courseId" value="<?= htmlspecialchars($course['courseId']) ?>"> -->
             <input type="text" name="studentName" required>
             <input type="submit" value="Search">
         </form>
@@ -430,11 +345,10 @@ switch (true) {
         ?>
     </div>
 
-    <h3 class="center">Edit Professor in course</h3>
+    <h3 class="center">Edit professors teaching courses</h3>
     <div class="search_course">
         <form id="professorSearchForm" onsubmit="return professorSearch();">
             <label for="professorName">Professor Name:</label>
-            <!-- <input type="hidden" name="courseId" value="<?= htmlspecialchars($course['courseId']) ?>"> -->
             <input type="text" name="professorName" required>
             <input type="submit" value="Search">
         </form>
@@ -604,10 +518,8 @@ switch (true) {
         }
 
         function editStudentCourse(studentId) {
-            // Implement the logic to edit the student's courses
-            console.log("Editing student courses for ID: " + studentId);
-            // Redirect or open a new page for editing student courses
-            // Example: window.location.href = `editStudentCourse.php?studentId=${studentId}`;
+            // Redirect for editing students taking courses
+            window.location.href = `editStudentCourse.php?studentId=${studentId}`;
         }
 
         function professorSearch() {
@@ -670,10 +582,8 @@ switch (true) {
         }
 
         function editProfessorCourse(professorId) {
-            // Implement the logic to edit the professor's courses
-            console.log("Editing professor courses for ID: " + professorId);
-            // Redirect or open a new page for editing professor courses
-            // Example: window.location.href = `editProfessorCourse.php?professorId=${professorId}`;
+            // Redirect for editing professor teaching courses
+            window.location.href = `editProfessorCourse.php?professorId=${professorId}`;
         }
     </script>
 </body>
