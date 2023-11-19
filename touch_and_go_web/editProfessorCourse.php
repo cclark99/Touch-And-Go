@@ -19,6 +19,8 @@ require 'db_connection.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Assuming you have form fields named 'professorId', 'addCourseId', and 'removeCourseId'
     $professorId = $_POST['professorId'] ?? null;
+    $addCourseId = $_POST['addCourseId'] ?? null;
+    $removeCourseId = $_POST['removeCourseId'] ?? null;
 
     if ($addCourseId) {
         // Add the course to the professor's courses
@@ -40,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Redirect back to the page with a success message
     $_SESSION['updateMsg'] = 'Professor courses updated successfully';
-    header('Location: adminHome.php');
+    header('Location: adminCourse.php');
     exit();
 }
 
