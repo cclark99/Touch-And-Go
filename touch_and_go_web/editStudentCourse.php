@@ -79,7 +79,6 @@ $currentCoursesStmt->close();
     <title>Edit Student Courses</title>
     <link rel="stylesheet" type="text/css" href="../styles.css">
     <style>
-        
         form {
             max-width: 600px;
             margin: auto;
@@ -142,6 +141,12 @@ $currentCoursesStmt->close();
         span {
             color: black;
             font-size: larger;
+        }
+
+        h3 {
+            text-align: center;
+            font-size: xx-large;
+            margin-top: 20px;
         }
     </style>
 </head>
