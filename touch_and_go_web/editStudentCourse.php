@@ -54,14 +54,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $removeCourseStmt->close();
     }
 
+    // Store the student name in a session variable
+    $_SESSION['studentName'] = $_POST['studentName'];
+
     // Redirect back to the page with a success message
-    header("Location: editStudentCourse.php?studentId=$studentId&studentName=" . urlencode($studentName));
+    header("Location: editStudentCourse.php?studentId=$studentId");
     exit();
 }
 
 // Retrieve studentId from GET parameter
 $studentId = $_GET['studentId'] ?? null;
-$studentName = $_GET['studentName'] ?? null;
+
+// Check if the studentName is in the session, use it, and then unset it
+if (isset($_SESSION['studentName'])) {
+    $studentName = $_SESSION['studentName'];
+    unset($_SESSION['studentName']);
+} else {
+    $studentName = $_GET['studentName'] ?? null;
+}
 
 // If studentId is not provided or not a valid number, redirect back
 if (!is_numeric($studentId)) {
@@ -220,6 +230,7 @@ $currentCoursesStmt->close();
 
         <form method="post" action="editStudentCourse.php">
             <input type="hidden" name="studentId" value="<?= $studentId ?>">
+            <input type="hidden" name="studentName" value="<?= $studentName ?>">
 
             <table>
                 <tr>
@@ -243,6 +254,7 @@ $currentCoursesStmt->close();
 
         <form method="post" action="editStudentCourse.php">
             <input type="hidden" name="studentId" value="<?= $studentId ?>">
+            <input type="hidden" name="studentName" value="<?= $studentName ?>">
 
             <label for="addCourseId">Add Course:</label>
             <select name="addCourseId">
