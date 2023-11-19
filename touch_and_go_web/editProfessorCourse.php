@@ -1,8 +1,9 @@
 <?php
+// editProfessorCourse.php
 
-// ini_set('display_errors', 1);
-// ini_set('display_startup_errors', 1);
-// error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 session_start();
 
@@ -41,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Redirect back to the page with a success message
     $_SESSION['updateMsg'] = 'Professor courses updated successfully';
-    header("Location: editProfessorCourse.php?professorId=$professorId&professorName=" . urlencode($professorName));
+    header("Location: editProfessorCourse.php?professorId=$professorId");
     exit();
 }
 
@@ -187,7 +188,7 @@ if (!is_numeric($professorId)) {
     </h3>
 
     <?php if (empty($currentCourses)): ?>
-        <p class="no-courses-message">This student has no courses.</p>
+        <p class="no-courses-message">This professor has no courses.</p>
     <?php else: ?>
 
         <form method="post" action="editProfessorCourse.php">
