@@ -174,6 +174,13 @@ $currentCoursesStmt->close();
             border: none;
             cursor: pointer;
         }
+
+        .no-courses-message {
+            text-align: center;
+            font-size: 18px;
+            margin-top: 20px;
+            color: #555;
+        }
     </style>
 </head>
 
@@ -193,27 +200,31 @@ $currentCoursesStmt->close();
         <?php echo $studentName; ?>
     </h3>
 
-    <form method="post" action="editStudentCourse.php">
-        <input type="hidden" name="studentId" value="<?= $studentId ?>">
+    <?php if (empty($currentCourses)): ?>
+        <p class="no-courses-message">This student has no courses.</p>
+    <?php else: ?>
 
-        <table>
-            <tr>
-                <th>Prefix</th>
-                <th>Course Name</th>
-                <th>Edit</th>
-            </tr>
-            <?php
-            foreach ($currentCourses as $course) {
-                echo '<tr>';
-                echo "<td>{$course['coursePrefix']}</td>";
-                echo "<td>{$course['courseName']}</td>";
-                echo "<td><button type='submit' name='removeCourseId' value='{$course['courseId']}'>Edit</button></td>";
-                echo '</tr>';
-            }
-            ?>
-        </table>
-    </form>
+        <form method="post" action="editStudentCourse.php">
+            <input type="hidden" name="studentId" value="<?= $studentId ?>">
 
+            <table>
+                <tr>
+                    <th>Prefix</th>
+                    <th>Course Name</th>
+                    <th>Edit</th>
+                </tr>
+                <?php
+                foreach ($currentCourses as $course) {
+                    echo '<tr>';
+                    echo "<td>{$course['coursePrefix']}</td>";
+                    echo "<td>{$course['courseName']}</td>";
+                    echo "<td><button type='submit' class='removeButton' name='removeCourseId' value='{$course['courseId']}'>Remove</button></td>";
+                    echo '</tr>';
+                }
+                ?>
+            </table>
+        </form>
+    <?php endif; ?>
     <h3 class="center">Add New Courses</h3>
 
     <form method="post" action="editStudentCourse.php">
@@ -234,12 +245,12 @@ $currentCoursesStmt->close();
         </select>
 
         <button type="submit">Add Course</button>
-    <?php
-    if (isset($_SESSION['updateMsg'])) {
-        echo '<h2 class="update-message">' . $_SESSION['updateMsg'] . '</h2>';
-        unset($_SESSION['updateMsg']);
-    }
-    ?>
+        <?php
+        if (isset($_SESSION['updateMsg'])) {
+            echo '<h2 class="update-message">' . $_SESSION['updateMsg'] . '</h2>';
+            unset($_SESSION['updateMsg']);
+        }
+        ?>
     </form>
 
 
