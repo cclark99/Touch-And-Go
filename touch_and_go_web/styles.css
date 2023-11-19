@@ -302,6 +302,10 @@ ul {
 
 /* end of style rules for ul tag */
 
+img.center {
+    margin-top: 10px;
+}
+
 /* start of style rules for li tag */
 li {
     width: 14.2857%;
