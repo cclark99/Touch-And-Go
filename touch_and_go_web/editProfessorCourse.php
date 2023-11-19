@@ -69,8 +69,27 @@ if (!is_numeric($professorId)) {
 
 <body>
 
+    <ul> <!-- start of ul for menu bar -->
+        <!-- list home.php link -->
+        <li><a class="link" href="adminHome.php">Home</a></li>
+        <!-- list schedule.php link -->
+        <li><a class="link" href="adminCourse.php">Courses</a></li>
+        <!-- list analytics.php link -->
+        <li id="fakeNav"><a></a></li>
+        <!-- list Touch & Go logo -->
+        <li><img src="../newLogo.png" alt="Touch and Go Logo" height="60"></li>
+        <!-- list contact.php link -->
+        <li id="fakeNav"><a></a></li>
+        <!-- list help.php link -->
+        <li id="fakeNav"><a></a></li>
+        <!-- list logout.php link -->
+        <li><a class='link' href="logout.php">Logout</a></li>
+    </ul> <!-- end of ul for menu bar -->
+
     <!-- Display current courses with delete buttons -->
-    <h2>Current Courses for </h2>
+    <h2>Current Courses for
+        <?php echo $professorName; ?>
+    </h2>
     <form method="post" action="editProfessorCourse.php">
         <input type="hidden" name="professorId" value="<?= $professorId ?>">
 
