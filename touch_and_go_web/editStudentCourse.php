@@ -249,7 +249,8 @@ $currentCoursesStmt->close();
                 ?>
             </table>
         </form>
-
+        <?php endif; ?>
+        
         <h3 class="center">Add New Courses</h3>
 
         <form method="post" action="editStudentCourse.php">
@@ -278,8 +279,6 @@ $currentCoursesStmt->close();
             }
             ?>
         </form>
-
-    <?php endif; ?>
 
 </body>
 
