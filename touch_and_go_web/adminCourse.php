@@ -438,7 +438,7 @@ switch (true) {
             <input type="text" name="professorName" required>
             <input type="submit" value="Search">
         </form>
-        <div id="studentResults"></div>
+        <div id="professorResults"></div>
         <?php
         if (isset($_SESSION['updateMsg'])) {
             echo '<h2 class="update-message">' . $_SESSION['updateMsg'] . '</h2>';
