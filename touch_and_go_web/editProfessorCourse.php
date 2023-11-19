@@ -25,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($addCourseId) {
         // Add the course to the professor's courses
         $addCourseQuery = "INSERT INTO professor_course (userId, courseId) VALUES (?, ?)";
+        echo "Query: $addCourseQuery"; // Add this line for debugging
         $addCourseStmt = $con->prepare($addCourseQuery);
         $addCourseStmt->bind_param('ii', $professorId, $addCourseId);
         $addCourseStmt->execute();
@@ -34,6 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($removeCourseId) {
         // Remove the course from the professor's courses
         $removeCourseQuery = "DELETE FROM professor_course WHERE userId = ? AND courseId = ?";
+        echo "Query: $removeCourseQuery"; // Add this line for debugging
         $removeCourseStmt = $con->prepare($removeCourseQuery);
         $removeCourseStmt->bind_param('ii', $professorId, $removeCourseId);
         $removeCourseStmt->execute();
