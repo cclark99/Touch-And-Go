@@ -1,9 +1,9 @@
 <?php
 // editStudentCourse.php
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
 
 session_start();
 
@@ -173,7 +173,7 @@ $currentCoursesStmt->close();
         <?php
         foreach ($currentCourses as $course) {
             echo '<div>';
-            echo "<span>{$course['coursePrefix']}</span>";
+            echo "<span>{$course['coursePrefix']} - </span>";
             echo "<span>{$course['courseName']}</span>";
             echo "<button type='submit' name='removeCourseId' value='{$course['courseId']}'>Remove</button>";
             echo '</div>';
