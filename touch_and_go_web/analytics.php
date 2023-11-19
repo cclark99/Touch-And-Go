@@ -14,7 +14,7 @@ if (!isset($_SESSION['loggedin'])) {
 }
 
 require 'db_connection.php';
-include 'get_course.php';
+require 'get_course.php';
 
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $courseId = $_POST['courseId'] ?? null;
 
   // Assuming you have the student's userId stored in the session
-  $userId = $_SESSION['userId'] ?? null;
+  $userId = $_SESSION['id'] ?? null;
 
   // Check if the student has already checked in for today's class
   $checkInQuery = "SELECT f.checkIn, c.startTime, c.endTime
