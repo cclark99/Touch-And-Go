@@ -432,8 +432,8 @@ switch (true) {
 
     <h3 class="center">Edit Professor in course</h3>
     <div class="search_course">
-        <form id="studentSearch" onsubmit="return professorSearch();">
-            <label for="studentName">Professor Name:</label>
+        <form id="professorSearchForm" onsubmit="return professorSearch();">
+            <label for="professorName">Professor Name:</label>
             <!-- <input type="hidden" name="courseId" value="<?= htmlspecialchars($course['courseId']) ?>"> -->
             <input type="text" name="professorName" required>
             <input type="submit" value="Search">
@@ -611,7 +611,7 @@ switch (true) {
         }
 
         function professorSearch() {
-            var data = new FormData(document.getElementById("professorSearch"));
+            var data = new FormData(document.getElementById("professorSearchForm"));
             data.append("ajax", 1);
 
             fetch("professorSearch.php", { method: "POST", body: data })
