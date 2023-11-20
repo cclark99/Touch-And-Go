@@ -16,32 +16,6 @@ if (!isset($_SESSION['loggedin'])) {
 require 'db_connection.php';
 include 'get_course.php';
 
-// Check if the form is submitted
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $courseId = $_POST['courseId'] ?? null;
-  
-  $userId = $_SESSION['id'] ?? null;
-
-  // Check if the student has already checked in for today's class
-  $checkInQuery = "SELECT f.checkIn, c.startTime, c.endTime
-                   FROM fingerprint f
-                   JOIN course c ON f.checkIn BETWEEN CONCAT(CURDATE(), ' ', c.startTime) AND CONCAT(CURDATE(), ' ', c.endTime)
-                   WHERE f.userId = ? AND c.courseId = ?";
-
-  $checkInStmt = $con->prepare($checkInQuery);
-  $checkInStmt->bind_param('ii', $userId, $courseId);
-  $checkInStmt->execute();
-  $checkInStmt->bind_result($checkIn, $startTime, $endTime);
-  $checkInStmt->fetch();
-  $checkInStmt->close();
-
-  if ($checkIn) {
-    echo "You checked in at: $checkIn during the class from $startTime to $endTime.";
-  } else {
-    echo "No check-in records found for the specified class.";
-  }
-}
-
 ?>
 <!DOCTYPE html>
 
@@ -185,6 +159,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     /* end of class style rules for dropdown */
   </style>
 
+  <script>
+    // Function to check attendance status
+    function checkAttendance(courseId) {
+      // Make an AJAX request to the server
+      $.ajax({
+        type: 'POST',
+        url: 'check_attendance.php',
+        data: {
+          courseId: courseId
+        },
+        success: function (response) {
+          // Update the status in the HTML
+          $('#status_' + courseId).html('Status: ' + response);
+        },
+        error: function () {
+          // Handle errors if needed
+          alert('Error checking attendance.');
+        }
+      });
+    }
+
+    // Function to check attendance for all courses
+    function checkAllAttendances() {
+      <?php
+      if ($course_array) {
+        foreach ($course_array as $row) {
+          echo "checkAttendance({$row['courseId']});\n";
+        }
+      }
+      ?>
+    }
+
+    // Call the function when the page is loaded
+    $(document).ready(function () {
+      checkAllAttendances();
+    });
+  </script>
+
 </head> <!-- end of head tag -->
 
 <body> <!-- start of body tag -->
@@ -213,53 +225,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     following link:
     https://www.w3schools.com/css/css_navbar_horizontal.asp -->
 
-
   <!-- analytics header -->
   <h1>Analytics</h1>
 
-  <section class="dropdown-section"> <!-- start of section tag with dropdown-section class -->
-    <!-- display Today's Attendance -->
+  <!-- Today's Attendance section -->
+  <section class="dropdown-section">
     <h3>Today's Attendance</h3>
-
-    <div class="dropdown"> <!-- start of ul tag with dropdown class -->
+    <div class="dropdown">
       <?php
       if ($course_array) {
         foreach ($course_array as $row) {
-          echo '<div class="question"> <!-- start of div tag with question class -->
-            <!-- create arrow -->
-            <span class="arrow"></span>
-            <!-- display first question -->
-            <span>' . $row['name'] . '</span>
-          </div> <!-- end of div tag -->
-          <div class="answer"> <!-- start of div tag with answer class -->
-            <!-- display answer to first question -->
-            <p>Status: </p>
-          </div>';
+          echo '<div class="question">
+                  <span class="arrow"></span>
+                  <span>' . $row['name'] . '</span>
+                </div>
+                <div class="answer">
+                  <p id="status_' . $row['courseId'] . '">Status: Loading...</p>
+                </div>';
         }
       } else {
         echo '<span style="color: #FAF8D6; line-height: 1.5em; padding-left: 2%; padding-right: 2%;">No classes found...</span>';
       }
       ?>
-    </div> <!-- end of ul tag -->
-  </section> <!-- end of section tag -->
-
-  <section class="dropdown-section">
-    <h3>Check-In</h3>
-    <div class="dropdown">
-      <form method="post" action="analytics.php">
-        <select name="courseId">
-          <?php
-          if ($course_array) {
-            foreach ($course_array as $row) {
-              echo "<option value='{$row['courseId']}'>{$row['name']}</option>";
-            }
-          } else {
-            echo '<option value="">No courses found...</option>';
-          }
-          ?>
-        </select>
-        <input type="submit" value="Check-In">
-      </form>
     </div>
   </section>
 
