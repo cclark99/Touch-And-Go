@@ -2,11 +2,10 @@
 
 session_start();
 
-// ini_set('display_errors', 1);
-// ini_set('display_startup_errors', 1);
-// error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-// Include other necessary files and HTML structure
 
 if (!isset($_SESSION['loggedin'])) {
   header('Location: index.php');
@@ -28,6 +27,9 @@ include 'get_course.php';
   <title>Analytics</title>
   <!-- link external style.css sheet -->
   <link rel="stylesheet" type="text/css" href="../styles.css">
+
+  <!-- Include jQuery library -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
   <style>
     form {
