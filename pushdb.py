@@ -29,7 +29,7 @@ try:
     #    print(row)
     
     #id first name lastname email password
-    insert_query = "INSERT INTO student VALUES (%s, %s, %s)"
+    insert_query = "INSERT INTO student (userId, firstName, lastName) VALUES (%s, %s, %s)"
     
     print("Enter ID: ")
     index = input()
