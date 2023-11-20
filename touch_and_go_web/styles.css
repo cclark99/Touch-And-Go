@@ -6,7 +6,8 @@ html {
 body {
     background-color: #FAF8D6;
     /* yellow background color */
-    margin: 0px
+    margin: 0px;
+    margin-bottom: 30px;
 }
 
 /* end of body tag style rules */
