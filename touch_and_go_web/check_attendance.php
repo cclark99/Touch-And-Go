@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $checkInStmt = $con->prepare($checkInQuery);
     $checkInStmt->bind_param('ii', $userId, $courseId);
     $checkInStmt->execute();
-    $checkInStmt->bind_result($checkIn, $startTime, $endTime);
+    $checkInStmt->bind_result($checkIn, $startTime, $endTime, $startDate, $endDate);
     $checkInStmt->fetch();
     $checkInStmt->close();
 
