@@ -29,14 +29,16 @@ def insertdb(index):
     try:
         connection = mysql.connector.connect(**db_config)
         cursor = connection.cursor()
-
+        
+        #Finding userId
         select_query = "SELECT userID FROM student WHERE fingerId = %s"
         
         cursor.execute(select_query, (index,))
         
-        result = cursor.fetchone()  # Assuming fingerId is unique, use fetchone
+        result = cursor.fetchone()
         userId = result[0]  # Return the UserID
 
+        #Insert record
         insert_query = "INSERT INTO fingerprint VALUES (%s, %s)"
 
         timestamp = datetime.now()
@@ -65,7 +67,6 @@ def get_fingerprint_name():
                 lcd.putstr("Fingerprint found")
                 print("Fingerprint found")
                 return finger.finger_id
-    time.sleep(1)  # Add a short delay to avoid continuous checking
 
 try:
     while True:
