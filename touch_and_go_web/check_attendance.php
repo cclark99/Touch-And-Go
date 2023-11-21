@@ -13,7 +13,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $checkInQuery = "SELECT f.checkIn, c.startTime, c.endTime, c.startDate, c.endDate
                      FROM fingerprint f
                      JOIN course c ON f.checkIn BETWEEN CONCAT(c.startDate, ' ', c.startTime) AND CONCAT(c.endDate, ' ', c.endTime)
-                     WHERE f.userId = ? AND c.courseId = ?";
+                     WHERE f.userId = ? AND c.courseId = ?
+                     ORDER BY f.checkIn desc";
 
     $checkInStmt = $con->prepare($checkInQuery);
     $checkInStmt->bind_param('ii', $userId, $courseId);
