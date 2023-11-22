@@ -20,20 +20,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                  LIMIT 1";  // Limit to one result since we only want the latest check-in
 
     $checkInStmt = $con->prepare($checkInQuery);
-    $checkInStmt->bind_param('ii', $userId, $courseId);
-    $checkInStmt->execute();
-    $checkInStmt->bind_result($checkIn, $startTime, $endTime, $startDate, $endDate);
 
-    if ($checkInStmt->fetch()) {
+    if (!$checkInStmt) {
         // Debugging statement
-        echo "Fetched data successfully.\n";
-        echo "checkIn: $checkIn, startTime: $startTime, endTime: $endTime, startDate: $startDate, endDate: $endDate";
+        echo "Prepare failed: (" . $con->errno . ") " . $con->error;
     } else {
-        // Debugging statement
-        echo "Failed to fetch data. Error: " . $con->error;
-    }
+        $checkInStmt->bind_param('ii', $userId, $courseId);
+        $checkInStmt->execute();
+        $checkInStmt->bind_result($checkIn, $startTime, $endTime, $startDate, $endDate);
 
-    $checkInStmt->close();
+        if ($checkInStmt->fetch()) {
+            // Debugging statement
+            echo "Fetched data successfully.\n";
+            echo "checkIn: $checkIn, startTime: $startTime, endTime: $endTime, startDate: $startDate, endDate: $endDate";
+        } else {
+            // Debugging statement
+            echo "Failed to fetch data. Error: " . $checkInStmt->error;
+        }
+
+        $checkInStmt->close();
+    }
 } else {
     // Handle the case where the request method is not POST
     echo "Invalid request method.";
