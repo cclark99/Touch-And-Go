@@ -17,28 +17,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                  JOIN course c ON f.checkIn BETWEEN CONCAT(c.startDate, ' ', c.startTime) AND CONCAT(c.endDate, ' ', c.endTime)
                  WHERE f.userId = ? AND c.courseId = ? AND DATE(f.checkIn) = CURDATE()
                  ORDER BY f.checkIn DESC
-                 LIMIT 1";
+                 LIMIT 1";  // Limit to one result since we only want the latest check-in
 
     $checkInStmt = $con->prepare($checkInQuery);
     $checkInStmt->bind_param('ii', $userId, $courseId);
     $checkInStmt->execute();
     $checkInStmt->bind_result($checkIn, $startTime, $endTime, $startDate, $endDate);
-    $checkInStmt->fetch();
-    $checkInStmt->close();
 
-    // Debugging statements
-    echo "Status: Debug\n";
-    echo "Current Date: $currentDate\n";
-    echo "Check-in Date: $checkIn\n";
+    if ($checkInStmt->fetch()) {
+        // Debugging statement
+        echo "Fetched data successfully.\n";
 
-    if ($checkIn) {
-        echo "You checked in at: $checkIn during the class from $startTime to $endTime on $startDate.";
+        if ($checkIn) {
+            echo "You checked in at: $checkIn during the class from $startTime to $endTime on $startDate.";
+        } else {
+            echo "No check-in records found for the specified class on $currentDate.";
+        }
     } else {
-        echo "No check-in records found for the specified class on $currentDate.";
+        // Debugging statement
+        echo "Failed to fetch data.\n";
     }
+
+    $checkInStmt->close();
 } else {
     // Handle the case where the request method is not POST
     echo "Invalid request method.";
 }
-
 ?>
