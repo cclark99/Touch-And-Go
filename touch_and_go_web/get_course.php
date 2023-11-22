@@ -10,7 +10,7 @@ if (
                                   course.endTime,  
                                   course.location,
                                   course.prefix,
-                                  course.daysOfWeek
+                                  course.daysOfWeek,
                                   professor.userId,
                                   professor.firstName,
                                   professor.lastName,
