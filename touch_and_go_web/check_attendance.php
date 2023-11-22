@@ -27,15 +27,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $checkInStmt->bind_param('ii', $userId, $courseId);
         $checkInStmt->execute();
-        $checkInStmt->bind_result($checkIn, $startTime, $endTime, $startDate, $endDate);
 
-        if ($checkInStmt->fetch()) {
+        if ($checkInStmt->errno) {
             // Debugging statement
-            echo "Fetched data successfully.\n";
-            echo "checkIn: $checkIn, startTime: $startTime, endTime: $endTime, startDate: $startDate, endDate: $endDate";
+            echo "Execute failed: (" . $checkInStmt->errno . ") " . $checkInStmt->error;
         } else {
-            // Debugging statement
-            echo "Failed to fetch data. Error: " . $checkInStmt->error;
+            $checkInStmt->bind_result($checkIn, $startTime, $endTime, $startDate, $endDate);
+
+            if ($checkInStmt->fetch()) {
+                // Debugging statement
+                echo "Fetched data successfully.\n";
+                echo "checkIn: $checkIn, startTime: $startTime, endTime: $endTime, startDate: $startDate, endDate: $endDate";
+            } else {
+                // Debugging statement
+                echo "Failed to fetch data. Error: " . $checkInStmt->error;
+            }
         }
 
         $checkInStmt->close();
