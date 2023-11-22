@@ -16,12 +16,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Check if the current day is within the daysOfWeek for the course and if the date is within the current week
     $checkInQuery = "SELECT f.checkIn, c.startTime, c.endTime, c.startDate, c.endDate, c.daysOfWeek
-                     FROM fingerprint f
-                     JOIN course c ON f.checkIn BETWEEN CONCAT(c.startDate, ' ', c.startTime) AND CONCAT(c.endDate, ' ', c.endTime)
-                     WHERE f.userId = ? AND c.courseId = ? AND FIND_IN_SET(?, REPLACE(c.daysOfWeek, '', ','))
-                        AND DAYOFWEEK(f.checkIn) = DAYOFWEEK(CURDATE()) -- Check for the current day of the week
-                        AND DATE(f.checkIn) BETWEEN ? AND ?
-                     ORDER BY f.checkIn DESC";
+                 FROM fingerprint f
+                 JOIN course c ON f.checkIn BETWEEN CONCAT(c.startDate, ' ', c.startTime) AND CONCAT(c.endDate, ' ', c.endTime)
+                 WHERE f.userId = ? AND c.courseId = ? 
+                   AND (
+                       FIND_IN_SET(?, REPLACE(c.daysOfWeek, '', ',')) > 0
+                       OR c.daysOfWeek LIKE CONCAT('%', ?, '%') -- Check if the current day is in the daysOfWeek string
+                   )
+                   AND DAYOFWEEK(f.checkIn) = DAYOFWEEK(CURDATE())
+                   AND DATE(f.checkIn) BETWEEN ? AND ?
+                 ORDER BY f.checkIn DESC";
 
     $checkInStmt = $con->prepare($checkInQuery);
     $checkInStmt->bind_param('iisss', $userId, $courseId, $currentDay, $currentWeekStart, $currentWeekEnd);
