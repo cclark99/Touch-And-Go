@@ -3,7 +3,6 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-
 require 'db_connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -19,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $checkInQuery = "SELECT f.checkIn, c.startTime, c.endTime, c.startDate, c.endDate, c.daysOfWeek
                      FROM fingerprint f
                      JOIN course c ON f.checkIn BETWEEN CONCAT(c.startDate, ' ', c.startTime) AND CONCAT(c.endDate, ' ', c.endTime)
-                     WHERE f.userId = ? AND c.courseId = ? AND FIND_IN_SET(?, c.daysOfWeek) > 0
+                     WHERE f.userId = ? AND c.courseId = ? AND FIND_IN_SET(?, REPLACE(c.daysOfWeek, '', ','))
                         AND DATE(f.checkIn) BETWEEN ? AND ?
                      ORDER BY f.checkIn DESC";
 
@@ -55,8 +54,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Handle the case where the request method is not POST
     echo "Invalid request method.";
 }
-
-
-
 
 ?>
