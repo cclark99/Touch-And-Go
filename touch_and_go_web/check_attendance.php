@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo "checkIn: $checkIn, startTime: $startTime, endTime: $endTime, startDate: $startDate, endDate: $endDate";
             } else {
                 // Debugging statement
-                die("Failed to fetch data. Error: " . $checkInStmt->error);
+                die("No data fetched. Error: " . $checkInStmt->error);
             }
         }
 
