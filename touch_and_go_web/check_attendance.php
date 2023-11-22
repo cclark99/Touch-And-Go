@@ -19,14 +19,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                  ORDER BY f.checkIn DESC
                  LIMIT 1";
 
-    echo "Debug SQL: $checkInQuery"; // Add this line for debugging
-
     $checkInStmt = $con->prepare($checkInQuery);
     $checkInStmt->bind_param('ii', $userId, $courseId);
     $checkInStmt->execute();
     $checkInStmt->bind_result($checkIn, $startTime, $endTime, $startDate, $endDate);
     $checkInStmt->fetch();
     $checkInStmt->close();
+
+    // Debugging statements
+    echo "Status: Debug\n";
+    echo "Current Date: $currentDate\n";
+    echo "Check-in Date: $checkIn\n";
 
     if ($checkIn) {
         echo "You checked in at: $checkIn during the class from $startTime to $endTime on $startDate.";
