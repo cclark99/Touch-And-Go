@@ -27,12 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($checkInStmt->fetch()) {
         // Debugging statement
         echo "Fetched data successfully.\n";
-
-        if ($checkIn) {
-            echo "You checked in at: $checkIn during the class from $startTime to $endTime on $startDate.";
-        } else {
-            echo "Check-in data found, but checkIn value is null.";
-        }
+        echo "checkIn: $checkIn, startTime: $startTime, endTime: $endTime, startDate: $startDate, endDate: $endDate";
     } else {
         // Debugging statement
         echo "Failed to fetch data. Error: " . $con->error;
