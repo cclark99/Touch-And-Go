@@ -17,7 +17,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                  JOIN course c ON f.checkIn BETWEEN CONCAT(c.startDate, ' ', c.startTime) AND CONCAT(c.endDate, ' ', c.endTime)
                  WHERE f.userId = ? AND c.courseId = ? AND DATE(f.checkIn) = CURDATE()
                  ORDER BY f.checkIn DESC
-                 LIMIT 1";  // Limit to one result since we only want the latest check-in
+                 LIMIT 1";
+
+    echo "Debug SQL: $checkInQuery"; // Add this line for debugging
 
     $checkInStmt = $con->prepare($checkInQuery);
     $checkInStmt->bind_param('ii', $userId, $courseId);
@@ -25,7 +27,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $checkInStmt->bind_result($checkIn, $startTime, $endTime, $startDate, $endDate);
     $checkInStmt->fetch();
     $checkInStmt->close();
-
 
     if ($checkIn) {
         echo "You checked in at: $checkIn during the class from $startTime to $endTime on $startDate.";
