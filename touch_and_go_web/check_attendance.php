@@ -34,6 +34,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             $checkInStmt->bind_result($checkIn, $startTime, $endTime, $startDate, $endDate);
 
+            // Debugging statement
+            echo "Debug SQL: " . $checkInQuery . "\n";
+
             if ($checkInStmt->fetch()) {
                 // Debugging statement
                 echo "Fetched data successfully.\n";
