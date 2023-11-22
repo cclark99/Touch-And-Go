@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $courseId = $_POST['courseId'] ?? null;
     $userId = $_SESSION['id'] ?? null;
 
-    $checkInQuery = "SELECT f.checkIn, c.startTime, c.endTime, c.startDate, c.endDate
+    $checkInQuery = "SELECT f.checkIn, c.startTime, c.endTime, c.startDate, c.endDate, c.daysOfWeek
                      FROM fingerprint f
                      JOIN course c ON f.checkIn BETWEEN CONCAT(c.startDate, ' ', c.startTime) AND CONCAT(c.endDate, ' ', c.endTime)
                      WHERE f.userId = ? AND c.courseId = ?
@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $checkInStmt = $con->prepare($checkInQuery);
     $checkInStmt->bind_param('ii', $userId, $courseId);
     $checkInStmt->execute();
-    $checkInStmt->bind_result($checkIn, $startTime, $endTime, $startDate, $endDate);
+    $checkInStmt->bind_result($checkIn, $startTime, $endTime, $startDate, $endDate, $daysOfWeek);
     $checkInStmt->fetch();
     $checkInStmt->close();
 
