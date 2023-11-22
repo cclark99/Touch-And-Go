@@ -23,14 +23,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (!$checkInStmt) {
         // Debugging statement
-        echo "Prepare failed: (" . $con->errno . ") " . $con->error;
+        die("Prepare failed: (" . $con->errno . ") " . $con->error);
     } else {
         $checkInStmt->bind_param('ii', $userId, $courseId);
         $checkInStmt->execute();
 
         if ($checkInStmt->errno) {
             // Debugging statement
-            echo "Execute failed: (" . $checkInStmt->errno . ") " . $checkInStmt->error;
+            die("Execute failed: (" . $checkInStmt->errno . ") " . $checkInStmt->error);
         } else {
             $checkInStmt->bind_result($checkIn, $startTime, $endTime, $startDate, $endDate);
 
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo "checkIn: $checkIn, startTime: $startTime, endTime: $endTime, startDate: $startDate, endDate: $endDate";
             } else {
                 // Debugging statement
-                echo "Failed to fetch data. Error: " . $checkInStmt->error;
+                die("Failed to fetch data. Error: " . $checkInStmt->error);
             }
         }
 
