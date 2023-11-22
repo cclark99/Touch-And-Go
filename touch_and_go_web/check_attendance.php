@@ -20,11 +20,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                  LIMIT 1";  // Limit to one result since we only want the latest check-in
 
     $checkInStmt = $con->prepare($checkInQuery);
-    $checkInStmt->bind_param('iis', $userId, $courseId, $currentDate);
+    $checkInStmt->bind_param('ii', $userId, $courseId);
     $checkInStmt->execute();
     $checkInStmt->bind_result($checkIn, $startTime, $endTime, $startDate, $endDate);
     $checkInStmt->fetch();
     $checkInStmt->close();
+
 
     if ($checkIn) {
         echo "You checked in at: $checkIn during the class from $startTime to $endTime on $startDate.";
