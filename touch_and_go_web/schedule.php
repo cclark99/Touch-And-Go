@@ -2,6 +2,10 @@
 
 session_start();
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 if (!isset($_SESSION['loggedin'])) {
   header('Location: index.php');
   exit();
@@ -95,7 +99,7 @@ include 'get_course.php';
         <div class="answer"> <!-- start of div tag with answer class -->
           <!-- display answer to first question -->
           <p>Time: ' . date('g:i A', strtotime($row['startTime'])) . ' - ' . date('g:i A', strtotime($row['endTime'])) . '<br>
-            Professor: ' . $row['firstName'] . ' ' .  $row['lastName'] . ' <br>
+            Professor: ' . $row['firstName'] . ' ' . $row['lastName'] . ' <br>
             Location: ' . $row['location'] . ' <br>
           </p>
         </div>';
