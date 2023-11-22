@@ -19,6 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                      FROM fingerprint f
                      JOIN course c ON f.checkIn BETWEEN CONCAT(c.startDate, ' ', c.startTime) AND CONCAT(c.endDate, ' ', c.endTime)
                      WHERE f.userId = ? AND c.courseId = ? AND FIND_IN_SET(?, REPLACE(c.daysOfWeek, '', ','))
+                        AND DAYOFWEEK(f.checkIn) = DAYOFWEEK(CURDATE()) -- Check for the current day of the week
                         AND DATE(f.checkIn) BETWEEN ? AND ?
                      ORDER BY f.checkIn DESC";
 
