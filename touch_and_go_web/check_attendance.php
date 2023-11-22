@@ -31,11 +31,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($checkIn) {
             echo "You checked in at: $checkIn during the class from $startTime to $endTime on $startDate.";
         } else {
-            echo "No check-in records found for the specified class on $currentDate.";
+            echo "Check-in data found, but checkIn value is null.";
         }
     } else {
         // Debugging statement
-        echo "Failed to fetch data.\n";
+        echo "Failed to fetch data. Error: " . $con->error;
     }
 
     $checkInStmt->close();
