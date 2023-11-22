@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                      ORDER BY f.checkIn desc";
 
     $checkInStmt = $con->prepare($checkInQuery);
-    $checkInStmt->bind_param('isi', $userId, $courseId, $currentDayOfWeek);
+    $checkInStmt->bind_param('iss', $userId, $courseId, $currentDayOfWeek);
     $checkInStmt->execute();
     $checkInStmt->bind_result($checkIn, $startTime, $endTime, $startDate, $endDate, $daysOfWeek);
     $checkInStmt->fetch();
