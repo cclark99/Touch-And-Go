@@ -10,9 +10,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $checkInQuery = "SELECT f.checkIn
                      FROM fingerprint f
-                     JOIN course c ON f.checkIn BETWEEN CONCAT(c.startDate, ' ', c.startTime) AND CONCAT(c.endDate, ' ', c.endTime)
+                     JOIN course c ON f.checkIn BETWEEN CONCAT(CURDATE(), ' ', c.startTime) AND CONCAT(CURDATE(), ' ', c.endTime)
                      WHERE f.userId = ? AND c.courseId = ?
-                     AND f.checkIn >= CURDATE() AND f.checkIn < CURDATE() + INTERVAL 1 DAY
+                     AND DATE(f.checkIn) = CURDATE()
                      ORDER BY f.checkIn DESC
                      LIMIT 1";
 
@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($checkInStmt->fetch()) {
                 // Format the attendance time in a readable format
                 $formattedTime = date('l, F j, Y g:i A', strtotime($checkIn));
-                echo "Attendance recorded.</br>Time checked in: $formattedTime";
+                echo "Attendance recorded. <br>Time checked in: $formattedTime";
             } else {
                 echo "No attendance recorded.";
             }
