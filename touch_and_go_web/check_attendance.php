@@ -8,16 +8,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $courseId = $_POST['courseId'] ?? null;
     $userId = $_SESSION['id'] ?? null;
 
-    // Get the current date and time
-    $currentDateTime = date('Y-m-d H:i:s');
-
     $checkInQuery = "SELECT f.checkIn
-                 FROM fingerprint f
-                 JOIN course c ON f.checkIn BETWEEN CONCAT(c.startDate, ' ', c.startTime) AND CONCAT(c.endDate, ' ', c.endTime)
-                 WHERE f.userId = ? AND c.courseId = ?
-                 AND f.checkIn >= CURDATE() AND f.checkIn < CURDATE() + INTERVAL 1 DAY
-                 ORDER BY f.checkIn DESC
-                 LIMIT 1";
+                     FROM fingerprint f
+                     JOIN course c ON f.checkIn BETWEEN CONCAT(c.startDate, ' ', c.startTime) AND CONCAT(c.endDate, ' ', c.endTime)
+                     WHERE f.userId = ? AND c.courseId = ?
+                     AND f.checkIn >= CURDATE() AND f.checkIn < CURDATE() + INTERVAL 1 DAY
+                     ORDER BY f.checkIn DESC
+                     LIMIT 1";
 
     $checkInStmt = $con->prepare($checkInQuery);
 
@@ -33,13 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $checkInStmt->bind_result($checkIn);
 
             if ($checkInStmt->fetch()) {
-                // Check if the retrieved check-in time is within an acceptable range
-                // You may need to adjust this condition based on your specific requirements
-                if (strtotime($checkIn) >= strtotime($currentDateTime) - 3600) {
-                    echo "Attendance recorded.";
-                } else {
-                    echo "No attendance recorded within the time range.";
-                }
+                echo "Attendance recorded.";
             } else {
                 echo "No attendance recorded.";
             }
