@@ -12,11 +12,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $currentDateTime = date('Y-m-d H:i:s');
 
     $checkInQuery = "SELECT f.checkIn
-                     FROM fingerprint f
-                     JOIN course c ON f.checkIn BETWEEN CONCAT(c.startDate, ' ', c.startTime) AND CONCAT(c.endDate, ' ', c.endTime)
-                     WHERE f.userId = ? AND c.courseId = ? AND DATE(f.checkIn) = CURDATE()
-                     ORDER BY f.checkIn DESC
-                     LIMIT 1";
+                 FROM fingerprint f
+                 JOIN course c ON f.checkIn BETWEEN CONCAT(c.startDate, ' ', c.startTime) AND CONCAT(c.endDate, ' ', c.endTime)
+                 WHERE f.userId = ? AND c.courseId = ?
+                 AND f.checkIn >= CURDATE() AND f.checkIn < CURDATE() + INTERVAL 1 DAY
+                 ORDER BY f.checkIn DESC
+                 LIMIT 1";
 
     $checkInStmt = $con->prepare($checkInQuery);
 
