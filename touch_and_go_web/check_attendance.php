@@ -8,9 +8,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $courseId = $_POST['courseId'] ?? null;
     $userId = $_SESSION['id'] ?? null;
 
-    // Debugging statement
-    echo "UserID: $userId, CourseID: $courseId<br>";
-
     $checkInQuery = "SELECT f.checkIn
                      FROM fingerprint f
                      JOIN course c ON f.checkIn BETWEEN CONCAT(c.startDate, ' ', c.startTime) AND CONCAT(c.endDate, ' ', c.endTime)
@@ -22,23 +19,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $checkInStmt = $con->prepare($checkInQuery);
 
     if (!$checkInStmt) {
-        // Debugging statement
         die("Prepare failed: (" . $con->errno . ") " . $con->error);
     } else {
         $checkInStmt->bind_param('ii', $userId, $courseId);
         $checkInStmt->execute();
 
         if ($checkInStmt->errno) {
-            // Debugging statement
             die("Execute failed: (" . $checkInStmt->errno . ") " . $checkInStmt->error);
         } else {
             $checkInStmt->bind_result($checkIn);
 
             if ($checkInStmt->fetch()) {
-                // Debugging statement
-                echo "Attendance recorded. CheckIn: $checkIn";
+                // Format the attendance time in a readable format
+                $formattedTime = date('l, F j, Y g:i A', strtotime($checkIn));
+                echo "Attendance recorded. CheckIn Time: $formattedTime";
             } else {
-                // Debugging statement
                 echo "No attendance recorded.";
             }
         }
@@ -46,7 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $checkInStmt->close();
     }
 } else {
-    // Debugging statement
     echo "Invalid request method.";
 }
 ?>
