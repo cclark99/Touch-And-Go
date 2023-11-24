@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($checkInStmt->fetch()) {
                 // Format the attendance time in a readable format
                 $formattedTime = date('l, F j, Y g:i A', strtotime($checkIn));
-                echo "Attendance recorded. \nTime checked in: $formattedTime";
+                echo "Attendance recorded.</br>Time checked in: $formattedTime";
             } else {
                 echo "No attendance recorded.";
             }
