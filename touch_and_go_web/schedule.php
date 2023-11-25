@@ -13,6 +13,7 @@ if (!isset($_SESSION['loggedin'])) {
 
 require 'db_connection.php';
 include 'get_course.php';
+include 'get_weekday_course.php';
 
 ?>
 
@@ -88,8 +89,8 @@ include 'get_course.php';
     <div class="dropdown"> <!-- start of ul tag with dropdown class -->
 
       <?php
-      if ($course_array) {
-        foreach ($course_array as $row) {
+      if ($todayCourse_array) {
+        foreach ($todayCourse_array as $row) {
           echo '<div class="question"> <!-- start of div tag with question class -->
           <!-- create arrow -->
           <span class="arrow"></span>
