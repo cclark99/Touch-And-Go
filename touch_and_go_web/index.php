@@ -10,6 +10,20 @@
    <title>Login</title>
    <!-- link external styles.css sheet -->
    <link rel="stylesheet" type="text/css" href="../styles.css">
+   <style>
+      .faq-link {
+         position: fixed;
+         bottom: 10px;
+         right: 10px;
+         text-align: right;
+         font-size: 14px;
+      }
+
+      .faq-link a {
+         color: #333;
+         text-decoration: none;
+      }
+   </style>
 </head> <!-- end of head tag -->
 
 <body> <!-- start of body tag -->
@@ -47,6 +61,9 @@
 
    <h3 style="text-align: center;">Need an account? <a href="register.php">Register Here</a></h3>
 
+   <div class="faq-link">
+      <a href="faq.php">FAQ</a>
+   </div>
 </body> <!-- end of body tag -->
 
 </html> <!-- end of html tag -->
