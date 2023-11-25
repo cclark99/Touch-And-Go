@@ -359,15 +359,14 @@ require 'db_connection.php';
 
     <script>
         function courseSearch() {
-            // (A) GET SEARCH TERM
+            // Get search term
             var data = new FormData(document.getElementById("courseSearch"));
             data.append("ajax", 1);
 
-            // (B) AJAX SEARCH REQUEST
+            // AJAX search request
             fetch("courseSearch.php", { method: "POST", body: data })
                 .then(res => res.json())
                 .then(res => {
-                    console.log("JSON Response:", JSON.stringify(res, null, 2)); // Add this line for debugging
                     var wrapper = document.getElementById("courseResults");
                     if (res.length > 0) {
                         wrapper.innerHTML = ""; // Clear previous results
@@ -445,7 +444,6 @@ require 'db_connection.php';
                         wrapper.innerHTML = "No results found";
                     }
                 })
-                .catch(error => console.error("Error:", error)); // Add this line for error handling
             return false;
         }
 
@@ -461,8 +459,6 @@ require 'db_connection.php';
             fetch("studentSearch.php", { method: "POST", body: data })
                 .then(res => res.json())
                 .then(res => {
-                    console.log("JSON Response:", JSON.stringify(res, null, 2));
-
                     var wrapper = document.getElementById("studentResults");
                     if (res.length > 0) {
                         wrapper.innerHTML = ""; // Clear previous results
@@ -509,7 +505,7 @@ require 'db_connection.php';
                         wrapper.innerHTML = "No results found";
                     }
                 })
-                .catch(error => console.error("Error:", error));
+
             return false;
         }
 
@@ -525,8 +521,6 @@ require 'db_connection.php';
             fetch("professorSearch.php", { method: "POST", body: data })
                 .then(res => res.json())
                 .then(res => {
-                    console.log("JSON Response:", JSON.stringify(res, null, 2));
-
                     var wrapper = document.getElementById("professorResults");
                     if (res.length > 0) {
                         wrapper.innerHTML = ""; // Clear previous results
@@ -573,7 +567,6 @@ require 'db_connection.php';
                         wrapper.innerHTML = "No results found";
                     }
                 })
-                .catch(error => console.error("Error:", error));
             return false;
         }
 

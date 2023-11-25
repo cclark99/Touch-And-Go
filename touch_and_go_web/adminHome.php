@@ -454,7 +454,6 @@ switch (true) {
             fetch("userSearch.php", { method: "POST", body: data })
                 .then(res => res.json())
                 .then(res => {
-                    console.log("JSON Response:", JSON.stringify(res, null, 2)); // Add this line for debugging
                     var wrapper = document.getElementById("results");
                     if (res.length > 0) {
                         wrapper.innerHTML = ""; // Clear previous results
@@ -517,7 +516,6 @@ switch (true) {
                         wrapper.innerHTML = "No results found";
                     }
                 })
-                .catch(error => console.error("Error:", error)); // Add this line for error handling
             return false;
         }
 
