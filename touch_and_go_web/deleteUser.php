@@ -19,6 +19,11 @@ if ($stmtUser = $con->prepare("DELETE FROM user WHERE userId = ?")) {
             $stmtStudent = $con->prepare("DELETE FROM student WHERE userId = ?");
             $stmtStudent->bind_param("i", $userId);
             $stmtStudent->execute();
+
+            $stmtFingerprint = $con->prepare("DELETE FROM fingerprint WHERE userId = ?");
+            $stmtFingerprint->bind_param("i", $userId);
+            $stmtFingerprint->execute();
+            
             // Redirect back to the search page with a success message
             $_SESSION['updateMsg'] = 'Successfully updated Student: ' . $userId;
             header('Location: adminHome.php');
