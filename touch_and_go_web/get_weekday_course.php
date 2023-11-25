@@ -35,10 +35,15 @@ if (
 
             // Get the current day of the week (e.g., "Monday")
             $currentDay = date('l');
+            $currentDate = date('Y-m-d');
 
             foreach ($rows as $row) {
                 // Check if the current day is in the daysOfWeek string
-                if (strpos($row['daysOfWeek'], $currentDay) !== false) {
+                // and if the current date is within the range of startDate and endDate
+                if (
+                    strpos($row['daysOfWeek'], $currentDay) !== false &&
+                    ($currentDate >= $row['startDate'] && $currentDate <= $row['endDate'])
+                ) {
                     $todayCourse_array[] = $row;
                 }
             }
