@@ -14,6 +14,7 @@ if (!isset($_SESSION['loggedin'])) {
 
 require 'db_connection.php';
 include 'get_course.php';
+include 'get_weekday_course.php';
 
 ?>
 <!DOCTYPE html>
