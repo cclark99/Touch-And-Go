@@ -256,17 +256,21 @@ include 'get_weekday_course.php';
 
     <div class="dropdown"> <!-- start of ul tag with dropdown class -->
       <?php
+
       if ($course_array) {
         foreach ($course_array as $row) {
           echo '<div class="question"> <!-- start of div tag with question class -->
-            <!-- create arrow -->
-            <span class="arrow"></span>
-            <!-- display first question -->
-            <span>' . $row['name'] . '</span>
-          </div> <!-- end of div tag -->
-          <div class="answer"> <!-- start of div tag with answer class -->
-            <!-- display answer to first question -->
-            <p>';
+          <!-- create arrow -->
+          <span class="arrow"></span>
+          <!-- display first question -->
+          <span>' . $row['name'] . '</span>
+        </div> <!-- end of div tag -->
+        <div class="answer"> <!-- start of div tag with answer class -->
+          <!-- display answer to first question -->
+          <p>';
+
+          // Print the raw 'daysOfWeek' field value for debugging
+          echo 'Raw Days of Week: ' . $row['daysOfWeek'] . '<br>';
 
           // Clean the 'daysOfWeek' field by removing non-alphabetic characters
           $cleanedDaysOfWeek = preg_replace('/[^a-zA-Z]/', '', $row['daysOfWeek']);
@@ -277,35 +281,7 @@ include 'get_weekday_course.php';
           // Debugging output
           echo 'Meeting Days: ' . implode(', ', $meetingDays) . '<br>';
 
-          // Generate an array of dates within the range of startDate and endDate
-          $startDate = new DateTime($row['startDate']);
-          $endDate = new DateTime($row['endDate']);
-          $interval = new DateInterval('P1D'); // 1 day interval
-          $dateRange = new DatePeriod($startDate, $interval, $endDate);
-
-          // Count the occurrences of each meeting day
-          $meetingDayCounts = array_fill_keys(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], 0);
-
-          foreach ($dateRange as $date) {
-            $dayOfWeek = $date->format('l'); // Get the day of the week (e.g., 'Monday')
-            if (in_array($dayOfWeek, $meetingDays)) {
-              $meetingDayCounts[$dayOfWeek]++;
-            }
-          }
-
-          // Debugging output
-          echo 'Meeting Day Counts: ';
-          print_r($meetingDayCounts);
-
-          // Print the total meeting times for each day
-          foreach ($meetingDayCounts as $day => $count) {
-            if ($count > 0) {
-              echo "$day: $count times<br>";
-            }
-          }
-
-          echo '</p>
-          </div>';
+          // ... (rest of the code remains unchanged)
         }
       } else {
         echo '<span style="color: #FAF8D6; line-height: 1.5em; padding-left: 2%; padding-right: 2%;">No classes found...</span>';
