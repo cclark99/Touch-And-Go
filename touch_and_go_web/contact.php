@@ -89,23 +89,33 @@ include 'get_course.php';
 
     <ul class="dropdown"> <!-- start of ul tag with dropdown class -->
       <?php
+      $printedProfessorIds = []; // Initialize an array to store printed professor IDs
+      
       if ($course_array) {
         foreach ($course_array as $row) {
-          echo '<div class="question"> <!-- start of div tag with question class -->
-            <!-- create arrow -->
-            <span class="arrow"></span>
-            <!-- display first professor -->
-            <span>' . $row['firstName'] . ' ' . $row['lastName'] . '</span>
-          </div> <!-- end of div tag -->
-          <div class="answer"> <!-- start of div tag with answer class -->
-            <!-- display professor information -->
-            <p>Email: <a class="link" href="mailto:' . $row['userEmail'] . '">' . $row['userEmail'] . '</a><br>
-              Phone: '. $row['phone'] .'<br>
-              Office Hours:<br>
-              - M/W: 4:30 - 5:00 PM<br>
-              - T/TH: 1:00 - 3:00 PM<br>
-            </p>
-          </div><!-- end of div tag -->';
+          $professorId = $row['professorId']; // Assuming 'professorId' is the unique identifier for each professor
+      
+          // Check if the professor ID has already been printed
+          if (!in_array($professorId, $printedProfessorIds)) {
+            echo '<div class="question"> <!-- start of div tag with question class -->
+                <!-- create arrow -->
+                <span class="arrow"></span>
+                <!-- display first professor -->
+                <span>' . $row['firstName'] . ' ' . $row['lastName'] . '</span>
+              </div> <!-- end of div tag -->
+              <div class="answer"> <!-- start of div tag with answer class -->
+                <!-- display professor information -->
+                <p>Email: <a class="link" href="mailto:' . $row['userEmail'] . '">' . $row['userEmail'] . '</a><br>
+                  Phone: ' . $row['phone'] . '<br>
+                  Office Hours:<br>
+                  - M/W: 4:30 - 5:00 PM<br>
+                  - T/TH: 1:00 - 3:00 PM<br>
+                </p>
+              </div><!-- end of div tag -->';
+
+            // Add the professor ID to the list of printed IDs
+            $printedProfessorIds[] = $professorId;
+          }
         }
       } else {
         echo '<span style="color: #FAF8D6; line-height: 1.5em; padding-left: 2%; padding-right: 2%;">No classes today </span>';
