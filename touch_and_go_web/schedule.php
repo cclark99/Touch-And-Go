@@ -91,6 +91,8 @@ include 'get_weekday_course.php';
       <?php
       if ($todayCourse_array) {
         foreach ($todayCourse_array as $row) {
+          // Replace occurrences of each day with day + space
+          $formattedDays = str_replace(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], ['Monday ', 'Tuesday ', 'Wednesday ', 'Thursday ', 'Friday ', 'Saturday ', 'Sunday '], $row['daysOfWeek']);
           echo '<div class="question"> <!-- start of div tag with question class -->
           <!-- create arrow -->
           <span class="arrow"></span>
@@ -126,6 +128,8 @@ include 'get_weekday_course.php';
       <?php
       if ($course_array) {
         foreach ($course_array as $row) {
+          // Replace occurrences of each day with day + space
+          $formattedDays = str_replace(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], ['Monday ', 'Tuesday ', 'Wednesday ', 'Thursday ', 'Friday ', 'Saturday ', 'Sunday '], $row['daysOfWeek']);
           echo '<div class="question"> <!-- start of div tag with question class -->
           <!-- create arrow -->
           <span class="arrow"></span>
