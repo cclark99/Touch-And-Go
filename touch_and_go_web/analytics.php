@@ -256,20 +256,24 @@ include 'get_weekday_course.php';
 
     <div class="dropdown"> <!-- start of ul tag with dropdown class -->
       <?php
+
       if ($course_array) {
         foreach ($course_array as $row) {
           echo '<div class="question"> <!-- start of div tag with question class -->
-                <!-- create arrow -->
-                <span class="arrow"></span>
-                <!-- display first question -->
-                <span>' . $row['name'] . '</span>
-              </div> <!-- end of div tag -->
-              <div class="answer"> <!-- start of div tag with answer class -->
-                <!-- display answer to first question -->
-                <p>';
+            <!-- create arrow -->
+            <span class="arrow"></span>
+            <!-- display first question -->
+            <span>' . $row['name'] . '</span>
+          </div> <!-- end of div tag -->
+          <div class="answer"> <!-- start of div tag with answer class -->
+            <!-- display answer to first question -->
+            <p>';
 
           // Parse the 'daysOfWeek' field to get an array of meeting days
           $meetingDays = str_split($row['daysOfWeek']);
+
+          // Debugging output
+          echo 'Meeting Days: ' . implode(', ', $meetingDays) . '<br>';
 
           // Generate an array of dates within the range of startDate and endDate
           $startDate = new DateTime($row['startDate']);
@@ -286,14 +290,20 @@ include 'get_weekday_course.php';
               $meetingDayCounts[$dayOfWeek]++;
             }
           }
+
+          // Debugging output
+          echo 'Meeting Day Counts: ';
+          print_r($meetingDayCounts);
+
           // Print the total meeting times for each day
           foreach ($meetingDayCounts as $day => $count) {
             if ($count > 0) {
               echo "$day: $count times<br>";
             }
           }
+
           echo '</p>
-              </div>';
+          </div>';
         }
       } else {
         echo '<span style="color: #FAF8D6; line-height: 1.5em; padding-left: 2%; padding-right: 2%;">No classes found...</span>';
