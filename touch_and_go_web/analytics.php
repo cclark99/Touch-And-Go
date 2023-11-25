@@ -256,7 +256,6 @@ include 'get_weekday_course.php';
 
     <div class="dropdown"> <!-- start of ul tag with dropdown class -->
       <?php
-
       if ($course_array) {
         foreach ($course_array as $row) {
           echo '<div class="question"> <!-- start of div tag with question class -->
@@ -269,8 +268,11 @@ include 'get_weekday_course.php';
             <!-- display answer to first question -->
             <p>';
 
-          // Parse the 'daysOfWeek' field to get an array of meeting days
-          $meetingDays = str_split($row['daysOfWeek']);
+          // Clean the 'daysOfWeek' field by removing non-alphabetic characters
+          $cleanedDaysOfWeek = preg_replace('/[^a-zA-Z]/', '', $row['daysOfWeek']);
+
+          // Parse the cleaned 'daysOfWeek' field to get an array of meeting days
+          $meetingDays = str_split($cleanedDaysOfWeek);
 
           // Debugging output
           echo 'Meeting Days: ' . implode(', ', $meetingDays) . '<br>';
