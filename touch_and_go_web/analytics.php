@@ -281,7 +281,35 @@ include 'get_weekday_course.php';
           // Debugging output
           echo 'Meeting Days: ' . implode(', ', $meetingDays) . '<br>';
 
-          // ... (rest of the code remains unchanged)
+          // Generate an array of dates within the range of startDate and endDate
+          $startDate = new DateTime($row['startDate']);
+          $endDate = new DateTime($row['endDate']);
+          $interval = new DateInterval('P1D'); // 1 day interval
+          $dateRange = new DatePeriod($startDate, $interval, $endDate);
+
+          // Count the occurrences of each meeting day
+          $meetingDayCounts = array_fill_keys(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], 0);
+
+          foreach ($dateRange as $date) {
+            $dayOfWeek = $date->format('l'); // Get the day of the week (e.g., 'Monday')
+            if (in_array($dayOfWeek, $meetingDays)) {
+              $meetingDayCounts[$dayOfWeek]++;
+            }
+          }
+
+          // Debugging output
+          echo 'Meeting Day Counts: ';
+          print_r($meetingDayCounts);
+
+          // Print the total meeting times for each day
+          foreach ($meetingDayCounts as $day => $count) {
+            if ($count > 0) {
+              echo "$day: $count times<br>";
+            }
+          }
+
+          echo '</p>
+        </div>';
         }
       } else {
         echo '<span style="color: #FAF8D6; line-height: 1.5em; padding-left: 2%; padding-right: 2%;">No classes found...</span>';
