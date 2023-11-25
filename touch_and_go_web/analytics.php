@@ -255,21 +255,18 @@ include 'get_weekday_course.php';
     <h3>Total Semester Attendance</h3>
 
     <div class="dropdown"> <!-- start of ul tag with dropdown class -->
-
       <?php
-      // ... Your existing code ...
-      
       if ($course_array) {
         foreach ($course_array as $row) {
           echo '<div class="question"> <!-- start of div tag with question class -->
-            <!-- create arrow -->
-            <span class="arrow"></span>
-            <!-- display first question -->
-            <span>' . $row['name'] . '</span>
-          </div> <!-- end of div tag -->
-          <div class="answer"> <!-- start of div tag with answer class -->
-            <!-- display answer to first question -->
-            <p>';
+                <!-- create arrow -->
+                <span class="arrow"></span>
+                <!-- display first question -->
+                <span>' . $row['name'] . '</span>
+              </div> <!-- end of div tag -->
+              <div class="answer"> <!-- start of div tag with answer class -->
+                <!-- display answer to first question -->
+                <p>';
 
           // Parse the 'daysOfWeek' field to get an array of meeting days
           $meetingDays = str_split($row['daysOfWeek']);
@@ -289,20 +286,19 @@ include 'get_weekday_course.php';
               $meetingDayCounts[$dayOfWeek]++;
             }
           }
-
           // Print the total meeting times for each day
           foreach ($meetingDayCounts as $day => $count) {
-            echo "$day: $count times<br>";
+            if ($count > 0) {
+              echo "$day: $count times<br>";
+            }
           }
-
           echo '</p>
-          </div>';
+              </div>';
         }
       } else {
         echo '<span style="color: #FAF8D6; line-height: 1.5em; padding-left: 2%; padding-right: 2%;">No classes found...</span>';
       }
       ?>
-
 
       <script>
         // set variables
