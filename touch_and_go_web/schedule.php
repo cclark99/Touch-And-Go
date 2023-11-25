@@ -100,8 +100,9 @@ include 'get_weekday_course.php';
         <div class="answer"> <!-- start of div tag with answer class -->
           <!-- display answer to first question -->
           <p>Time: ' . date('g:i A', strtotime($row['startTime'])) . ' - ' . date('g:i A', strtotime($row['endTime'])) . '<br>
-            Professor: ' . $row['firstName'] . ' ' . $row['lastName'] . ' <br>
-            Location: ' . $row['location'] . ' <br>
+             Meeting Days: ' . $row['daysOfWeek'] . '<br>
+             Professor: ' . $row['firstName'] . ' ' . $row['lastName'] . ' <br>
+             Location: ' . $row['location'] . ' <br>
           </p>
         </div>';
         }
@@ -134,8 +135,9 @@ include 'get_weekday_course.php';
         <div class="answer"> <!-- start of div tag with answer class -->
           <!-- display answer to first question -->
           <p>Time: ' . date('g:i A', strtotime($row['startTime'])) . ' - ' . date('g:i A', strtotime($row['endTime'])) . '<br>
-            Professor: ' . $row['firstName'] . ' ' . $row['lastName'] . '<br>
-            Location: ' . $row['location'] . ' <br>
+             Meeting Days: ' . $row['daysOfWeek'] . '<br>
+             Professor: ' . $row['firstName'] . ' ' . $row['lastName'] . '<br>
+             Location: ' . $row['location'] . ' <br>
           </p>
         </div>';
         }
