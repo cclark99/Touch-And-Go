@@ -10,6 +10,20 @@
    <title>Register</title>
    <!-- link external styles.css sheet -->
    <link rel="stylesheet" type="text/css" href="styles.css">
+   <style>
+      .faq-link {
+         position: fixed;
+         bottom: 10px;
+         right: 10px;
+         text-align: right;
+         font-size: 26px;
+      }
+
+      .faq-link a {
+         color: #333;
+         text-decoration: none;
+      }
+   </style>
 </head> <!-- end of head tag -->
 
 <body> <!-- start of body tag -->
@@ -64,9 +78,11 @@
    }
    ?>
 
+   <h3 style="text-align: center;">Already have an account? <a href="index.php">Login Here</a></h3>
 
-   <h3 style="text-align: center;">Already have an account? <a href="index.php">Login Here</a></h2>
-
+   <div class="faq-link">
+      <a href="faq.php">FAQ</a>
+   </div>
 </body> <!-- end of body tag -->
 
 </html> <!-- end of html tag -->

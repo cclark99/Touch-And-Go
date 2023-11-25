@@ -16,7 +16,7 @@
          bottom: 10px;
          right: 10px;
          text-align: right;
-         font-size: 14px;
+         font-size: 26px;
       }
 
       .faq-link a {
