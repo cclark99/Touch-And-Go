@@ -268,7 +268,6 @@ include 'get_weekday_course.php';
         <div class="answer"> <!-- start of div tag with answer class -->
           <!-- display answer to first question -->
           <p>Present: <br>
-             Late: <br>
              You have attended % of classes this semester.
           </p>
         </div>';
