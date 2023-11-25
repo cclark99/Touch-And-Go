@@ -269,35 +269,21 @@ include 'get_weekday_course.php';
           <!-- display answer to first question -->
           <p>';
 
-          // Print the raw 'daysOfWeek' field value for debugging
-          echo 'Raw Days of Week: ' . $row['daysOfWeek'] . '<br>';
-
-          // Clean the 'daysOfWeek' field by removing non-alphabetic characters
-          $cleanedDaysOfWeek = preg_replace('/[^a-zA-Z]/', '', $row['daysOfWeek']);
-
-          // Parse the cleaned 'daysOfWeek' field to get an array of meeting days
-          $meetingDays = str_split($cleanedDaysOfWeek);
-
-          // Debugging output
-          echo 'Meeting Days: ' . implode(', ', $meetingDays) . '<br>';
-
           // Generate an array of dates within the range of startDate and endDate
           $startDate = new DateTime($row['startDate']);
           $endDate = new DateTime($row['endDate']);
           $interval = new DateInterval('P1D'); // 1 day interval
           $dateRange = new DatePeriod($startDate, $interval, $endDate);
 
-          // Count the occurrences of meeting days specified in 'daysOfWeek'
-          $meetingDayCounts = array_fill_keys($meetingDays, 0);
+          // Count the occurrences of each day of the week
+          $meetingDayCounts = array_fill_keys(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], 0);
 
           foreach ($dateRange as $date) {
             $dayOfWeek = $date->format('l'); // Get the day of the week (e.g., 'Monday')
-            if (in_array($dayOfWeek, $meetingDays)) {
-              $meetingDayCounts[$dayOfWeek]++;
-            }
+            $meetingDayCounts[$dayOfWeek]++;
           }
 
-          // Print the total meeting times for each day specified in 'daysOfWeek'
+          // Print the total meeting times for each day
           foreach ($meetingDayCounts as $day => $count) {
             echo "$day: $count times<br>";
           }
