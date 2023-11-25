@@ -32,8 +32,14 @@ if (
     if ($result->num_rows > 0) {
       $rows = $result->fetch_all(MYSQLI_ASSOC);
       $course_array = array();
+
+      $currentDate = date('Y-m-d');
+
       foreach ($rows as $row) {
-        $course_array[] = $row;
+        // Check if the current date is within the range of startDate and endDate
+        if ($currentDate >= $row['startDate'] && $currentDate <= $row['endDate']) {
+          $course_array[] = $row;
+        }
       }
     }
   } else {

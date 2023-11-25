@@ -235,8 +235,8 @@ include 'get_course.php';
     <h3>Today's Attendance</h3>
     <div class="dropdown">
       <?php
-      if ($course_array) {
-        foreach ($course_array as $row) {
+      if ($todayCourse_array) {
+        foreach ($todayCourse_array as $row) {
           echo '<div class="question">
                   <span class="arrow"></span>
                   <span>' . $row['name'] . '</span>
