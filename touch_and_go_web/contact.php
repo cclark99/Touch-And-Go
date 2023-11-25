@@ -93,7 +93,7 @@ include 'get_course.php';
       
       if ($course_array) {
         foreach ($course_array as $row) {
-          $professorId = $row['professorId']; // Assuming 'professorId' is the unique identifier for each professor
+          $professorId = $row['userId']; // Assuming 'professorId' is the unique identifier for each professor
       
           // Check if the professor ID has already been printed
           if (!in_array($professorId, $printedProfessorIds)) {
