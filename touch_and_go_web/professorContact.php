@@ -21,6 +21,15 @@ include 'get_professor_contact.php';
   <title>Contact</title>
   <link rel="stylesheet" type="text/css" href="../styles.css">
   <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      background-color: #FAF8D6;
+    }
+
     h3 {
       color: #10222E;
       font-size: 24pt;
@@ -37,6 +46,10 @@ include 'get_professor_contact.php';
       border: 1px solid #10222E;
       margin-bottom: 10px;
       padding: 10px;
+      width: 300px;
+      /* Adjust the width as needed */
+      margin-right: auto;
+      margin-left: auto;
     }
 
     .student-list {
@@ -103,7 +116,6 @@ include 'get_professor_contact.php';
     echo '<p style="color: #FAF8D6; line-height: 1.5em; padding-left: 2%; padding-right: 2%;">No student information found. </p>';
   }
   ?>
-
 </body>
 
 </html>
