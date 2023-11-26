@@ -11,7 +11,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['userType'] != 'professor') {
 
 require 'db_connection.php';
 include 'get_professor_contact.php';
-
 ?>
 
 <!DOCTYPE html>
@@ -28,44 +27,26 @@ include 'get_professor_contact.php';
       text-align: center;
     }
 
-    /* .dropdown-section {
-      width: 50%;
-      margin: auto;
-    }
-
-    .dropdown {
+    .student-list {
       list-style-type: none;
       padding: 0;
-      cursor: pointer;
+      margin: 0;
     }
 
-    .question,
-    .answer {
-      display: none;
+    .student-item {
+      border: 1px solid #10222E;
+      margin-bottom: 10px;
+      padding: 10px;
     }
 
-    .answer-opened {
-      display: block;
+    .student-item a {
+      color: #10222E;
+      text-decoration: none;
     }
-
-    .arrow {
-      display: inline-block;
-      width: 0;
-      height: 0;
-      border-style: solid;
-      border-width: 5px 5px 0;
-      border-color: #4CAF50 transparent transparent transparent;
-    }
-
-    .arrow-rotated {
-      transform: rotate(180deg);
-    } */
-
   </style>
 </head>
 
 <body>
-
   <ul>
     <li><a class="link" href="professorHome.php">Home</a></li>
     <li><a class="link" href="professorSchedule.php">Schedule</a></li>
@@ -79,57 +60,30 @@ include 'get_professor_contact.php';
   <h1>Contact</h1>
   <h3>Professor Contact Information:</h3>
 
-  <section class="dropdown-section">
+  <?php
+  if ($course_array) {
+    foreach ($course_array as $row) {
+      $courseId = $row['courseId'];
 
-    <?php
-    $printedCourseIds = array();
+      echo '<ul class="student-list">';
+      echo '<li class="student-item"><strong>' . $row['className'] . '</strong></li>';
 
-    if ($course_array) {
-      echo '<ul class="dropdown">';
-
-      foreach ($course_array as $row) {
-        $courseId = $row['courseId'];
-
-        if (!in_array($courseId, $printedCourseIds)) {
-          echo '<li class="question">
-                  <span class="arrow"></span>
-                  <span>' . $row['className'] . '</span>
-                </li>
-                <li class="answer">
-                  <ul>'; // Open a nested list for answers
-    
-          $printedCourseIds[] = $courseId;
+      // Display students in the course
+      foreach ($course_array as $student) {
+        if ($student['courseId'] == $courseId) {
+          echo '<li class="student-item">
+                            <p>Student: <a class="link" href="mailto:' . $student['userEmail'] . '">' . $student['firstName'] . ' ' . $student['lastName'] . '</a></p>
+                          </li>';
         }
-
-        echo '<li class="answer">
-                <p>Student: ' . $row['firstName'] . ' ' . $row['lastName'] . '<br>
-                   Email: <a class="link" href="mailto:' . $row['userEmail'] . '">' . $row['userEmail'] . '</a>
-                </p>
-              </li>';
       }
 
-      echo '</ul>'; // Close the nested list
-      echo '</li>'; // Close the answer list item
-      echo '</ul>'; // Close the main dropdown list
-    } else {
-      echo '<span style="color: #FAF8D6; line-height: 1.5em; padding-left: 2%; padding-right: 2%;">No student information found. </span>';
+      echo '</ul>';
     }
-    ?>
-  </section>
+  } else {
+    echo '<p style="color: #FAF8D6; line-height: 1.5em; padding-left: 2%; padding-right: 2%;">No student information found. </p>';
+  }
+  ?>
 
-  <script>
-    const questions = document.querySelectorAll('.question');
-
-    console.log(questions);
-
-    for (let i = 0; i < questions.length; i++) {
-      questions[i].addEventListener('click', () => {
-        const answers = questions[i].nextElementSibling.querySelectorAll('.answer');
-        answers.forEach(answer => answer.classList.toggle('answer-opened'));
-        questions[i].querySelector('.arrow').classList.toggle('arrow-rotated');
-      });
-    }
-  </script>
 </body>
 
 </html>
