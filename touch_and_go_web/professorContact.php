@@ -56,6 +56,11 @@ include 'get_professor_contact.php';
       margin: 0;
     }
 
+    .student-item li {
+      width: auto;
+
+    }
+
     .student-item {
       border: 1px solid #10222E;
       margin-bottom: 10px;
@@ -63,7 +68,7 @@ include 'get_professor_contact.php';
     }
 
     .student-item a {
-      color: #10222E;
+      color: #FAF8D6;;
       text-decoration: none;
     }
   </style>
