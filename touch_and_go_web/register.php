@@ -11,6 +11,19 @@
    <!-- link external styles.css sheet -->
    <link rel="stylesheet" type="text/css" href="styles.css">
    <style>
+      .disclaimer {
+         position: fixed;
+         bottom: 10px;
+         left: 10px;
+         text-align: left;
+         font-size: 26px;
+      }
+
+      .disclaimer p {
+         color: #333;
+         text-decoration: none;
+      }
+
       .faq-link {
          position: fixed;
          bottom: 10px;

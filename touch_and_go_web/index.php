@@ -76,7 +76,7 @@
    <h3 style="text-align: center;">Need an account? <a href="register.php">Register Here</a></h3>
 
    <div class="disclaimer">
-      <p></p>
+      <p>Disclaimer about fingerprint storage</p>
    </div>
 
    <div class="faq-link">
