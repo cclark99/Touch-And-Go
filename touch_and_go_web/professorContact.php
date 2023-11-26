@@ -88,36 +88,35 @@ require 'db_connection.php';
 
     <ul class="dropdown"> <!-- start of ul tag with dropdown class -->
       <?php
-      $printedProfessorIds = []; // Initialize an array to store printed professor IDs
+      $printedCourseIds = array(); // Initialize an array to keep track of printed course IDs
       
       if ($course_array) {
         foreach ($course_array as $row) {
-          $professorId = $row['userId']; // Assuming 'professorId' is the unique identifier for each professor
-      
-          // Check if the professor ID has already been printed
-          if (!in_array($professorId, $printedProfessorIds)) {
+          $courseId = $row['courseId'];
+
+          // Check if the course ID has already been printed
+          if (!in_array($courseId, $printedCourseIds)) {
             echo '<div class="question"> <!-- start of div tag with question class -->
-                <!-- create arrow -->
-                <span class="arrow"></span>
-                <!-- display first professor -->
-                <span>' . $row['firstName'] . ' ' . $row['lastName'] . '</span>
-              </div> <!-- end of div tag -->
-              <div class="answer"> <!-- start of div tag with answer class -->
-                <!-- display professor information -->
-                <p>Email: <a class="link" href="mailto:' . $row['userEmail'] . '">' . $row['userEmail'] . '</a><br>
-                  Phone: ' . $row['phone'] . '<br>
-                  Office Hours:<br>
-                  - M/W: 4:30 - 5:00 PM<br>
-                  - T/TH: 1:00 - 3:00 PM<br>
+                    <!-- create arrow -->
+                    <span class="arrow"></span>
+                    <!-- display course information -->
+                    <span>' . $row['className'] . '</span>
+                  </div> <!-- end of div tag -->';
+
+            // Add the course ID to the list of printed IDs
+            $printedCourseIds[] = $courseId;
+          }
+
+          // Display student information for the course
+          echo '<div class="answer"> <!-- start of div tag with answer class -->
+                <!-- display student information -->
+                <p>Student: ' . $row['firstName'] . ' ' . $row['lastName'] . '<br>
+                   Email: <a class="link" href="mailto:' . $row['userEmail'] . '">' . $row['userEmail'] . '</a>
                 </p>
               </div><!-- end of div tag -->';
-
-            // Add the professor ID to the list of printed IDs
-            $printedProfessorIds[] = $professorId;
-          }
         }
       } else {
-        echo '<span style="color: #FAF8D6; line-height: 1.5em; padding-left: 2%; padding-right: 2%;">No professor information found. </span>';
+        echo '<span style="color: #FAF8D6; line-height: 1.5em; padding-left: 2%; padding-right: 2%;">No student information found. </span>';
       }
       ?>
     </ul> <!-- end of ul tag -->

@@ -2,8 +2,8 @@
 // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
 if (
   $stmt = $con->prepare('select * from course 
-                          inner join professor_course on professor_course.courseId = course.courseId 
-                          inner join professor on professor_course.userId = professor.userId 
+                            inner join professor_course on professor_course.courseId = course.courseId 
+                            inner join professor on professor_course.userId = professor.userId 
                          where professor.userId = ?')
 ) {
   $stmt->bind_param('s', $_SESSION['id']);
