@@ -109,6 +109,7 @@ include 'get_professor_contact.php';
 
         echo '<li class="student-item">
                         <p>Student: <a class="link" href="mailto:' . $student['userEmail'] . '">' . $student['firstName'] . ' ' . $student['lastName'] . '</a></p>
+                        <p>Email: <a class="link" href="mailto:' . $student['userEmail'] . '">' . $student['userEmail'] . '</a></p>
                       </li>';
 
         $currentCourse = $courseId;
