@@ -118,7 +118,7 @@ include 'get_course.php';
           }
         }
       } else {
-        echo '<span style="color: #FAF8D6; line-height: 1.5em; padding-left: 2%; padding-right: 2%;">No classes today </span>';
+        echo '<span style="color: #FAF8D6; line-height: 1.5em; padding-left: 2%; padding-right: 2%;">No professor information found. </span>';
       }
       ?>
     </ul> <!-- end of ul tag -->
