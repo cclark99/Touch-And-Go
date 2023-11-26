@@ -69,7 +69,12 @@ include 'get_professor_contact.php';
     }
 
     .student-item p {
+      font-size: 24px;
+    }
+
+    .course-item strong {
       font-size: 20px;
+      text-align: center;
     }
   </style>
 </head>
