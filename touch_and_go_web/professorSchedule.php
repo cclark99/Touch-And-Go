@@ -2,14 +2,18 @@
 
 session_start();
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 if (!isset($_SESSION['loggedin']) || $_SESSION['userType'] != 'professor') {
   header('Location: index.php');
   exit();
 }
 
 require 'db_connection.php';
-include 'get_course.php';
-include 'get_weekday_course.php';
+include 'get_professor_course.php';
+// include 'get_weekday_course.php';
 
 ?>
 
