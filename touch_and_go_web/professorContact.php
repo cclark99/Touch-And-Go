@@ -47,6 +47,7 @@ include 'get_professor_contact.php';
       width: 600px;
       margin-right: auto;
       margin-left: auto;
+      text-align: center;
     }
 
     .student-list {
@@ -74,7 +75,6 @@ include 'get_professor_contact.php';
 
     .course-item strong {
       font-size: 20px;
-      text-align: center;
     }
   </style>
 </head>
