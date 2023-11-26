@@ -26,7 +26,8 @@ include 'get_professor_contact.php';
     }
 
     .dropdown-section {
-      width: 25%;
+      width: 50%;
+      /* Adjusted the width for better visibility */
       margin: auto;
     }
 
@@ -85,23 +86,23 @@ include 'get_professor_contact.php';
         $courseId = $row['courseId'];
 
         if (!in_array($courseId, $printedCourseIds)) {
-          echo '<ul class="dropdown"> <!-- start of ul tag with dropdown class -->
-                  <li class="question"> <!-- start of li tag with question class -->
+          echo '<ul class="dropdown">
+                  <li class="question">
                     <span class="arrow"></span>
                     <span>' . $row['className'] . '</span>
-                  </li> <!-- end of li tag -->';
+                  </li>';
 
           $printedCourseIds[] = $courseId;
         }
 
-        echo '<li class="answer"> <!-- start of li tag with answer class -->
+        echo '<li class="answer">
               <p>Student: ' . $row['firstName'] . ' ' . $row['lastName'] . '<br>
                  Email: <a class="link" href="mailto:' . $row['userEmail'] . '">' . $row['userEmail'] . '</a>
               </p>
-            </li><!-- end of li tag -->';
+            </li>';
       }
 
-      echo '</ul>'; // close the ul tag
+      echo '</ul>';
     } else {
       echo '<span style="color: #FAF8D6; line-height: 1.5em; padding-left: 2%; padding-right: 2%;">No student information found. </span>';
     }
