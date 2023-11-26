@@ -80,6 +80,10 @@
 
    <h3 style="text-align: center;">Already have an account? <a href="index.php">Login Here</a></h3>
 
+   <div class="disclaimer">
+      <p>Disclaimer about fingerprint storage</p>
+   </div>
+
    <div class="faq-link">
       <a href="faq.php">FAQ</a>
    </div>

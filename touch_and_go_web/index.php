@@ -23,6 +23,20 @@
          color: #333;
          text-decoration: none;
       }
+
+      .disclaimer {
+         position: fixed;
+         bottom: 10px;
+         left: 10px;
+         text-align: left;
+         font-size: 26px;
+      }
+
+      .disclaimer p {
+         color: #333;
+         text-decoration: none;
+      }
+
    </style>
 </head> <!-- end of head tag -->
 
@@ -61,9 +75,14 @@
 
    <h3 style="text-align: center;">Need an account? <a href="register.php">Register Here</a></h3>
 
+   <div class="disclaimer">
+      <p></p>
+   </div>
+
    <div class="faq-link">
       <a href="faq.php">FAQ</a>
    </div>
+
 </body> <!-- end of body tag -->
 
 </html> <!-- end of html tag -->
