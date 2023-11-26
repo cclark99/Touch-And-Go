@@ -61,7 +61,6 @@ include 'get_professor_contact.php';
       transform: rotate(180deg);
     }
 
-    /* Existing styles from the provided stylesheet */
   </style>
 </head>
 
