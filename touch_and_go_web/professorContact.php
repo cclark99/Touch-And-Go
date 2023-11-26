@@ -93,20 +93,20 @@ include 'get_professor_contact.php';
 
         if (!in_array($courseId, $printedCourseIds)) {
           echo '<li class="question">
-              <span class="arrow"></span>
-              <span>' . $row['className'] . '</span>
-            </li>
-            <li class="answer">
-              <ul>'; // Open a nested list for answers
+                  <span class="arrow"></span>
+                  <span>' . $row['className'] . '</span>
+                </li>
+                <li class="answer">
+                  <ul>'; // Open a nested list for answers
     
           $printedCourseIds[] = $courseId;
         }
 
         echo '<li class="answer">
-            <p>Student: ' . $row['firstName'] . ' ' . $row['lastName'] . '<br>
-               Email: <a class="link" href="mailto:' . $row['userEmail'] . '">' . $row['userEmail'] . '</a>
-            </p>
-          </li>';
+                <p>Student: ' . $row['firstName'] . ' ' . $row['lastName'] . '<br>
+                   Email: <a class="link" href="mailto:' . $row['userEmail'] . '">' . $row['userEmail'] . '</a>
+                </p>
+              </li>';
       }
 
       echo '</ul>'; // Close the nested list
