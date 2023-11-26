@@ -8,8 +8,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['userType'] != 'professor') {
 }
 
 require 'db_connection.php';
-include 'get_course.php';
-include 'get_weekday_course.php';
+include 'get_professor_course.php';
+include 'get_professor_weekday_course.php';
 
 ?>
 <!DOCTYPE html>

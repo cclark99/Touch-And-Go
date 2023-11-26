@@ -8,7 +8,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['userType'] != 'professor') {
 }
 
 require 'db_connection.php';
-include 'get_course.php';
 
 ?>
 
