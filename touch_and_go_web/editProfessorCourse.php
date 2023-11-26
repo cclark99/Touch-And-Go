@@ -50,8 +50,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Check if the error code corresponds to a duplicate entry error
                 if ($con->errno == 1062) { // 1062 is the MySQL error code for duplicate entry
                     $_SESSION['updateMsg'] = 'Error: Duplicate entry. This professor is already assigned to this course.';
+                    header('Location: editProfessorCourse.php');
+                    exit();
                 } else {
                     $_SESSION['updateMsg'] = 'Error: ' . $addCourseStmt->error;
+                    header('Location: editProfessorCourse.php');
+                    exit();
                 }
             } else {
                 $_SESSION['updateMsg'] = 'Course added successfully.';
