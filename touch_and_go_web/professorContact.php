@@ -21,19 +21,17 @@ include 'get_professor_contact.php';
   <title>Contact</title>
   <link rel="stylesheet" type="text/css" href="../styles.css">
   <style>
-    body {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      margin: 0;
-      background-color: #FAF8D6;
-    }
-
     h3 {
       color: #10222E;
       font-size: 24pt;
       text-align: center;
+    }
+
+    .container {
+      max-width: 800px;
+      /* Adjust the max-width as needed */
+      margin: 0 auto;
+      padding: 20px;
     }
 
     .course-list {
@@ -85,37 +83,39 @@ include 'get_professor_contact.php';
   <h1>Contact</h1>
   <h3>Professor Contact Information:</h3>
 
-  <?php
-  if ($course_array) {
-    $currentCourse = null;
+  <div class="container">
+    <?php
+    if ($course_array) {
+      $currentCourse = null;
 
-    foreach ($course_array as $student) {
-      $courseId = $student['courseId'];
+      foreach ($course_array as $student) {
+        $courseId = $student['courseId'];
 
-      // Display course name only once
-      if ($currentCourse != $courseId) {
-        // Close previous course if it exists
-        if ($currentCourse !== null) {
-          echo '</ul></div>';
+        // Display course name only once
+        if ($currentCourse != $courseId) {
+          // Close previous course if it exists
+          if ($currentCourse !== null) {
+            echo '</ul></div>';
+          }
+
+          echo '<div class="course-item"><strong>' . $student['className'] . '</strong>';
+          echo '<ul class="student-list">';
         }
 
-        echo '<div class="course-item"><strong>' . $student['className'] . '</strong>';
-        echo '<ul class="student-list">';
+        echo '<li class="student-item">
+                        <p>Student: <a class="link" href="mailto:' . $student['userEmail'] . '">' . $student['firstName'] . ' ' . $student['lastName'] . '</a></p>
+                      </li>';
+
+        $currentCourse = $courseId;
       }
 
-      echo '<li class="student-item">
-                    <p>Student: <a class="link" href="mailto:' . $student['userEmail'] . '">' . $student['firstName'] . ' ' . $student['lastName'] . '</a></p>
-                  </li>';
-
-      $currentCourse = $courseId;
+      // Close the last course
+      echo '</ul></div>';
+    } else {
+      echo '<p style="color: #FAF8D6; line-height: 1.5em; padding-left: 2%; padding-right: 2%;">No student information found. </p>';
     }
-
-    // Close the last course
-    echo '</ul></div>';
-  } else {
-    echo '<p style="color: #FAF8D6; line-height: 1.5em; padding-left: 2%; padding-right: 2%;">No student information found. </p>';
-  }
-  ?>
+    ?>
+  </div>
 </body>
 
 </html>
