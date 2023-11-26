@@ -54,11 +54,11 @@ include 'get_professor_contact.php';
       list-style-type: none;
       padding: 0;
       margin: 0;
+      width: auto;
     }
 
     .student-item li {
       width: auto;
-
     }
 
     .student-item {
