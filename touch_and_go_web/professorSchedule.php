@@ -56,17 +56,17 @@ include 'get_weekday_course.php';
 
   <ul> <!-- start of ul for menu bar -->
     <!-- list home.php link -->
-    <li><a class="link" href="home.php">Home</a></li>
+    <li><a class="link" href="professorHome.php">Home</a></li>
     <!-- list schedule.php link -->
-    <li><a class="link" href="schedule.php">Schedule</a></li>
+    <li><a class="link" href="professorSchedule.php">Schedule</a></li>
     <!-- list analytics.php link -->
-    <li><a class="link" href="analytics.php">Analytics</a></li>
+    <li><a class="link" href="professorAnalytics.php">Analytics</a></li>
     <!-- list Touch & Go logo -->
     <li><img src="../newLogo.png" alt="Touch and Go Logo" height="60"></li>
     <!-- list contact.php link -->
-    <li><a class='link' href="contact.php">Contact</a></li>
+    <li><a class='link' href="professorContact.php">Contact</a></li>
     <!-- list help.php link -->
-    <li><a class='link' href="help.php">Help</a></li>
+    <li><a class='link' href="professorHelp.php">Help</a></li>
     <!-- list logout.php link -->
     <li><a class='link' href="logout.php">Logout</a></li>
   </ul> <!-- end of ul for menu bar -->
