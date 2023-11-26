@@ -32,7 +32,7 @@ if (!is_numeric($professorId)) {
 }
 
 // Fetch professor's current courses
-$currentCoursesQuery = "SELECT courseId, name, prefix FROM professor_course pc JOIN course c ON pc.courseId = c.courseId WHERE pc.userId = ?";
+$currentCoursesQuery = "SELECT pc.courseId, c.name, c.prefix FROM professor_course pc JOIN course c ON pc.courseId = c.courseId WHERE pc.userId = ?";
 $currentCoursesStmt = $con->prepare($currentCoursesQuery);
 $currentCoursesStmt->bind_param('i', $professorId);
 $currentCoursesStmt->execute();
