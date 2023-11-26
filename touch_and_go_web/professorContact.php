@@ -54,7 +54,6 @@ include 'get_professor_contact.php';
       list-style-type: none;
       padding: 0;
       margin: 0;
-      width: auto;
     }
 
     .student-item li {
@@ -65,10 +64,11 @@ include 'get_professor_contact.php';
       border: 1px solid #10222E;
       margin-bottom: 10px;
       padding: 10px;
+      width: auto;
     }
 
     .student-item a {
-      color: #FAF8D6;;
+      color: #FAF8D6;
       text-decoration: none;
     }
   </style>
