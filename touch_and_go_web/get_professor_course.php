@@ -1,27 +1,10 @@
 <?php
 // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
 if (
-  $stmt = $con->prepare('select course.courseId, 
-                                  course.name, 
-                                  course.description,
-                                  course.startDate,
-                                  course.endDate,
-                                  course.startTime, 
-                                  course.endTime,  
-                                  course.location,
-                                  course.prefix,
-                                  course.daysOfWeek,
-                                  professor.firstName,
-                                  professor.lastName,
-                                  user.userEmail,
-                                  professor.phone
-                            from course 
-                              inner join student_course on student_course.courseId = course.courseId
-                              inner join student on student.userId = student_course.userId
-                              inner join professor_course on professor_course.courseId = course.courseId
-                              inner join professor on professor_course.userId = professor.userId 
-                              inner join user on professor.userId = user.userId
-                            where professor.userId = ?')
+  $stmt = $con->prepare('select * from course 
+                          inner join professor_course on professor_course.courseId = course.courseId 
+                          inner join professor on professor_course.userId = professor.userId 
+                         where professor.userId = ?')
 ) {
   $stmt->bind_param('s', $_SESSION['id']);
 
