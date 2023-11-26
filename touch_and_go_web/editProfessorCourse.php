@@ -26,7 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $currentCoursesStmt->bind_result($courseId);
         $currentCourses = [];
 
-
         while ($currentCoursesStmt->fetch()) {
             $currentCourses[] = $courseId;
         }
@@ -41,10 +40,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $addCourseQuery = "INSERT INTO professor_course (userId, courseId) VALUES (?, ?)";
             $addCourseStmt = $con->prepare($addCourseQuery);
             $addCourseStmt->bind_param('ii', $professorId, $addCourseId);
-            $addCourseStmt->execute();
+
+            // Execute the statement and check for errors
+            if (!$addCourseStmt->execute()) {
+                // Check if the error code corresponds to a duplicate entry error
+                if ($con->errno == 1062) { // 1062 is the MySQL error code for duplicate entry
+                    $_SESSION['updateMsg'] = 'Error: Duplicate entry. This professor is already assigned to this course.';
+                } else {
+                    $_SESSION['updateMsg'] = 'Error: ' . $addCourseStmt->error;
+                }
+            } else {
+                $_SESSION['updateMsg'] = 'Course added successfully.';
+            }
+
             $addCourseStmt->close();
         }
-
     }
 
     if ($removeCourseId) {
