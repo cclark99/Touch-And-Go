@@ -1,9 +1,5 @@
 <?php
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 session_start();
 
 // Check if the user is logged in and has the admin role
@@ -13,6 +9,61 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['userType'] != 'admin') {
 }
 
 require 'db_connection.php';
+
+// Check if the form data is submitted
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Assuming you have form fields named 'professorId', 'addCourseId', and 'removeCourseId'
+    $professorId = $_POST['professorId'] ?? null;
+    $addCourseId = $_POST['addCourseId'] ?? null;
+    $removeCourseId = $_POST['removeCourseId'] ?? null;
+
+    if ($addCourseId) {
+        // Fetch professor's current courses
+        $currentCoursesQuery = "SELECT courseId FROM professor_course WHERE userId = ?";
+        $currentCoursesStmt = $con->prepare($currentCoursesQuery);
+        $currentCoursesStmt->bind_param('i', $professorId);
+        $currentCoursesStmt->execute();
+        $currentCoursesStmt->bind_result($courseId);
+        $currentCourses = [];
+
+
+        while ($currentCoursesStmt->fetch()) {
+            $currentCourses[] = $courseId;
+        }
+
+        $currentCoursesStmt->close();
+
+        // Check if the course is already in the professor's courses
+        if (in_array($addCourseId, $currentCourses)) {
+            $_SESSION['updateMsg'] = 'The professor is already teaching this course.';
+        } else {
+            // Add the course to the professor's courses
+            $addCourseQuery = "INSERT INTO professor_course (userId, courseId) VALUES (?, ?)";
+            $addCourseStmt = $con->prepare($addCourseQuery);
+            $addCourseStmt->bind_param('ii', $professorId, $addCourseId);
+            $addCourseStmt->execute();
+            $addCourseStmt->close();
+        }
+
+    }
+
+    if ($removeCourseId) {
+        // Remove the course from the professor's courses
+        $removeCourseQuery = "DELETE FROM professor_course WHERE userId = ? AND courseId = ?";
+        $removeCourseStmt = $con->prepare($removeCourseQuery);
+        $removeCourseStmt->bind_param('ii', $professorId, $removeCourseId);
+        $removeCourseStmt->execute();
+        $removeCourseStmt->close();
+    }
+
+    // Store the professor's name in a session variable
+    $_SESSION['professorName'] = $_POST['professorName'];
+
+    // Redirect back to the page with a success message
+    $_SESSION['updateMsg'] = 'Professor courses updated successfully';
+    header("Location: editProfessorCourse.php?professorId=$professorId");
+    exit();
+}
 
 // Retrieve professorId from GET parameter
 $professorId = $_GET['professorId'] ?? null;
@@ -32,7 +83,7 @@ if (!is_numeric($professorId)) {
 }
 
 // Fetch professor's current courses
-$currentCoursesQuery = "SELECT pc.courseId, c.name, c.prefix FROM professor_course pc JOIN course c ON pc.courseId = c.courseId WHERE pc.userId = ?";
+$currentCoursesQuery = "SELECT c.courseId, c.name, c.prefix FROM professor_course sc JOIN course c ON sc.courseId = c.courseId WHERE sc.userId = ?";
 $currentCoursesStmt = $con->prepare($currentCoursesQuery);
 $currentCoursesStmt->bind_param('i', $professorId);
 $currentCoursesStmt->execute();
@@ -44,74 +95,6 @@ while ($currentCoursesStmt->fetch()) {
 }
 
 $currentCoursesStmt->close();
-
-// Fetch professor's current courses for form validation
-$currentCoursesQuery = "SELECT courseId FROM professor_course WHERE userId = ?";
-$currentCoursesStmt = $con->prepare($currentCoursesQuery);
-$currentCoursesStmt->bind_param('i', $professorId);
-$currentCoursesStmt->execute();
-$currentCoursesStmt->bind_result($courseId);
-$currentCourses = [];
-
-while ($currentCoursesStmt->fetch()) {
-    $currentCourses[] = $courseId;
-}
-
-$currentCoursesStmt->close();
-
-// Check if the form data is submitted
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Assuming you have form fields named 'professorId', 'addCourseId', and 'removeCourseId'
-    $professorId = $_POST['professorId'] ?? null;
-    $addCourseId = $_POST['addCourseId'] ?? null;
-    $removeCourseId = $_POST['removeCourseId'] ?? null;
-
-    if ($addCourseId) {
-        // Check if the course is already in the professor's courses
-        if (in_array($addCourseId, $currentCourses)) {
-            $_SESSION['updateMsg'] = 'The professor is already teaching this course.';
-        } else {
-            // Add the course to the professor's courses
-            $addCourseQuery = "INSERT INTO professor_course (userId, courseId) VALUES (?, ?)";
-            $addCourseStmt = $con->prepare($addCourseQuery);
-            $addCourseStmt->bind_param('ii', $professorId, $addCourseId);
-
-            // Execute the statement and check for errors
-            if (!$addCourseStmt->execute()) {
-                // Check if the error code corresponds to a duplicate entry error
-                if ($con->errno == 1062) { // 1062 is the MySQL error code for duplicate entry
-                    $_SESSION['updateMsg'] = 'Error: Duplicate entry. This professor is already assigned to this course.';
-                } else {
-                    $_SESSION['updateMsg'] = 'Error: ' . $addCourseStmt->error;
-                }
-            } else {
-                $_SESSION['updateMsg'] = 'Course added successfully.';
-            }
-
-            $addCourseStmt->close();
-        }
-
-        // Redirect back to the page with a success message
-        header("Location: editProfessorCourse.php?professorId=$professorId");
-        exit();
-    }
-
-    if ($removeCourseId) {
-        // Remove the course from the professor's courses
-        $removeCourseQuery = "DELETE FROM professor_course WHERE userId = ? AND courseId = ?";
-        $removeCourseStmt = $con->prepare($removeCourseQuery);
-        $removeCourseStmt->bind_param('ii', $professorId, $removeCourseId);
-        $removeCourseStmt->execute();
-        $removeCourseStmt->close();
-    }
-
-    // Store the professor's name in a session variable
-    $_SESSION['professorName'] = $_POST['professorName'];
-
-    // Redirect back to the page with a success message
-    header("Location: editProfessorCourse.php?professorId=$professorId");
-    exit();
-}
 ?>
 
 <!DOCTYPE html>
