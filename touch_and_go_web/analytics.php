@@ -260,14 +260,18 @@ include 'get_weekday_course.php';
       if ($course_array) {
         foreach ($course_array as $row) {
           echo '<div class="question"> <!-- start of div tag with question class -->
-    <!-- create arrow -->
-    <span class="arrow"></span>
-    <!-- display first question -->
-    <span>' . $row['name'] . '</span>
-  </div> <!-- end of div tag -->
-  <div class="answer"> <!-- start of div tag with answer class -->
-    <!-- display answer to first question -->
-    <p>';
+                <!-- create arrow -->
+                <span class="arrow"></span>
+                <!-- display first question -->
+                <span>' . $row['name'] . '</span>
+              </div> <!-- end of div tag -->
+              <div class="answer"> <!-- start of div tag with answer class -->
+                <!-- display answer to the first question -->
+                <p>';
+
+          // Get the days of the week the class meets
+          $daysOfWeekString = $row['daysOfWeek'];
+          $meetingDayCounts = array_fill_keys(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], 0);
 
           // Generate an array of dates within the range of startDate and endDate
           $startDate = new DateTime($row['startDate']);
@@ -276,11 +280,13 @@ include 'get_weekday_course.php';
           $dateRange = new DatePeriod($startDate, $interval, $endDate);
 
           // Count the occurrences of each day of the week
-          $meetingDayCounts = array_fill_keys(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], 0);
-
           foreach ($dateRange as $date) {
             $dayOfWeek = $date->format('l'); // Get the day of the week (e.g., 'Monday')
-            $meetingDayCounts[$dayOfWeek]++;
+      
+            // Check if the day of the week exists in the string
+            if (strpos($daysOfWeekString, $dayOfWeek) !== false) {
+              $meetingDayCounts[$dayOfWeek]++;
+            }
           }
 
           // Print the total meeting times for each day
@@ -288,8 +294,7 @@ include 'get_weekday_course.php';
             echo "$day: $count times<br>";
           }
 
-          echo '</p>
-  </div>';
+          echo '</p></div>';
         }
       } else {
         echo '<span style="color: #FAF8D6; line-height: 1.5em; padding-left: 2%; padding-right: 2%;">No classes found...</span>';
