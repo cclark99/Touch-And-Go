@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 if (!isset($_SESSION['loggedin']) || $_SESSION['userType'] != 'professor') {
   header('Location: index.php');
   exit();
@@ -112,6 +115,8 @@ include 'get_professor_contact.php';
 
   <script>
     const questions = document.querySelectorAll('.question');
+
+    console.log(questions);
 
     for (let i = 0; i < questions.length; i++) {
       questions[i].addEventListener('click', () => {
