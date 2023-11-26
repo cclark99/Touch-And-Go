@@ -35,7 +35,7 @@ if ($stmt = $con->prepare('SELECT userId, userPassword, userType FROM user WHERE
 					header('Location: home.php');
 					break;
 				case 'professor':
-					header('Location: home.php');
+					header('Location: professorHome.php');
 					break;
 				case 'admin':
 					header('Location: adminHome.php');
