@@ -10,7 +10,8 @@ if (
     INNER JOIN professor_course pc ON sc.courseId = pc.courseId
     INNER JOIN user u ON s.userId = u.userId
     INNER JOIN course c ON sc.courseId = c.courseId
-    WHERE pc.userId = ?')
+    WHERE pc.userId = ?
+    ORDER BY c.courseId')
 ) {
   $stmt->bind_param('s', $_SESSION['id']);
 
