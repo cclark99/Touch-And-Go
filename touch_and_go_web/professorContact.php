@@ -44,16 +44,13 @@ include 'get_professor_contact.php';
       border: 1px solid #10222E;
       margin-bottom: 10px;
       padding: 10px;
-      width: 300px;
-      /* Adjust the width as needed */
+      width: 600px;
       margin-right: auto;
       margin-left: auto;
     }
 
     .student-list {
-      list-style-type: none;
-      padding: 0;
-      margin: 0;
+      margin-top: 10px;
     }
 
     .student-item li {
@@ -71,6 +68,9 @@ include 'get_professor_contact.php';
       text-decoration: none;
     }
 
+    .student-item p {
+      font-size: 20px;
+    }
   </style>
 </head>
 
