@@ -86,27 +86,32 @@ include 'get_professor_contact.php';
     $printedCourseIds = array();
 
     if ($course_array) {
+      echo '<ul class="dropdown">';
+
       foreach ($course_array as $row) {
         $courseId = $row['courseId'];
 
         if (!in_array($courseId, $printedCourseIds)) {
-          echo '<ul class="dropdown">
-                  <li class="question">
-                    <span class="arrow"></span>
-                    <span>' . $row['className'] . '</span>
-                  </li>';
-
+          echo '<li class="question">
+              <span class="arrow"></span>
+              <span>' . $row['className'] . '</span>
+            </li>
+            <li class="answer">
+              <ul>'; // Open a nested list for answers
+    
           $printedCourseIds[] = $courseId;
         }
 
         echo '<li class="answer">
-              <p>Student: ' . $row['firstName'] . ' ' . $row['lastName'] . '<br>
-                 Email: <a class="link" href="mailto:' . $row['userEmail'] . '">' . $row['userEmail'] . '</a>
-              </p>
-            </li>';
+            <p>Student: ' . $row['firstName'] . ' ' . $row['lastName'] . '<br>
+               Email: <a class="link" href="mailto:' . $row['userEmail'] . '">' . $row['userEmail'] . '</a>
+            </p>
+          </li>';
       }
 
-      echo '</ul>';
+      echo '</ul>'; // Close the nested list
+      echo '</li>'; // Close the answer list item
+      echo '</ul>'; // Close the main dropdown list
     } else {
       echo '<span style="color: #FAF8D6; line-height: 1.5em; padding-left: 2%; padding-right: 2%;">No student information found. </span>';
     }
