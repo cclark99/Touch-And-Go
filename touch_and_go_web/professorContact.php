@@ -27,6 +27,18 @@ include 'get_professor_contact.php';
       text-align: center;
     }
 
+    .course-list {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .course-item {
+      border: 1px solid #10222E;
+      margin-bottom: 10px;
+      padding: 10px;
+    }
+
     .student-list {
       list-style-type: none;
       padding: 0;
@@ -62,23 +74,31 @@ include 'get_professor_contact.php';
 
   <?php
   if ($course_array) {
-    foreach ($course_array as $row) {
-      $courseId = $row['courseId'];
+    $currentCourse = null;
 
-      echo '<ul class="student-list">';
-      echo '<li class="student-item"><strong>' . $row['className'] . '</strong></li>';
+    foreach ($course_array as $student) {
+      $courseId = $student['courseId'];
 
-      // Display students in the course
-      foreach ($course_array as $student) {
-        if ($student['courseId'] == $courseId) {
-          echo '<li class="student-item">
-                            <p>Student: <a class="link" href="mailto:' . $student['userEmail'] . '">' . $student['firstName'] . ' ' . $student['lastName'] . '</a></p>
-                          </li>';
+      // Display course name only once
+      if ($currentCourse != $courseId) {
+        // Close previous course if it exists
+        if ($currentCourse !== null) {
+          echo '</ul></div>';
         }
+
+        echo '<div class="course-item"><strong>' . $student['className'] . '</strong>';
+        echo '<ul class="student-list">';
       }
 
-      echo '</ul>';
+      echo '<li class="student-item">
+                    <p>Student: <a class="link" href="mailto:' . $student['userEmail'] . '">' . $student['firstName'] . ' ' . $student['lastName'] . '</a></p>
+                  </li>';
+
+      $currentCourse = $courseId;
     }
+
+    // Close the last course
+    echo '</ul></div>';
   } else {
     echo '<p style="color: #FAF8D6; line-height: 1.5em; padding-left: 2%; padding-right: 2%;">No student information found. </p>';
   }
