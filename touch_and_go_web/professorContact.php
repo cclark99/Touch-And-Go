@@ -28,7 +28,7 @@ include 'get_professor_contact.php';
       text-align: center;
     }
 
-    .dropdown-section {
+    /* .dropdown-section {
       width: 50%;
       margin: auto;
     }
@@ -59,7 +59,7 @@ include 'get_professor_contact.php';
 
     .arrow-rotated {
       transform: rotate(180deg);
-    }
+    } */
 
   </style>
 </head>
