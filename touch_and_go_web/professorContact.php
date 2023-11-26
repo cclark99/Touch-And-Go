@@ -63,7 +63,6 @@ include 'get_professor_contact.php';
     .student-item {
       border: 1px solid #10222E;
       margin-bottom: 10px;
-      padding: 10px;
       width: 100%;
     }
 
@@ -71,6 +70,7 @@ include 'get_professor_contact.php';
       color: #FAF8D6;
       text-decoration: none;
     }
+
   </style>
 </head>
 
