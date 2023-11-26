@@ -27,7 +27,6 @@ include 'get_professor_contact.php';
 
     .dropdown-section {
       width: 50%;
-      /* Adjusted the width for better visibility */
       margin: auto;
     }
 
@@ -58,6 +57,8 @@ include 'get_professor_contact.php';
     .arrow-rotated {
       transform: rotate(180deg);
     }
+
+    /* Existing styles from the provided stylesheet */
   </style>
 </head>
 
