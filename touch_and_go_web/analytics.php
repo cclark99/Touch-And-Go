@@ -291,7 +291,7 @@ include 'get_weekday_course.php';
 
           // Calculate and print the total meeting times for the entire week
           $totalMeetingTimes = array_sum($meetingDayCounts);
-          echo "Total meeting times for the week: $totalMeetingTimes times<br>";
+          echo "Total meeting times for the semester: $totalMeetingTimes times<br>";
 
           echo '</p></div>';
         }

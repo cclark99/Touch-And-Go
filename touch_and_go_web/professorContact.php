@@ -88,7 +88,7 @@ include 'get_professor_contact.php';
   </ul>
 
   <h1>Contact</h1>
-  <h3>Professor Contact Information:</h3>
+  <h3>Students' Contact Information:</h3>
 
   <div class="container">
     <?php
