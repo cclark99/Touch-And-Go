@@ -60,7 +60,7 @@ session_start();
     https://www.w3schools.com/css/css_navbar_horizontal.asp -->
 
     <!-- help header -->
-    <h1>Frequently Asked Questions</h1>
+    <h1>Help</h1>
 
     <!-- output "Issues with the site?"" -->
     <h2>Issues with the site?</h2>
