@@ -136,9 +136,22 @@ include 'get_professor_analytics.php';
 </head>
 
 <body>
-  <ul>
-    <!-- Your existing menu items -->
-  </ul>
+  <ul> <!-- start of ul for menu bar -->
+    <!-- list home.php link -->
+    <li><a class="link" href="professorHome.php">Home</a></li>
+    <!-- list schedule.php link -->
+    <li><a class="link" href="professorSchedule.php">Schedule</a></li>
+    <!-- list analytics.php link -->
+    <li><a class="link" href="professorAnalytics.php">Analytics</a></li>
+    <!-- list Touch & Go logo -->
+    <li><img src="../newLogo.png" alt="Touch and Go Logo" height="60"></li>
+    <!-- list contact.php link -->
+    <li><a class='link' href="professorContact.php">Contact</a></li>
+    <!-- list help.php link -->
+    <li><a class='link' href="professorHelp.php">Help</a></li>
+    <!-- list logout.php link -->
+    <li><a class='link' href="logout.php">Logout</a></li>
+  </ul> <!-- end of ul for menu bar -->
 
   <h1>Analytics</h1>
 
