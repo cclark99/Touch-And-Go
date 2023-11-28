@@ -1,5 +1,5 @@
 <?php
-$course_array = array(); // Initialize an array to store student information
+$student_checkIn_array = array(); // Initialize an array to store student information
 
 // Prepare our SQL statement to prevent SQL injection
 if (
@@ -33,14 +33,14 @@ if (
   ORDER BY
     c.courseId, s.userId, firstCheckInTime;')
 ) {
-  $stmt->bind_param('i', $_SESSION['id']); // Use 'i' for integer
+  $stmt->bind_param('i', $_SESSION['id']); 
 
   if ($stmt->execute()) {
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-      // Fetch all rows as an associative array and store in $course_array
-      $course_array = $result->fetch_all(MYSQLI_ASSOC);
+      // Fetch all rows as an associative array and store in $student_checkIn_array
+      $student_checkIn_array = $result->fetch_all(MYSQLI_ASSOC);
     }
   } else {
     echo 'Error executing the query: ' . $stmt->error;
