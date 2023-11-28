@@ -94,7 +94,8 @@
    <h3 style="text-align: center;">Already have an account? <a href="index.php">Login Here</a></h3>
 
    <div class="disclaimer">
-      <p>Any and all fingerprint data is not kept. Fingerprint scan data will be removed in full after demo day, 12/4/23
+      <p>Any and all fingerprint data is not kept.<br>Fingerprint scan data will be removed in full after demo day,
+         12/4/23
       </p>
    </div>
 

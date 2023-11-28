@@ -36,7 +36,6 @@
          color: #333;
          text-decoration: none;
       }
-
    </style>
 </head> <!-- end of head tag -->
 
@@ -76,7 +75,8 @@
    <h3 style="text-align: center;">Need an account? <a href="register.php">Register Here</a></h3>
 
    <div class="disclaimer">
-      <p>Any and all fingerprint data is not kept. Fingerprint scan data will be removed in full after demo day, 12/4/23</p>
+      <p>Any and all fingerprint data is not kept.<br>Fingerprint scan data will be removed in full after demo day,
+         12/4/23</p>
    </div>
 
    <div class="faq-link">
