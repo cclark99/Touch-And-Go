@@ -8,8 +8,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['userType'] != 'professor') {
 }
 
 require 'db_connection.php';
-include 'get_professor_course.php';
-include 'get_professor_weekday_course.php';
+include 'get_professor_analytics.php';
 
 ?>
 <!DOCTYPE html>
@@ -225,81 +224,25 @@ include 'get_professor_weekday_course.php';
 
   <!-- analytics header -->
   <h1>Analytics</h1>
-
-  <!-- Today's Attendance section -->
   <section class="dropdown-section">
-    <h3>Today's Attendance</h3>
+    <h3>Student Check-In Details</h3>
     <div class="dropdown">
       <?php
-      if ($todayCourse_array) {
-        foreach ($todayCourse_array as $row) {
+      if ($student_checkIn_array) {
+        foreach ($student_checkIn_array as $row) {
           echo '<div class="question">
                   <span class="arrow"></span>
-                  <span>' . $row['name'] . '</span>
+                  <span>' . $row['courseName'] . ' - ' . $row['studentFirstName'] . ' ' . $row['studentLastName'] . '</span>
                 </div>
                 <div class="answer">
-                  <p id="status_' . $row['courseId'] . '">Status: Loading...</p>
+                  <p>Check-In Time: ' . $row['firstCheckInTime'] . '</p>
+                  <!-- Add other details you want to display -->
                 </div>';
         }
       } else {
-        echo '<span style="color: #FAF8D6; line-height: 1.5em; padding-left: 2%; padding-right: 2%;">No classes today.</span>';
+        echo '<span style="color: #FAF8D6; line-height: 1.5em; padding-left: 2%; padding-right: 2%;">No student check-in details found...</span>';
       }
       ?>
-    </div>
-  </section>
-
-  <hr>
-
-  <section class="dropdown-section"> <!-- start of section tag with dropdown-section class -->
-    <!-- display Total Semester Attendance -->
-    <h3>Total Semester Attendance</h3>
-
-    <div class="dropdown"> <!-- start of ul tag with dropdown class -->
-      <?php
-
-      if ($course_array) {
-        foreach ($course_array as $row) {
-          echo '<div class="question"> <!-- start of div tag with question class -->
-                <!-- create arrow -->
-                <span class="arrow"></span>
-                <!-- display first question -->
-                <span>' . $row['name'] . '</span>
-              </div> <!-- end of div tag -->
-              <div class="answer"> <!-- start of div tag with answer class -->
-                <!-- display answer to the first question -->
-                <p>';
-
-          // Get the days of the week the class meets
-          $daysOfWeekString = $row['daysOfWeek'];
-          $meetingDayCounts = array_fill_keys(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], 0);
-
-          // Generate an array of dates within the range of startDate and endDate
-          $startDate = new DateTime($row['startDate']);
-          $endDate = new DateTime($row['endDate']);
-          $interval = new DateInterval('P1D'); // 1 day interval
-          $dateRange = new DatePeriod($startDate, $interval, $endDate);
-
-          // Count the occurrences of each day of the week
-          foreach ($dateRange as $date) {
-            $dayOfWeek = $date->format('l'); // Get the day of the week (e.g., 'Monday')
-      
-            // Check if the day of the week exists in the string
-            if (strpos($daysOfWeekString, $dayOfWeek) !== false) {
-              $meetingDayCounts[$dayOfWeek]++;
-            }
-          }
-
-          // Calculate and print the total meeting times for the entire week
-          $totalMeetingTimes = array_sum($meetingDayCounts);
-          echo "Total meeting times for the week: $totalMeetingTimes times<br>";
-
-          echo '</p></div>';
-        }
-      } else {
-        echo '<span style="color: #FAF8D6; line-height: 1.5em; padding-left: 2%; padding-right: 2%;">No classes found...</span>';
-      }
-      ?>
-
       <script>
         // set variables
         const question = document.querySelectorAll('.question');

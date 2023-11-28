@@ -33,7 +33,7 @@ if (
   ORDER BY
     c.courseId, s.userId, firstCheckInTime;')
 ) {
-  $stmt->bind_param('i', $_SESSION['id']); 
+  $stmt->bind_param('i', $_SESSION['id']);
 
   if ($stmt->execute()) {
     $result = $stmt->get_result();
