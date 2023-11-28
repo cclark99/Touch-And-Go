@@ -1,5 +1,5 @@
 <?php
-
+date_default_timezone_set('America/New_York');
 session_start();
 
 if (!isset($_SESSION['loggedin']) || $_SESSION['userType'] != 'professor') {
