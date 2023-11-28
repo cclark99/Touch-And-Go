@@ -224,39 +224,58 @@ include 'get_professor_analytics.php';
 
   <!-- analytics header -->
   <h1>Analytics</h1>
+
   <section class="dropdown-section">
     <h3>Student Check-In Details</h3>
     <div class="dropdown">
       <?php
       if ($student_checkIn_array) {
+        $currentStudent = null;
+        $currentCourse = null;
+
         foreach ($student_checkIn_array as $row) {
-          echo '<div class="question">
-                  <span class="arrow"></span>
-                  <span>' . $row['courseName'] . ' - ' . $row['studentFirstName'] . ' ' . $row['studentLastName'] . '</span>
-                </div>
-                <div class="answer">
-                  <p>Check-In Time: ' . $row['firstCheckInTime'] . '</p>
-                  <!-- Add other details you want to display -->
-                </div>';
+          $studentFullName = $row['studentFirstName'] . ' ' . $row['studentLastName'];
+          $courseName = $row['courseName'];
+
+          if ($currentStudent !== $studentFullName || $currentCourse !== $courseName) {
+            if ($currentStudent !== null && $currentCourse !== null) {
+              echo '</div>';
+            }
+
+            echo '<div class="question">
+                    <span class="arrow"></span>
+                    <span>' . $courseName . ' - ' . $studentFullName . '</span>
+                  </div>
+                  <div class="answer">';
+            $currentStudent = $studentFullName;
+            $currentCourse = $courseName;
+          }
+
+          echo '<p>Check-In Time: ' . $row['firstCheckInTime'] . '</p>';
+          // You can add other details here
         }
+
+        echo '</div>';
       } else {
         echo '<span style="color: #FAF8D6; line-height: 1.5em; padding-left: 2%; padding-right: 2%;">No student check-in details found...</span>';
       }
       ?>
-      <script>
-        // set variables
-        const question = document.querySelectorAll('.question');
-        const answer = document.querySelectorAll('.answer');
-        const arrow = document.querySelectorAll('.arrow');
+    </div>
+  </section>
+  <script>
+    // set variables
+    const question = document.querySelectorAll('.question');
+    const answer = document.querySelectorAll('.answer');
+    const arrow = document.querySelectorAll('.arrow');
 
-        // for loop to open the answer to the question
-        for (let i = 0; i < question.length; i++) {
-          question[i].addEventListener('click', () => {
-            answer[i].classList.toggle('answer-opened');
-            arrow[i].classList.toggle('arrow-rotated');
-          });
-        } // end of for loop
-      </script>
+    // for loop to open the answer to the question
+    for (let i = 0; i < question.length; i++) {
+      question[i].addEventListener('click', () => {
+        answer[i].classList.toggle('answer-opened');
+        arrow[i].classList.toggle('arrow-rotated');
+      });
+    } // end of for loop
+  </script>
 </body> <!-- end of body tag -->
 
 </html> <!-- end of html tag -->
