@@ -255,10 +255,11 @@ include 'get_weekday_course.php';
     <h3>Total Semester Attendance</h3>
 
 
-    <?php
-    if ($course_array) {
-      foreach ($course_array as $row) {
-        echo '<div class="question"> <!-- start of div tag with question class -->
+    <div class="dropdown"> <!-- start of ul tag with dropdown class -->
+      <?php
+      if ($course_array) {
+        foreach ($course_array as $row) {
+          echo '<div class="question"> <!-- start of div tag with question class -->
             <!-- create arrow -->
             <span class="arrow"></span>
             <!-- display first question -->
@@ -268,39 +269,39 @@ include 'get_weekday_course.php';
             <!-- display answer to the first question -->
             <p>';
 
-        // Get the days of the week the class meets
-        $daysOfWeekString = $row['daysOfWeek'];
-        $meetingDayCounts = array_fill_keys(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], 0);
+          // Get the days of the week the class meets
+          $daysOfWeekString = $row['daysOfWeek'];
+          $meetingDayCounts = array_fill_keys(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], 0);
 
-        // Generate an array of dates within the range of startDate and endDate
-        $startDate = new DateTime($row['startDate']);
-        $endDate = new DateTime($row['endDate']);
-        $interval = new DateInterval('P1D'); // 1 day interval
-        $dateRange = new DatePeriod($startDate, $interval, $endDate);
+          // Generate an array of dates within the range of startDate and endDate
+          $startDate = new DateTime($row['startDate']);
+          $endDate = new DateTime($row['endDate']);
+          $interval = new DateInterval('P1D'); // 1 day interval
+          $dateRange = new DatePeriod($startDate, $interval, $endDate);
 
-        // Count the occurrences of each day of the week
-        foreach ($dateRange as $date) {
-          $dayOfWeek = $date->format('l'); // Get the day of the week (e.g., 'Monday')
-    
-          // Check if the day of the week exists in the string
-          if (strpos($daysOfWeekString, $dayOfWeek) !== false) {
-            $meetingDayCounts[$dayOfWeek]++;
+          // Count the occurrences of each day of the week
+          foreach ($dateRange as $date) {
+            $dayOfWeek = $date->format('l'); // Get the day of the week (e.g., 'Monday')
+      
+            // Check if the day of the week exists in the string
+            if (strpos($daysOfWeekString, $dayOfWeek) !== false) {
+              $meetingDayCounts[$dayOfWeek]++;
+            }
           }
-        }
 
-        // Calculate and print the total meeting times for the entire week
-        $totalMeetingTimes = array_sum($meetingDayCounts);
-        echo "Total meeting times for the semester: $totalMeetingTimes times<br>";
+          // Calculate and print the total meeting times for the entire week
+          $totalMeetingTimes = array_sum($meetingDayCounts);
+          echo "Total meeting times for the semester: $totalMeetingTimes times<br>";
 
-        // Debug: Echo the course ID
-        echo "Course ID: " . $row['courseId'] . "<br>";
+          // Debug: Echo the course ID
+          echo "Course ID: " . $row['courseId'] . "<br>";
 
-        // Get the attendance count for the specific student and course
-        $attendanceCount = 0;
+          // Get the attendance count for the specific student and course
+          $attendanceCount = 0;
 
-        // Fetch and display attendance information for the specific student and course
-        if (
-          $stmt = $con->prepare('
+          // Fetch and display attendance information for the specific student and course
+          if (
+            $stmt = $con->prepare('
                 SELECT
                     COUNT(*) AS attendanceCount
                 FROM
@@ -322,34 +323,35 @@ include 'get_weekday_course.php';
                 GROUP BY
                     s.userId, c.courseId
             ')
-        ) {
-          $stmt->bind_param('ii', $_SESSION['id'], $row['courseId']);
+          ) {
+            $stmt->bind_param('ii', $_SESSION['id'], $row['courseId']);
 
-          if ($stmt->execute()) {
-            $result = $stmt->get_result();
+            if ($stmt->execute()) {
+              $result = $stmt->get_result();
 
-            if ($result->num_rows > 0) {
-              // Fetch the attendance count from the result
-              $attendanceCount = $result->fetch_assoc()['attendanceCount'];
+              if ($result->num_rows > 0) {
+                // Fetch the attendance count from the result
+                $attendanceCount = $result->fetch_assoc()['attendanceCount'];
+              }
+            } else {
+              echo 'Error executing the query: ' . $stmt->error;
             }
+
+            $stmt->close();
           } else {
-            echo 'Error executing the query: ' . $stmt->error;
+            echo 'Error preparing the statement: ' . $con->error;
           }
 
-          $stmt->close();
-        } else {
-          echo 'Error preparing the statement: ' . $con->error;
+          // Echo the attendance count for the specific student and course
+          echo "Total attendance for the student in this course: $attendanceCount times<br>";
+
+          echo '</p></div>';
         }
-
-        // Echo the attendance count for the specific student and course
-        echo "Total attendance for the student in this course: $attendanceCount times<br>";
-
-        echo '</p></div>';
+      } else {
+        echo '<span style="color: #FAF8D6; line-height: 1.5em; padding-left: 2%; padding-right: 2%;">No classes found...</span>';
       }
-    } else {
-      echo '<span style="color: #FAF8D6; line-height: 1.5em; padding-left: 2%; padding-right: 2%;">No classes found...</span>';
-    }
-    ?>
+      ?>
+    </div>
 
 
     <script>
