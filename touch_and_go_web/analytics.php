@@ -293,9 +293,6 @@ include 'get_weekday_course.php';
           $totalMeetingTimes = array_sum($meetingDayCounts);
           echo "Total meeting times for the semester: $totalMeetingTimes times<br>";
 
-          // Debug: Echo the course ID
-          echo "Course ID: " . $row['courseId'] . "<br>";
-
           // Get the attendance count for the specific student and course
           $attendanceCount = 0;
 
