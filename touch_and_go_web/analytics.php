@@ -28,114 +28,6 @@ include 'get_weekday_course.php';
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
   <style>
-    form {
-      padding: 20px;
-      margin: auto;
-      border: 1px solid #eee;
-      background: #f7f7f7;
-      display: grid;
-      align-content: center;
-    }
-
-    input {
-      display: block;
-      padding: 10px;
-    }
-
-    input[type=text] {
-      border: 1px solid #ddd;
-    }
-
-    input[type=submit] {
-      margin-top: 20px;
-      border: 0;
-      color: #fff;
-      background: #10222e;
-      cursor: pointer;
-    }
-
-    #results div {
-      padding: 10px;
-      border: 1px solid #eee;
-      background: #f7f7f7;
-      width: 60%;
-      margin: auto;
-    }
-
-    #results div:nth-child(even) {
-      background: #fff;
-    }
-
-    .searchBox {
-      width: 50%;
-      margin: auto;
-    }
-
-    /* Add these styles to your existing CSS */
-
-    /* Style for the dropdown menu */
-    .searchBox select {
-      padding: 10px;
-      margin-right: 10px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-    }
-
-    /* Style for the search form */
-    .searchBox form {
-      padding: 20px;
-      margin: auto;
-      border: 1px solid #eee;
-      background: #f7f7f7;
-      display: grid;
-      align-content: center;
-    }
-
-    .searchBox input {
-      display: block;
-      padding: 10px;
-    }
-
-    .searchBox input[type=text],
-    .searchBox select {
-      width: 50%;
-      /* Adjust the width as needed */
-    }
-
-    .searchBox input[type=submit] {
-      margin-top: 20px;
-      border: 0;
-      color: #fff;
-      background: #10222e;
-      cursor: pointer;
-    }
-
-    /* Style for the search results */
-    #results {
-      margin-top: 20px;
-    }
-
-    #results table {
-      width: 80%;
-      margin: auto;
-      border-collapse: collapse;
-    }
-
-    #results th,
-    #results td {
-      border: 1px solid #ddd;
-      padding: 8px;
-      text-align: left;
-    }
-
-    #results th {
-      background-color: #10222e;
-      color: #fff;
-    }
-
-    #results tr:nth-child(even) {
-      background-color: #f2f2f2;
-    }
 
     /* start of style rules for h3 tag */
     h3 {
@@ -172,7 +64,7 @@ include 'get_weekday_course.php';
           $('#status_' + courseId).html('Status: ' + response);
         },
         error: function () {
-          // Handle errors if needed
+          // Need to update this error check
           alert('Error checking attendance.');
         }
       });
