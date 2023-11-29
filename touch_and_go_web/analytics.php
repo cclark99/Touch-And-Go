@@ -320,7 +320,7 @@ include 'get_weekday_course.php';
                     s.userId, c.courseId
             ')
           ) {
-            $stmt->bind_param('ii', $_SESSION['id'], $course_array['courseId']);
+            $stmt->bind_param('ii', $_SESSION['id'], $row['courseId']);
 
             if ($stmt->execute()) {
               $result = $stmt->get_result();
