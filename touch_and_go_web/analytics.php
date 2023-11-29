@@ -234,7 +234,7 @@ include 'get_weekday_course.php';
           }
 
           // Echo the attendance count for the specific student and course
-          echo "Total attendance for the student in this course: $attendanceCount times<br>";
+          echo "Total attendance in this course: $attendanceCount times<br>";
 
           echo '</p></div>';
         }
