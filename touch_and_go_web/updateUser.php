@@ -22,7 +22,7 @@ $stmtExistingPassword->fetch();
 $stmtExistingPassword->close();
 
 // Check if a new password is provided and if it's different from the existing password
-if (!empty($userPassword) && !password_verify($userPassword, $existingPassword)) {
+if (!empty($userPassword) && $userPassword != $existingPassword) {
     $newPassword = password_hash($userPassword, PASSWORD_BCRYPT);
 
     // Update the user table with the new hashed password
