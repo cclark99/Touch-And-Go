@@ -315,12 +315,9 @@ include 'get_weekday_course.php';
                         fingerprint f ON s.userId = f.userId
                     JOIN
                         course c ON sc.courseId = c.courseId
-                    JOIN
-                        professor_course pc ON c.courseId = pc.courseId
                     WHERE
                         f.checkIn BETWEEN CONCAT(c.startDate, " ", c.startTime) AND CONCAT(c.endDate, " ", c.endTime)
                         AND TIME(f.checkIn) BETWEEN c.startTime AND c.endTime
-                        AND pc.userId = ?
                         AND INSTR(c.daysOfWeek, DAYNAME(f.checkIn)) > 0 
                         AND s.userId = ? 
                         AND c.courseId = ?
@@ -329,7 +326,7 @@ include 'get_weekday_course.php';
                 ) AS subquery
             ')
           ) {
-            $stmt->bind_param('iii', $_SESSION['id'], $row['courseId'], $row['courseId']);
+            $stmt->bind_param('ii', $_SESSION['id'], $row['courseId']);
 
             if ($stmt->execute()) {
               $result = $stmt->get_result();
