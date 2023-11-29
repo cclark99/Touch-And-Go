@@ -254,19 +254,20 @@ include 'get_weekday_course.php';
     <!-- display Total Semester Attendance -->
     <h3>Total Semester Attendance</h3>
 
+
     <div class="dropdown"> <!-- start of ul tag with dropdown class -->
       <?php
       if ($course_array) {
         foreach ($course_array as $row) {
           echo '<div class="question"> <!-- start of div tag with question class -->
-            <!-- create arrow -->
-            <span class="arrow"></span>
-            <!-- display first question -->
-            <span>' . $row['name'] . '</span>
-          </div> <!-- end of div tag -->
-          <div class="answer"> <!-- start of div tag with answer class -->
-            <!-- display answer to the first question -->
-            <p>';
+                <!-- create arrow -->
+                <span class="arrow"></span>
+                <!-- display first question -->
+                <span>' . $row['name'] . '</span>
+              </div> <!-- end of div tag -->
+              <div class="answer"> <!-- start of div tag with answer class -->
+                <!-- display answer to the first question -->
+                <p>';
 
           // Get the days of the week the class meets
           $daysOfWeekString = $row['daysOfWeek'];
@@ -298,36 +299,47 @@ include 'get_weekday_course.php';
           // Fetch and display attendance information for the specific student and course
           if (
             $stmt = $con->prepare('
-                SELECT
-                    COUNT(*) AS attendanceCount
-                FROM
-                    student_course sc
-                JOIN
-                    student s ON sc.userId = s.userId
-                JOIN
-                    fingerprint f ON s.userId = f.userId
-                JOIN
-                    course c ON sc.courseId = c.courseId
-                JOIN
-                    professor_course pc ON c.courseId = pc.courseId
-                WHERE
-                    f.checkIn BETWEEN CONCAT(c.startDate, " ", c.startTime) AND CONCAT(c.endDate, " ", c.endTime)
-                    AND TIME(f.checkIn) BETWEEN c.startTime AND c.endTime
-                    AND pc.userId = ?
-                    AND INSTR(c.daysOfWeek, DAYNAME(f.checkIn)) > 0 
-                    AND s.userId = ? 
-                GROUP BY
-                    s.userId, c.courseId
-            ')
+                    SELECT
+                        COUNT(*) AS attendanceCount
+                    FROM
+                        student_course sc
+                    JOIN
+                        student s ON sc.userId = s.userId
+                    JOIN
+                        fingerprint f ON s.userId = f.userId
+                    JOIN
+                        course c ON sc.courseId = c.courseId
+                    JOIN
+                        professor_course pc ON c.courseId = pc.courseId
+                    WHERE
+                        f.checkIn BETWEEN CONCAT(c.startDate, " ", c.startTime) AND CONCAT(c.endDate, " ", c.endTime)
+                        AND TIME(f.checkIn) BETWEEN c.startTime AND c.endTime
+                        AND pc.userId = ?
+                        AND INSTR(c.daysOfWeek, DAYNAME(f.checkIn)) > 0 
+                        AND s.userId = ? 
+                    GROUP BY
+                        s.userId, c.courseId
+                ')
           ) {
             $stmt->bind_param('ii', $_SESSION['id'], $row['courseId']);
 
             if ($stmt->execute()) {
+              // Debugging message
+              echo 'Query executed successfully.';
+
               $result = $stmt->get_result();
 
               if ($result->num_rows > 0) {
+                // Debugging message
+                echo 'Rows found in result set.';
+
                 // Fetch the attendance count from the result
                 $attendanceCount = $result->fetch_assoc()['attendanceCount'];
+
+                // Debugging message
+                echo "Attendance count: $attendanceCount";
+              } else {
+                echo 'No rows found in the result set.';
               }
             } else {
               echo 'Error executing the query: ' . $stmt->error;
