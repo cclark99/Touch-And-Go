@@ -304,27 +304,32 @@ include 'get_weekday_course.php';
             $stmt = $con->prepare('
                 SELECT
                     COUNT(*) AS attendanceCount
-                FROM
-                    student_course sc
-                JOIN
-                    student s ON sc.userId = s.userId
-                JOIN
-                    fingerprint f ON s.userId = f.userId
-                JOIN
-                    course c ON sc.courseId = c.courseId
-                JOIN
-                    professor_course pc ON c.courseId = pc.courseId
-                WHERE
-                    f.checkIn BETWEEN CONCAT(c.startDate, " ", c.startTime) AND CONCAT(c.endDate, " ", c.endTime)
-                    AND TIME(f.checkIn) BETWEEN c.startTime AND c.endTime
-                    AND pc.userId = ?
-                    AND INSTR(c.daysOfWeek, DAYNAME(f.checkIn)) > 0 
-                    AND s.userId = ? 
-                GROUP BY
-                    s.userId, c.courseId
+                FROM (
+                    SELECT
+                        f.checkIn
+                    FROM
+                        student_course sc
+                    JOIN
+                        student s ON sc.userId = s.userId
+                    JOIN
+                        fingerprint f ON s.userId = f.userId
+                    JOIN
+                        course c ON sc.courseId = c.courseId
+                    JOIN
+                        professor_course pc ON c.courseId = pc.courseId
+                    WHERE
+                        f.checkIn BETWEEN CONCAT(c.startDate, " ", c.startTime) AND CONCAT(c.endDate, " ", c.endTime)
+                        AND TIME(f.checkIn) BETWEEN c.startTime AND c.endTime
+                        AND pc.userId = ?
+                        AND INSTR(c.daysOfWeek, DAYNAME(f.checkIn)) > 0 
+                        AND s.userId = ? 
+                        AND c.courseId = ?
+                    GROUP BY
+                        s.userId, c.courseId, DATE(f.checkIn)
+                ) AS subquery
             ')
           ) {
-            $stmt->bind_param('ii', $_SESSION['id'], $row['courseId']);
+            $stmt->bind_param('iii', $_SESSION['id'], $row['courseId'], $row['courseId']);
 
             if ($stmt->execute()) {
               $result = $stmt->get_result();
@@ -351,6 +356,7 @@ include 'get_weekday_course.php';
         echo '<span style="color: #FAF8D6; line-height: 1.5em; padding-left: 2%; padding-right: 2%;">No classes found...</span>';
       }
       ?>
+
     </div>
 
 
