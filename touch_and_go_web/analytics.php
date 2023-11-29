@@ -256,18 +256,17 @@ include 'get_weekday_course.php';
 
     <div class="dropdown"> <!-- start of ul tag with dropdown class -->
       <?php
-
       if ($course_array) {
         foreach ($course_array as $row) {
           echo '<div class="question"> <!-- start of div tag with question class -->
-                <!-- create arrow -->
-                <span class="arrow"></span>
-                <!-- display first question -->
-                <span>' . $row['name'] . '</span>
-              </div> <!-- end of div tag -->
-              <div class="answer"> <!-- start of div tag with answer class -->
-                <!-- display answer to the first question -->
-                <p>';
+            <!-- create arrow -->
+            <span class="arrow"></span>
+            <!-- display first question -->
+            <span>' . $row['name'] . '</span>
+          </div> <!-- end of div tag -->
+          <div class="answer"> <!-- start of div tag with answer class -->
+            <!-- display answer to the first question -->
+            <p>';
 
           // Get the days of the week the class meets
           $daysOfWeekString = $row['daysOfWeek'];
@@ -293,27 +292,78 @@ include 'get_weekday_course.php';
           $totalMeetingTimes = array_sum($meetingDayCounts);
           echo "Total meeting times for the semester: $totalMeetingTimes times<br>";
 
+          // Get the attendance count for the specific student and course
+          $attendanceCount = 0;
+
+          // Fetch and display attendance information for the specific student and course
+          if (
+            $stmt = $con->prepare('
+                SELECT
+                    COUNT(*) AS attendanceCount
+                FROM
+                    student_course sc
+                JOIN
+                    student s ON sc.userId = s.userId
+                JOIN
+                    fingerprint f ON s.userId = f.userId
+                JOIN
+                    course c ON sc.courseId = c.courseId
+                JOIN
+                    professor_course pc ON c.courseId = pc.courseId
+                WHERE
+                    f.checkIn BETWEEN CONCAT(c.startDate, " ", c.startTime) AND CONCAT(c.endDate, " ", c.endTime)
+                    AND TIME(f.checkIn) BETWEEN c.startTime AND c.endTime
+                    AND pc.userId = ?
+                    AND INSTR(c.daysOfWeek, DAYNAME(f.checkIn)) > 0 
+                    AND s.userId = ? 
+                GROUP BY
+                    s.userId, c.courseId
+            ')
+          ) {
+            $stmt->bind_param('ii', $_SESSION['id'], $course_array['courseId']);
+
+            if ($stmt->execute()) {
+              $result = $stmt->get_result();
+
+              if ($result->num_rows > 0) {
+                // Fetch the attendance count from the result
+                $attendanceCount = $result->fetch_assoc()['attendanceCount'];
+              }
+            } else {
+              echo 'Error executing the query: ' . $stmt->error;
+            }
+
+            $stmt->close();
+          } else {
+            echo 'Error preparing the statement: ' . $con->error;
+          }
+
+          // Echo the attendance count for the specific student and course
+          echo "Total attendance for the student in this course: $attendanceCount times<br>";
+
           echo '</p></div>';
         }
       } else {
         echo '<span style="color: #FAF8D6; line-height: 1.5em; padding-left: 2%; padding-right: 2%;">No classes found...</span>';
       }
       ?>
+    </div>
 
-      <script>
-        // set variables
-        const question = document.querySelectorAll('.question');
-        const answer = document.querySelectorAll('.answer');
-        const arrow = document.querySelectorAll('.arrow');
 
-        // for loop to open the answer to the question
-        for (let i = 0; i < question.length; i++) {
-          question[i].addEventListener('click', () => {
-            answer[i].classList.toggle('answer-opened');
-            arrow[i].classList.toggle('arrow-rotated');
-          });
-        } // end of for loop
-      </script>
+    <script>
+      // set variables
+      const question = document.querySelectorAll('.question');
+      const answer = document.querySelectorAll('.answer');
+      const arrow = document.querySelectorAll('.arrow');
+
+      // for loop to open the answer to the question
+      for (let i = 0; i < question.length; i++) {
+        question[i].addEventListener('click', () => {
+          answer[i].classList.toggle('answer-opened');
+          arrow[i].classList.toggle('arrow-rotated');
+        });
+      } // end of for loop
+    </script>
 </body> <!-- end of body tag -->
 
 </html> <!-- end of html tag -->
