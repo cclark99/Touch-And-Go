@@ -40,7 +40,7 @@ if (!empty($userPassword) && !password_verify($userPassword, $existingPassword))
 }
 
 // Close the database connection before redirecting
-$con->close();
+// $con->close();
 
 switch ($userType) {
     case 'student':
