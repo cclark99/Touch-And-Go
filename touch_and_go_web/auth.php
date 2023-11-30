@@ -43,7 +43,7 @@ if ($stmt = $con->prepare('SELECT userId, userPassword, userType FROM user WHERE
 	if ($stmt->num_rows > 0) {
 		$stmt->bind_result($id, $password, $userType);
 		$stmt->fetch();
-		
+
 		if (password_verify($_POST['password'], $password)) {
 			// Verification success! User has logged-in!
 
