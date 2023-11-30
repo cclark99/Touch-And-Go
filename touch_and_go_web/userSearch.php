@@ -1,12 +1,12 @@
 <?php
-// (A) DATABASE CONFIG 
+// database config 
 define("DB_HOST", "localhost");
 define("DB_NAME", "touch_and_go_test");
 define("DB_CHARSET", "utf8mb4");
 define("DB_USER", "test");
 define("DB_PASSWORD", "test123");
 
-// (B) CONNECT TO DATABASE
+// connect to database
 $pdo = new PDO(
     "mysql:host=" . DB_HOST . ";charset=" . DB_CHARSET . ";dbname=" . DB_NAME,
     DB_USER,
@@ -17,7 +17,7 @@ $pdo = new PDO(
     ]
 );
 
-// (C) SEARCH
+// search
 $stmt = $pdo->prepare("
     SELECT 
         user.userId,
@@ -38,7 +38,7 @@ $stmt = $pdo->prepare("
         student.firstName LIKE ? OR student.lastName LIKE ? OR
         professor.firstName LIKE ? OR professor.lastName LIKE ? OR
         admin.firstName LIKE ? OR admin.lastName LIKE ?)
-        AND (? = '' OR user.userType = ?)
+        AND (? = '' OR (user.userType = ? AND user.userEmail != 'root@kutztown.com'))
 ");
 
 $searchTerm = "%" . $_POST["search"] . "%";
