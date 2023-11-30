@@ -251,7 +251,7 @@ switch (true) {
 
         .update-message {
             margin-top: 15px;
-            padding: 10px;
+            padding: 20px;
             font-size: 18px;
             text-align: center;
             background-color: #2a3c4e;
