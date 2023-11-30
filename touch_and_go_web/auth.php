@@ -7,11 +7,11 @@ function createRootAdmin($con)
 {
 	$rootEmail = 'root@kutztown.com';
 	$rootPassword = password_hash('adminPassTest', PASSWORD_BCRYPT);
-	$rootUserId = 0;
+	$rootUserId = 1;
 
 	$stmtCreateRootAdminUser = $con->prepare("INSERT INTO user (userId, userEmail, userPassword, userType) VALUES (?, ?, ?, 'admin')");
 	$stmtCreateRootAdminUser->bind_param("iss", $rootUserId, $rootEmail, $rootPassword);
-	
+
 	$stmtCreateRootAdminUser->execute();
 	$stmtCreateRootAdminUser->close();
 
