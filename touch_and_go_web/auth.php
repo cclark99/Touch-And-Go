@@ -32,14 +32,14 @@ if ($_POST['email'] === 'root@kutztown.com') {
 	$stmtCheckRoot->store_result();
 
 	if ($stmtCheckRoot->num_rows === 0) {
-		// User with ID '1' doesn't exist, proceed with insertion
+		//root account doesn't exist, do the insertion
 		createRootAdmin($con);
 	}
 
 	$stmtCheckRoot->close();
 }
 
-// Now we check if the data from the login form was submitted, isset() will check if the data exists.
+// Check if the data from the login form was submitted, isset() will check if the data exists.
 if (!isset($_POST['email'], $_POST['password'])) {
 	// Could not get the data that should have been sent.
 	$_SESSION['login_msg'] = ('Please fill both the email and password fields!');
