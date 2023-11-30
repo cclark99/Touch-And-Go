@@ -8,8 +8,10 @@ if (!isset($_SESSION['loggedin'])) {
 }
 
 require 'db_connection.php';
+include 'get_course.php';
+include 'get_attendance.php';
 
-// Get user's name based on what account type they are, as well as userId
+// Get user's name based on what account type they are, as well as userId first
 
 switch (true) {
   case $_SESSION['userType'] == 'student':
@@ -94,6 +96,7 @@ switch (true) {
 }
 
 ?>
+
 <!DOCTYPE html>
 
 <html lang="en"> <!-- start of html tag -->
