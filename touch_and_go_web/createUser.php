@@ -17,6 +17,21 @@ $firstName = $_POST['firstName'];
 $lastName = $_POST['lastName'];
 $phoneNumber = $_POST['phoneNumber'];
 
+// Check if the email already exists for another user. If it does redirect back to the homepage
+$stmtCheckEmail = $con->prepare("SELECT userId FROM user WHERE userEmail = ?");
+$stmtCheckEmail->bind_param("s", $userEmail);
+$stmtCheckEmail->execute();
+$stmtCheckEmail->store_result();
+
+if ($stmtCheckEmail->num_rows > 0) {
+    // Email already exists, inform the user
+    $_SESSION['updateMsg'] = 'Email address already exists. Please choose a different email.';
+    header('Location: adminHome.php');
+    exit();
+}
+
+$stmtCheckEmail->close();
+
 // Update the user table
 if ($stmtUser = $con->prepare("INSERT INTO user (userEmail, userPassword, userType) VALUES( ?, ?, ?)")) {
     $newPassword = password_hash($_POST['userPassword'], PASSWORD_BCRYPT);
