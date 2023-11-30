@@ -32,7 +32,7 @@ if (!$userData) {
 // Check if the user is trying to edit the root account
 if ($userData['userId'] == 1) {
     $_SESSION['updateMsg'] = 'Can not edit root account here. Contact Touch & Go Team.';
-    header('Location: adminHome.php'); 
+    header('Location: adminHome.php');
     exit();
 }
 
