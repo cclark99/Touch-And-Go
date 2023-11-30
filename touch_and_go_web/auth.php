@@ -1,7 +1,25 @@
 <?php
 session_start();
-
 include "db_connection.php";
+
+// Function to create the root admin account
+function createRootAdmin($con)
+{
+	$rootEmail = 'root@kutztown.com';
+	$rootPassword = password_hash('adminPassTest', PASSWORD_BCRYPT);
+	$rootUserId = 0;
+
+	$stmtCreateRootAdminUser = $con->prepare("INSERT INTO user (userId, userEmail, userPassword, userType) VALUES (?, ?, ?, 'admin')");
+	$stmtCreateRootAdminUser->bind_param("iss", $rootUserId, $rootEmail, $rootPassword);
+	
+	$stmtCreateRootAdminUser->execute();
+	$stmtCreateRootAdminUser->close();
+
+	$stmtCreateRootAdmin = $con->prepare("INSERT INTO admin (userId, firstName, lastName) VALUES (?, 'Root', 'Admin')");
+	$stmtCreateRootAdmin->bind_param("i", $rootUserId);
+	$stmtCreateRootAdmin->execute();
+	$stmtCreateRootAdmin->close();
+}
 
 // Now we check if the data from the login form was submitted, isset() will check if the data exists.
 if (!isset($_POST['email'], $_POST['password'])) {
@@ -24,12 +42,20 @@ if ($stmt = $con->prepare('SELECT userId, userPassword, userType FROM user WHERE
 		// Account exists, now we verify the password.
 		if (password_verify($_POST['password'], $password)) {
 			// Verification success! User has logged-in!
-			// Create sessions, so we know the user is logged in, they basically act like cookies but remember the data on the server.
+
+			// Check and create the root admin account if needed
+			if ($userType === 'admin' && $_POST['email'] === 'root@kutztown.com') {
+				createRootAdmin($con);
+			}
+
+			// Create sessions
 			session_regenerate_id();
 			$_SESSION['loggedin'] = TRUE;
 			$_SESSION['email'] = $_POST['email'];
 			$_SESSION['id'] = $id;
 			$_SESSION['userType'] = $userType;
+
+			// Redirect based on user type
 			switch ($userType) {
 				case 'student':
 					header('Location: home.php');
@@ -54,6 +80,7 @@ if ($stmt = $con->prepare('SELECT userId, userPassword, userType FROM user WHERE
 		header('Location: index.php');
 		exit();
 	}
+
 	$stmt->close();
 }
 ?>
