@@ -38,7 +38,7 @@ $stmt = $pdo->prepare("
         student.firstName LIKE ? OR student.lastName LIKE ? OR
         professor.firstName LIKE ? OR professor.lastName LIKE ? OR
         admin.firstName LIKE ? OR admin.lastName LIKE ?)
-        AND (? = '' OR (user.userType = ? AND user.userId != 1))
+        AND (? = '' OR user.userType = ?)
 ");
 
 $searchTerm = "%" . $_POST["search"] . "%";
@@ -57,7 +57,12 @@ $stmt->execute([
 
 $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+// Filter out user ID 1 - root admin account
+$results = array_filter($results, function ($result) {
+    return $result['userId'] != 1;
+});
+
 if (isset($_POST["ajax"])) {
-    echo json_encode($results);
+    echo json_encode(array_values($results)); // Reindex array after filtering
 }
 ?>
