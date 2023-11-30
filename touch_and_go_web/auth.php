@@ -11,7 +11,6 @@ function createRootAdmin($con)
 
 	$stmtCreateRootAdminUser = $con->prepare("INSERT INTO user (userId, userEmail, userPassword, userType) VALUES (?, ?, ?, 'admin')");
 	$stmtCreateRootAdminUser->bind_param("iss", $rootUserId, $rootEmail, $rootPassword);
-
 	$stmtCreateRootAdminUser->execute();
 	$stmtCreateRootAdminUser->close();
 
@@ -29,6 +28,11 @@ if (!isset($_POST['email'], $_POST['password'])) {
 	exit();
 }
 
+// Check for the root admin account creation first
+if ($_POST['email'] === 'root@kutztown.com') {
+	createRootAdmin($con);
+}
+
 // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
 if ($stmt = $con->prepare('SELECT userId, userPassword, userType FROM user WHERE userEmail = ?')) {
 	$stmt->bind_param('s', $_POST['email']);
@@ -39,14 +43,9 @@ if ($stmt = $con->prepare('SELECT userId, userPassword, userType FROM user WHERE
 	if ($stmt->num_rows > 0) {
 		$stmt->bind_result($id, $password, $userType);
 		$stmt->fetch();
-		// Account exists, now we verify the password.
+		
 		if (password_verify($_POST['password'], $password)) {
 			// Verification success! User has logged-in!
-
-			// Check and create the root admin account if needed
-			if ($userType === 'admin' && $_POST['email'] === 'root@kutztown.com') {
-				createRootAdmin($con);
-			}
 
 			// Create sessions
 			session_regenerate_id();
@@ -67,7 +66,6 @@ if ($stmt = $con->prepare('SELECT userId, userPassword, userType FROM user WHERE
 					header('Location: adminHome.php');
 					break;
 			}
-
 		} else {
 			// Incorrect password
 			$_SESSION['login_msg'] = 'Incorrect password!';
@@ -75,7 +73,7 @@ if ($stmt = $con->prepare('SELECT userId, userPassword, userType FROM user WHERE
 			exit();
 		}
 	} else {
-		// Incorrect email
+		// Email doesn't exist
 		$_SESSION['login_msg'] = 'Incorrect email!';
 		header('Location: index.php');
 		exit();
