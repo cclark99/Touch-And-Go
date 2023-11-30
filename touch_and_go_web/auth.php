@@ -24,17 +24,27 @@ function createRootAdmin($con)
 	$stmtCreateRootAdmin->close();
 }
 
+// Check for the root admin account creation first
+if ($_POST['email'] === 'root@kutztown.com') {
+	// Check if user with ID '1' already exists
+	$stmtCheckRoot = $con->prepare("SELECT userId FROM user WHERE userId = 1");
+	$stmtCheckRoot->execute();
+	$stmtCheckRoot->store_result();
+
+	if ($stmtCheckRoot->num_rows === 0) {
+		// User with ID '1' doesn't exist, proceed with insertion
+		createRootAdmin($con);
+	}
+
+	$stmtCheckRoot->close();
+}
+
 // Now we check if the data from the login form was submitted, isset() will check if the data exists.
 if (!isset($_POST['email'], $_POST['password'])) {
 	// Could not get the data that should have been sent.
 	$_SESSION['login_msg'] = ('Please fill both the email and password fields!');
 	header('Location: index.php');
 	exit();
-}
-
-// Check for the root admin account creation first
-if ($_POST['email'] === 'root@kutztown.com') {
-	createRootAdmin($con);
 }
 
 // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
