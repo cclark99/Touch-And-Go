@@ -13,11 +13,18 @@ $userPassword = trim($_POST['userPassword']);
 $firstName = trim($_POST['firstName']);
 $lastName = trim($_POST['lastName']);
 
+if ($userId == 1) {
+    $_SESSION['updateMsg'] = 'Cannot update the root account here. Contact the Touch & Go Team.';
+    header('Location: adminHome.php');
+    exit();
+}
+
 // Check if the new email already exists in the database
 $stmtCheckEmail = $con->prepare("SELECT userId FROM user WHERE userEmail = ?");
 $stmtCheckEmail->bind_param("s", $userEmail);
 $stmtCheckEmail->execute();
 $stmtCheckEmail->store_result();
+
 
 if ($stmtCheckEmail->num_rows > 0) {
     // Email already exists, inform the user

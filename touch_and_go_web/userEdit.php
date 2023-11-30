@@ -9,7 +9,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['userType'] != 'admin') {
 
 include("db_connection.php");
 
-// Retrieve user type and email from the parameters
+// Retrieve user type, email, firstName, and lastName from the get parameters
 $userType = urldecode($_GET['userType']);
 $userEmail = urldecode($_GET['userEmail']);
 $firstName = urldecode($_GET['firstName']);
@@ -24,7 +24,15 @@ $userData = $result->fetch_assoc();
 
 // User data is not found
 if (!$userData) {
+    $_SESSION['updateMsg'] = 'User data not found. Contact Touch & Go Team.';
     header('Location: adminHome.php');
+    exit();
+}
+
+// Check if the user is trying to edit the root account
+if ($userData['userId'] == 1) {
+    $_SESSION['updateMsg'] = 'Can not edit root account here. Contact Touch & Go Team.';
+    header('Location: adminHome.php'); 
     exit();
 }
 
