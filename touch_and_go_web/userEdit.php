@@ -169,8 +169,17 @@ if ($userData['userId'] == 1) {
         <!-- list help.php link -->
         <li id="fakeNav"><a></a></li>
         <!-- list logout.php link -->
-        <li><a class='link' href="logout.php">Logout</a></li>
+        <li><a class='link' href="#" onclick="confirmLogout()">Logout</a></li>
     </ul> <!-- end of ul for menu bar -->
+
+    <script>
+        function confirmLogout() {
+            var confirmed = confirm('Are you sure you want to log out?');
+            if (confirmed) {
+                window.location.href = 'logout.php';
+            }
+        }
+    </script>
 
     <!-- this ends the code that was created using information from the 
     following link:
