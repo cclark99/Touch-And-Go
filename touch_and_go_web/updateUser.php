@@ -5,13 +5,13 @@ session_start();
 // Include necessary files and establish database connection
 include("db_connection.php");
 
-// Retrieve form data
-$userId = $_POST['userId'];
-$userEmail = $_POST['userEmail'];
-$userType = $_POST['userType'];
-$userPassword = $_POST['userPassword'];
-$firstName = $_POST['firstName'];
-$lastName = $_POST['lastName'];
+// Retrieve form data and trim whitespace
+$userId = trim($_POST['userId']);
+$userEmail = trim($_POST['userEmail']);
+$userType = trim($_POST['userType']);
+$userPassword = trim($_POST['userPassword']);
+$firstName = trim($_POST['firstName']);
+$lastName = trim($_POST['lastName']);
 
 // Check if the new email already exists in the database
 $stmtCheckEmail = $con->prepare("SELECT userId FROM user WHERE userEmail = ?");
