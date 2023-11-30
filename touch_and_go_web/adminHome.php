@@ -371,6 +371,13 @@ switch (true) {
     <!-- home header -->
     <h1>Home</h1>
 
+    <?php
+    if (isset($_SESSION['updateMsg'])) {
+        echo '<h2 class="update-message">' . $_SESSION['updateMsg'] . '</h2>';
+        unset($_SESSION['updateMsg']);
+    }
+    ?>
+
     <h3 class="center">Search & Edit Users</h3>
     <div class="searchBox">
         <form id="search" onsubmit="return asearch();">
@@ -388,12 +395,6 @@ switch (true) {
         </form>
 
         <div id="results"></div>
-        <?php
-        if (isset($_SESSION['updateMsg'])) {
-            echo '<h2 class="update-message">' . $_SESSION['updateMsg'] . '</h2>';
-            unset($_SESSION['updateMsg']);
-        }
-        ?>
     </div>
 
     <h3 class="center">Create Users</h3>
