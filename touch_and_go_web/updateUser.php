@@ -13,6 +13,22 @@ $userPassword = $_POST['userPassword'];
 $firstName = $_POST['firstName'];
 $lastName = $_POST['lastName'];
 
+// Check if the new email already exists in the database
+$stmtCheckEmail = $con->prepare("SELECT userId FROM user WHERE userEmail = ?");
+$stmtCheckEmail->bind_param("s", $userEmail);
+$stmtCheckEmail->execute();
+$stmtCheckEmail->store_result();
+
+if ($stmtCheckEmail->num_rows > 0) {
+    // Email already exists, inform the user
+    $_SESSION['updateMsg'] = 'Email address already exists. Please choose a different email.';
+    header('Location: adminHome.php');
+    exit();
+}
+
+// Continue with the update if the email is unique
+$stmtCheckEmail->close();
+
 // Retrieve the existing hashed password from the database
 $stmtExistingPassword = $con->prepare("SELECT userPassword FROM user WHERE userId = ?");
 $stmtExistingPassword->bind_param("i", $userId);
@@ -38,9 +54,6 @@ if (!empty($userPassword) && $userPassword != $existingPassword) {
     $stmtUser->execute();
     $stmtUser->close();
 }
-
-// Close the database connection before redirecting
-// $con->close();
 
 switch ($userType) {
     case 'student':

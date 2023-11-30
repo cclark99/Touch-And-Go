@@ -22,16 +22,12 @@ $stmt->execute();
 $result = $stmt->get_result();
 $userData = $result->fetch_assoc();
 
-// If user data is not found, you may want to handle this scenario, e.g., redirect to an error page
+// User data is not found
 if (!$userData) {
     header('Location: adminHome.php');
     exit();
 }
 
-// Fetch user data based on user type and email from the database
-// Perform necessary database queries to retrieve user data
-
-// Display a form with the current user data for editing
 ?>
 
 <!-- HTML form for editing user data -->
