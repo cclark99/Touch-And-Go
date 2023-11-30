@@ -38,7 +38,7 @@ $stmt = $pdo->prepare("
         student.firstName LIKE ? OR student.lastName LIKE ? OR
         professor.firstName LIKE ? OR professor.lastName LIKE ? OR
         admin.firstName LIKE ? OR admin.lastName LIKE ?)
-        AND (? = '' OR (user.userType = ? AND user.userEmail != 'root@kutztown.com'))
+        AND (? = '' OR (user.userType = ? AND user.userId != 1))
 ");
 
 $searchTerm = "%" . $_POST["search"] . "%";
