@@ -4,7 +4,15 @@ import mysql.connector
 def get_user_input():
     response = input("Do you want to provide custom data for student insertion? (y/n): ").lower()
     if response in ['y', 'yes']:
-        userId = input("Enter user ID: ")
+        while True:
+            try:
+                user_input = int(input("Enter a number above 100: "))
+                if user_input > 100:
+                    break  # exit the loop if the input is above 100
+            else:
+                print("Number must be above 100. Please try again.")
+            except ValueError:
+                print("Invalid input. Please enter a valid number.")
         firstName = input("Enter first name: ")
         lastName = input("Enter last name: ")
     else:
