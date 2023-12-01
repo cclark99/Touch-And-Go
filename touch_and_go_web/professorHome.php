@@ -180,10 +180,6 @@ switch (true) {
 
   <!-- display today is (day of the week, month, day, and year)-->
   <div id="output"></div>
-  <!-- display percentage of attended classes of today -->
-  <div>You have attended __% of your classes today.</div>
-  <!-- display percentage of attended classes of the semester -->
-  <div>You have attended __% of you classes this semester.</div>
 
   <script>
     // set variables
