@@ -19,8 +19,8 @@ if ($userId == 1) {
     exit();
 }
 
-// Check if the new email already exists in the database
-$stmtCheckEmail = $con->prepare("SELECT userId FROM user WHERE userEmail = ?");
+// Check if the new email already exists in the database and does not equal the same user that is being updated
+$stmtCheckEmail = $con->prepare("SELECT userId FROM user WHERE userEmail = ? AND userId != ?");
 $stmtCheckEmail->bind_param("s", $userEmail);
 $stmtCheckEmail->execute();
 $stmtCheckEmail->store_result();
