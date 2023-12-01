@@ -6,8 +6,8 @@ def get_user_input():
     if response in ['y', 'yes']:
         while True:
             try:
-                user_input = int(input("Enter a number above 100: "))
-                if user_input > 100:
+                userId = int(input("Enter a user ID (number above 100): "))
+                if userId > 100:
                     break  # exit the loop if the input is above 100
                 else:
                     print("Number must be above 100. Please try again.")
