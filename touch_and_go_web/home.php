@@ -108,7 +108,18 @@ switch (true) {
   <title>Home</title>
   <!-- link external style.css sheet -->
   <link rel="stylesheet" type="text/css" href="../styles.css">
+  <script>
+    function confirmLogout() {
+      // Show a confirmation dialog
+      var result = confirm("Are you sure you want to logout?");
 
+      // If the user clicks "OK," proceed with the logout
+      if (result) {
+        window.location.href = "logout.php";
+      }
+      // If the user clicks "Cancel," do nothing
+    }
+  </script>
   <!-- start of style tag -->
   <style>
     /* start of style rules for h3 tag */
@@ -220,17 +231,6 @@ switch (true) {
 
     // display the day of the week, month, day, and year of the current day
     output.innerHTML = dayOfWeek + monthNames[month] + " " + day + ", " + year;
-
-    function confirmLogout() {
-      // Show a confirmation dialog
-      var result = confirm("Are you sure you want to logout?");
-
-      // If the user clicks "OK," proceed with the logout
-      if (result) {
-        window.location.href = "logout.php";
-      }
-      // If the user clicks "Cancel," do nothing
-    }
 
   </script> <!-- end of script tag -->
 </body> <!-- end of body tag -->
