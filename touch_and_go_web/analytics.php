@@ -28,7 +28,6 @@ include 'get_weekday_course.php';
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
   <style>
-
     /* start of style rules for h3 tag */
     h3 {
       color: #10222E;
@@ -50,6 +49,19 @@ include 'get_weekday_course.php';
   </style>
 
   <script>
+
+    function confirmLogout() {
+      // Show a confirmation dialog
+      var result = confirm("Are you sure you want to logout?");
+
+      // If the user clicks "OK," proceed with the logout
+      if (result) {
+        window.location.href = "logout.php";
+      }
+      // If the user clicks "Cancel," do nothing
+    }
+
+
     // Function to check attendance status
     function checkAttendance(courseId) {
       // Make an AJAX request to the server
@@ -108,7 +120,7 @@ include 'get_weekday_course.php';
     <!-- list help.php link -->
     <li><a class='link' href="help.php">Help</a></li>
     <!-- list logout.php link -->
-    <li><a class='link' href="logout.php">Logout</a></li>
+    <li><a class='link' href="#" onclick="confirmLogout()">Logout</a></li>
   </ul> <!-- end of ul for menu bar -->
 
   <!-- this ends the code that was created using information from the 

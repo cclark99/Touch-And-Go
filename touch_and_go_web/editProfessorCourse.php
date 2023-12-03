@@ -105,6 +105,20 @@ $currentCoursesStmt->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Professor Courses</title>
     <link rel="stylesheet" type="text/css" href="../styles.css">
+
+    <script>
+        function confirmLogout() {
+            // Show a confirmation dialog
+            var result = confirm("Are you sure you want to logout?");
+
+            // If the user clicks "OK," proceed with the logout
+            if (result) {
+                window.location.href = "logout.php";
+            }
+            // If the user clicks "Cancel," do nothing
+        }
+    </script>
+
     <style>
         form {
             max-width: 600px;
@@ -220,7 +234,7 @@ $currentCoursesStmt->close();
         <li><img src="../newLogo.png" alt="Touch and Go Logo" height="60"></li>
         <li id="fakeNav"><a></a></li>
         <li id="fakeNav"><a></a></li>
-        <li><a class='link' href="logout.php">Logout</a></li>
+        <li><a class='link' href="#" onclick="confirmLogout()">Logout</a></li>
     </ul>
 
     <h3>Current Courses for

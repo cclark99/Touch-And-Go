@@ -51,6 +51,19 @@ if ($userData['userId'] == 1) {
     <!-- link external style.css sheet -->
     <link rel="stylesheet" type="text/css" href="../styles.css">
 
+    <script>
+        function confirmLogout() {
+            // Show a confirmation dialog
+            var result = confirm("Are you sure you want to logout?");
+
+            // If the user clicks "OK," proceed with the logout
+            if (result) {
+                window.location.href = "logout.php";
+            }
+            // If the user clicks "Cancel," do nothing
+        }
+    </script>
+
     <!-- start of style tag -->
     <style>
         /* start of style rules for h3 tag */
@@ -172,14 +185,6 @@ if ($userData['userId'] == 1) {
         <li><a class='link' href="#" onclick="confirmLogout()">Logout</a></li>
     </ul> <!-- end of ul for menu bar -->
 
-    <script>
-        function confirmLogout() {
-            var confirmed = confirm('Are you sure you want to log out?');
-            if (confirmed) {
-                window.location.href = 'logout.php';
-            }
-        }
-    </script>
 
     <!-- this ends the code that was created using information from the 
     following link:

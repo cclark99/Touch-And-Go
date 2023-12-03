@@ -20,10 +20,21 @@ include 'get_professor_analytics.php';
   <link rel="stylesheet" type="text/css" href="../styles.css">
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-  <style>
-    /* Your existing styles */
+  <script>
+    function confirmLogout() {
+      // Show a confirmation dialog
+      var result = confirm("Are you sure you want to logout?");
 
-    /* Add these styles to your existing CSS */
+      // If the user clicks "OK," proceed with the logout
+      if (result) {
+        window.location.href = "logout.php";
+      }
+      // If the user clicks "Cancel," do nothing
+    }
+  </script>
+
+  <style>
+
     /* Style for the dropdown menu */
     .searchBox select {
       padding: 10px;
@@ -50,7 +61,6 @@ include 'get_professor_analytics.php';
     .searchBox input[type=text],
     .searchBox select {
       width: 50%;
-      /* Adjust the width as needed */
     }
 
     .searchBox input[type=submit] {
@@ -150,7 +160,7 @@ include 'get_professor_analytics.php';
     <!-- list help.php link -->
     <li><a class='link' href="professorHelp.php">Help</a></li>
     <!-- list logout.php link -->
-    <li><a class='link' href="logout.php">Logout</a></li>
+    <li><a class='link' href="#" onclick="confirmLogout()">Logout</a></li>
   </ul> <!-- end of ul for menu bar -->
 
   <h1>Analytics</h1>
@@ -188,7 +198,6 @@ include 'get_professor_analytics.php';
           $formattedDateTime = $checkInDateTime->format('l, F j, Y g:i A');
 
           echo '<p>Check-In Time: ' . $formattedDateTime . '</p>';
-          // You can add other details here
         }
 
         echo '</div>';

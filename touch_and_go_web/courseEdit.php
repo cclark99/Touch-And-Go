@@ -26,8 +26,6 @@ if (isset($_GET['courseId'])) {
     // Check if the course exists
     if ($result->num_rows > 0) {
         $course = $result->fetch_assoc();
-
-        // Display the course information in an editable form
         ?>
         <!DOCTYPE html>
         <html lang="en">
@@ -36,6 +34,20 @@ if (isset($_GET['courseId'])) {
             <meta charset="utf-8">
             <title>Edit Course</title>
             <link rel="stylesheet" type="text/css" href="../styles.css">
+
+            <script>
+                function confirmLogout() {
+                    // Show a confirmation dialog
+                    var result = confirm("Are you sure you want to logout?");
+
+                    // If the user clicks "OK," proceed with the logout
+                    if (result) {
+                        window.location.href = "logout.php";
+                    }
+                    // If the user clicks "Cancel," do nothing
+                }
+            </script>
+
             <style>
                 .update_course {
                     max-width: 800px;
@@ -125,6 +137,17 @@ if (isset($_GET['courseId'])) {
         </head>
 
         <body>
+
+            <ul>
+                <li><a class="link" href="adminHome.php">Home</a></li>
+                <li><a class="link" href="adminCourse.php">Courses</a></li>
+                <li id="fakeNav"><a></a></li>
+                <li><img src="../newLogo.png" alt="Touch and Go Logo" height="60"></li>
+                <li id="fakeNav"><a></a></li>
+                <li id="fakeNav"><a></a></li>
+                <li><a class='link' href="#" onclick="confirmLogout()">Logout</a></li>
+            </ul>
+
             <h1>Edit Course</h1>
             <div class="update_course">
                 <form method="post" action="updateCourse.php">

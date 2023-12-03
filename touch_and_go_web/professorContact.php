@@ -17,6 +17,20 @@ include 'get_professor_contact.php';
   <meta charset="utf-8">
   <title>Contact</title>
   <link rel="stylesheet" type="text/css" href="../styles.css">
+
+  <script>
+    function confirmLogout() {
+      // Show a confirmation dialog
+      var result = confirm("Are you sure you want to logout?");
+
+      // If the user clicks "OK," proceed with the logout
+      if (result) {
+        window.location.href = "logout.php";
+      }
+      // If the user clicks "Cancel," do nothing
+    }
+  </script>
+
   <style>
     h3 {
       color: #10222E;
@@ -26,7 +40,6 @@ include 'get_professor_contact.php';
 
     .container {
       max-width: 800px;
-      /* Adjust the max-width as needed */
       margin: 0 auto;
       padding: 20px;
     }
@@ -84,7 +97,7 @@ include 'get_professor_contact.php';
     <li><img src="../newLogo.png" alt="Touch and Go Logo" height="60"></li>
     <li><a class='link' href="professorContact.php">Contact</a></li>
     <li><a class='link' href="professorHelp.php">Help</a></li>
-    <li><a class='link' href="logout.php">Logout</a></li>
+    <li><a class='link' href="#" onclick="confirmLogout()">Logout</a></li>
   </ul>
 
   <h1>Contact</h1>
