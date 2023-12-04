@@ -259,9 +259,7 @@ require 'db_connection.php';
         <li><img src="../newLogo.png" alt="Touch and Go Logo" height="60"></li>
         <!-- list contact.php link -->
         <li id="fakeNav"><a></a></li>
-        <!-- list help.php link -->
         <li id="fakeNav"><a></a></li>
-        <!-- list logout.php link -->
         <li><a class='link' href="#" onclick="confirmLogout()">Logout</a></li>
     </ul> <!-- end of ul for menu bar -->
 

@@ -71,7 +71,7 @@ if (!isset($_SESSION['loggedin'])) {
     https://www.w3schools.com/css/css_navbar_horizontal.asp -->
 
     <!-- help header -->
-    <h1>Help</h1>
+    <h1>Student Help</h1>
   
     <!-- output "Issues with the site?"" -->
     <h2>Issues with the site?</h2>
@@ -87,7 +87,7 @@ if (!isset($_SESSION['loggedin'])) {
    https://www.youtube.com/watch?v=bwe-PsEoot4 -->
 
     <section class="dropdown-section"> <!-- start of section tag with dropdown-section class -->
-      <!-- horizintal line -->
+      <!-- horizontal line -->
       <hr>
       <!-- FAQ header -->
       <h3>Frequently Asked Questions</h3>

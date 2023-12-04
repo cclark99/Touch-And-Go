@@ -77,7 +77,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['userType'] != 'professor') {
     https://www.w3schools.com/css/css_navbar_horizontal.asp -->
 
   <!-- help header -->
-  <h1>Help</h1>
+  <h1>Professor Help</h1>
 
   <!-- output "Issues with the site?"" -->
   <h2>Issues with the site?</h2>
@@ -104,7 +104,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['userType'] != 'professor') {
         <!-- create arrow -->
         <span class="arrow"></span>
         <!-- display first question -->
-        <span>My attendance is incorrect on the Touch & Go website, who should I contact?</span>
+        <span>My schedule is incorrect on the Touch & Go website, who should I contact?</span>
       </div> <!-- end of div tag -->
       <div class="answer"> <!-- start of div tag with answer class -->
         <!-- display answer to first question -->
@@ -112,6 +112,18 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['userType'] != 'professor') {
           please contact us via email or phone to resolve the problem.</p>
       </div> <!-- end of div tag -->
 
+
+      <div class="question"> <!-- start of div tag with question class -->
+        <!-- create arrow -->
+        <span class="arrow"></span>
+        <!-- display first question -->
+        <span>Why can't I see all of my students that are in my course?</span>
+      </div> <!-- end of div tag -->
+      <div class="answer"> <!-- start of div tag with answer class -->
+        <!-- display answer to first question -->
+        <p>Make sure to find out if those students enrolled with their fingerprint scans and account to
+          touchandgo.software. If they are, reach out to us via email or phone.</p>
+      </div> <!-- end of div tag -->
 
 
       <div class="question"> <!-- start of div tag with question class -->
@@ -135,7 +147,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['userType'] != 'professor') {
       </div> <!-- end of div tag -->
       <div class="answer"> <!-- start of div tag with answer class -->
         <!-- display answer to third question -->
-        <p>Each student's schedule will be posted one week before the start of the semester. If your schedule is not
+        <p>Each professor's schedule will be posted one week before the start of the semester. If your schedule is not
           visible to you by this time, please reach out to us via email or phone.</p>
       </div> <!-- end of div tag -->
 
