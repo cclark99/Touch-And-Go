@@ -108,8 +108,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['userType'] != 'professor') {
       </div> <!-- end of div tag -->
       <div class="answer"> <!-- start of div tag with answer class -->
         <!-- display answer to first question -->
-        <p>We suggest contacting your professor first. If your professor has you marked as present on the specific day,
-          please contact us via email or phone to resolve the problem.</p>
+        <p>Reach out to a touchandgo admin. Make sure to let them know which courses you are not seeing properly.
+          Contact them via phone or email.</p>
       </div> <!-- end of div tag -->
 
 
